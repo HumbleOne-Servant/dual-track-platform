@@ -1,372 +1,337 @@
+<!-- FILE: C:\DualTrackLearning_Online\index.html -->
+<!-- BOX 1 OF 3: STABILIZED CANVAS AND DROPDOWN ARCHITECTURE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dual-Track Learning Platform</title>
     <style>
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #ffffff;
-            color: #1f2937;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-        /* Left Vertical Sidebar Rail Navigation Selector Matrix */
-        .sidebar-rail {
-            width: 65px;
-            background-color: #ffffff;
-            border-right: 1px solid #e5e7eb;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 0;
-            gap: 8px;
-            z-index: 10;
-        }
-        .hat-icon {
-            font-size: 22px;
-            margin-bottom: 20px;
-            color: #111827;
-        }
-        .grade-item {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            border: none;
-            background: transparent;
-            color: #4b5563;
-            font-weight: 500;
-            font-size: 13px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s ease;
-        }
-        .grade-item:hover {
-            background-color: #f3f4f6;
-            color: #111827;
-        }
-        .grade-item.active {
-            background-color: #111827;
-            color: #ffffff;
-            font-weight: 600;
-        }
-        /* Main Workspace Panel Layout */
-        .workspace-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background-color: #ffffff;
-            overflow: hidden;
-        }
-        /* Top Navigation Header Row */
-        .header-strip {
-            padding: 15px 30px;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ffffff;
-        }
-        .header-strip h1 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-            color: #111827;
-            letter-spacing: -0.3px;
-        }
-        .header-strip p {
-            margin: 4px 0 0 0;
-            font-size: 12px;
-            color: #6b7280;
-        }
-        .days-counter {
-            background-color: #f3f4f6;
-            border: 1px solid #e5e7eb;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #374151;
-        }
-        /* Filter Control Ribbon options */
-        .control-ribbon {
-            padding: 12px 30px;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ffffff;
-        }
-        .ribbon-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .pill-container {
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 5px 12px;
-            gap: 8px;
-            height: 36px;
-        }
-        .pill-label {
-            font-size: 11px;
-            font-weight: 700;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .arrow-button {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            width: 36px;
-            height: 36px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #4b5563;
-            font-size: 14px;
-        }
-        .arrow-button:hover { background-color: #f9fafb; }
-        select {
-            border: none;
-            background: transparent;
-            color: #111827;
-            font-size: 13px;
-            font-weight: 600;
-            outline: none;
-            cursor: pointer;
-        }
-        .completion-toggle {
-            display: flex;
-            align-items: center;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #374151;
-            gap: 8px;
-            cursor: pointer;
-            height: 36px;
-        }
-        /* Light Gray Dashboard Content Canvas Split Layout */
-        .dashboard-canvas {
-            flex: 1;
-            display: flex;
-            background-color: #f9fafb;
-            padding: 25px;
-            gap: 25px;
-            overflow: hidden;
-        }
-        /* LEFT COLUMN PANEL: Balanced 50% split width card box */
-        .left-node-panel {
-            width: 50%;
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            padding: 30px;
-            overflow-y: auto;
-        }
-        /* RIGHT COLUMN PANEL: Balanced 50% split width card box */
-        .right-ledger-panel {
-            width: 50%;
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            padding: 24px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        .ledger-section-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 10px;
-        }
-        .ledger-card-body {
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 16px;
-            font-size: 13px;
-            line-height: 1.6;
-            color: #374151;
-        }
-        .hash-string {
-            font-family: Menlo, Monaco, Consolas, monospace;
-            color: #0284c7;
-            font-weight: 500;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f0f3f8; color: #222; }
+        .control-panel { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); margin-bottom: 20px; display: flex; gap: 15px; }
+        select, button { padding: 10px; border-radius: 4px; border: 1px solid #bbb; font-size: 14px; }
+        button { background-color: #0d6efd; color: white; cursor: pointer; border: none; font-weight: bold; }
+        button:hover { background-color: #0b5ed7; }
+        .canvas-container { display: flex; gap: 20px; min-height: 550px; }
+        .track-panel { flex: 1; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
+        .panel-header { border-bottom: 3px solid #0d6efd; padding-bottom: 10px; margin-top: 0; color: #1e293b; }
+        .public-lesson-box { background-color: #f8fafc; padding: 15px; border-radius: 6px; border-left: 4px solid #64748b; margin-bottom: 15px; }
+        .highlight-trigger { background-color: #fde047; border-bottom: 2px dashed #eab308; cursor: pointer; padding: 0 4px; font-weight: bold; border-radius: 2px; }
+        .highlight-trigger:hover { background-color: #fef08a; }
+        
+        /* Interactive Alignment Portal Box */
+        .alignment-portal { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; padding: 20px; border-radius: 8px; margin-top: 20px; display: none; }
+        .portal-section { margin-bottom: 12px; font-size: 15px; }
+        .portal-title { font-weight: bold; color: #1e40af; margin-bottom: 3px; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+        
+        /* Gamified Muscle-Memory Element */
+        .game-box { background: #fff; border: 1px solid #bfdbfe; padding: 12px; border-radius: 6px; margin-top: 10px; display: flex; align-items: center; gap: 10px; }
+        .game-input { padding: 6px; border: 2px solid #3b82f6; border-radius: 4px; outline: none; font-weight: bold; font-size: 14px; text-transform: uppercase; }
+        .game-status { font-weight: bold; font-size: 14px; }
+        
+        .student-textbox { width: 100%; box-sizing: border-box; padding: 10px; border-radius: 4px; border: 1px solid #94a3b8; margin-top: 5px; font-size: 14px; }
+        .status-footer { display: flex; justify-content: space-between; align-items: center; background: #e2e8f0; padding: 15px; border-radius: 6px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <!-- Left Rail Selection Rail Matrix Buttons -->
-    <nav class="sidebar-rail">
-        <div class="hat-icon">🎓</div>
-        <button class="grade-item" onclick="updateActiveGrade('K', this)">K</button>
-        <button class="grade-item" onclick="updateActiveGrade('1', this)">1</button>
-        <button class="grade-item" onclick="updateActiveGrade('2', this)">2</button>
-        <button class="grade-item" onclick="updateActiveGrade('3', this)">3</button>
-        <button class="grade-item" onclick="updateActiveGrade('4', this)">4</button>
-        <button class="grade-item active" onclick="updateActiveGrade('5', this)">5</button>
-        <button class="grade-item" onclick="updateActiveGrade('6', this)">6</button>
-        <button class="grade-item" onclick="updateActiveGrade('7', this)">7</button>
-        <button class="grade-item" onclick="updateActiveGrade('8', this)">8</button>
-        <button class="grade-item" onclick="updateActiveGrade('9', this)">9</button>
-        <button class="grade-item" onclick="updateActiveGrade('10', this)">10</button>
-        <button class="grade-item" onclick="updateActiveGrade('11', this)">11</button>
-        <button class="grade-item" onclick="updateActiveGrade('12', this)">12</button>
-    </nav>
-
-    <div class="workspace-panel">
-        <header class="header-strip">
-            <div>
-                <h1>Dual-Track Learning Platform</h1>
-                <p>Public instruction node · private forensic ledger · 180-day calendar</p>
-            </div>
-            <div class="days-counter">📁 Live Data Stream Active</div>
-        </header>
-
-        <section class="control-ribbon">
-            <div class="ribbon-left">
-                <button class="arrow-button" onclick="adjustActiveDay(-1)">&lt;</button>
-                <div class="pill-container">
-                    <select id="daySelect" onchange="runDataPipelineSync()"></select>
-                </div>
-                <button class="arrow-button" onclick="adjustActiveDay(1)">&gt;</button>
-                
-                <div class="pill-container" style="margin-left: 8px;">
-                    <span class="pill-label">Track Subject:</span>
-                    <select id="subjectSelect" onchange="runDataPipelineSync()">
-                        <option value="mathematics" selected>mathematics</option>
-                        <option value="science">science</option>
-                        <option value="language_arts">language_arts</option>
-                        <option value="history_social_studies">history_social_studies</option>
-                        <option value="biblical_studies">biblical_studies</option>
-                    </select>
-                </div>
-            </div>
-            
-            <label class="completion-toggle">
-                <input type="checkbox" id="markDayComplete" style="margin: 0; cursor: pointer; transform: scale(1.05);">
-                <span>Mark day complete to unlock next</span>
-            </label>
-        </section>
-        <main class="dashboard-canvas">
-            <!-- LEFT PANEL: Dynamic Stored Textbook Output Canvas -->
-            <div id="textbookDisplayPanel" class="left-node-panel">
-                <p style="color: #6b7280;">Loading stored lesson content...</p>
-            </div>
-
-            <!-- RIGHT PANEL: Dynamic Stored Ledger Output Canvas -->
-            <div class="right-ledger-panel">
-                <div style="font-size: 15px; font-weight: 700; color: #111827; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 4px;">📜 Forensic Ledger</div>
-                
-                <div>
-                    <div class="ledger-section-title">Cross-References</div>
-                    <div id="crossRefCard" class="ledger-card-body">Connecting to live data stream core...</div>
-                </div>
-
-                <div>
-                    <div class="ledger-section-title">Structural Sync Hash</div>
-                    <div id="hashCard" class="ledger-card-body hash-string">0x00000000</div>
-                </div>
-            </div>
-        </main>
+    <div class="control-panel">
+        <!-- ALL DISTINCT GRADES TO ELIMINATE CLUSTER OVERLAPPING BUGS -->
+        <select id="grade-dropdown">
+            <option value="grade_k">Kindergarten</option>
+            <option value="grade_1">Grade 1</option>
+            <option value="grade_2">Grade 2</option>
+            <option value="grade_3">Grade 3</option>
+            <option value="grade_4">Grade 4</option>
+            <option value="grade_5">Grade 5</option>
+            <option value="grade_6">Grade 6</option>
+            <option value="grade_7">Grade 7</option>
+            <option value="grade_8">Grade 8</option>
+            <option value="grade_9">Grade 9</option>
+            <option value="grade_10">Grade 10</option>
+            <option value="grade_11">Grade 11</option>
+            <option value="grade_12">Grade 12</option>
+        </select>
+        
+        <!-- DIRECT BACKEND MATCHING ARCHITECTURE DROPDOWN OPTIONS -->
+        <select id="subject-dropdown">
+            <option value="mathematics">mathematics</option>
+            <option value="science">science</option>
+            <option value="language_arts">language_arts</option>
+            <option value="history_social_studies">history_social_studies</option>
+            <option value="biblical_studies">biblical_studies</option>
+        </select>
+        
+        <!-- AUTOMATIC 180 DAY MENU SHELL CONTAINER -->
+        <select id="day-dropdown">
+            <!-- Will be populated dynamically from day 1 to 180 below to guarantee unique pathways -->
+        </select>
+        <button onclick="loadCurriculumDay()">Open Selected Lesson</button>
     </div>
-
-    <script>
-        let chosenGradeIndex = "5";
-
-        function initializeCalendarDropdown() {
-            const dayDropdown = document.getElementById("daySelect");
-            dayDropdown.innerHTML = "";
-            for (let d = 1; d <= 180; d++) {
-                const opt = document.createElement("option");
-                opt.value = `day_${d}`;
-                opt.innerText = `Day ${d} / 180`;
-                dayDropdown.appendChild(opt);
-            }
-        }
-        function updateActiveGrade(gradeCode, buttonElement) {
-            document.querySelectorAll('.grade-item').forEach(btn => btn.classList.remove('active'));
-            buttonElement.classList.add('active');
-            chosenGradeIndex = gradeCode;
-            runDataPipelineSync();
-        }
-
-        function adjustActiveDay(stepDirection) {
-            const dayDropdown = document.getElementById("daySelect");
-            let currentIndex = dayDropdown.selectedIndex;
-            let targetIndex = currentIndex + stepDirection;
-            if (targetIndex >= 0 && targetIndex < dayDropdown.options.length) {
-                dayDropdown.selectedIndex = targetIndex;
-                runDataPipelineSync();
-            }
-        }
-        // FILE-FETCHING INGESTION ENGINE: Reads files straight out of your 11,700 folders
-        async function runDataPipelineSync() {
-            const currentSubject = document.getElementById("subjectSelect").value;
-            const currentDayString = document.getElementById("daySelect").value;
-            
-            const textbookDisplayPanel = document.getElementById("textbookDisplayPanel");
-            const crossRefCard = document.getElementById("crossRefCard");
-            const hashCard = document.getElementById("hashCard");
-
-            // DIRECT ARCHITECTURE ROAD MAP: Bypasses static memory loops entirely
-            const targetDataFilePath = `curriculum/grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDayString}.json`;
-
-            try {
-                const networkResponse = await fetch(targetDataFilePath);
-                if (!networkResponse.ok) throw new Error(`Status Code: ${networkResponse.status}`);
+<!-- BOX 2 OF 3: SPLIT WINDOW HOUSINGS AND WORKBOOK WRAPPERS -->
+    <div class="canvas-container">
+        <!-- LEFT PANEL: MAINSTREAM PUBLIC SCHOOL CURRICULUM & GENERATED INTERACTIVE WORKSHEETS -->
+        <div class="track-panel" id="left-track">
+            <div>
+                <h2 class="panel-header">🏫 Left Side: Public School Core Lesson & Handout</h2>
+                <h3 id="lesson-title" style="margin-top:10px; color:#334155;"></h3>
                 
-                const data = await networkResponse.json();
+                <div class="public-lesson-box">
+                    <strong>📖 Core Concept Framework:</strong>
+                    <p id="public-core-content">Select parameters above and click "Open Selected Lesson" to draw dynamic text assets...</p>
+                </div>
+                
+                <!-- THIS BOX EXPLICITLY GENERATES THE VISUAL STUDENT HANDOUT WORKSHEET -->
+                <div id="worksheet-generation-wrapper" style="background: #fff; padding: 15px; border: 1px dashed #94a3b8; border-radius: 6px; display:none;">
+                    <strong style="color:#0d6efd;">📋 Public Curriculum Student Worksheet</strong>
+                    <p id="public-worksheet-instructions" style="font-size:14px; color:#475569; margin: 8px 0; font-weight: 500;"></p>
+                    <textarea id="left-public-worksheet-input" class="student-textbox" rows="4" placeholder="Type answers matching standard school requirements here..."></textarea>
+                </div>
+            </div>
+        </div>
 
-                let bulletsHTML = data.bullets.map(b => `<li style="margin-bottom:8px;">${b}</li>`).join('');
-                textbookDisplayPanel.innerHTML = `
-                    <div style="background-color: #f3f4f6; color: #4b5563; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-bottom: 12px;">Grade ${chosenGradeIndex.toUpperCase()} &nbsp;&bull;&nbsp; ${currentSubject.replace(/_/g,' ')} &nbsp;&bull;&nbsp; ${currentDayString.replace('_',' ')}</div>
-                    <h2 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #111827;">${data.title}</h2>
-                    <p style="margin: 0 0 20px 0; font-size: 14px; color: #6b7280;">🎯 ${data.description}</p>
-                    <div style="border-left: 3px solid #e5e7eb; padding-left: 12px; margin-bottom: 20px; font-style: italic; color: #4b5563;">${data.concept}</div>
-                    <ul style="margin: 0; padding-left: 20px; line-height: 1.6; font-size: 14px; color: #374151;">${bulletsHTML}</ul>
-                `;
+        <!-- RIGHT PANEL: UNIFIED ALIGNMENT FRAMEWORK, TRUTH PORTAL, AND PRIVATE STORAGE LOGS -->
+        <div class="track-panel" id="right-track">
+            <div>
+                <h2 class="panel-header">🛡️ Right Side: Truth Alignment Portal & Game Check</h2>
+                
+                <div id="portal-instructions" style="color: #64748b; font-style: italic; text-align: center; margin-top: 40px;">
+                    Click any yellow highlighted keyword on the left school panel to reveal the underlying biblical principles, alternative frameworks, and unlock muscle-memory tracking.
+                </div>
 
-                crossRefCard.innerText = data.cross_reference;
-                hashCard.innerText = data.sync_hash;
+                <div id="alignment-portal-display" class="alignment-portal">
+                    <h3 style="margin-top:0; color:#1d4ed8; border-bottom:1px solid #bfdbfe; padding-bottom:5px;">🔗 Dynamic Alignment Connection</h3>
+                    
+                    <div class="portal-section">
+                        <div class="portal-title">✝️ Biblical Principle & Truth Comparison</div>
+                        <div id="portal-bible-text"></div>
+                    </div>
+                    
+                    <div class="portal-section">
+                        <div class="portal-title">🔬 Uploaded Alternative Design Framework</div>
+                        <div id="portal-alternative-text"></div>
+                    </div>
+                    
+                    <div class="portal-section">
+                        <div class="portal-title">🕹️ Muscle Memory Lock: Type the matching core truth phrase</div>
+                        <div class="game-box">
+                            <input type="text" id="game-typing-input" class="game-input" placeholder="Type target phrase...">
+                            <span id="game-target-phrase" style="font-weight:bold; color:#475569; font-size:13px;"></span>
+                            <span id="game-validation-status" class="game-status"></span>
+                        </div>
+                    </div>
+                </div>
 
-            } catch (networkError) {
-                console.error("Data pipeline link offline error trace:", targetDataFilePath);
-                textbookDisplayPanel.innerHTML = `<p style="color: #ef4444; font-weight: 500;">Lesson Content Offline</p><p style="color: #6b7280; font-size: 13px;">Confirm your unzipped <b>curriculum</b> folder is completely uploaded inside GitHub Desktop next to index.html.</p>`;
-                crossRefCard.innerText = "Synchronizing regional tracking context grids...";
-                hashCard.innerText = "ERROR_NODE_TIMEOUT";
-            }
+                <div id="retention-questions-block" style="margin-top:25px; display:none;">
+                    <h3 style="color:#1e293b; margin-bottom:5px;">🧠 Retention Verification Answers</h3>
+                    <div id="questions-container"></div>
+                </div>
+            </div>
+
+            <div class="status-footer">
+                <label style="font-weight: bold; cursor: pointer; font-size:14px;">
+                    <input type="checkbox" id="mark-complete-toggle"> 🔒 Lock Responses & Save to Private Evaluation Drive
+                </label>
+                <div id="save-status-indicator" style="font-weight: bold; color: #16a34a; font-size:13px;"></div>
+            </div>
+        </div>
+    </div>
+<!-- BOX 3 OF 3: DYNAMIC LOADER AND INDEPENDENT PATH DISPATCHER -->
+<script>
+let activeLessonData = null;
+let currentTargetGameWord = "";
+
+// AUTOMATICALLY BUILD ALL 180 INDEPENDENT OPTIONS IN THE MENU ON LAUNCH
+window.addEventListener('DOMContentLoaded', () => {
+    const daySelect = document.getElementById('day-dropdown');
+    daySelect.innerHTML = "";
+    for (let d = 1; d <= 181; d++) {
+        let opt = document.createElement('option');
+        opt.value = `day_${d}`;
+        opt.innerText = `Day ${d}`;
+        daySelect.appendChild(opt);
+    }
+});
+
+async function loadCurriculumDay() {
+    const grade = document.getElementById('grade-dropdown').value;
+    const subject = document.getElementById('subject-dropdown').value;
+    const day = document.getElementById('day-dropdown').value; // e.g. "day_45"
+    
+    // Reset display panel views completely
+    document.getElementById('alignment-portal-display').style.display = 'none';
+    document.getElementById('retention-questions-block').style.display = 'none';
+    document.getElementById('worksheet-generation-wrapper').style.display = 'none';
+    document.getElementById('portal-instructions').style.display = 'block';
+    document.getElementById('save-status-indicator').innerText = '';
+    document.getElementById('mark-complete-toggle').checked = false;
+    document.getElementById('game-typing-input').value = "";
+    document.getElementById('game-validation-status').innerText = "";
+    document.getElementById('left-public-worksheet-input').value = "";
+    
+    // FIX: Resolves pure unique path arrays direct to the target file name
+    const targetUrl = `curriculum/${grade}/${subject}/${day}.json`;
+    
+    try {
+        const response = await fetch(targetUrl);
+        if (!response.ok) throw new Error("File missing.");
+        
+        activeLessonData = await response.json();
+        renderPublicToBiblicalInterface(activeLessonData);
+        loadSavedDatabaseMetrics(grade, subject, day);
+    } catch (err) {
+        document.getElementById('public-core-content').innerText = `❌ Pathway Mismatch: Unable to resolve file target at ${targetUrl}`;
+        document.getElementById('lesson-title').innerText = "Asset Load Error";
+    }
+}
+
+function renderPublicToBiblicalInterface(data) {
+    document.getElementById('lesson-title').innerText = data.title;
+    
+    // FIX: Explicitly forces the dynamic worksheet wrapper block to become visible on layout load
+    document.getElementById('worksheet-generation-wrapper').style.display = 'block';
+    document.getElementById('public-worksheet-instructions').innerText = data.public_worksheet_instructions;
+    
+    let publicText = data.public_core_concept;
+    
+    // Safely look up and highlight words inside the incoming stream
+    if (data.alignment_triggers) {
+        for (const word in data.alignment_triggers) {
+            const regex = new RegExp(`\\b(${word})\\b`, 'gi');
+            publicText = publicText.replace(regex, `<span class="highlight-trigger" onclick="activateAlignmentPortal('${word}')">$1</span>`);
         }
+    }
+    document.getElementById('public-core-content').innerHTML = publicText;
+    
+    let questionsHtml = "";
+    if (data.retention_questions) {
+        data.retention_questions.forEach((q, index) => {
+            questionsHtml += `
+                <div style="margin-top:12px;">
+                    <label style="font-size:14px; font-weight:bold; color:#334155;">[Verification ${index+1}] ${q.text}</label>
+                    <textarea id="retention-ans-${q.id}" class="student-textbox" rows="2" placeholder="Type summary conclusions here..."></textarea>
+                </div>
+            `;
+        });
+    }
+    document.getElementById('questions-container').innerHTML = questionsHtml;
+}
 
-        window.onload = function() {
-            initializeCalendarDropdown();
-            runDataPipelineSync();
+function activateAlignmentPortal(word) {
+    if (!activeLessonData || !activeLessonData.alignment_triggers[word]) return;
+    
+    const triggerNode = activeLessonData.alignment_triggers[word];
+    document.getElementById('portal-instructions').style.display = 'none';
+    document.getElementById('alignment-portal-display').style.display = 'block';
+    document.getElementById('retention-questions-block').style.display = 'block';
+    
+    document.getElementById('portal-bible-text').innerText = triggerNode.biblical_truth;
+    document.getElementById('portal-alternative-text').innerText = triggerNode.alternative_framework;
+    
+    currentTargetGameWord = triggerNode.game_word.toUpperCase();
+    document.getElementById('game-target-phrase').innerText = `(Type: "${currentTargetGameWord}")`;
+    const inputField = document.getElementById('game-typing-input');
+    inputField.value = "";
+    inputField.focus();
+    document.getElementById('game-validation-status').innerText = "⏳ Awaiting Match";
+    document.getElementById('game-validation-status').style.color = "#a16207";
+}
+
+document.getElementById('game-typing-input').addEventListener('input', function(e) {
+    const value = e.target.value.toUpperCase();
+    const statusLabel = document.getElementById('game-validation-status');
+    
+    if (value === currentTargetGameWord) {
+        statusLabel.innerText = "🎯 MATCH LOCKED!";
+        statusLabel.style.color = "#16a34a";
+    } else {
+        statusLabel.innerText = "⏳ Typing...";
+        statusLabel.style.color = "#a16207";
+    }
+});
+
+function getStorageRecordKey(grade, subject, day) {
+    return `dualtrack_vault_${grade}_${subject}_${day}`;
+}
+
+function loadSavedDatabaseMetrics(grade, subject, day) {
+    const key = getStorageRecordKey(grade, subject, day);
+    const saved = localStorage.getItem(key);
+    
+    if (saved) {
+        const record = JSON.parse(saved);
+        const worksheetInput = document.getElementById('left-public-worksheet-input');
+        if (worksheetInput && record.public_worksheet_text) worksheetInput.value = record.public_worksheet_text;
+        
+        if (activeLessonData && activeLessonData.retention_questions) {
+            activeLessonData.retention_questions.forEach(q => {
+                const textInput = document.getElementById(`retention-ans-${q.id}`);
+                if (textInput && record.retention_answers[q.id]) textInput.value = record.retention_answers[q.id];
+            });
+        }
+        
+        if (record.is_finalized) {
+            document.getElementById('mark-complete-toggle').checked = true;
+            setLockState(true);
+            document.getElementById('save-status-indicator').innerText = "🔒 Finalized & Logged to Year-End Private Drive File";
+        }
+    } else {
+        setLockState(false);
+    }
+}
+
+document.getElementById('mark-complete-toggle').addEventListener('change', function(e) {
+    const grade = document.getElementById('grade-dropdown').value;
+    const subject = document.getElementById('subject-dropdown').value;
+    const day = document.getElementById('day-dropdown').value;
+    const key = getStorageRecordKey(grade, subject, day);
+    
+    if (e.target.checked) {
+        const retAnswers = {};
+        if (activeLessonData && activeLessonData.retention_questions) {
+            activeLessonData.retention_questions.forEach(q => {
+                const el = document.getElementById(`retention-ans-${q.id}`);
+                if (el) retAnswers[q.id] = el.value;
+            });
+        }
+        
+        const masterReportRecord = {
+            timestamp: new Date().toISOString(),
+            grade: grade,
+            subject: subject,
+            day: day,
+            hash: activeLessonData ? activeLessonData.sync_hash : "EMPTY",
+            public_worksheet_text: document.getElementById('left-public-worksheet-input').value,
+            retention_answers: retAnswers,
+            is_finalized: true
         };
-    </script>
+        
+        localStorage.setItem(key, JSON.stringify(masterReportRecord));
+        
+        let archiveDrive = localStorage.getItem("PRIVATE_EVALUATION_DRIVE_BACKUP");
+        let archiveList = archiveDrive ? JSON.parse(archiveDrive) : [];
+        archiveList = archiveList.filter(item => !(item.grade === grade && item.subject === subject && item.day === day));
+        archiveList.push(masterReportRecord);
+        localStorage.setItem("PRIVATE_EVALUATION_DRIVE_BACKUP", JSON.stringify(archiveList));
+        
+        setLockState(true);
+        document.getElementById('save-status-indicator').innerText = "🔒 Finalized & Logged to Year-End Private Drive File";
+    } else {
+        setLockState(false);
+        localStorage.removeItem(key);
+        document.getElementById('save-status-indicator').innerText = "🔓 Form Unlocked";
+    }
+});
+
+function setLockState(lock) {
+    const ws = document.getElementById('left-public-worksheet-input');
+    if (ws) ws.disabled = lock;
+    if (activeLessonData && activeLessonData.retention_questions) {
+        activeLessonData.retention_questions.forEach(q => {
+            const el = document.getElementById(`retention-ans-${q.id}`);
+            if (el) el.disabled = lock;
+        });
+    }
+}
+</script>
 </body>
 </html>
