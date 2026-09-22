@@ -7,149 +7,365 @@
     <style>
         * { box-sizing: border-box; }
         body {
-            margin: 0; padding: 0;
+            margin: 0;
+            padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #ffffff; color: #1f2937;
-            display: flex; height: 100vh; overflow: hidden;
+            background-color: #ffffff;
+            color: #1f2937;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
         }
+        /* Left Vertical Sidebar Rail Navigation Selector Matrix */
         .sidebar-rail {
-            width: 65px; background-color: #ffffff; border-right: 1px solid #e5e7eb;
-            display: flex; flex-direction: column; align-items: center; padding: 20px 0; gap: 8px;
+            width: 65px;
+            background-color: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            gap: 8px;
+            z-index: 10;
         }
-        .hat-icon { font-size: 22px; margin-bottom: 20px; color: #111827; }
+        .hat-icon {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #111827;
+        }
         .grade-item {
-            width: 38px; height: 38px; border-radius: 50%; border: none;
-            background: transparent; color: #4b5563; font-weight: 500; font-size: 13px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: #4b5563;
+            font-weight: 500;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
         }
-        .grade-item.active { background-color: #111827; color: #ffffff; font-weight: 600; }
-        .workspace-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-        .header-strip { padding: 15px 30px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; }
-        .header-strip h1 { margin: 0; font-size: 18px; font-weight: 700; color: #111827; }
-        .days-counter { background-color: #f3f4f6; border: 1px solid #e5e7eb; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; }
-        .control-ribbon { padding: 12px 30px; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 12px; }
-        .pill-container { display: flex; align-items: center; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 5px 12px; height: 36px; }
-        .arrow-button { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        select { border: none; background: transparent; color: #111827; font-size: 13px; font-weight: 600; outline: none; cursor: pointer; }
-        .dashboard-canvas { flex: 1; display: flex; background-color: #f9fafb; padding: 25px; gap: 25px; overflow: hidden; }
-        .left-node-panel { width: 50%; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 30px; overflow-y: auto; }
-        .right-ledger-panel { width: 50%; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; }
-        .ledger-section-title { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.8px; }
-        .ledger-card-body { background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; font-size: 13px; line-height: 1.6; }
-        .hash-string { font-family: monospace; color: #0284c7; font-weight: 500; }
+        .grade-item:hover {
+            background-color: #f3f4f6;
+            color: #111827;
+        }
+        .grade-item.active {
+            background-color: #111827;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        /* Main Workspace Panel */
+        .workspace-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+        /* Top Navigation Header Row */
+        .header-strip {
+            padding: 15px 30px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+        }
+        .header-strip h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+            letter-spacing: -0.3px;
+        }
+        .header-strip p {
+            margin: 4px 0 0 0;
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .days-counter {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+        }
+        /* Filter Control Ribbon */
+        .control-ribbon {
+            padding: 12px 30px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+        }
+        .ribbon-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .pill-container {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 5px 12px;
+            gap: 8px;
+            height: 36px;
+        }
+        .pill-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .arrow-button {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4b5563;
+            font-size: 14px;
+        }
+        .arrow-button:hover { background-color: #f9fafb; }
+        select {
+            border: none;
+            background: transparent;
+            color: #111827;
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+        .completion-toggle {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            gap: 8px;
+            cursor: pointer;
+            height: 36px;
+        }
+        /* Light Gray Dashboard Content Canvas Split */
+        .dashboard-canvas {
+            flex: 1;
+            display: flex;
+            background-color: #f9fafb;
+            padding: 25px;
+            gap: 25px;
+            overflow: hidden;
+        }
+        /* LEFT COLUMN PANEL: Balanced 50% split width card box */
+        .left-node-panel {
+            width: 50%;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 30px;
+            overflow-y: auto;
+        }
+        /* RIGHT COLUMN PANEL: Balanced 50% split width card box */
+        .right-ledger-panel {
+            width: 50%;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .ledger-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+        }
+        .ledger-card-body {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #374151;
+        }
+        .hash-string {
+            font-family: Menlo, Monaco, Consolas, monospace;
+            color: #0284c7;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Grade Selection Rail Matrix Buttons -->
     <nav class="sidebar-rail">
         <div class="hat-icon">🎓</div>
-        <button class="grade-item" onclick="updateGrade('K', this)">K</button>
-        <button class="grade-item" onclick="updateGrade('1', this)">1</button>
-        <button class="grade-item" onclick="updateGrade('2', this)">2</button>
-        <button class="grade-item" onclick="updateGrade('3', this)">3</button>
-        <button class="grade-item" onclick="updateGrade('4', this)">4</button>
-        <button class="grade-item active" onclick="updateGrade('5', this)">5</button>
-        <button class="grade-item" onclick="updateGrade('6', this)">6</button>
-        <button class="grade-item" onclick="updateGrade('7', this)">7</button>
-        <button class="grade-item" onclick="updateGrade('8', this)">8</button>
-        <button class="grade-item" onclick="updateGrade('9', this)">9</button>
-        <button class="grade-item" onclick="updateGrade('10', this)">10</button>
-        <button class="grade-item" onclick="updateGrade('11', this)">11</button>
-        <button class="grade-item" onclick="updateGrade('12', this)">12</button>
+        <button class="grade-item" onclick="updateActiveGrade('K', this)">K</button>
+        <button class="grade-item" onclick="updateActiveGrade('1', this)">1</button>
+        <button class="grade-item" onclick="updateActiveGrade('2', this)">2</button>
+        <button class="grade-item" onclick="updateActiveGrade('3', this)">3</button>
+        <button class="grade-item" onclick="updateActiveGrade('4', this)">4</button>
+        <button class="grade-item active" onclick="updateActiveGrade('5', this)">5</button>
+        <button class="grade-item" onclick="updateActiveGrade('6', this)">6</button>
+        <button class="grade-item" onclick="updateActiveGrade('7', this)">7</button>
+        <button class="grade-item" onclick="updateActiveGrade('8', this)">8</button>
+        <button class="grade-item" onclick="updateActiveGrade('9', this)">9</button>
+        <button class="grade-item" onclick="updateActiveGrade('10', this)">10</button>
+        <button class="grade-item" onclick="updateActiveGrade('11', this)">11</button>
+        <button class="grade-item" onclick="updateActiveGrade('12', this)">12</button>
     </nav>
 
     <div class="workspace-panel">
         <header class="header-strip">
-            <h1>Dual-Track Learning Platform</h1>
-            <div class="days-counter">📁 Local Server Active</div>
+            <div>
+                <h1>Dual-Track Learning Platform</h1>
+                <p>Public instruction node · private forensic ledger · 180-day calendar</p>
+            </div>
+            <div class="days-counter">📁 Vault Tracking Mode Active</div>
         </header>
 
         <section class="control-ribbon">
-            <button class="arrow-button" onclick="changeDay(-1)">&lt;</button>
-            <div class="pill-container"><select id="daySelect" onchange="loadLesson()"></select></div>
-            <button class="arrow-button" onclick="changeDay(1)">&gt;</button>
-            
-            <div class="pill-container" style="margin-left: 8px;">
-                <select id="subjectSelect" onchange="loadLesson()">
-                    <option value="mathematics" selected>Mathematics</option>
-                    <option value="science">Science</option>
-                    <option value="language_arts">Language Arts</option>
-                    <option value="history_social_studies">History / Social Studies</option>
-                    <option value="biblical_studies">Biblical Studies</option>
-                </select>
+            <div class="ribbon-left">
+                <button class="arrow-button" onclick="adjustActiveDay(-1)">&lt;</button>
+                <div class="pill-container">
+                    <select id="daySelect" onchange="runDataPipelineSync()"></select>
+                </div>
+                <button class="arrow-button" onclick="adjustActiveDay(1)">&gt;</button>
+                
+                <div class="pill-container" style="margin-left: 8px;">
+                    <span class="pill-label">Track Subject:</span>
+                    <select id="subjectSelect" onchange="runDataPipelineSync()">
+                        <option value="mathematics" selected>Mathematics</option>
+                        <option value="science">Science</option>
+                        <option value="language_arts">Language Arts</option>
+                        <option value="history_social_studies">History / Social Studies</option>
+                        <option value="biblical_studies">Biblical Studies</option>
+                    </select>
+                </div>
             </div>
+            
+            <label class="completion-toggle">
+                <input type="checkbox" id="markDayComplete" style="margin: 0; cursor: pointer; transform: scale(1.05);">
+                <span>Mark day complete to unlock next</span>
+            </label>
         </section>
-
         <main class="dashboard-canvas">
-            <div id="textbookDisplayPanel" class="left-node-panel"><p>Loading curriculum text files...</p></div>
+            <!-- LEFT PANEL: Dynamic Stored Textbook Output Canvas -->
+            <div id="textbookDisplayPanel" class="left-node-panel">
+                <p style="color: #6b7280;">Loading stored lesson content...</p>
+            </div>
+
+            <!-- RIGHT PANEL: Dynamic Stored Ledger Output Canvas -->
             <div class="right-ledger-panel">
-                <div><div class="ledger-section-title">Cross-References</div><div id="crossRefCard" class="ledger-card-body">Awaiting sync...</div></div>
-                <div><div class="ledger-section-title">Structural Sync Hash</div><div id="hashCard" class="ledger-card-body hash-string">0x00000000</div></div>
+                <div style="font-size: 15px; font-weight: 700; color: #111827; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 4px;">📜 Forensic Ledger</div>
+                
+                <div>
+                    <div class="ledger-section-title">Cross-References</div>
+                    <div id="crossRefCard" class="ledger-card-body">Connecting to live data stream core...</div>
+                </div>
+
+                <div>
+                    <div class="ledger-section-title">Structural Sync Hash</div>
+                    <div id="hashCard" class="ledger-card-body hash-string">0x00000000</div>
+                </div>
             </div>
         </main>
     </div>
 
     <script>
-        let currentGrade = "5";
+        let chosenGradeIndex = "5";
 
-        function initDays() {
-            const select = document.getElementById("daySelect");
-            select.innerHTML = "";
+        function initializeCalendarDropdown() {
+            const dayDropdown = document.getElementById("daySelect");
+            dayDropdown.innerHTML = "";
             for (let d = 1; d <= 180; d++) {
-                let opt = document.createElement("option");
-                opt.value = `day_${d}`; opt.innerText = `Day ${d} / 180`;
-                select.appendChild(opt);
+                const opt = document.createElement("option");
+                opt.value = `day_${d}`;
+                opt.innerText = `Day ${d} / 180`;
+                dayDropdown.appendChild(opt);
             }
         }
-
-        function updateGrade(code, btn) {
-            document.querySelectorAll('.grade-item').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentGrade = code;
-            loadLesson();
+        function updateActiveGrade(gradeCode, buttonElement) {
+            document.querySelectorAll('.grade-item').forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+            chosenGradeIndex = gradeCode;
+            runDataPipelineSync();
         }
 
-        function changeDay(dir) {
-            const select = document.getElementById("daySelect");
-            let next = select.selectedIndex + dir;
-            if (next >= 0 && next < select.options.length) {
-                select.selectedIndex = next;
-                loadLesson();
+        function adjustActiveDay(stepDirection) {
+            const dayDropdown = document.getElementById("daySelect");
+            let currentIndex = dayDropdown.selectedIndex;
+            let targetIndex = currentIndex + stepDirection;
+            if (targetIndex >= 0 && targetIndex < dayDropdown.options.length) {
+                dayDropdown.selectedIndex = targetIndex;
+                runDataPipelineSync();
             }
         }
-
-        async function loadLesson() {
-            const subject = document.getElementById("subjectSelect").value;
-            const day = document.getElementById("daySelect").value;
+        async function runDataPipelineSync() {
+            const currentSubject = document.getElementById("subjectSelect").value;
+            const currentDayString = document.getElementById("daySelect").value;
             
-            // Tries both lower and uppercase variants to bypass server case blocks permanently
-            const path1 = `curriculum/grade_${currentGrade.toLowerCase()}/${subject}/${day}.json`;
-            const path2 = `Curriculum/grade_${currentGrade.toLowerCase()}/${subject}/${day}.json`;
+            const textbookDisplayPanel = document.getElementById("textbookDisplayPanel");
+            const crossRefCard = document.getElementById("crossRefCard");
+            const hashCard = document.getElementById("hashCard");
 
-            async function tryFetch(url) {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error();
-                return res.json();
-            }
+            // Direct route mapping targeting your true external JSON storage directory structure
+            const targetDataFilePath = `curriculum/grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDayString}.json`;
 
             try {
-                let data;
-                try { data = await tryFetch(path1); } 
-                catch (e) { data = await tryFetch(path2); }
+                const networkResponse = await fetch(targetDataFilePath);
+                if (!networkResponse.ok) throw new Error(`Status Code: ${networkResponse.status}`);
+                
+                const data = await networkResponse.json();
 
                 let bulletsHTML = data.bullets.map(b => `<li style="margin-bottom:8px;">${b}</li>`).join('');
-                document.getElementById("textbookDisplayPanel").innerHTML = `
-                    <h2 style="margin: 0 0 8px 0; font-size: 24px;">${data.title}</h2>
-                    <p style="color: #6b7280; margin: 0 0 20px 0;">${data.description}</p>
-                    <div style="border-left: 3px solid #e5e7eb; padding-left: 12px; margin-bottom: 20px; font-style: italic;">${data.concept}</div>
-                    <ul style="padding-left: 20px; line-height: 1.6;">${bulletsHTML}</ul>`;
-                document.getElementById("crossRefCard").innerText = data.cross_reference;
-                document.getElementById("hashCard").innerText = data.sync_hash;
-            } catch (err) {
-                document.getElementById("textbookDisplayPanel").innerHTML = `<p style="color: #ef4444;">Lesson Data Offline</p><p style="color: #6b7280; font-size: 13px;">Ensure your unzipped folder sits in your repository.</p>`;
+                textbookDisplayPanel.innerHTML = `
+                    <div style="background-color: #f3f4f6; color: #4b5563; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-bottom: 12px;">Grade ${chosenGradeIndex.toUpperCase()} &nbsp;&bull;&nbsp; ${currentSubject.replace(/_/g,' ')} &nbsp;&bull;&nbsp; ${currentDayString.replace('_',' ')}</div>
+                    <h2 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #111827;">${data.title}</h2>
+                    <p style="margin: 0 0 20px 0; font-size: 14px; color: #6b7280;">🎯 ${data.description}</p>
+                    <div style="border-left: 3px solid #e5e7eb; padding-left: 12px; margin-bottom: 20px; font-style: italic; color: #4b5563;">${data.concept}</div>
+                    <ul style="margin: 0; padding-left: 20px; line-height: 1.6; font-size: 14px; color: #374151;">${bulletsHTML}</ul>
+                `;
+
+                crossRefCard.innerText = data.cross_reference;
+                hashCard.innerText = data.sync_hash;
+
+            } catch (networkError) {
+                console.error("Data pipeline link offline error trace:", targetDataFilePath);
+                textbookDisplayPanel.innerHTML = `<p style="color: #ef4444; font-weight: 500;">Lesson Content Offline</p><p style="color: #6b7280; font-size: 13px;">Confirm your unzipped <b>curriculum</b> folder is completely uploaded inside GitHub Desktop next to index.html.</p>`;
+                crossRefCard.innerText = "Synchronizing regional tracking context grids...";
+                hashCard.innerText = "ERROR_NODE_TIMEOUT";
             }
         }
 
-        window.onload = function() { initDays(); loadLesson(); };
+        window.onload = function() {
+            initializeCalendarDropdown();
+            runDataPipelineSync();
+        };
     </script>
 </body>
 </html>
