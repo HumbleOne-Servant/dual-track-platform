@@ -70,7 +70,7 @@
     </style>
 </head>
     <style>
-        /* Top Navigation Header Row */
+        /* Top Navigation Title Bar */
         .header-strip {
             padding: 15px 30px;
             border-bottom: 1px solid #e5e7eb;
@@ -170,7 +170,7 @@
         }
     </style>
     <style>
-        /* Light Gray Dashboard Content Wrapper */
+        /* Light Gray Workspace Canvas Grid */
         .dashboard-canvas {
             flex: 1;
             display: flex;
@@ -179,7 +179,7 @@
             gap: 25px;
             overflow: hidden;
         }
-        /* LEFT SCREEN VIEW: Balanced 50% split width card box */
+        /* LEFT COLUMN CARD: Standardized Balanced Width Layout */
         .left-node-panel {
             width: 50%;
             background-color: #ffffff;
@@ -189,7 +189,7 @@
             padding: 30px;
             overflow-y: auto;
         }
-        /* RIGHT SCREEN VIEW: Balanced 50% split width card box */
+        /* RIGHT COLUMN CARD: Standardized Balanced Width Layout */
         .right-ledger-panel {
             width: 50%;
             background-color: #ffffff;
@@ -228,6 +228,7 @@
 </head>
 <body>
 
+    <!-- Left Rail Grade Matrix Navigation Strip -->
     <nav class="sidebar-rail">
         <div class="hat-icon">🎓</div>
         <button class="grade-item" onclick="updateActiveGrade('K', this)">K</button>
@@ -281,18 +282,16 @@
         </section>
 
         <main class="dashboard-canvas">
-            <!-- LEFT PANEL VIEW PORTAL -->
             <div id="textbookDisplayPanel" class="left-node-panel">
-                <p style="color: #6b7280;">Initializing digital zip connection layers...</p>
+                <p style="color: #6b7280;">Connecting to secure data archive packages...</p>
             </div>
 
-            <!-- RIGHT PANEL VIEW PORTAL -->
             <div class="right-ledger-panel">
                 <div style="font-size: 15px; font-weight: 700; color: #111827; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 4px;">📜 Forensic Ledger</div>
                 
                 <div>
                     <div class="ledger-section-title">Cross-References</div>
-                    <div id="crossRefCard" class="ledger-card-body">Awaiting pipeline sync metrics...</div>
+                    <div id="crossRefCard" class="ledger-card-body">Awaiting local index synchronization...</div>
                 </div>
 
                 <div>
@@ -305,6 +304,7 @@
     <script>
         let chosenGradeIndex = "5";
         let preloadedZipInstance = null;
+        let internalZipPathPrefix = ""; // Automatically calculates extra nested folder layers
 
         function initializeCalendarDropdown() {
             const dayDropdown = document.getElementById("daySelect");
@@ -317,18 +317,26 @@
             }
         }
 
-        // Pre-load the single zip archive directly into the layout memory pool on first launch
         async function fetchAndUnpackZipArchive() {
             const textbookDisplayPanel = document.getElementById("textbookDisplayPanel");
             try {
-                textbookDisplayPanel.innerHTML = `<p style="color: #0284c7; font-weight: 500;">⚡ Downloading compressed curriculum vault package (1 item)...</p>`;
+                textbookDisplayPanel.innerHTML = `<p style="color: #0284c7; font-weight: 500;">⚡ Connecting to local curriculum vault package...</p>`;
                 
-                // Pulls the archive smoothly over your relative file layout path
                 const response = await fetch('curriculum.zip');
-                if (!response.ok) throw new Error("Could not find curriculum.zip file in your main root path folder.");
+                if (!response.ok) throw new Error("Missing curriculum.zip archive container.");
                 
                 const blobData = await response.blob();
                 preloadedZipInstance = await JSZip.loadAsync(blobData);
+                
+                // AUTONOMOUS SEARCH PATH ENGINE
+                // Scans the internal file registry to find where the grade folders begin
+                preloadedZipInstance.forEach(function (relativePath, file) {
+                    if (relativePath.toLowerCase().includes('grade_k/') && !internalZipPathPrefix) {
+                        let structuralCutoffIndex = relativePath.toLowerCase().indexOf('grade_k/');
+                        internalZipPathPrefix = relativePath.substring(0, structuralCutoffIndex);
+                        console.log("Vault tracking system anchored at path prefix:", internalZipPathPrefix);
+                    }
+                });
                 
                 textbookDisplayPanel.innerHTML = `<p style="color: #22c55e; font-weight: 500;">🎉 Vault verification successful. Displaying dashboard data...</p>`;
                 extractDataFromZipArchive();
@@ -365,12 +373,12 @@
             const crossRefCard = document.getElementById("crossRefCard");
             const hashCard = document.getElementById("hashCard");
 
-            // ADJUSTED PATHWAY: Dynamically points into your extra nested folder level automatically
-            const localizedPathInsideZip = `curriculum/curriculum/grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDay}.json`;
+            // Forms an ultra-flexible file target address by combining your discovered prefix paths
+            const targetFileAddress = `${internalZipPathPrefix}grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDay}.json`;
 
             try {
-                const targetZipFileReference = preloadedZipInstance.file(localizedPathInsideZip);
-                if (!targetZipFileReference) throw new Error("Selected lesson coordinate path not found in zip structure.");
+                const targetZipFileReference = preloadedZipInstance.file(targetFileAddress);
+                if (!targetZipFileReference) throw new Error("Coordinates missing from zip matrix folder map.");
                 
                 const clearTextString = await targetZipFileReference.async("string");
                 const data = JSON.parse(clearTextString);
@@ -390,8 +398,9 @@
                 hashCard.innerText = data.sync_hash;
 
             } catch (error) {
-                textbookDisplayPanel.innerHTML = `<p style="color: #ef4444; font-weight: 500;">Lesson Node Offline</p><p style="color: #6b7280; font-size: 13px;">Could not unpack file path target entry: <br><b>${localizedPathInsideZip}</b></p>`;
-                crossRefCard.innerText = "No secondary ledger alignment matching these filter constraints.";
+                console.error("Target missing error path trace:", targetFileAddress);
+                textbookDisplayPanel.innerHTML = `<p style="color: #ef4444; font-weight: 500;">Lesson Node Offline</p><p style="color: #6b7280; font-size: 13px;">Could not locate layout data node at path location: <br><b>${targetFileAddress}</b></p>`;
+                crossRefCard.innerText = "No synchronized scripture tracking items mapping down to this filter context selection.";
                 hashCard.innerText = "ZIP_NODE_MISSING";
             }
         }
