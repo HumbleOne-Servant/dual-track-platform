@@ -16,7 +16,7 @@
             height: 100vh;
             overflow: hidden;
         }
-        /* Left Vertical Grade Sidebar Rail */
+        /* Left Rail Navigation Bar */
         .sidebar-rail {
             width: 65px;
             background-color: #ffffff;
@@ -168,7 +168,7 @@
         }
     </style>
     <style>
-        /* Light Gray Dashboard Content Wrapper */
+        /* Light Gray Dashboard Content Canvas */
         .dashboard-canvas {
             flex: 1;
             display: flex;
@@ -177,9 +177,9 @@
             gap: 25px;
             overflow: hidden;
         }
-        /* Left Column Public Viewport Frame */
+        /* LEFT COLUMN PANEL: Set to exactly 50% width for ideal middle line alignment */
         .left-node-panel {
-            flex: 1;
+            width: 50%;
             background-color: #ffffff;
             border: 1px solid #e5e7eb;
             border-radius: 12px;
@@ -193,9 +193,9 @@
             border: none;
             background-color: #ffffff;
         }
-        /* Right Column Ledger Board Style */
+        /* RIGHT COLUMN PANEL: Set to exactly 50% width for clean horizontal balance */
         .right-ledger-panel {
-            width: 380px;
+            width: 50%;
             background-color: #ffffff;
             border: 1px solid #e5e7eb;
             border-radius: 12px;
@@ -247,7 +247,6 @@
 </head>
 <body>
 
-    <!-- Left Rail Selection Rail Matrix -->
     <nav class="sidebar-rail">
         <div class="hat-icon">🎓</div>
         <button class="grade-item" onclick="updateActiveGrade('K', this)">K</button>
@@ -265,7 +264,6 @@
         <button class="grade-item" onclick="updateActiveGrade('12', this)">12</button>
     </nav>
 
-    <!-- Master Desktop Window Viewport Container -->
     <div class="workspace-panel">
         <header class="header-strip">
             <div>
@@ -275,7 +273,6 @@
             <div class="days-counter">📁 0/180 days</div>
         </header>
 
-        <!-- Dynamic Filter Control Ribbon Block Section -->
         <section class="control-ribbon">
             <div class="ribbon-left">
                 <button class="arrow-button" onclick="adjustActiveDay(-1)">&lt;</button>
@@ -290,7 +287,7 @@
                         <option value="Mathematics" selected>Mathematics</option>
                         <option value="Science">Science</option>
                         <option value="Language Arts">Language Arts</option>
-                        <option value="History">History</option>
+                        <option value="History / Social Studies">History / Social Studies</option>
                         <option value="Biblical Studies">Biblical Studies</option>
                     </select>
                 </div>
@@ -302,16 +299,12 @@
             </label>
         </section>
 
-        <!-- Main Screen Canvas Panels Arena -->
         <main class="dashboard-canvas">
-            
-            <!-- LEFT PANEL CONTAINER -->
             <div class="left-node-panel">
                 <div id="iframeStatusScreen" class="status-container">Loading public portal assets...</div>
                 <iframe id="publicTextbookFrame" src="about:blank" style="display: none;"></iframe>
             </div>
 
-            <!-- RIGHT PANEL CONTAINER -->
             <div class="right-ledger-panel">
                 <div style="font-size: 15px; font-weight: 700; color: #111827; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 4px;">📜 Forensic Ledger</div>
                 
@@ -325,16 +318,12 @@
                     <div id="hashCard" class="ledger-card-body hash-string">0x00000000</div>
                 </div>
             </div>
-
         </main>
     </div>
     <script>
-        // 🚨 CONFIGURATION ACTION REQUIRED: Change this placeholder link text to your live Render application URL
         const BACKEND_URL = "https://dual-track-platform.onrender.com";
-        
         let chosenGradeIndex = "5";
 
-        // Generate the 180 day options cleanly inside the select element box
         function initializeCalendarDropdown() {
             const dayDropdown = document.getElementById("daySelect");
             dayDropdown.innerHTML = "";
@@ -372,7 +361,6 @@
             const crossRefCard = document.getElementById("crossRefCard");
             const hashCard = document.getElementById("hashCard");
 
-            // Reset workspace screens immediately to an elegant loading layout state on every input change
             iframeStatusScreen.style.display = "flex";
             iframeStatusScreen.innerText = "Loading public portal assets...";
             publicTextbookFrame.style.display = "none";
@@ -380,7 +368,6 @@
             crossRefCard.innerText = "Synchronizing ledger entries...";
             hashCard.innerText = "COMPUTING_HASH...";
 
-            // Match query structural parameters exactly to the python backend engine configuration
             const corePipelineUrl = `${BACKEND_URL}?grade=${encodeURIComponent("Grade " + chosenGradeIndex)}&subject=${encodeURIComponent(currentSubject)}&day=${encodeURIComponent(currentDay)}`;
 
             try {
@@ -389,12 +376,11 @@
                 
                 const dataResponsePayload = await networkResponse.json();
 
-                // 1. Hide the tracking screen placeholder and fill out your left iframe textbook source
+                // Clear formatting overlays and switch the view to display the incoming text content cleanly
                 iframeStatusScreen.style.display = "none";
-                publicTextbookFrame.src = dataResponsePayload.iframe_target;
+                publicTextbookFrame.srcdoc = dataResponsePayload.iframe_target;
                 publicTextbookFrame.style.display = "block";
 
-                // 2. Safely output your calculated ledger texts and tracking hashes onto the boards
                 crossRefCard.innerText = dataResponsePayload.ledger_payload.cross_reference;
                 hashCard.innerText = dataResponsePayload.ledger_payload.sync_hash;
 
@@ -406,7 +392,6 @@
             }
         }
 
-        // Auto trigger setup and connection scripts upon window load processing routines
         window.onload = function() {
             initializeCalendarDropdown();
             runDataPipelineSync();
