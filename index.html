@@ -57,7 +57,7 @@
             color: #ffffff;
             font-weight: 600;
         }
-        /* Main Workspace Panel Layout */
+        /* Main Workspace Panel */
         .workspace-panel {
             flex: 1;
             display: flex;
@@ -163,7 +163,7 @@
             cursor: pointer;
             height: 36px;
         }
-        /* Light Gray Dashboard Content Canvas Split Layout */
+        /* Balanced 50/50 Dual Display Grid Canvas Split Layout */
         .dashboard-canvas {
             flex: 1;
             display: flex;
@@ -172,56 +172,16 @@
             gap: 25px;
             overflow: hidden;
         }
-        /* LEFT COLUMN PANEL: Balanced 50% split width card box */
-        .left-node-panel {
-            width: 50%;
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            padding: 30px;
-            overflow-y: auto;
-        }
-        /* RIGHT COLUMN PANEL: Balanced 50% split width card box */
-        .right-ledger-panel {
-            width: 50%;
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            padding: 24px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        .ledger-section-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 10px;
-        }
-        .ledger-card-body {
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 16px;
-            font-size: 13px;
-            line-height: 1.6;
-            color: #374151;
-        }
-        .hash-string {
-            font-family: Menlo, Monaco, Consolas, monospace;
-            color: #0284c7;
-            font-weight: 500;
-        }
+        .left-node-panel { width: 50%; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); padding: 30px; overflow-y: auto; }
+        .right-ledger-panel { width: 50%; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; }
+        .ledger-section-title { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+        .ledger-card-body { background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; font-size: 13px; line-height: 1.6; color: #374151; }
+        .hash-string { font-family: Menlo, Monaco, Consolas, monospace; color: #0284c7; font-weight: 500; }
     </style>
 </head>
 <body>
 
-    <!-- Grade Selection Rail Matrix Buttons -->
+    <!-- Left Rail Selection Rail Matrix Buttons -->
     <nav class="sidebar-rail">
         <div class="hat-icon">🎓</div>
         <button class="grade-item" onclick="updateActiveGrade('K', this)">K</button>
@@ -258,7 +218,6 @@
                 
                 <div class="pill-container" style="margin-left: 8px;">
                     <span class="pill-label">Track Subject:</span>
-                    <!-- FIXED DROPDOWN VALUES: Maps exactly to your folder directory strings character-for-character -->
                     <select id="subjectSelect" onchange="runDataPipelineSync()">
                         <option value="mathematics" selected>mathematics</option>
                         <option value="science">science</option>
@@ -274,13 +233,12 @@
                 <span>Mark day complete to unlock next</span>
             </label>
         </section>
+
         <main class="dashboard-canvas">
-            <!-- LEFT PANEL: Dynamic Stored Textbook Output Canvas -->
             <div id="textbookDisplayPanel" class="left-node-panel">
                 <p style="color: #6b7280;">Loading stored lesson content...</p>
             </div>
 
-            <!-- RIGHT PANEL: Dynamic Stored Ledger Output Canvas -->
             <div class="right-ledger-panel">
                 <div style="font-size: 15px; font-weight: 700; color: #111827; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 4px;">📜 Forensic Ledger</div>
                 
@@ -296,8 +254,8 @@
             </div>
         </main>
     </div>
-
     <script>
+        // STRICT USER REQUEST STRINGS: Active lowercase token declarations
         let chosenGradeIndex = "5";
 
         function initializeCalendarDropdown() {
@@ -310,6 +268,7 @@
                 dayDropdown.appendChild(opt);
             }
         }
+
         function updateActiveGrade(gradeCode, buttonElement) {
             document.querySelectorAll('.grade-item').forEach(btn => btn.classList.remove('active'));
             buttonElement.classList.add('active');
@@ -326,8 +285,8 @@
                 runDataPipelineSync();
             }
         }
+
         async function runDataPipelineSync() {
-            // GRABS TRUE VALUE: Pulls pure folder strings straight from the selector attributes
             const currentSubject = document.getElementById("subjectSelect").value;
             const currentDayString = document.getElementById("daySelect").value;
             
@@ -335,8 +294,13 @@
             const crossRefCard = document.getElementById("crossRefCard");
             const hashCard = document.getElementById("hashCard");
 
-            // DIRECT MAP LINK: Seamless relative address calculation that mirrors your unzipped folders
-            const targetDataFilePath = `curriculum/grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDayString}.json`;
+            // SAFE SECURE STRINGS: Converts the requested variables into all lowercase paths character-for-character
+            let safeGradePathToken = chosenGradeIndex.toLowerCase();
+            let safeSubjectPathToken = currentSubject.toLowerCase();
+            let safeDayPathToken = currentDayString.toLowerCase();
+
+            // CONSTRUCTED TARGET ADDRESS MATRIX: Dynamically targets your exact unzipped file routes
+            const targetDataFilePath = `curriculum/grade_${safeGradePathToken}/${safeSubjectPathToken}/${safeDayPathToken}.json`;
 
             try {
                 const networkResponse = await fetch(targetDataFilePath);
