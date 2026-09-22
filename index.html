@@ -5,148 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dual-Ledger Adaptive Platform Framework</title>
     <style>
-        :root {
-            --bg-primary: #0b0f19; --bg-panel: #1e293b; --bg-card: #111827; --text-main: #f8fafc;
-            --text-muted: #94a3b8; --accent-public: #38bdf8; --accent-private: #fbbf24;
-            --border-color: #334155;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #121212;
+            color: #e0e0e0;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-main); height: 100vh; display: flex; overflow: hidden; }
-        .grade-sidebar { width: 85px; background: #070a12; border-right: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; padding: 1.5rem 0; overflow-y: auto; gap: 0.65rem; }
-        .sidebar-brand { font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; }
-        .grade-btn { width: 52px; height: 52px; border-radius: 10px; border: 1px solid var(--border-color); background: transparent; color: var(--text-muted); font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .grade-btn.active { background: var(--accent-public); color: #000000; border-color: var(--accent-public); }
-        .app-container { display: flex; flex: 1; flex-direction: column; overflow: hidden; }
-        header { background: #111827; padding: 0.75rem 2rem; border-bottom: 1px solid var(--border-color); }
-        h1 { font-size: 1.1rem; font-weight: 700; color: #ffffff; }
-        .student-controls-bar { background: #1e293b; padding: 0.75rem 2rem; border-bottom: 1px solid var(--border-color); display: flex; gap: 2rem; align-items: center; }
-        .control-group { display: flex; align-items: center; gap: 0.75rem; }
-        .control-group label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
-        .selector-element { background: var(--bg-primary); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.4rem 1rem; border-radius: 6px; outline: none; font-weight: 600; cursor: pointer; }
-        main { display: flex; flex: 1; overflow: hidden; }
-        .pane { flex: 1; display: flex; flex-direction: column; overflow: hidden; padding: 1.5rem; position: relative; }
-        .pane:first-child { border-right: 1px solid var(--border-color); padding: 0; } /* Zero padding to allow iframe to stretch full bleed */
-        .public-pane { background: #131b2e; } .private-pane { background: #090d16; overflow-y: auto; }
-        .pane-badge { position: absolute; top: 1rem; left: 1rem; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 0.25rem 0.5rem; border-radius: 4px; z-index: 10; }
-        .public-badge { background: rgba(56, 189, 248, 0.1); color: var(--accent-public); }
-        .private-badge { background: rgba(251, 191, 36, 0.1); color: var(--accent-private); }
+        header {
+            background-color: #1f1f1f;
+            padding: 15px;
+            border-bottom: 2px solid #333;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        select, button {
+            background-color: #2d2d2d;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        button {
+            background-color: #007acc;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #0062a3;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        .panel-left {
+            flex: 1;
+            border-right: 2px solid #333;
+            background-color: #fff;
+            position: relative;
+        }
+        .panel-left iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .panel-right {
+            width: 400px;
+            background-color: #181818;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .status-badge {
+            align-self: flex-start;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .status-connecting { background-color: #d97706; color: #fff; }
+        .status-synced { background-color: #16a34a; color: #fff; }
+        .status-error { background-color: #dc2626; color: #fff; }
         
-        /* Interactive Web-Embed Frame Styling Dimensions */
-        .curriculum-iframe { width: 100%; height: 100%; border: none; background: #ffffff; }
-        
-        .lesson-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem; color: #ffffff; margin-top: 1.5rem; }
-        .lesson-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; text-transform: uppercase; }
-        .section-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.25rem; }
-        .formatted-p { line-height: 1.8; font-size: 1.05rem; color: #e2e8f0; }
-        .forensic-block { background: rgba(251, 191, 36, 0.02); border-left: 4px solid var(--accent-private); padding: 1.25rem; margin-top: 1.25rem; border-radius: 0 6px 6px 0; }
+        .ledger-box {
+            background-color: #222;
+            border: 1px solid #333;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        .ledger-box h3 { margin-top: 0; color: #007acc; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        .hash-tag { font-family: monospace; color: #38bdf8; word-break: break-all; }
+        .placeholder-text { color: #888; font-style: italic; }
     </style>
 </head>
 <body>
-    <nav class="grade-sidebar">
-        <div class="sidebar-brand">Grade</div>
-        <button id="btn-K" class="grade-btn active" onclick="changeGrade('K')">K</button>
-        <button id="btn-1" class="grade-btn" onclick="changeGrade('1')">1</button>
-        <button id="btn-2" class="grade-btn" onclick="changeGrade('2')">2</button>
-        <button id="btn-3" class="grade-btn" onclick="changeGrade('3')">3</button>
-        <button id="btn-4" class="grade-btn" onclick="changeGrade('4')">4</button>
-        <button id="btn-5" class="grade-btn" onclick="changeGrade('5')">5</button>
-        <button id="btn-6" class="grade-btn" onclick="changeGrade('6')">6</button>
-        <button id="btn-7" class="grade-btn" onclick="changeGrade('7')">7</button>
-        <button id="btn-8" class="grade-btn" onclick="changeGrade('8')">8</button>
-        <button id="btn-9" class="grade-btn" onclick="changeGrade('9')">9</button>
-        <button id="btn-10" class="grade-btn" onclick="changeGrade('10')">10</button>
-        <button id="btn-11" class="grade-btn" onclick="changeGrade('11')">11</button>
-        <button id="btn-12" class="grade-btn" onclick="changeGrade('12')">12</button>
-    </nav>
 
-    <div class="app-container">
-        <header>
-            <h1>Dual-Ledger Adaptive Platform Framework</h1>
-        </header>
+    <header>
+        <select id="gradeSelect">
+            <option value="Grade 1">Grade 1</option>
+            <option value="Grade 2">Grade 2</option>
+            <option value="Grade 3">Grade 3</option>
+        </select>
+        <select id="subjectSelect">
+            <option value="Math">Math</option>
+            <option value="Science">Science</option>
+            <option value="History">History</option>
+        </select>
+        <select id="daySelect">
+            <option value="Day 1">Day 1</option>
+            <option value="Day 2">Day 2</option>
+            <option value="Day 3">Day 3</option>
+        </select>
+        <button onclick="syncPlatform()">Synchronize Ledger</button>
+    </header>
 
-        <div class="student-controls-bar">
-            <div class="control-group">
-                <label for="subjectSelect">Track Subject:</label>
-                <select id="subjectSelect" class="selector-element" onchange="changeSubject()">
-                    <option value="Mathematics" selected>Mathematics</option>
-                    <option value="Science">Science</option>
-                    <option value="English Language Arts">English Language Arts</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <label for="daySelect">Lesson Matrix Day:</label>
-                <select id="daySelect" class="selector-element" onchange="changeDay()">
-                </select>
-            </div>
+    <div class="container">
+        <!-- LEFT SIDE: Public Learning Node (Iframe) -->
+        <div class="panel-left">
+            <iframe id="publicIframe" src="about:blank"></iframe>
         </div>
 
-        <main>
-            <!-- TRACK 1: MULTI-PORTAL CONTENT EMBED VIEWPORT -->
-            <section class="pane public-pane">
-                <span class="pane-badge public-badge">Public Learning Node</span>
-                <div id="iframeContainer" style="width:100%; height:100%;">
-                    <p style="color:var(--text-muted); padding: 2rem;">Loading public portal assets...</p>
-                </div>
-            </section>
+        <!-- RIGHT SIDE: Private Forensic Ledger -->
+        <div class="panel-right">
+            <div id="statusIndicator" class="status-badge status-connecting">Connecting to live data stream core...</div>
+            
+            <div class="ledger-box">
+                <h3>Parallel Research Text</h3>
+                <p id="ledgerText" class="placeholder-text">Awaiting pipeline connection stabilization...</p>
+            </div>
 
-            <!-- TRACK 2: DYNAMIC INDEPENDENT OVERLAY PANELS -->
-            <section class="pane private-pane">
-                <span class="pane-badge private-badge">Private Forensic Ledger</span>
-                <div id="privateContent"></div>
-            </section>
-        </main>
+            <div class="ledger-box">
+                <h3>Sync Hash Vector</h3>
+                <p id="ledgerHash" class="hash-tag">0x00000000</p>
+            </div>
+        </div>
     </div>
 
     <script>
-        let currentGrade = 'K';
-        let currentSubject = 'Mathematics';
-        let currentDay = 1;
+        // CONFIGURATION: Replace this URL string with your actual live Render endpoint
+        const BACKEND_URL = "https://your-render-app-name.onrender.com";
 
-        function generateDayDropdown() {
-            const daySelect = document.getElementById('daySelect');
-            daySelect.innerHTML = '';
-            for (let i = 1; i <= 180; i++) { daySelect.innerHTML += `<option value="${i}">Day ${i}</option>`; }
-            daySelect.value = currentDay;
-        }
+        async function syncPlatform() {
+            const grade = document.getElementById('gradeSelect').value;
+            const subject = document.getElementById('subjectSelect').value;
+            const day = document.getElementById('daySelect').value;
+            
+            const statusIndicator = document.getElementById('statusIndicator');
+            const ledgerText = document.getElementById('ledgerText');
+            const ledgerHash = document.getElementById('ledgerHash');
+            const publicIframe = document.getElementById('publicIframe');
 
-        function changeGrade(grade) {
-            currentGrade = grade;
-            document.querySelectorAll('.grade-btn').forEach(btn => {
-                if (btn.id === `btn-${grade}`) btn.classList.add('active');
-                else btn.classList.remove('active');
-            });
-            fetchPayload();
-        }
+            statusIndicator.className = "status-badge status-connecting";
+            statusIndicator.innerText = "Synchronizing data pipelines...";
 
-        function changeSubject() { currentSubject = document.getElementById('subjectSelect').value; fetchPayload(); }
-        function changeDay() { currentDay = parseInt(document.getElementById('daySelect').value) || 1; fetchPayload(); }
+            // Properly format parameters into an standard internet address query layout
+            const syncTargetUrl = `${BACKEND_URL}?grade=${encodeURIComponent(grade)}&subject=${encodeURIComponent(subject)}&day=${encodeURIComponent(day)}`;
 
-        async function fetchPayload() {
             try {
-                const response = await fetch(`https://onrender.com{currentGrade}&subject=${encodeURIComponent(currentSubject)}&day=${currentDay}`);
+                const response = await fetch(syncTargetUrl, { method: 'GET' });
+                
+                if (!response.ok) throw new Error(`Backend rejected response: ${response.status}`);
+                
                 const data = await response.json();
-                
-                // MOUNT WEB-EMBED TEXTBOOK MODULE INSTANTLY
-                document.getElementById('iframeContainer').innerHTML = `
-                    <iframe src="${data.embed_url}" class="curriculum-iframe" allowfullscreen></iframe>
-                `;
-                
-                // MOUNT FORENSIC TEXT PANELS
-                document.getElementById('privateContent').innerHTML = `
-                    <h2 class="lesson-title">${data.title}</h2>
-                    <div class="lesson-subtitle">Active Matrix Location: Day ${currentDay} of 180</div>
-                    <div class="section-card">
-                        <div class="forensic-block">
-                            <p class="formatted-p" style="white-space:pre-wrap; font-style:italic;">${data.biblical_body}</p>
-                        </div>
-                    </div>
-                `;
+
+                // 1. Instantly trigger iframe to render dynamic open web asset path
+                publicIframe.src = data.iframe_target;
+
+                // 2. Populate the private forensic ledger tracking outputs
+                ledgerText.innerText = data.ledger_payload.cross_reference;
+                ledgerText.classList.remove('placeholder-text');
+                ledgerHash.innerText = data.ledger_payload.sync_hash;
+
+                // 3. Mark status window green
+                statusIndicator.className = "status-badge status-synced";
+                statusIndicator.innerText = "Ledger Synced";
+
             } catch (error) {
-                document.getElementById('privateContent').innerHTML = `<p style="color:#ef4444; padding-top:2rem;">Connecting to live data stream core...</p>`;
+                console.error("Pipeline failure details:", error);
+                statusIndicator.className = "status-badge status-error";
+                statusIndicator.innerText = "Connection Broken";
+                ledgerText.innerText = "Failed to pull research data from backend engine. Confirm backend is awake.";
+                ledgerText.classList.add('placeholder-text');
+                ledgerHash.innerText = "ERROR_NODE_TIMEOUT";
             }
         }
 
-        window.onload = () => { generateDayDropdown(); changeGrade('K'); };
+        // Run automatically on first bootup layout render
+        window.onload = syncPlatform;
     </script>
 </body>
 </html>
