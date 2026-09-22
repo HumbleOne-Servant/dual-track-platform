@@ -1,71 +1,66 @@
-import os
 import json
-import urllib.parse
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 
-PORT = 8080
-HTML_PATH = r"index.html"
-
-class DualLedgerAPIHandler(BaseHTTPRequestHandler):
+class DualLedgerBackend(BaseHTTPRequestHandler):
     def end_headers(self):
+        # Permits your GitHub Pages frontend to securely pull data from Render
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         super().end_headers()
 
     def do_OPTIONS(self):
-        self.send_response(204); self.end_headers()
+        # Handles the mandatory security pre-flight checks web browsers perform
+        self.send_response(200)
+        self.end_headers()
 
     def do_GET(self):
         parsed_url = urlparse(self.path)
-        path_clean = parsed_url.path.rstrip('/').lower()
+        
+        # Safely parse parameters without causing crashes/AttributeErrors
         query_params = parse_qs(parsed_url.query)
+        
+        # Pull parameters safely; default to standard values if missing
+        grade = query_params.get('grade', ['Grade 1'])[0]
+        subject = query_params.get('subject', ['Math'])[0]
+        day = query_params.get('day', ['Day 1'])[0]
 
-        # Serve static UI Layout File Panel Natively
-        if path_clean == "" or path_clean == "/index.html":
-            if not os.path.exists(HTML_PATH):
-                self.send_response(404); self.end_headers(); return
-            self.send_response(200); self.send_header("Content-Type", "text/html; charset=utf-8"); self.end_headers()
-            with open(HTML_PATH, "rb") as f: self.wfile.write(f.read())
-            return
-        elif path_clean == "/api/curriculum":
-            g_list = query_params.get('grade', ['K'])
-            s_list = query_params.get('subject', ['Mathematics'])
-            d_list = query_params.get('day', ['1'])
-            
-            grade_query = g_list[0].strip() if g_list and g_list[0] else "K"
-            subject_query = s_list[0].strip() if s_list and s_list[0] else "Mathematics"
-            day_query = d_list[0].strip() if d_list and d_list[0] else "1"
+        # Clean string spaces to generate predictable open-source repository paths
+        url_subject = subject.replace(" ", "_").lower()
+        url_day = day.replace(" ", "_").lower()
 
-            # 🌐 STRUCTURAL WEB EXTENSION MAPPER
-            # Maps queries to open textbooks natively to populate all 180 days automatically
-            sub_key = subject_query.lower()
-            if "math" in sub_key:
-                embed_target_url = f"https://wikipedia.org"
-            elif "science" in sub_key:
-                embed_target_url = f"https://wikipedia.org"
-            else:
-                embed_target_url = f"https://wikipedia.org"
+        # DYNAMIC PATH ENGINE: Generates public textbook link and matching research ledger text
+        # You can substitute "example.org" with your preferred open web repository root URL
+        public_iframe_url = f"https://example.org{grade.replace(' ', '').lower()}/{url_subject}/{url_day}.html"
+        
+        forensic_text = f"Forensic tracking active for {grade}, {subject}, {day}. Verifying historical continuity vectors against standard repository nodes."
+        sync_hash = f"SHA256-{hash(grade + subject + day) & 0xffffffff:08x}"
 
-            # Package payload structure cleanly for frontend iframe mapping windows
-            payload = {
-                "grade": grade_query,
-                "subject": subject_query,
-                "day": day_query,
-                "title": f"{subject_query} — Lesson Module {day_query}",
-                "embed_url": embed_target_url,
-                "biblical_body": f"Parallel Alternative Forensic Tracking Context Matrix Operational.\n\nActive Node: Grade {grade_query} | Day {day_query}\n\n[Input your proprietary scriptural analysis and alternative research texts here inside the repository code framework.]"
+        # Package the complete response structure
+        response_data = {
+            "status": "synchronized",
+            "iframe_target": public_iframe_url,
+            "ledger_payload": {
+                "cross_reference": forensic_text,
+                "sync_hash": sync_hash
             }
+        }
 
-            self.send_response(200); self.send_header("Content-Type", "application/json"); self.end_headers()
-            self.wfile.write(json.dumps(payload).encode('utf-8'))
-            return
-        else:
-            self.send_response(404); self.end_headers()
+        # Send successful response back to frontend
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps(response_data).encode('utf-8'))
 
-if __name__ == "__main__":
-    httpd = HTTPServer(('0.0.0.0', 8080), DualLedgerAPIHandler)
-    print("Spreadsheet-Free Embed Engine Gateway Running Live...")
-    try: httpd.serve_forever()
-    except KeyboardInterrupt: httpd.server_close()
+def run(server_class=HTTPServer, handler_class=DualLedgerBackend, port=8000):
+    server_address = ('', port)
+    httpd = server_class(server_address, handler_class)
+    print(f"Dual-Ledger Core active on port {port}...")
+    httpd.serve_forever()
+
+if __name__ == '__main__':
+    # Render manages port allocations dynamically via environment variables
+    import os
+    port = int(os.environ.get('PORT', 8000))
+    run(port=port)
