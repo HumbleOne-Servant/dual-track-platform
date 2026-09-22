@@ -57,7 +57,7 @@
             color: #ffffff;
             font-weight: 600;
         }
-        /* Main Workspace Panel */
+        /* Main Workspace Panel Structure Layout */
         .workspace-panel {
             flex: 1;
             display: flex;
@@ -95,7 +95,7 @@
             font-weight: 600;
             color: #374151;
         }
-        /* Filter Control Ribbon */
+        /* Filter Control Ribbon options */
         .control-ribbon {
             padding: 12px 30px;
             border-bottom: 1px solid #e5e7eb;
@@ -163,7 +163,7 @@
             cursor: pointer;
             height: 36px;
         }
-        /* Light Gray Dashboard Content Canvas Split */
+        /* Light Gray Dashboard Content Canvas Split Layout */
         .dashboard-canvas {
             flex: 1;
             display: flex;
@@ -221,6 +221,7 @@
 </head>
 <body>
 
+    <!-- Left Rail Selection Buttons Map -->
     <nav class="sidebar-rail">
         <div class="hat-icon">🎓</div>
         <button class="grade-item" onclick="updateActiveGrade('K', this)">K</button>
@@ -274,10 +275,12 @@
         </section>
 
         <main class="dashboard-canvas">
+            <!-- LEFT PANEL: Dynamic Stored Textbook Output Canvas -->
             <div id="textbookDisplayPanel" class="left-node-panel">
                 <p style="color: #6b7280;">Loading stored lesson content...</p>
             </div>
 
+            <!-- RIGHT PANEL: Dynamic Stored Ledger Output Canvas -->
             <div class="right-ledger-panel">
                 <div style="font-size: 15px; font-weight: 700; color: #111827; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 4px;">📜 Forensic Ledger</div>
                 
@@ -296,7 +299,6 @@
     <script>
         let chosenGradeIndex = "5";
 
-        // EXPLICIT MATRIX MAP: Catalogs every grade, subject, and course tier character-for-character
         const HARDCODED_VAULT_INDEX = {
             "elementary": {
                 "mathematics": {
@@ -441,6 +443,11 @@
                     "bullets": [
                         "Rhetorical devices leverage contextual reference to influence conceptual interpretation.",
                         "Comparative thematic matching exposes systemic cultural perspectives across target texts.",
+                        "Analytical writing demands rigorous citation verification to maintain validation ratings."
+                    ],
+                    "ref": "Hebrews 4:12 — For the word of God is quick, and powerful, and sharper than any twoedged sword.",
+                    "hash_pre": "HS_ELA_"
+                },
                 "history_social_studies": {
                     "course": "Constitutional Law, Governance, and Macroeconomics",
                     "concept": "National stability balances structural power segregation against individual liberty definitions.",
@@ -463,3 +470,74 @@
                     "ref": "2 Timothy 2:15 — Study to shew thyself approved unto God, a workman that needeth not to be ashamed.",
                     "hash_pre": "HS_BIB_"
                 }
+            }
+        };
+        function initializeCalendarDropdown() {
+            const dayDropdown = document.getElementById("daySelect");
+            dayDropdown.innerHTML = "";
+            for (let d = 1; d <= 180; d++) {
+                const opt = document.createElement("option");
+                opt.value = `day_${d}`;
+                opt.innerText = `Day ${d} / 180`;
+                dayDropdown.appendChild(opt);
+            }
+        }
+
+        function updateActiveGrade(gradeCode, buttonElement) {
+            document.querySelectorAll('.grade-item').forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+            chosenGradeIndex = gradeCode;
+            runDataPipelineSync();
+        }
+
+        function adjustActiveDay(stepDirection) {
+            const dayDropdown = document.getElementById("daySelect");
+            let currentIndex = dayDropdown.selectedIndex;
+            let targetIndex = currentIndex + stepDirection;
+            if (targetIndex >= 0 && targetIndex < dayDropdown.options.length) {
+                dayDropdown.selectedIndex = targetIndex;
+                runDataPipelineSync();
+            }
+        }
+
+        function runDataPipelineSync() {
+            const currentSubject = document.getElementById("subjectSelect").value;
+            const currentDayString = document.getElementById("daySelect").value;
+            const dayNum = parseInt(currentDayString.replace("day_", "")) || 1;
+            
+            const textbookDisplayPanel = document.getElementById("textbookDisplayPanel");
+            const crossRefCard = document.getElementById("crossRefCard");
+            const hashCard = document.getElementById("hashCard");
+
+            let gradeUpper = chosenGradeIndex.toUpperCase();
+            let tierKey = "high";
+            if (["K", "1", "2", "3"].includes(gradeUpper)) tierKey = "elementary";
+            else if (["4", "5", "6", "7", "8"].includes(gradeUpper)) tierKey = "middle";
+
+            const nodeMap = HARDCODED_VAULT_INDEX[tierKey][currentSubject];
+
+            let dynamicTitle = `${nodeMap.course} — Part ${dayNum}`;
+            let dynamicDescription = `Progressive milestone lesson segment focusing on specialized tracking variables for day index unit ${dayNum}.`;
+            let computedHash = `${nodeMap.hash_pre}${String(dayNum).padStart(3, '0')}G${gradeUpper}WN8`;
+
+            let bulletsHTML = nodeMap.bullets.map((b, i) => `<li style="margin-bottom:8px;"><b>Section ${dayNum}.${i+1}:</b> ${b}</li>`).join('');
+            
+            textbookDisplayPanel.innerHTML = `
+                <div style="background-color: #f3f4f6; color: #4b5563; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-bottom: 12px;">Grade ${gradeUpper} &nbsp;&bull;&nbsp; ${currentSubject.replace(/_/g,' ')} &nbsp;&bull;&nbsp; Day ${dayNum}</div>
+                <h2 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #111827;">${dynamicTitle}</h2>
+                <p style="margin: 0 0 20px 0; font-size: 14px; color: #6b7280;">🎯 ${dynamicDescription}</p>
+                <div style="border-left: 3px solid #e5e7eb; padding-left: 12px; margin-bottom: 20px; font-style: italic; color: #4b5563;">${nodeMap.concept}</div>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; font-size: 14px; color: #374151;">${bulletsHTML}</ul>
+            `;
+
+            crossRefCard.innerText = nodeMap.ref;
+            hashCard.innerText = computedHash;
+        }
+
+        window.onload = function() {
+            initializeCalendarDropdown();
+            runDataPipelineSync();
+        };
+    </script>
+</body>
+</html>
