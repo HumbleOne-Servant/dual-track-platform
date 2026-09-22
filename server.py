@@ -88,21 +88,25 @@ class DualLedgerAPIHandler(BaseHTTPRequestHandler):
                 self.wfile.write(f.read())
             return
         # Centralized REST API Query Mapping Database Conduit
-        elif path_clean == "/api/curriculum":
+                elif path_clean == "/api/curriculum":
             grade_list = query_params.get('grade', [None])
             subject_list = query_params.get('subject', [None])
             
-            grade_query = grade_list[0] if grade_list and grade_list[0] else None
-            subject_query = subject_list[0] if subject_list and subject_list[0] else None
+            # Extract element 0 explicitly to grab the true clean string value, eliminating the list string bug
+            grade_query = grade_list[0].strip().lower() if grade_list and grade_list[0] else None
+            subject_query = subject_list[0].strip().lower() if subject_list and subject_list[0] else None
 
             filtered_records = []
             for row in CURRICULUM_DATA:
-                if grade_query and str(row.get('grade', '')).strip().lower() != str(grade_query).strip().lower():
+                row_grade = str(row.get('grade', '')).strip().lower()
+                row_subject = str(row.get('subject', '')).strip().lower()
+                
+                # Enforce strict data boundary isolation queries safely
+                if grade_query and row_grade != grade_query:
                     continue
-                if subject_query and str(row.get('subject', '')).strip().lower() != str(subject_query).strip().lower():
+                if subject_query and row_subject != subject_query:
                     continue
                 
-                # Setup structure payload dictionary containers
                 payload = row.copy()
                 payload['student_lessons'] = []
                 payload['student_worksheets'] = []
@@ -110,10 +114,6 @@ class DualLedgerAPIHandler(BaseHTTPRequestHandler):
                 payload['powerpoints'] = []
                 payload['internet_links'] = []
                 
-                # Keep database row text as an explicit safety net fallback
-                payload['mainstream_body'] = row.get('mainstream_body', row.get('objective', ''))
-
-                # Scan local subject folders to classify files using the Structural Dictionary
                 grade_folder = f"Grade {str(row.get('grade', '')).strip()}"
                 target_dir = os.path.join(DOCS_DIR, grade_folder, str(row.get('subject', '')).strip())
                 
@@ -123,19 +123,14 @@ class DualLedgerAPIHandler(BaseHTTPRequestHandler):
                         rel_path = os.path.relpath(os.path.join(target_dir, file), DOCS_DIR)
                         resource_url = f"/api/resources/{urllib.parse.quote(rel_path)}"
                         
-                        # STRUCTURAL DICTIONARY MANIFEST MAPPING RULES:
-                        # Rule A: Parse Internet Configuration Links
                         if file_lower.endswith('.url'):
                             url_target = parse_url_link(os.path.join(target_dir, file))
                             if url_target:
                                 payload['internet_links'].append({"title": file.replace('.url', ''), "url": url_target})
-                        # Rule B: Map PowerPoint Interaction Decks
                         elif file_lower.endswith(('.ppt', '.pptx')):
                             payload['powerpoints'].append({"title": file, "url": resource_url})
-                        # Rule C: Separate Teacher Materials from Student Content
                         elif file_lower.endswith('.docx'):
                             file_meta = {"title": file, "url": resource_url}
-                            
                             if 'teacher' in file_lower or 'guide' in file_lower or 'key' in file_lower:
                                 payload['teacher_guides'].append(file_meta)
                             elif 'worksheet' in file_lower or 'practice' in file_lower or 'quiz' in file_lower or 'drill' in file_lower:
@@ -143,12 +138,10 @@ class DualLedgerAPIHandler(BaseHTTPRequestHandler):
                             else:
                                 payload['student_lessons'].append(file_meta)
 
-                    # Dynamic Assignment Resolver: Match files to active Day tracker safely
                     if payload['student_lessons']:
                         payload['student_lessons'].sort(key=lambda x: x['title'])
                         day_index = (int(row.get('day', '1')) - 1) % len(payload['student_lessons'])
                         target_docx_path = os.path.normpath(os.path.join(DOCS_DIR, urllib.parse.unquote(payload['student_lessons'][day_index]['url'].replace("/api/resources/", ""))))
-                        
                         extracted_lesson_text = parse_docx_text(target_docx_path)
                         if extracted_lesson_text:
                             payload['mainstream_body'] = extracted_lesson_text
@@ -160,7 +153,7 @@ class DualLedgerAPIHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps(filtered_records).encode('utf-8'))
             return
-
+        
         else:
             self.send_response(404)
             self.end_headers()
