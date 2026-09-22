@@ -7,537 +7,149 @@
     <style>
         * { box-sizing: border-box; }
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #ffffff;
-            color: #1f2937;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
+            background-color: #ffffff; color: #1f2937;
+            display: flex; height: 100vh; overflow: hidden;
         }
-        /* Left Vertical Sidebar Rail Navigation Selector Matrix */
         .sidebar-rail {
-            width: 65px;
-            background-color: #ffffff;
-            border-right: 1px solid #e5e7eb;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 0;
-            gap: 8px;
-            z-index: 10;
+            width: 65px; background-color: #ffffff; border-right: 1px solid #e5e7eb;
+            display: flex; flex-direction: column; align-items: center; padding: 20px 0; gap: 8px;
         }
-        .hat-icon {
-            font-size: 22px;
-            margin-bottom: 20px;
-            color: #111827;
-        }
+        .hat-icon { font-size: 22px; margin-bottom: 20px; color: #111827; }
         .grade-item {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            border: none;
-            background: transparent;
-            color: #4b5563;
-            font-weight: 500;
-            font-size: 13px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s ease;
+            width: 38px; height: 38px; border-radius: 50%; border: none;
+            background: transparent; color: #4b5563; font-weight: 500; font-size: 13px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
-        .grade-item:hover {
-            background-color: #f3f4f6;
-            color: #111827;
-        }
-        .grade-item.active {
-            background-color: #111827;
-            color: #ffffff;
-            font-weight: 600;
-        }
-        /* Main Workspace Panel Structure Layout */
-        .workspace-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background-color: #ffffff;
-            overflow: hidden;
-        }
-        /* Top Navigation Header Row */
-        .header-strip {
-            padding: 15px 30px;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ffffff;
-        }
-        .header-strip h1 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-            color: #111827;
-            letter-spacing: -0.3px;
-        }
-        .header-strip p {
-            margin: 4px 0 0 0;
-            font-size: 12px;
-            color: #6b7280;
-        }
-        .days-counter {
-            background-color: #f3f4f6;
-            border: 1px solid #e5e7eb;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #374151;
-        }
-        /* Filter Control Ribbon options */
-        .control-ribbon {
-            padding: 12px 30px;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ffffff;
-        }
-        .ribbon-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .pill-container {
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 5px 12px;
-            gap: 8px;
-            height: 36px;
-        }
-        .pill-label {
-            font-size: 11px;
-            font-weight: 700;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .arrow-button {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            width: 36px;
-            height: 36px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #4b5563;
-            font-size: 14px;
-        }
-        .arrow-button:hover { background-color: #f9fafb; }
-        select {
-            border: none;
-            background: transparent;
-            color: #111827;
-            font-size: 13px;
-            font-weight: 600;
-            outline: none;
-            cursor: pointer;
-        }
-        .completion-toggle {
-            display: flex;
-            align-items: center;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #374151;
-            gap: 8px;
-            cursor: pointer;
-            height: 36px;
-        }
-        /* Light Gray Dashboard Content Canvas Split Layout */
-        .dashboard-canvas {
-            flex: 1;
-            display: flex;
-            background-color: #f9fafb;
-            padding: 25px;
-            gap: 25px;
-            overflow: hidden;
-        }
-        /* LEFT COLUMN CARD: Balanced Width Layout */
-        .left-node-panel {
-            width: 50%;
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            padding: 30px;
-            overflow-y: auto;
-        }
-        /* RIGHT COLUMN CARD: Balanced Width Layout */
-        .right-ledger-panel {
-            width: 50%;
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            padding: 24px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        .ledger-section-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: #9ca3af;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 10px;
-        }
-        .ledger-card-body {
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 16px;
-            font-size: 13px;
-            line-height: 1.6;
-            color: #374151;
-        }
-        .hash-string {
-            font-family: Menlo, Monaco, Consolas, monospace;
-            color: #0284c7;
-            font-weight: 500;
-        }
+        .grade-item.active { background-color: #111827; color: #ffffff; font-weight: 600; }
+        .workspace-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .header-strip { padding: 15px 30px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; }
+        .header-strip h1 { margin: 0; font-size: 18px; font-weight: 700; color: #111827; }
+        .days-counter { background-color: #f3f4f6; border: 1px solid #e5e7eb; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .control-ribbon { padding: 12px 30px; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 12px; }
+        .pill-container { display: flex; align-items: center; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 5px 12px; height: 36px; }
+        .arrow-button { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        select { border: none; background: transparent; color: #111827; font-size: 13px; font-weight: 600; outline: none; cursor: pointer; }
+        .dashboard-canvas { flex: 1; display: flex; background-color: #f9fafb; padding: 25px; gap: 25px; overflow: hidden; }
+        .left-node-panel { width: 50%; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 30px; overflow-y: auto; }
+        .right-ledger-panel { width: 50%; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; }
+        .ledger-section-title { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.8px; }
+        .ledger-card-body { background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; font-size: 13px; line-height: 1.6; }
+        .hash-string { font-family: monospace; color: #0284c7; font-weight: 500; }
     </style>
 </head>
 <body>
-
-    <!-- Left Rail Selection Buttons Map -->
     <nav class="sidebar-rail">
         <div class="hat-icon">🎓</div>
-        <button class="grade-item" onclick="updateActiveGrade('K', this)">K</button>
-        <button class="grade-item" onclick="updateActiveGrade('1', this)">1</button>
-        <button class="grade-item" onclick="updateActiveGrade('2', this)">2</button>
-        <button class="grade-item" onclick="updateActiveGrade('3', this)">3</button>
-        <button class="grade-item" onclick="updateActiveGrade('4', this)">4</button>
-        <button class="grade-item active" onclick="updateActiveGrade('5', this)">5</button>
-        <button class="grade-item" onclick="updateActiveGrade('6', this)">6</button>
-        <button class="grade-item" onclick="updateActiveGrade('7', this)">7</button>
-        <button class="grade-item" onclick="updateActiveGrade('8', this)">8</button>
-        <button class="grade-item" onclick="updateActiveGrade('9', this)">9</button>
-        <button class="grade-item" onclick="updateActiveGrade('10', this)">10</button>
-        <button class="grade-item" onclick="updateActiveGrade('11', this)">11</button>
-        <button class="grade-item" onclick="updateActiveGrade('12', this)">12</button>
+        <button class="grade-item" onclick="updateGrade('K', this)">K</button>
+        <button class="grade-item" onclick="updateGrade('1', this)">1</button>
+        <button class="grade-item" onclick="updateGrade('2', this)">2</button>
+        <button class="grade-item" onclick="updateGrade('3', this)">3</button>
+        <button class="grade-item" onclick="updateGrade('4', this)">4</button>
+        <button class="grade-item active" onclick="updateGrade('5', this)">5</button>
+        <button class="grade-item" onclick="updateGrade('6', this)">6</button>
+        <button class="grade-item" onclick="updateGrade('7', this)">7</button>
+        <button class="grade-item" onclick="updateGrade('8', this)">8</button>
+        <button class="grade-item" onclick="updateGrade('9', this)">9</button>
+        <button class="grade-item" onclick="updateGrade('10', this)">10</button>
+        <button class="grade-item" onclick="updateGrade('11', this)">11</button>
+        <button class="grade-item" onclick="updateGrade('12', this)">12</button>
     </nav>
 
     <div class="workspace-panel">
         <header class="header-strip">
-            <div>
-                <h1>Dual-Track Learning Platform</h1>
-                <p>Public instruction node · private forensic ledger · 180-day calendar</p>
-            </div>
-            <div class="days-counter">📁 Core Database Vault Embedded</div>
+            <h1>Dual-Track Learning Platform</h1>
+            <div class="days-counter">📁 Local Server Active</div>
         </header>
 
         <section class="control-ribbon">
-            <div class="ribbon-left">
-                <button class="arrow-button" onclick="adjustActiveDay(-1)">&lt;</button>
-                <div class="pill-container">
-                    <select id="daySelect" onchange="runDataPipelineSync()"></select>
-                </div>
-                <button class="arrow-button" onclick="adjustActiveDay(1)">&gt;</button>
-                
-                <div class="pill-container" style="margin-left: 8px;">
-                    <span class="pill-label">Track Subject:</span>
-                    <select id="subjectSelect" onchange="runDataPipelineSync()">
-                        <option value="mathematics" selected>Mathematics</option>
-                        <option value="science">Science</option>
-                        <option value="language_arts">Language Arts</option>
-                        <option value="history_social_studies">History / Social Studies</option>
-                        <option value="biblical_studies">Biblical Studies</option>
-                    </select>
-                </div>
-            </div>
+            <button class="arrow-button" onclick="changeDay(-1)">&lt;</button>
+            <div class="pill-container"><select id="daySelect" onchange="loadLesson()"></select></div>
+            <button class="arrow-button" onclick="changeDay(1)">&gt;</button>
             
-            <label class="completion-toggle">
-                <input type="checkbox" id="markDayComplete" style="margin: 0; cursor: pointer; transform: scale(1.05);">
-                <span>Mark day complete to unlock next</span>
-            </label>
+            <div class="pill-container" style="margin-left: 8px;">
+                <select id="subjectSelect" onchange="loadLesson()">
+                    <option value="mathematics" selected>Mathematics</option>
+                    <option value="science">Science</option>
+                    <option value="language_arts">Language Arts</option>
+                    <option value="history_social_studies">History / Social Studies</option>
+                    <option value="biblical_studies">Biblical Studies</option>
+                </select>
+            </div>
         </section>
 
         <main class="dashboard-canvas">
-            <!-- LEFT PANEL: Dynamic Stored Textbook Output Canvas -->
-            <div id="textbookDisplayPanel" class="left-node-panel">
-                <p style="color: #6b7280;">Loading stored lesson content...</p>
-            </div>
-
-            <!-- RIGHT PANEL: Dynamic Stored Ledger Output Canvas -->
+            <div id="textbookDisplayPanel" class="left-node-panel"><p>Loading curriculum text files...</p></div>
             <div class="right-ledger-panel">
-                <div style="font-size: 15px; font-weight: 700; color: #111827; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 4px;">📜 Forensic Ledger</div>
-                
-                <div>
-                    <div class="ledger-section-title">Cross-References</div>
-                    <div id="crossRefCard" class="ledger-card-body">Connecting to live data stream core...</div>
-                </div>
-
-                <div>
-                    <div class="ledger-section-title">Structural Sync Hash</div>
-                    <div id="hashCard" class="ledger-card-body hash-string">0x00000000</div>
-                </div>
+                <div><div class="ledger-section-title">Cross-References</div><div id="crossRefCard" class="ledger-card-body">Awaiting sync...</div></div>
+                <div><div class="ledger-section-title">Structural Sync Hash</div><div id="hashCard" class="ledger-card-body hash-string">0x00000000</div></div>
             </div>
         </main>
     </div>
+
     <script>
-        let chosenGradeIndex = "5";
+        let currentGrade = "5";
 
-        const HARDCODED_VAULT_INDEX = {
-            "elementary": {
-                "mathematics": {
-                    "course": "Introductory Addition and Place Value Framework",
-                    "concept": "Numbers combine linearly to form higher-order baseline metrics.",
-                    "bullets": [
-                        "Single units combine linearly to bridge the zero-to-ten counting vector.",
-                        "Ten individual units bundle together to establish a single column shift.",
-                        "Visualizing number shapes assists in rapid arithmetic calculation patterns."
-                    ],
-                    "ref": "Proverbs 11:1 — A false balance is abomination to the Lord: but a just weight is his delight.",
-                    "hash_pre": "EL_MATH_"
-                },
-                "science": {
-                    "course": "Basic Properties of Matter and Earth Systems",
-                    "concept": "Matter changes visible shapes while retaining its underlying physical mass.",
-                    "bullets": [
-                        "Solids maintain a fixed structure and do not deform to fit containers.",
-                        "Liquids flow dynamically to fill bottom boundaries of open space.",
-                        "Gases expand infinitely to fill all available volumetric areas."
-                    ],
-                    "ref": "Genesis 1:7 — And God made the firmament, and divided the waters which were under the firmament.",
-                    "hash_pre": "EL_SCI_"
-                },
-                "language_arts": {
-                    "course": "Foundational Phonics, Grammar, and Sentence Layouts",
-                    "concept": "Words align systematically to convey clear, simple baseline statements.",
-                    "bullets": [
-                        "Nouns name specific people, geographical locations, or physical things.",
-                        "Verbs inject structural action changes into a sentence row.",
-                        "Sentences require a complete thought block to achieve structural readability."
-                    ],
-                    "ref": "Proverbs 25:11 — A word fitly spoken is like apples of gold in pictures of silver.",
-                    "hash_pre": "EL_ELA_"
-                },
-                "history_social_studies": {
-                    "course": "Community Infrastructure and Basic Civic Roles",
-                    "concept": "Cooperative laws enable individual families to build safe, shared living spaces.",
-                    "bullets": [
-                        "Shared rules establish standard baseline metrics for public safety profiles.",
-                        "Community services preserve key infrastructure elements like roads and local parks.",
-                        "Historical markers record the names of early city construction leaders."
-                    ],
-                    "ref": "Romans 13:7 — Render therefore to all their dues: tribute to whom tribute is due.",
-                    "hash_pre": "EL_HIST_"
-                },
-                "biblical_studies": {
-                    "course": "Narratives of Faith and Foundational Parables",
-                    "concept": "Simple text records establish structural values of personal integrity and truth.",
-                    "bullets": [
-                        "Early narratives demonstrate how individual choice impacts family lines.",
-                        "Parables utilize literal agricultural examples to teach deeper core tracking rules.",
-                        "Historical accounts follow explicit visual tracking lines across geographical markers."
-                    ],
-                    "ref": "Psalm 23:3 — He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.",
-                    "hash_pre": "EL_BIB_"
-                }
-            },
-            "middle": {
-                "mathematics": {
-                    "course": "Fractions and Rational Numbers on a Number Line",
-                    "concept": "A fraction represents equal parts of a whole unit.",
-                    "bullets": [
-                        "The denominator defines how many equal intervals divide the segment from 0 to 1.",
-                        "The numerator represents how many steps are counted from the origin point.",
-                        "A value of 4/4 lines up perfectly with the integer 1."
-                    ],
-                    "ref": "Mark 6:41 — And when he had taken the five loaves and the two fishes, he looked up to heaven, and blessed, and brake the loaves.",
-                    "hash_pre": "MD_MATH_"
-                },
-                "science": {
-                    "course": "Ecosystem Dynamics and Energy Transfers",
-                    "concept": "Ecosystem energy profiles flow consistently through structured ecological levels.",
-                    "bullets": [
-                        "Primary producers synthesize chemical energy directly via organic inputs or solar paths.",
-                        "Decomposers process dead biomass matter back into bio-available soils.",
-                        "Environmental shifts trigger immediate changes across structural community profiles."
-                    ],
-                    "ref": "Genesis 1:25 — And God made the beast of the earth after his kind, and cattle after their kind.",
-                    "hash_pre": "MD_SCI_"
-                },
-                "language_arts": {
-                    "course": "Structural Text Analysis and Theme Development",
-                    "concept": "Cohesive communication balances core structural assertions with clear context.",
-                    "bullets": [
-                        "The primary thesis introduces the foundational argument framework.",
-                        "Contextual evidence validates informational data metrics clearly.",
-                        "Structural transition links prevent organizational readability drops."
-                    ],
-                    "ref": "John 1:1 — In the beginning was the Word, and the Word was with God.",
-                    "hash_pre": "MD_ELA_"
-                },
-                "history_social_studies": {
-                    "course": "River Valleys and the Foundations of Civilizations",
-                    "concept": "Stable water resources enabled structural shifts from migratory to agricultural societies.",
-                    "bullets": [
-                        "Silt distribution networks created highly fertile farming basins.",
-                        "Irrigation infrastructure developments generated early municipal laws.",
-                        "Trade routes linked isolated settlements into broad economic grids."
-                    ],
-                    "ref": "Proverbs 22:28 — Remove not the ancient landmark, which thy fathers have set.",
-                    "hash_pre": "MD_HIST_"
-                },
-                "biblical_studies": {
-                    "course": "Historical Geography of Ancient Israel and Near East Texts",
-                    "concept": "Textual geographic records maintain precise alignment with physical land vectors.",
-                    "bullets": [
-                        "Topographical valley segments served as defensive natural buffer walls.",
-                        "Water management networks determined ancient municipal density profiles.",
-                        "Trade highway junctions connected regional trade centers smoothly."
-                    ],
-                    "ref": "Psalm 119:105 — Thy word is a lamp unto my feet, and a light unto my path.",
-                    "hash_pre": "MD_BIB_"
-                }
-            },
-            "high": {
-                "mathematics": {
-                    "course": "Advanced Algebraic Functions and Coordinate Geometry",
-                    "concept": "Variable expressions map predictable geometric curves across coordinate spaces.",
-                    "bullets": [
-                        "The slope parameter defines the rate of structural line rise over horizontal run.",
-                        "Quadratic structures generate parabolic balance points matching vertex rules.",
-                        "Independent variables compute clean outputs along horizontal axes."
-                    ],
-                    "ref": "Job 38:5 — Who hath laid the measures thereof, if thou knowest? or who hath stretched the line upon it?",
-                    "hash_pre": "HS_MATH_"
-                },
-                "science": {
-                    "course": "Molecular Biology and Cellular Genetics",
-                    "concept": "Microscopic genetic data arrays code the structural templates for complex living matter.",
-                    "bullets": [
-                        "Nucleotide base pairs construct stable double-helix structural bonds.",
-                        "Messenger molecules clone data strings to coordinate structural ribosome building blocks.",
-                        "Cellular division mirrors copy precision steps to protect organic code maps."
-                    ],
-                    "ref": "Psalm 139:14 — I will praise thee; for I am fearfully and wonderfully made.",
-                    "hash_pre": "HS_SCI_"
-                },
-                "language_arts": {
-                    "course": "Advanced Rhetorical Analysis and Literary Criticism",
-                    "concept": "Advanced syntax combines underlying argumentative logic with stylistic framing devices.",
-                    "bullets": [
-                        "Rhetorical devices leverage contextual reference to influence conceptual interpretation.",
-                        "Comparative thematic matching exposes systemic cultural perspectives across target texts.",
-                        "Analytical writing demands rigorous citation verification to maintain validation ratings."
-                    ],
-                    "ref": "Hebrews 4:12 — For the word of God is quick, and powerful, and sharper than any twoedged sword.",
-                    "hash_pre": "HS_ELA_"
-                },
-                "history_social_studies": {
-                    "course": "Constitutional Law, Governance, and Macroeconomics",
-                    "concept": "National stability balances structural power segregation against individual liberty definitions.",
-                    "bullets": [
-                        "Separation of powers creates operational checks to stop structural system corruption.",
-                        "Monetary flow balances inflation parameters against industrial trade growth cycles.",
-                        "Geopolitical agreements alter macro-economic distribution networks over time."
-                    ],
-                    "ref": "Isaiah 33:22 — For the Lord is our judge, the Lord is our lawgiver, the Lord is our king; he will save us.",
-                    "hash_pre": "HS_HIST_"
-                },
-                "biblical_studies": {
-                    "course": "Covenantal Theology, Epistolary Logic, and Hermeneutics",
-                    "concept": "Scriptural analysis demands context tracking across historical, cultural, and language systems.",
-                    "bullets": [
-                        "Hermeneutic principles require evaluating root texts in original semantic context maps.",
-                        "Epistolary text blocks employ logical line structures to resolve ideological community debates.",
-                        "Covenant architectures define the legal boundaries between divine grace and human duty."
-                    ],
-                    "ref": "2 Timothy 2:15 — Study to shew thyself approved unto God, a workman that needeth not to be ashamed.",
-                    "hash_pre": "HS_BIB_"
-                }
-            }
-        };
-        function initializeCalendarDropdown() {
-            const dayDropdown = document.getElementById("daySelect");
-            dayDropdown.innerHTML = "";
+        function initDays() {
+            const select = document.getElementById("daySelect");
+            select.innerHTML = "";
             for (let d = 1; d <= 180; d++) {
-                const opt = document.createElement("option");
-                opt.value = `day_${d}`;
-                opt.innerText = `Day ${d} / 180`;
-                dayDropdown.appendChild(opt);
+                let opt = document.createElement("option");
+                opt.value = `day_${d}`; opt.innerText = `Day ${d} / 180`;
+                select.appendChild(opt);
             }
         }
 
-        function updateActiveGrade(gradeCode, buttonElement) {
-            document.querySelectorAll('.grade-item').forEach(btn => btn.classList.remove('active'));
-            buttonElement.classList.add('active');
-            chosenGradeIndex = gradeCode;
-            runDataPipelineSync();
+        function updateGrade(code, btn) {
+            document.querySelectorAll('.grade-item').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentGrade = code;
+            loadLesson();
         }
 
-        function adjustActiveDay(stepDirection) {
-            const dayDropdown = document.getElementById("daySelect");
-            let currentIndex = dayDropdown.selectedIndex;
-            let targetIndex = currentIndex + stepDirection;
-            if (targetIndex >= 0 && targetIndex < dayDropdown.options.length) {
-                dayDropdown.selectedIndex = targetIndex;
-                runDataPipelineSync();
+        function changeDay(dir) {
+            const select = document.getElementById("daySelect");
+            let next = select.selectedIndex + dir;
+            if (next >= 0 && next < select.options.length) {
+                select.selectedIndex = next;
+                loadLesson();
             }
         }
 
-        function runDataPipelineSync() {
-            const currentSubject = document.getElementById("subjectSelect").value;
-            const currentDayString = document.getElementById("daySelect").value;
-            const dayNum = parseInt(currentDayString.replace("day_", "")) || 1;
+        async function loadLesson() {
+            const subject = document.getElementById("subjectSelect").value;
+            const day = document.getElementById("daySelect").value;
             
-            const textbookDisplayPanel = document.getElementById("textbookDisplayPanel");
-            const crossRefCard = document.getElementById("crossRefCard");
-            const hashCard = document.getElementById("hashCard");
+            // Tries both lower and uppercase variants to bypass server case blocks permanently
+            const path1 = `curriculum/grade_${currentGrade.toLowerCase()}/${subject}/${day}.json`;
+            const path2 = `Curriculum/grade_${currentGrade.toLowerCase()}/${subject}/${day}.json`;
 
-            let gradeUpper = chosenGradeIndex.toUpperCase();
-            let tierKey = "high";
-            if (["K", "1", "2", "3"].includes(gradeUpper)) tierKey = "elementary";
-            else if (["4", "5", "6", "7", "8"].includes(gradeUpper)) tierKey = "middle";
+            async function tryFetch(url) {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error();
+                return res.json();
+            }
 
-            const nodeMap = HARDCODED_VAULT_INDEX[tierKey][currentSubject];
+            try {
+                let data;
+                try { data = await tryFetch(path1); } 
+                catch (e) { data = await tryFetch(path2); }
 
-            let dynamicTitle = `${nodeMap.course} — Part ${dayNum}`;
-            let dynamicDescription = `Progressive milestone lesson segment focusing on specialized tracking variables for day index unit ${dayNum}.`;
-            let computedHash = `${nodeMap.hash_pre}${String(dayNum).padStart(3, '0')}G${gradeUpper}WN8`;
-
-            let bulletsHTML = nodeMap.bullets.map((b, i) => `<li style="margin-bottom:8px;"><b>Section ${dayNum}.${i+1}:</b> ${b}</li>`).join('');
-            
-            textbookDisplayPanel.innerHTML = `
-                <div style="background-color: #f3f4f6; color: #4b5563; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-bottom: 12px;">Grade ${gradeUpper} &nbsp;&bull;&nbsp; ${currentSubject.replace(/_/g,' ')} &nbsp;&bull;&nbsp; Day ${dayNum}</div>
-                <h2 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #111827;">${dynamicTitle}</h2>
-                <p style="margin: 0 0 20px 0; font-size: 14px; color: #6b7280;">🎯 ${dynamicDescription}</p>
-                <div style="border-left: 3px solid #e5e7eb; padding-left: 12px; margin-bottom: 20px; font-style: italic; color: #4b5563;">${nodeMap.concept}</div>
-                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; font-size: 14px; color: #374151;">${bulletsHTML}</ul>
-            `;
-
-            crossRefCard.innerText = nodeMap.ref;
-            hashCard.innerText = computedHash;
+                let bulletsHTML = data.bullets.map(b => `<li style="margin-bottom:8px;">${b}</li>`).join('');
+                document.getElementById("textbookDisplayPanel").innerHTML = `
+                    <h2 style="margin: 0 0 8px 0; font-size: 24px;">${data.title}</h2>
+                    <p style="color: #6b7280; margin: 0 0 20px 0;">${data.description}</p>
+                    <div style="border-left: 3px solid #e5e7eb; padding-left: 12px; margin-bottom: 20px; font-style: italic;">${data.concept}</div>
+                    <ul style="padding-left: 20px; line-height: 1.6;">${bulletsHTML}</ul>`;
+                document.getElementById("crossRefCard").innerText = data.cross_reference;
+                document.getElementById("hashCard").innerText = data.sync_hash;
+            } catch (err) {
+                document.getElementById("textbookDisplayPanel").innerHTML = `<p style="color: #ef4444;">Lesson Data Offline</p><p style="color: #6b7280; font-size: 13px;">Ensure your unzipped folder sits in your repository.</p>`;
+            }
         }
 
-        window.onload = function() {
-            initializeCalendarDropdown();
-            runDataPipelineSync();
-        };
+        window.onload = function() { initDays(); loadLesson(); };
     </script>
 </body>
 </html>
