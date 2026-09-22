@@ -1,12 +1,12 @@
 {
-  "title": "Fractions on a Number Line (Day 113)",
-  "description": "Understand a fraction as a number on the number line; represent fractions on a number line diagram.",
-  "concept": "A fraction represents equal parts of a whole unit mapped across a spatial dimension.",
+  "title": "Introductory Addition and Place Value Framework (Day 113)",
+  "description": "Mastering basic arithmetic combinations and tens-place bundling units.",
+  "concept": "Numbers combine to form higher-order baseline metrics.",
   "bullets": [
-    "The denominator defines how many equal intervals divide the segment from 0 to 1.",
-    "The numerator represents how many steps are counted from the origin point.",
-    "A value of 4/4 lines up perfectly with the integer 1."
+    "Single units combine linearly to bridge the zero-to-ten counting vector.",
+    "Ten individual units bundle together to establish a single column shift.",
+    "Visualizing number shapes assists in rapid arithmetic calculation patterns."
   ],
-  "cross_reference": "Mark 6:41 — And when he had taken the five loaves and the two fishes, he looked up to heaven, and blessed, and brake the loaves, and gave them to his disciples to set before them.",
-  "sync_hash": "NS8xLUZyY113WN8"
+  "cross_reference": "Proverbs 11:1 — A false balance is abomination to the Lord: but a just weight is his delight.",
+  "sync_hash": "EL_MATH_113GKWN8"
 }

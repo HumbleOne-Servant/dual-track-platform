@@ -1,12 +1,12 @@
 {
-  "title": "Properties of Ecosystems and Energy Transfers (Day 2)",
-  "description": "Analyze the interdependent relationships between biotic organisms and abiotic environmental factors.",
-  "concept": "Ecosystem energy profiles flow consistently through structured ecological levels.",
+  "title": "Basic Properties of Matter and Earth Systems (Day 2)",
+  "description": "Observing the physical differences between solids, liquids, and atmospheric gases.",
+  "concept": "Matter changes visible shapes while retaining its underlying physical mass.",
   "bullets": [
-    "Primary producers synthesize chemical energy directly via organic inputs or solar paths.",
-    "Decomposers process dead biomass matter back into bio-available soils.",
-    "Environmental shifts trigger immediate changes across structural community profiles."
+    "Solids maintain a fixed structure and do not deform to fit containers.",
+    "Liquids flow dynamically to fill bottom boundaries of open space.",
+    "Gases expand infinitely to fill all available volumetric areas."
   ],
-  "cross_reference": "Genesis 1:25 — And God made the beast of the earth after his kind, and cattle after their kind, and every thing that creepeth upon the earth after his kind: and God saw that it was good.",
-  "sync_hash": "V1ExTFNYW002WN8"
+  "cross_reference": "Genesis 1:7 — And God made the firmament, and divided the waters which were under the firmament.",
+  "sync_hash": "EL_SCI_002GKWN8"
 }

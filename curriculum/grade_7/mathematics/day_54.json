@@ -1,12 +1,12 @@
 {
-  "title": "Fractions on a Number Line (Day 54)",
-  "description": "Understand a fraction as a number on the number line; represent fractions on a number line diagram.",
-  "concept": "A fraction represents equal parts of a whole unit mapped across a spatial dimension.",
+  "title": "Fractions and Rational Numbers on a Number Line (Day 54)",
+  "description": "Understand a fraction as a coordinate mapped across a spatial dimension.",
+  "concept": "A fraction represents equal parts of a whole unit.",
   "bullets": [
     "The denominator defines how many equal intervals divide the segment from 0 to 1.",
     "The numerator represents how many steps are counted from the origin point.",
     "A value of 4/4 lines up perfectly with the integer 1."
   ],
-  "cross_reference": "Mark 6:41 — And when he had taken the five loaves and the two fishes, he looked up to heaven, and blessed, and brake the loaves, and gave them to his disciples to set before them.",
-  "sync_hash": "NS8xLUZyY054WN8"
+  "cross_reference": "Mark 6:41 — And when he had taken the five loaves and the two fishes, he looked up to heaven, and blessed, and brake the loaves.",
+  "sync_hash": "MD_MATH_054G7WN8"
 }
