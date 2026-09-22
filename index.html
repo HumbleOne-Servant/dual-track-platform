@@ -16,7 +16,7 @@
             height: 100vh;
             overflow: hidden;
         }
-        /* Left Rail Navigation Bar */
+        /* Left Vertical Sidebar Rail Selector */
         .sidebar-rail {
             width: 65px;
             background-color: #ffffff;
@@ -57,7 +57,7 @@
             color: #ffffff;
             font-weight: 600;
         }
-        /* Main Workspace Window Layout */
+        /* Main Right Workspace Column */
         .workspace-panel {
             flex: 1;
             display: flex;
@@ -68,7 +68,7 @@
     </style>
 </head>
     <style>
-        /* Top Navigation Header Row */
+        /* Top Navigation Title Bar */
         .header-strip {
             padding: 15px 30px;
             border-bottom: 1px solid #e5e7eb;
@@ -98,7 +98,7 @@
             font-weight: 600;
             color: #374151;
         }
-        /* Filter Control Ribbon */
+        /* Sub-Navigation Selection Controls Row */
         .control-ribbon {
             padding: 12px 30px;
             border-bottom: 1px solid #e5e7eb;
@@ -168,7 +168,7 @@
         }
     </style>
     <style>
-        /* Light Gray Dashboard Content Canvas */
+        /* Light Gray Workspace Canvas */
         .dashboard-canvas {
             flex: 1;
             display: flex;
@@ -177,23 +177,17 @@
             gap: 25px;
             overflow: hidden;
         }
-        /* LEFT COLUMN PANEL: Set to exactly 50% width for ideal middle line alignment */
+        /* LEFT SIDE: Public Learning Node (Balanced 50% Center Split Width) */
         .left-node-panel {
             width: 50%;
             background-color: #ffffff;
             border: 1px solid #e5e7eb;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            position: relative;
-            overflow: hidden;
+            padding: 30px;
+            overflow-y: auto;
         }
-        .left-node-panel iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: #ffffff;
-        }
-        /* RIGHT COLUMN PANEL: Set to exactly 50% width for clean horizontal balance */
+        /* RIGHT SIDE: Private Forensic Ledger (Balanced 50% Center Split Width) */
         .right-ledger-panel {
             width: 50%;
             background-color: #ffffff;
@@ -228,25 +222,11 @@
             color: #0284c7;
             font-weight: 500;
         }
-        .status-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: #ffffff;
-            padding: 40px;
-            text-align: center;
-            font-size: 15px;
-            color: #6b7280;
-        }
     </style>
 </head>
 <body>
 
+    <!-- Left Rail Selection Rail Matrix -->
     <nav class="sidebar-rail">
         <div class="hat-icon">🎓</div>
         <button class="grade-item" onclick="updateActiveGrade('K', this)">K</button>
@@ -277,18 +257,18 @@
             <div class="ribbon-left">
                 <button class="arrow-button" onclick="adjustActiveDay(-1)">&lt;</button>
                 <div class="pill-container">
-                    <select id="daySelect" onchange="runDataPipelineSync()"></select>
+                    <select id="daySelect" onchange="loadLocalVaultCurriculum()"></select>
                 </div>
                 <button class="arrow-button" onclick="adjustActiveDay(1)">&gt;</button>
                 
                 <div class="pill-container" style="margin-left: 8px;">
                     <span class="pill-label">Track Subject:</span>
-                    <select id="subjectSelect" onchange="runDataPipelineSync()">
-                        <option value="Mathematics" selected>Mathematics</option>
-                        <option value="Science">Science</option>
-                        <option value="Language Arts">Language Arts</option>
-                        <option value="History / Social Studies">History / Social Studies</option>
-                        <option value="Biblical Studies">Biblical Studies</option>
+                    <select id="subjectSelect" onchange="loadLocalVaultCurriculum()">
+                        <option value="mathematics" selected>Mathematics</option>
+                        <option value="science">Science</option>
+                        <option value="language_arts">Language Arts</option>
+                        <option value="history_social_studies">History / Social Studies</option>
+                        <option value="biblical_studies">Biblical Studies</option>
                     </select>
                 </div>
             </div>
@@ -300,17 +280,18 @@
         </section>
 
         <main class="dashboard-canvas">
-            <div class="left-node-panel">
-                <div id="iframeStatusScreen" class="status-container">Loading public portal assets...</div>
-                <iframe id="publicTextbookFrame" src="about:blank" style="display: none;"></iframe>
+            <!-- LEFT PANEL: Static Textbook Output Viewport -->
+            <div id="textbookDisplayPanel" class="left-node-panel">
+                <p style="color: #6b7280;">Loading stored lesson content...</p>
             </div>
 
+            <!-- RIGHT PANEL: Static Forensic Ledger Reference Viewport -->
             <div class="right-ledger-panel">
                 <div style="font-size: 15px; font-weight: 700; color: #111827; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 4px;">📜 Forensic Ledger</div>
                 
                 <div>
                     <div class="ledger-section-title">Cross-References</div>
-                    <div id="crossRefCard" class="ledger-card-body">Connecting to live data stream core...</div>
+                    <div id="crossRefCard" class="ledger-card-body">Awaiting local index initialization...</div>
                 </div>
 
                 <div>
@@ -321,7 +302,6 @@
         </main>
     </div>
     <script>
-        const BACKEND_URL = "https://dual-track-platform.onrender.com";
         let chosenGradeIndex = "5";
 
         function initializeCalendarDropdown() {
@@ -329,7 +309,7 @@
             dayDropdown.innerHTML = "";
             for (let d = 1; d <= 180; d++) {
                 const opt = document.createElement("option");
-                opt.value = `Day ${d}`;
+                opt.value = `day_${d}`;
                 opt.innerText = `Day ${d} / 180`;
                 dayDropdown.appendChild(opt);
             }
@@ -339,7 +319,7 @@
             document.querySelectorAll('.grade-item').forEach(btn => btn.classList.remove('active'));
             buttonElement.classList.add('active');
             chosenGradeIndex = gradeCode;
-            runDataPipelineSync();
+            loadLocalVaultCurriculum();
         }
 
         function adjustActiveDay(stepDirection) {
@@ -348,53 +328,52 @@
             let targetIndex = currentIndex + stepDirection;
             if (targetIndex >= 0 && targetIndex < dayDropdown.options.length) {
                 dayDropdown.selectedIndex = targetIndex;
-                runDataPipelineSync();
+                loadLocalVaultCurriculum();
             }
         }
 
-        async function runDataPipelineSync() {
+        async function loadLocalVaultCurriculum() {
             const currentSubject = document.getElementById("subjectSelect").value;
             const currentDay = document.getElementById("daySelect").value;
             
-            const iframeStatusScreen = document.getElementById("iframeStatusScreen");
-            const publicTextbookFrame = document.getElementById("publicTextbookFrame");
+            const textbookDisplayPanel = document.getElementById("textbookDisplayPanel");
             const crossRefCard = document.getElementById("crossRefCard");
             const hashCard = document.getElementById("hashCard");
 
-            iframeStatusScreen.style.display = "flex";
-            iframeStatusScreen.innerText = "Loading public portal assets...";
-            publicTextbookFrame.style.display = "none";
-            
-            crossRefCard.innerText = "Synchronizing ledger entries...";
-            hashCard.innerText = "COMPUTING_HASH...";
-
-            const corePipelineUrl = `${BACKEND_URL}?grade=${encodeURIComponent("Grade " + chosenGradeIndex)}&subject=${encodeURIComponent(currentSubject)}&day=${encodeURIComponent(currentDay)}`;
+            // Tracks directly into your newly generated relative local file system folders
+            const targetDataFilePath = `curriculum/grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDay}.json`;
 
             try {
-                const networkResponse = await fetch(corePipelineUrl, { method: 'GET' });
-                if (!networkResponse.ok) throw new Error(`Server Response Failure Status: ${networkResponse.status}`);
+                const response = await fetch(targetDataFilePath);
+                if (!response.ok) throw new Error("Lesson location map check failed.");
                 
-                const dataResponsePayload = await networkResponse.json();
+                const data = await response.json();
 
-                // Clear formatting overlays and switch the view to display the incoming text content cleanly
-                iframeStatusScreen.style.display = "none";
-                publicTextbookFrame.srcdoc = dataResponsePayload.iframe_target;
-                publicTextbookFrame.style.display = "block";
+                // Build out and inject the structured textbook text card into your left view
+                let bulletsHTML = data.bullets.map(b => `<li style="margin-bottom:8px;">${b}</li>`).join('');
+                textbookDisplayPanel.innerHTML = `
+                    <div style="background-color: #f3f4f6; color: #4b5563; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-bottom: 12px;">Grade ${chosenGradeIndex} &nbsp;&bull;&nbsp; ${currentSubject.replace(/_/g,' ')} &nbsp;&bull;&nbsp; ${currentDay.replace('_',' ')}</div>
+                    <h2 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #111827;">${data.title}</h2>
+                    <p style="margin: 0 0 20px 0; font-size: 14px; color: #6b7280;">🎯 ${data.description}</p>
+                    <div style="border-left: 3px solid #e5e7eb; padding-left: 12px; margin-bottom: 20px; font-style: italic; color: #4b5563;">${data.concept}</div>
+                    <ul style="margin: 0; padding-left: 20px; line-height: 1.6; font-size: 14px; color: #374151;">${bulletsHTML}</ul>
+                `;
 
-                crossRefCard.innerText = dataResponsePayload.ledger_payload.cross_reference;
-                hashCard.innerText = dataResponsePayload.ledger_payload.sync_hash;
+                // Update cross-reference vectors and digital signature strings instantly inside your right panel
+                crossRefCard.innerText = data.cross_reference;
+                hashCard.innerText = data.sync_hash;
 
-            } catch (networkError) {
-                console.error("Pipeline failure log summary:", networkError);
-                iframeStatusScreen.innerText = "Public instruction node currently unreachable.";
-                crossRefCard.innerText = "Connection Broken. Verify backend service on Render is awake and running.";
-                hashCard.innerText = "ERROR_DISCONNECTED_NODE";
+            } catch (error) {
+                console.error("Local path check details:", error);
+                textbookDisplayPanel.innerHTML = `<p style="color: #ef4444; font-weight: 500;">Vault Path Error</p><p style="color: #6b7280; font-size: 13px;">Confirm your <b>curriculum</b> folder is completely uploaded to GitHub Pages next to index.html.</p>`;
+                crossRefCard.innerText = "Vault structure offline.";
+                hashCard.innerText = "ERROR_LOCAL_MISSING_NODE";
             }
         }
 
         window.onload = function() {
             initializeCalendarDropdown();
-            runDataPipelineSync();
+            loadLocalVaultCurriculum();
         };
     </script>
 </body>
