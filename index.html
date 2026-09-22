@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dual-Track Learning Platform</title>
+    <!-- Seamless Zip Reader Engine Core Integration -->
+    <script src="https://cloudflare.com"></script>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -16,7 +18,7 @@
             height: 100vh;
             overflow: hidden;
         }
-        /* Left Vertical Sidebar Rail Selector */
+        /* Left Vertical Sidebar Rail Navigation Selector Matrix */
         .sidebar-rail {
             width: 65px;
             background-color: #ffffff;
@@ -57,7 +59,7 @@
             color: #ffffff;
             font-weight: 600;
         }
-        /* Main Right Workspace Column */
+        /* Main Workspace Panel */
         .workspace-panel {
             flex: 1;
             display: flex;
@@ -68,7 +70,7 @@
     </style>
 </head>
     <style>
-        /* Top Navigation Title Bar */
+        /* Top Navigation Header Row */
         .header-strip {
             padding: 15px 30px;
             border-bottom: 1px solid #e5e7eb;
@@ -98,7 +100,7 @@
             font-weight: 600;
             color: #374151;
         }
-        /* Sub-Navigation Selection Controls Row */
+        /* Filter Control Ribbon */
         .control-ribbon {
             padding: 12px 30px;
             border-bottom: 1px solid #e5e7eb;
@@ -168,7 +170,7 @@
         }
     </style>
     <style>
-        /* Light Gray Workspace Canvas */
+        /* Light Gray Dashboard Content Wrapper */
         .dashboard-canvas {
             flex: 1;
             display: flex;
@@ -177,7 +179,7 @@
             gap: 25px;
             overflow: hidden;
         }
-        /* LEFT SIDE: Public Learning Node (Balanced 50% Center Split Width) */
+        /* LEFT SCREEN VIEW: Balanced 50% split width card box */
         .left-node-panel {
             width: 50%;
             background-color: #ffffff;
@@ -187,7 +189,7 @@
             padding: 30px;
             overflow-y: auto;
         }
-        /* RIGHT SIDE: Private Forensic Ledger (Balanced 50% Center Split Width) */
+        /* RIGHT SCREEN VIEW: Balanced 50% split width card box */
         .right-ledger-panel {
             width: 50%;
             background-color: #ffffff;
@@ -226,7 +228,6 @@
 </head>
 <body>
 
-    <!-- Left Rail Selection Rail Matrix -->
     <nav class="sidebar-rail">
         <div class="hat-icon">🎓</div>
         <button class="grade-item" onclick="updateActiveGrade('K', this)">K</button>
@@ -257,13 +258,13 @@
             <div class="ribbon-left">
                 <button class="arrow-button" onclick="adjustActiveDay(-1)">&lt;</button>
                 <div class="pill-container">
-                    <select id="daySelect" onchange="loadLocalVaultCurriculum()"></select>
+                    <select id="daySelect" onchange="extractDataFromZipArchive()"></select>
                 </div>
                 <button class="arrow-button" onclick="adjustActiveDay(1)">&gt;</button>
                 
                 <div class="pill-container" style="margin-left: 8px;">
                     <span class="pill-label">Track Subject:</span>
-                    <select id="subjectSelect" onchange="loadLocalVaultCurriculum()">
+                    <select id="subjectSelect" onchange="extractDataFromZipArchive()">
                         <option value="mathematics" selected>Mathematics</option>
                         <option value="science">Science</option>
                         <option value="language_arts">Language Arts</option>
@@ -280,18 +281,18 @@
         </section>
 
         <main class="dashboard-canvas">
-            <!-- LEFT PANEL: Static Textbook Output Viewport -->
+            <!-- LEFT PANEL VIEW PORTAL -->
             <div id="textbookDisplayPanel" class="left-node-panel">
-                <p style="color: #6b7280;">Loading stored lesson content...</p>
+                <p style="color: #6b7280;">Initializing digital zip connection layers...</p>
             </div>
 
-            <!-- RIGHT PANEL: Static Forensic Ledger Reference Viewport -->
+            <!-- RIGHT PANEL VIEW PORTAL -->
             <div class="right-ledger-panel">
                 <div style="font-size: 15px; font-weight: 700; color: #111827; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 4px;">📜 Forensic Ledger</div>
                 
                 <div>
                     <div class="ledger-section-title">Cross-References</div>
-                    <div id="crossRefCard" class="ledger-card-body">Awaiting local index initialization...</div>
+                    <div id="crossRefCard" class="ledger-card-body">Awaiting pipeline sync metrics...</div>
                 </div>
 
                 <div>
@@ -303,6 +304,7 @@
     </div>
     <script>
         let chosenGradeIndex = "5";
+        let preloadedZipInstance = null;
 
         function initializeCalendarDropdown() {
             const dayDropdown = document.getElementById("daySelect");
@@ -315,11 +317,32 @@
             }
         }
 
+        // Pre-load the single zip archive directly into the layout memory pool on first launch
+        async function fetchAndUnpackZipArchive() {
+            const textbookDisplayPanel = document.getElementById("textbookDisplayPanel");
+            try {
+                textbookDisplayPanel.innerHTML = `<p style="color: #0284c7; font-weight: 500;">⚡ Downloading compressed curriculum vault package (1 item)...</p>`;
+                
+                // Pulls the archive smoothly over your relative file layout path
+                const response = await fetch('curriculum.zip');
+                if (!response.ok) throw new Error("Could not find curriculum.zip file in your main root path folder.");
+                
+                const blobData = await response.blob();
+                preloadedZipInstance = await JSZip.loadAsync(blobData);
+                
+                textbookDisplayPanel.innerHTML = `<p style="color: #22c55e; font-weight: 500;">🎉 Vault verification successful. Displaying dashboard data...</p>`;
+                extractDataFromZipArchive();
+            } catch (err) {
+                console.error(err);
+                textbookDisplayPanel.innerHTML = `<p style="color: #ef4444; font-weight: 500;">Zip Loading Failure</p><p style="color: #6b7280; font-size: 13px;">Make sure your file is saved exactly as <b>curriculum.zip</b> right next to your index.html file inside your repository.</p>`;
+            }
+        }
+
         function updateActiveGrade(gradeCode, buttonElement) {
             document.querySelectorAll('.grade-item').forEach(btn => btn.classList.remove('active'));
             buttonElement.classList.add('active');
             chosenGradeIndex = gradeCode;
-            loadLocalVaultCurriculum();
+            extractDataFromZipArchive();
         }
 
         function adjustActiveDay(stepDirection) {
@@ -328,11 +351,13 @@
             let targetIndex = currentIndex + stepDirection;
             if (targetIndex >= 0 && targetIndex < dayDropdown.options.length) {
                 dayDropdown.selectedIndex = targetIndex;
-                loadLocalVaultCurriculum();
+                extractDataFromZipArchive();
             }
         }
 
-        async function loadLocalVaultCurriculum() {
+        async function extractDataFromZipArchive() {
+            if (!preloadedZipInstance) return;
+
             const currentSubject = document.getElementById("subjectSelect").value;
             const currentDay = document.getElementById("daySelect").value;
             
@@ -340,16 +365,17 @@
             const crossRefCard = document.getElementById("crossRefCard");
             const hashCard = document.getElementById("hashCard");
 
-            // Tracks directly into your newly generated relative local file system folders
-            const targetDataFilePath = `curriculum/grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDay}.json`;
+            // Look up the specific lesson target directly from inside the loaded zip memory space
+            const localizedPathInsideZip = `curriculum/grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDay}.json`;
 
             try {
-                const response = await fetch(targetDataFilePath);
-                if (!response.ok) throw new Error("Lesson location map check failed.");
+                const targetZipFileReference = preloadedZipInstance.file(localizedPathInsideZip);
+                if (!targetZipFileReference) throw new Error("Selected lesson coordinate path not found in zip structure.");
                 
-                const data = await response.json();
+                const clearTextString = await targetZipFileReference.async("string");
+                const data = JSON.parse(clearTextString);
 
-                // Build out and inject the structured textbook text card into your left view
+                // Populate and project your textbook card entries into the left split pane
                 let bulletsHTML = data.bullets.map(b => `<li style="margin-bottom:8px;">${b}</li>`).join('');
                 textbookDisplayPanel.innerHTML = `
                     <div style="background-color: #f3f4f6; color: #4b5563; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; display: inline-block; margin-bottom: 12px;">Grade ${chosenGradeIndex} &nbsp;&bull;&nbsp; ${currentSubject.replace(/_/g,' ')} &nbsp;&bull;&nbsp; ${currentDay.replace('_',' ')}</div>
@@ -359,21 +385,20 @@
                     <ul style="margin: 0; padding-left: 20px; line-height: 1.6; font-size: 14px; color: #374151;">${bulletsHTML}</ul>
                 `;
 
-                // Update cross-reference vectors and digital signature strings instantly inside your right panel
+                // Sync the cross-references and tracking hashes onto the right ledger card panels instantly
                 crossRefCard.innerText = data.cross_reference;
                 hashCard.innerText = data.sync_hash;
 
             } catch (error) {
-                console.error("Local path check details:", error);
-                textbookDisplayPanel.innerHTML = `<p style="color: #ef4444; font-weight: 500;">Vault Path Error</p><p style="color: #6b7280; font-size: 13px;">Confirm your <b>curriculum</b> folder is completely uploaded to GitHub Pages next to index.html.</p>`;
-                crossRefCard.innerText = "Vault structure offline.";
-                hashCard.innerText = "ERROR_LOCAL_MISSING_NODE";
+                textbookDisplayPanel.innerHTML = `<p style="color: #ef4444; font-weight: 500;">Lesson Node Offline</p><p style="color: #6b7280; font-size: 13px;">Could not unpack file path target entry: <br><b>${localizedPathInsideZip}</b></p>`;
+                crossRefCard.innerText = "No secondary ledger alignment matching these filter constraints.";
+                hashCard.innerText = "ZIP_NODE_MISSING";
             }
         }
 
         window.onload = function() {
             initializeCalendarDropdown();
-            loadLocalVaultCurriculum();
+            fetchAndUnpackZipArchive();
         };
     </script>
 </body>
