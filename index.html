@@ -3,185 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dual-Ledger Adaptive Platform Framework</title>
+    <title>Dual-Track Learning Platform</title>
     <style>
+        * { box-sizing: border-box; }
         body {
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
             display: flex;
-            flex-direction: column;
             height: 100vh;
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-        header {
-            background-color: #1f1f1f;
-            padding: 15px;
-            border-bottom: 2px solid #333;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        select, button {
-            background-color: #2d2d2d;
-            color: #fff;
-            border: 1px solid #444;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        button {
-            background-color: #007acc;
-            font-weight: bold;
-        }
-        button:hover {
-            background-color: #0062a3;
-        }
-        .container {
-            display: flex;
-            flex: 1;
             overflow: hidden;
         }
-        .panel-left {
+        /* Master Sidebar Rail */
+        .sidebar {
+            width: 70px;
+            background-color: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 0;
+            gap: 10px;
+            z-index: 10;
+        }
+        .logo-box {
+            width: 44px;
+            height: 44px;
+            background-color: #0f172a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .grade-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            background: transparent;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .grade-btn:hover {
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+        .grade-btn.active {
+            background-color: #0f172a;
+            color: #ffffff;
+        }
+        /* Main Right Workspace Container */
+        .workspace {
             flex: 1;
-            border-right: 2px solid #333;
-            background-color: #fff;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
-        .panel-left iframe {
-            width: 100%;
-            height: 100%;
+        /* Header Bar Style */
+        .main-header {
+            background-color: #ffffff;
+            padding: 15px 25px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-titles h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .header-titles p {
+            margin: 3px 0 0 0;
+            font-size: 12px;
+            color: #64748b;
+        }
+        .tracker-badge {
+            background-color: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+    </style>
+</head>
+    <style>
+        /* Sub-navigation Controls Header Row */
+        .sub-nav-bar {
+            background-color: #ffffff;
+            padding: 10px 25px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .nav-controls-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .selector-box {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 4px 10px;
+            gap: 8px;
+        }
+        .selector-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        select {
             border: none;
+            background: transparent;
+            color: #0f172a;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            padding-right: 5px;
         }
-        .panel-right {
-            width: 400px;
-            background-color: #181818;
-            padding: 20px;
-            box-sizing: border-box;
+        .nav-btn {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: bold;
+        }
+        .nav-btn:hover { background-color: #f8fafc; color: #0f172a; }
+        .complete-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+        }
+        /* Split Presentation Workspace Canvas */
+        .content-split {
+            flex: 1;
+            display: flex;
+            background-color: #f8fafc;
+            overflow: hidden;
+        }
+        .node-left {
+            flex: 1;
+            padding: 25px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-        .status-badge {
-            align-self: flex-start;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
+        .ledger-right {
+            width: 380px;
+            border-left: 1px solid #e2e8f0;
+            background-color: #ffffff;
+            padding: 25px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
-        .status-connecting { background-color: #d97706; color: #fff; }
-        .status-synced { background-color: #16a34a; color: #fff; }
-        .status-error { background-color: #dc2626; color: #fff; }
-        
-        .ledger-box {
-            background-color: #222;
-            border: 1px solid #333;
-            padding: 15px;
-            border-radius: 6px;
-        }
-        .ledger-box h3 { margin-top: 0; color: #007acc; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
-        .hash-tag { font-family: monospace; color: #38bdf8; word-break: break-all; }
-        .placeholder-text { color: #888; font-style: italic; }
     </style>
-</head>
 <body>
 
-    <header>
-        <select id="gradeSelect">
-            <option value="Grade 1">Grade 1</option>
-            <option value="Grade 2">Grade 2</option>
-            <option value="Grade 3">Grade 3</option>
-        </select>
-        <select id="subjectSelect">
-            <option value="Math">Math</option>
-            <option value="Science">Science</option>
-            <option value="History">History</option>
-        </select>
-        <select id="daySelect">
-            <option value="Day 1">Day 1</option>
-            <option value="Day 2">Day 2</option>
-            <option value="Day 3">Day 3</option>
-        </select>
-        <button onclick="syncPlatform()">Synchronize Ledger</button>
-    </header>
-
-    <div class="container">
-        <!-- LEFT SIDE: Public Learning Node (Iframe) -->
-        <div class="panel-left">
-            <iframe id="publicIframe" src="about:blank"></iframe>
-        </div>
-
-        <!-- RIGHT SIDE: Private Forensic Ledger -->
-        <div class="panel-right">
-            <div id="statusIndicator" class="status-badge status-connecting">Connecting to live data stream core...</div>
-            
-            <div class="ledger-box">
-                <h3>Parallel Research Text</h3>
-                <p id="ledgerText" class="placeholder-text">Awaiting pipeline connection stabilization...</p>
-            </div>
-
-            <div class="ledger-box">
-                <h3>Sync Hash Vector</h3>
-                <p id="ledgerHash" class="hash-tag">0x00000000</p>
-            </div>
-        </div>
+    <!-- Left Grade Select Navigation Column -->
+    <div class="sidebar">
+        <div class="logo-box">🎓</div>
+        <button class="grade-btn active" onclick="changeGrade('K', this)">K</button>
+        <button class="grade-btn" onclick="changeGrade('1', this)">1</button>
+        <button class="grade-btn" onclick="changeGrade('2', this)">2</button>
+        <button class="grade-btn" onclick="changeGrade('3', this)">3</button>
+        <button class="grade-btn" onclick="changeGrade('4', this)">4</button>
+        <button class="grade-btn" onclick="changeGrade('5', this)">5</button>
+        <button class="grade-btn" onclick="changeGrade('6', this)">6</button>
+        <button class="grade-btn" onclick="changeGrade('7', this)">7</button>
+        <button class="grade-btn" onclick="changeGrade('8', this)">8</button>
+        <button class="grade-btn" onclick="changeGrade('9', this)">9</button>
+        <button class="grade-btn" onclick="changeGrade('10', this)">10</button>
+        <button class="grade-btn" onclick="changeGrade('11', this)">11</button>
+        <button class="grade-btn" onclick="changeGrade('12', this)">12</button>
     </div>
 
-    <script>
-        // CONFIGURATION: Replace this URL string with your actual live Render endpoint
-        const BACKEND_URL = "https://your-render-app-name.onrender.com";
+    <!-- Right Window App Desktop Wrapper -->
+    <div class="workspace">
+        
+        <!-- Core Platform Title Row -->
+        <header class="main-header">
+            <div class="header-titles">
+                <h1>Dual-Track Learning Platform</h1>
+                <p>Public instruction node · private forensic ledger · 180-day calendar</p>
+            </div>
+            <div class="tracker-badge">📅 0/180 days</div>
+        </header>
 
-        async function syncPlatform() {
-            const grade = document.getElementById('gradeSelect').value;
-            const subject = document.getElementById('subjectSelect').value;
-            const day = document.getElementById('daySelect').value;
+        <!-- Dynamic Control Settings Row with all 5 Core Custom Subjects -->
+        <section class="sub-nav-bar">
+            <div class="nav-controls-left">
+                <button class="nav-btn" onclick="shiftDay(-1)">&lt;</button>
+                <div class="selector-box">
+                    <select id="daySelect" onchange="triggerDataSync()">
+                        <!-- Dynamic list generation populated down below via script logic -->
+                    </select>
+                </div>
+                <button class="nav-btn" onclick="shiftDay(1)">&gt;</button>
+                
+                <div class="selector-box" style="margin-left: 10px;">
+                    <span class="selector-label">Track Subject:</span>
+                    <select id="subjectSelect" onchange="triggerDataSync()">
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Science">Science</option>
+                        <option value="Language Arts">Language Arts</option>
+                        <option value="History">History</option>
+                        <option value="Biblical Studies">Biblical Studies</option>
+                    </select>
+                </div>
+            </div>
             
-            const statusIndicator = document.getElementById('statusIndicator');
-            const ledgerText = document.getElementById('ledgerText');
-            const ledgerHash = document.getElementById('ledgerHash');
-            const publicIframe = document.getElementById('publicIframe');
+            <div class="complete-action">
+                <input type="checkbox" id="completeCheck" style="transform: scale(1.1); cursor: pointer;">
+                <label for="completeCheck" style="cursor: pointer;">Mark day complete to unlock next</label>
+            </div>
+        </section>
 
-            statusIndicator.className = "status-badge status-connecting";
-            statusIndicator.innerText = "Synchronizing data pipelines...";
+        <!-- Master Split Frame Panels Block Area -->
+        <main class="content-split">
+            
+            <!-- LEFT SCREEN VIEW: Dynamic Public Instructional content container -->
+            <div class="node-left">
+                <iframe id="contentIframe" src="about:blank" style="width:100%; height:100%; border:none; background-color:transparent;"></iframe>
+            </div>
 
-            // Properly format parameters into an standard internet address query layout
-            const syncTargetUrl = `${BACKEND_URL}?grade=${encodeURIComponent(grade)}&subject=${encodeURIComponent(subject)}&day=${encodeURIComponent(day)}`;
-
-            try {
-                const response = await fetch(syncTargetUrl, { method: 'GET' });
+            <!-- RIGHT SCREEN VIEW: Private Historical Verification Cross Reference Ledger Column -->
+            <div class="ledger-right">
+                <div style="font-size: 14px; font-weight: 700; color: #0f172a; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 5px;">📋 Forensic Ledger</div>
                 
-                if (!response.ok) throw new Error(`Backend rejected response: ${response.status}`);
-                
-                const data = await response.json();
+                <div>
+                    <div style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px;">Cross-References</div>
+                    <div id="ledgerReferenceBox" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; font-size: 13px; line-height: 1.5; color: #334155;">
+                        Awaiting data pipeline validation...
+                    </div>
+                </div>
 
-                // 1. Instantly trigger iframe to render dynamic open web asset path
-                publicIframe.src = data.iframe_target;
+                <div>
+                    <div style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px;">Structural Sync Hash</div>
+                    <div id="ledgerHashBox" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 15px; font-family: monospace; font-size: 13px; color: #0ea5e9; word-break: break-all;">
+                        0x00000000
+                    </div>
+                </div>
+            </div>
 
-                // 2. Populate the private forensic ledger tracking outputs
-                ledgerText.innerText = data.ledger_payload.cross_reference;
-                ledgerText.classList.remove('placeholder-text');
-                ledgerHash.innerText = data.ledger_payload.sync_hash;
+        </main>
+    </div>
+    <script>
+        // CONFIGURATION LINK: Replace this placeholder link text with your live Render application url
+        const BACKEND_URL = "https://onrender.com";
+        
+        let activeGradeSelection = "K";
 
-                // 3. Mark status window green
-                statusIndicator.className = "status-badge status-synced";
-                statusIndicator.innerText = "Ledger Synced";
-
-            } catch (error) {
-                console.error("Pipeline failure details:", error);
-                statusIndicator.className = "status-badge status-error";
-                statusIndicator.innerText = "Connection Broken";
-                ledgerText.innerText = "Failed to pull research data from backend engine. Confirm backend is awake.";
-                ledgerText.classList.add('placeholder-text');
-                ledgerHash.innerText = "ERROR_NODE_TIMEOUT";
+        // Programmatically populate the dropdown to hold a full 180 day school structure
+        function buildDayOptionsDropdown() {
+            const daySelectElement = document.getElementById("daySelect");
+            daySelectElement.innerHTML = "";
+            for (let dayIndex = 1; dayIndex <= 180; dayIndex++) {
+                const opt = document.createElement("option");
+                opt.value = `Day ${dayIndex}`;
+                opt.innerText = `Day ${dayIndex} / 180`;
+                daySelectElement.appendChild(opt);
             }
         }
 
-        // Run automatically on first bootup layout render
-        window.onload = syncPlatform;
+        function changeGrade(gradeCode, clickedButtonElement) {
+            document.querySelectorAll('.grade-btn').forEach(button => button.classList.remove('active'));
+            clickedButtonElement.classList.add('active');
+            activeGradeSelection = gradeCode;
+            triggerDataSync();
+        }
+
+        function shiftDay(directionValue) {
+            const daySelectElement = document.getElementById("daySelect");
+            let currentSelectedIndex = daySelectElement.selectedIndex;
+            let targetIndex = currentSelectedIndex + directionValue;
+            
+            if (targetIndex >= 0 && targetIndex < daySelectElement.options.length) {
+                daySelectElement.selectedIndex = targetIndex;
+                triggerDataSync();
+            }
+        }
+
+        async function triggerDataSync() {
+            const selectedSubject = document.getElementById("subjectSelect").value;
+            const selectedDay = document.getElementById("daySelect").value;
+            
+            const ledgerReferenceBox = document.getElementById("ledgerReferenceBox");
+            const ledgerHashBox = document.getElementById("ledgerHashBox");
+            const contentIframe = document.getElementById("contentIframe");
+
+            ledgerReferenceBox.innerText = "Synchronizing live tracking core ledger...";
+            ledgerHashBox.innerText = "COMPUTING_HASH_NODE...";
+
+            // Assemble correct parameter tags dynamically on the fly matching backend engine requirements
+            const queryURL = `${BACKEND_URL}?grade=${encodeURIComponent("Grade " + activeGradeSelection)}&subject=${encodeURIComponent(selectedSubject)}&day=${encodeURIComponent(selectedDay)}`;
+
+            try {
+                const webResponse = await fetch(queryURL, { method: 'GET' });
+                if (!webResponse.ok) throw new Error(`Communication Error Code: ${webResponse.status}`);
+                
+                const payloadJSON = await webResponse.json();
+
+                // 1. Load the dynamic web textbook asset path securely inside the Left Node panel 
+                contentIframe.src = payloadJSON.iframe_target;
+
+                // 2. Refresh cross-references and tracking hashes safely on the Right Ledger view
+                ledgerReferenceBox.innerText = payloadJSON.ledger_payload.cross_reference;
+                ledgerHashBox.innerText = payloadJSON.ledger_payload.sync_hash;
+
+            } catch (networkError) {
+                console.error("Data pipeline broken:", networkError);
+                ledgerReferenceBox.innerText = "Connection Broken. Verify backend service on Render is awake and running.";
+                ledgerHashBox.innerText = "ERROR_DISCONNECTED_NODE";
+            }
+        }
+
+        // Initialize and fire layout loops cleanly on window loading sequence triggers
+        window.onload = function() {
+            buildDayOptionsDropdown();
+            triggerDataSync();
+        };
     </script>
 </body>
 </html>
