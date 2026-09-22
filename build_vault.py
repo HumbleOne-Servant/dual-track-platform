@@ -23,18 +23,26 @@ def build_or_upgrade_vault():
                 file_name = f"day_{day_num}.json"
                 file_path = os.path.join(folder_path, file_name)
                 
-                # Default structural baseline if file doesn't exist or needs standard alignment keys
+                # Public school data sits primarily on the left, with alignment tags feeding the interface
                 default_data = {
-                    "title": f"Standard {subject.replace('_', ' ').title()} - Day {day_num}",
-                    "mainstream_concept": "Standard curriculum metric detailing structural observations and foundational mechanics.",
-                    "biblical_alignment": "Demonstrating that natural laws and structural truths are inherently unified with creation frameworks.",
-                    "trigger_words": {
-                        "structural": "All foundational frameworks and structural parameters operate under unchanging, design-centric mathematical guidelines.",
-                        "matrix": "Systematic grid alignments reflect the baseline order established from the beginning of natural law."
+                    "title": f"Public School {subject.replace('_', ' ').title()} Lesson - Day {day_num}",
+                    "public_core_concept": "This public school unit introduces standard coordinate tracking, spatial measurement, and the foundational parameters governing local structural matrix formulas.",
+                    "public_worksheet_instructions": "Complete the calculation segments. Map out the standard values below and run your verification algorithms.",
+                    "alignment_triggers": {
+                        "matrix": {
+                            "biblical_truth": "Colossians 1:17 — He is before all things, and by him all things hold together. The matrix grid reflects the universal order holding creation intact.",
+                            "alternative_framework": "Mainstream models treat the grid as an empty secular coordinate system. Our alternative framework proves the grid is a physical, designed lattice constructed on permanent divine laws.",
+                            "game_word": "HOLD TOGETHER"
+                        },
+                        "parameters": {
+                            "biblical_truth": "Job 38:10 — When I broke up for it my decreed place, and set bars and doors. All natural systems operate inside strict, design-centric boundaries.",
+                            "alternative_framework": "Secular science claims parameters evolved randomly. The true model shows that breaking a fundamental parameter collapses the mathematical integrity of the system.",
+                            "game_word": "DECREED PLACE"
+                        }
                     },
                     "retention_questions": [
-                        {"id": "q1", "text": "How does the highlighted structural evidence unify the mainstream observation with biblical design metrics?"},
-                        {"id": "q2", "text": "Identify the primary baseline connection that shows these concepts are one and the same rather than separate ideas."}
+                        {"id": "q1", "text": "What biblical principles are active inside the public school concept text highlighted on the left?"},
+                        {"id": "q2", "text": "How does our alternative framework unify these mainstream school facts with universal design?"}
                     ],
                     "sync_hash": f"{subject[:3].upper()}_{grade.upper()}_DAY{day_num}"
                 }
@@ -43,7 +51,6 @@ def build_or_upgrade_vault():
                     try:
                         with open(file_path, 'r', encoding='utf-8') as f:
                             existing = json.load(f)
-                        # Ensure all essential keys survive or append cleanly
                         for key in default_data:
                             if key not in existing:
                                 existing[key] = default_data[key]
@@ -66,32 +73,36 @@ if __name__ == "__main__":
     <meta charset="UTF-8">
     <title>Dual-Track Learning Platform</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f4f6f9; color: #333; }
-        .control-panel { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; gap: 15px; align-items: center; }
-        select, button { padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px; }
-        button { background-color: #0056b3; color: white; cursor: pointer; border: none; font-weight: bold; }
-        button:hover { background-color: #004494; }
-        .canvas-container { display: flex; gap: 20px; min-height: 500px; }
-        .track-panel { flex: 1; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; }
-        .panel-header { border-bottom: 2px solid #0056b3; padding-bottom: 10px; margin-top: 0; color: #111; }
-        .content-box { font-size: 16px; line-height: 1.6; margin-bottom: 20px; }
-        .highlight-word { background-color: #fff3cd; border-bottom: 2px dashed #ffc107; cursor: pointer; padding: 0 2px; font-weight: bold; }
-        .highlight-word:hover { background-color: #ffe8a1; }
-        .explanation-bubble { background-color: #e2f0fe; border-left: 4px solid #0056b3; padding: 12px; margin: 15px 0; border-radius: 0 4px 4px 0; display: none; font-size: 14px; }
-        .question-block { margin-top: 15px; padding: 10px 0; }
-        .student-textbox { width: 100%; box-sizing: border-box; padding: 10px; border-radius: 4px; border: 1px solid #aaa; margin-top: 5px; font-size: 14px; }
-        .status-footer { margin-top: 20px; display: flex; justify-content: space-between; align-items: center; background: #eaedf2; padding: 15px; border-radius: 6px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f0f3f8; color: #222; }
+        .control-panel { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); margin-bottom: 20px; display: flex; gap: 15px; }
+        select, button { padding: 10px; border-radius: 4px; border: 1px solid #bbb; font-size: 14px; }
+        button { background-color: #0d6efd; color: white; cursor: pointer; border: none; font-weight: bold; }
+        button:hover { background-color: #0b5ed7; }
+        .canvas-container { display: flex; gap: 20px; min-height: 550px; }
+        .track-panel { flex: 1; background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
+        .panel-header { border-bottom: 3px solid #0d6efd; padding-bottom: 10px; margin-top: 0; color: #1e293b; }
+        .public-lesson-box { background-color: #f8fafc; padding: 15px; border-radius: 6px; border-left: 4px solid #64748b; margin-bottom: 15px; }
+        .highlight-trigger { background-color: #fde047; border-bottom: 2px dashed #eab308; cursor: pointer; padding: 0 4px; font-weight: bold; border-radius: 2px; }
+        .highlight-trigger:hover { background-color: #fef08a; }
+        
+        /* Interactive Alignment Portal Box */
+        .alignment-portal { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; padding: 20px; border-radius: 8px; margin-top: 20px; display: none; }
+        .portal-section { margin-bottom: 12px; font-size: 15px; }
+        .portal-title { font-weight: bold; color: #1e40af; margin-bottom: 3px; text-transform: uppercase; font-size: 12px; tracking: 1px; }
+        
+        /* Gamified Muscle-Memory Element */
+        .game-box { background: #fff; border: 1px solid #bfdbfe; padding: 12px; border-radius: 6px; margin-top: 10px; display: flex; align-items: center; gap: 10px; }
+        .game-input { padding: 6px; border: 2px solid #3b82f6; border-radius: 4px; outline: none; font-weight: bold; font-size: 14px; text-transform: uppercase; }
+        .game-status { font-weight: bold; font-size: 14px; }
+        
+        .student-textbox { width: 100%; box-sizing: border-box; padding: 10px; border-radius: 4px; border: 1px solid #94a3b8; margin-top: 5px; font-size: 14px; }
+        .status-footer { display: flex; justify-content: space-between; align-items: center; background: #e2e8f0; padding: 15px; border-radius: 6px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <div class="control-panel">
-        <select id="grade-dropdown">
-            <option value="grade_k">Kindergarten</option>
-            <option value="grade_1">Grade 1</option>
-            <option value="grade_5">Grade 5</option>
-            <option value="grade_6">Grade 6</option>
-        </select>
+        <select id="grade-dropdown"><option value="grade_5">Grade 5</option><option value="grade_6">Grade 6</option></select>
         <select id="subject-dropdown">
             <option value="mathematics">Mathematics</option>
             <option value="science">Science</option>
@@ -99,215 +110,254 @@ if __name__ == "__main__":
             <option value="history_social_studies">History / Social Studies</option>
             <option value="biblical_studies">Biblical Studies</option>
         </select>
-        <select id="day-dropdown">
-            <option value="day_1">Day 1</option>
-            <option value="day_2">Day 2</option>
-            <option value="day_180">Day 180</option>
-        </select>
-        <button onclick="loadCurriculumDay()">Fetch Selected Lesson</button>
+        <select id="day-dropdown"><option value="day_1">Day 1</option><option value="day_2">Day 2</option></select>
+        <button onclick="loadCurriculumDay()">Open Selected Lesson</button>
     </div>
 
     <div class="canvas-container">
-        <!-- LEFT PANEL: ALIGNMENT & DEEP COMPARISON FRAMEWORK -->
+        <!-- LEFT PANEL: MAINSTREAM PUBLIC SCHOOL CURRICULUM & INTERACTIVE WORKSHEETS -->
         <div class="track-panel" id="left-track">
             <div>
-                <h2 class="panel-header">🛡️ Track 1: Unified Verification & Biblical Alignment</h2>
-                <div id="left-content" class="content-box">Select a day and click "Fetch Selected Lesson" to map structural variables...</div>
-                <div id="explanation-box" class="explanation-bubble"></div>
-            </div>
-            <div>
-                <div id="retention-questions-area"></div>
+                <h2 class="panel-header">🏫 Left Side: Public School Core Lesson & Handout</h2>
+                <h3 id="lesson-title" style="margin-top:10px; color:#334155;"></h3>
+                
+                <div class="public-lesson-box">
+                    <strong>📖 Core Concept Framework:</strong>
+                    <p id="public-core-content">Select a grade and subject, then click open to build the interactive canvas channels...</p>
+                </div>
+                
+                <div style="background: #fff; padding: 15px; border: 1px dashed #94a3b8; border-radius: 6px;">
+                    <strong>📋 Public Curriculum Worksheet Generation Frame</strong>
+                    <p id="public-worksheet-instructions" style="font-size:14px; color:#475569;"></p>
+                    <textarea id="left-public-worksheet-input" class="student-textbox" rows="4" placeholder="Type answers matching standard school requirements here..."></textarea>
+                </div>
             </div>
         </div>
 
-        <!-- RIGHT PANEL: MAINSTREAM SYSTEM WORKSHEET DISPLAY -->
+        <!-- RIGHT PANEL: UNIFIED ALIGNMENT FRAMEWORK, GAMES & YEAR-END ARCHIVE LOGGER -->
         <div class="track-panel" id="right-track">
             <div>
-                <h2 class="panel-header">📝 Track 2: Mainstream Public Curriculum & Handout</h2>
-                <div id="right-content" class="content-box">Worksheet fields will assemble dynamically matching the active folder structure metrics...</div>
+                <h2 class="panel-header">🛡️ Right Side: Truth Alignment Portal & Game Check</h2>
+                
+                <div id="portal-instructions" style="color: #64748b; font-style: italic; text-align: center; margin-top: 40px;">
+                    Click any yellow highlighted keyword on the left school panel to reveal the underlying biblical principles, alternative frameworks, and unlock muscle-memory tracking.
+                </div>
+
+                <!-- Hidden until triggered by keyword click -->
+                <div id="alignment-portal-display" class="alignment-portal">
+                    <h3 style="margin-top:0; color:#1d4ed8; border-bottom:1px solid #bfdbfe; padding-bottom:5px;">🔗 Dynamic Alignment Connection</h3>
+                    
+                    <div class="portal-section">
+                        <div class="portal-title">✝️ Biblical Principle & Truth Comparison</div>
+                        <div id="portal-bible-text"></div>
+                    </div>
+                    
+                    <div class="portal-section">
+                        <div class="portal-title">🔬 Uploaded Alternative Design Framework</div>
+                        <div id="portal-alternative-text"></div>
+                    </div>
+                    
+                    <div class="portal-section">
+                        <div class="portal-title">🕹️ Muscle Memory Lock: Type the matching core truth phrase</div>
+                        <div class="game-box">
+                            <input type="text" id="game-typing-input" class="game-input" placeholder="Type target phrase...">
+                            <span id="game-target-phrase" style="font-weight:bold; color:#475569; font-size:13px;"></span>
+                            <span id="game-validation-status" class="game-status"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="retention-questions-block" style="margin-top:25px; display:none;">
+                    <h3 style="color:#1e293b; margin-bottom:5px;">🧠 Retention Verification Answers</h3>
+                    <div id="questions-container"></div>
+                </div>
             </div>
+
             <div class="status-footer">
-                <label style="font-weight: bold; cursor: pointer;">
-                    <input type="checkbox" id="mark-complete-toggle"> 🌟 Mark Day Complete & Commit to Private Vault
+                <label style="font-weight: bold; cursor: pointer; font-size:14px;">
+                    <input type="checkbox" id="mark-complete-toggle"> 🔒 Lock Responses & Save to Private Evaluation Drive
                 </label>
-                <div id="save-status-indicator" style="font-weight: bold; color: #28a745;"></div>
+                <div id="save-status-indicator" style="font-weight: bold; color: #16a34a; font-size:13px;"></div>
             </div>
         </div>
     </div>
 // FILE: C:\DualTrackLearning_Online\app.js
 // BOX 3 OF 3: INTERACTIVE DROP-LOAD ENGINE AND COMPILATION LOGGER
-let currentLoadedData = null; 
+let activeLessonData = null;
+let currentTargetGameWord = "";
 
 async function loadCurriculumDay() {
     const grade = document.getElementById('grade-dropdown').value;
     const subject = document.getElementById('subject-dropdown').value;
     const day = document.getElementById('day-dropdown').value;
     
-    // Clear display structures
-    document.getElementById('explanation-box').style.display = 'none';
+    // Reset window layout states
+    document.getElementById('alignment-portal-display').style.display = 'none';
+    document.getElementById('retention-questions-block').style.display = 'none';
+    document.getElementById('portal-instructions').style.display = 'block';
     document.getElementById('save-status-indicator').innerText = '';
     document.getElementById('mark-complete-toggle').checked = false;
+    document.getElementById('game-typing-input').value = "";
+    document.getElementById('game-validation-status').innerText = "";
     
-    // Dynamic disk file resolution mapping template: curriculum/grade_X/subject/day_Y.json
     const targetUrl = `curriculum/${grade}/${subject}/${day}.json`;
     
     try {
         const response = await fetch(targetUrl);
-        if (!response.ok) throw new Error("File not found on local disk structures.");
+        if (!response.ok) throw new Error("File path mismatch.");
         
-        currentLoadedData = await response.json();
-        renderDualTrackView(currentLoadedData);
-        loadSavedResponses(grade, subject, day);
+        activeLessonData = await response.json();
+        renderPublicToBiblicalInterface(activeLessonData);
+        loadSavedDatabaseMetrics(grade, subject, day);
     } catch (err) {
-        document.getElementById('left-content').innerText = `❌ Asset Loader Mismatch: Unable to resolve data footprint pathway at ${targetUrl}`;
-        document.getElementById('right-content').innerText = "Please confirm build_vault.py has executed and initialized the files.";
+        document.getElementById('public-core-content').innerText = `❌ Pathway Mismatch: Unable to resolve file target at ${targetUrl}`;
     }
 }
 
-function renderDualTrackView(data) {
-    let alignedText = data.biblical_alignment;
+function renderPublicToBiblicalInterface(data) {
+    document.getElementById('lesson-title').innerText = data.title;
+    document.getElementById('public-worksheet-instructions').innerText = data.public_worksheet_instructions;
     
-    // Process and inject target trigger highlights dynamically across the incoming stream text
-    if (data.trigger_words) {
-        for (const word in data.trigger_words) {
+    let publicText = data.public_core_concept;
+    
+    // Parse left public text strings to inject highlighted interactive click words
+    if (data.alignment_triggers) {
+        for (const word in data.alignment_triggers) {
             const regex = new RegExp(`\\b(${word})\\b`, 'gi');
-            alignedText = alignedText.replace(regex, `<span class="highlight-word" onclick="triggerExplanation('${word}')">$1</span>`);
+            publicText = publicText.replace(regex, `<span class="highlight-trigger" onclick="activateAlignmentPortal('${word}')">$1</span>`);
         }
     }
+    document.getElementById('public-core-content').innerHTML = publicText;
     
-    // Populate left column
-    document.getElementById('left-content').innerHTML = `
-        <h3>Core Concept Alignment:</h3>
-        <p>${alignedText}</p>
-        <p style="font-style: italic; color: #555; background: #f9f9f9; padding: 10px; border-radius: 4px;">
-           <strong>Unified Reality Insight:</strong> This observation disproves the secular public assertion that natural science exists apart from design frameworks. Both operate on the exact same universal constants.
-        </p>
-    `;
-    
-    // Populate left retention assignment blocks
-    let questionsHtml = `<h3>🧠 Retention Concept Verification</h3>`;
-    data.retention_questions.forEach((q, idx) => {
+    // Assemble right panel retention review text blocks
+    let questionsHtml = "";
+    data.retention_questions.forEach((q, index) => {
         questionsHtml += `
-            <div class="question-block">
-                <label><strong>Question ${idx + 1}:</strong> ${q.text}</label>
-                <textarea id="ans-${q.id}" class="student-textbox" rows="3" placeholder="Type structural observation analysis here..."></textarea>
+            <div style="margin-top:12px;">
+                <label style="font-size:14px; font-weight:bold; color:#334155;">[Verification ${index+1}] ${q.text}</label>
+                <textarea id="retention-ans-${q.id}" class="student-textbox" rows="2" placeholder="Type summary conclusions here..."></textarea>
             </div>
         `;
     });
-    document.getElementById('retention-questions-area').innerHTML = questionsHtml;
+    document.getElementById('questions-container').innerHTML = questionsHtml;
+}
+
+function activateAlignmentPortal(word) {
+    if (!activeLessonData || !activeLessonData.alignment_triggers[word]) return;
     
-    // Populate right column mainstream curriculum lesson handout sheet
-    document.getElementById('right-content').innerHTML = `
-        <h3>${data.title}</h3>
-        <p><strong>Mainstream Curriculum Objective:</strong><br>${data.mainstream_concept}</p>
-        <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
-        <div style="background: #fafafa; padding: 15px; border: 1px dashed #bbb; border-radius: 6px;">
-            <h4>📋 Student Practice Handout Frame</h4>
-            <p>1. Transcribe the primary operational metrics described in the objective above.</p>
-            <textarea id="mainstream-worksheet-input" class="student-textbox" rows="4" placeholder="Enter answers for the core curriculum requirements here..."></textarea>
-        </div>
-    `;
+    const triggerNode = activeLessonData.alignment_triggers[word];
+    document.getElementById('portal-instructions').style.display = 'none';
+    document.getElementById('alignment-portal-display').style.display = 'block';
+    document.getElementById('retention-questions-block').style.display = 'block';
+    
+    document.getElementById('portal-bible-text').innerText = triggerNode.biblical_truth;
+    document.getElementById('portal-alternative-text').innerText = triggerNode.alternative_framework;
+    
+    // Set up the muscle memory gamified typing challenge
+    currentTargetGameWord = triggerNode.game_word.toUpperCase();
+    document.getElementById('game-target-phrase').innerText = `(Type: "${currentTargetGameWord}")`;
+    const inputField = document.getElementById('game-typing-input');
+    inputField.value = "";
+    inputField.focus();
+    document.getElementById('game-validation-status').innerText = "⏳ Awaiting Match";
+    document.getElementById('game-validation-status').style.color = "#a16207";
 }
 
-function triggerExplanation(word) {
-    const bubble = document.getElementById('explanation-box');
-    if (currentLoadedData && currentLoadedData.trigger_words && currentLoadedData.trigger_words[word]) {
-        bubble.innerHTML = `<strong>Framework Alignment Metric (${word.toUpperCase()}):</strong> ${currentLoadedData.trigger_words[word]}`;
-        bubble.style.display = 'block';
+// Game check event tracking keyboard interactions for instant muscle memory success loop
+document.getElementById('game-typing-input').addEventListener('input', function(e) {
+    const value = e.target.value.toUpperCase();
+    const statusLabel = document.getElementById('game-validation-status');
+    
+    if (value === currentTargetGameWord) {
+        statusLabel.innerText = "🎯 MATCH LOCKED!";
+        statusLabel.style.color = "#16a34a";
+    } else {
+        statusLabel.innerText = "⏳ Typing...";
+        statusLabel.style.color = "#a16207";
     }
-}
+});
 
-function getStoragePrefix(grade, subject, day) {
+function getStorageRecordKey(grade, subject, day) {
     return `dualtrack_vault_${grade}_${subject}_${day}`;
 }
 
-function loadSavedResponses(grade, subject, day) {
-    const prefix = getStoragePrefix(grade, subject, day);
-    const savedPayload = localStorage.getItem(prefix);
+function loadSavedDatabaseMetrics(grade, subject, day) {
+    const key = getStorageRecordKey(grade, subject, day);
+    const saved = localStorage.getItem(key);
     
-    if (savedPayload) {
-        const payload = JSON.parse(savedPayload);
-        if (currentLoadedData && currentLoadedData.retention_questions) {
-            currentLoadedData.retention_questions.forEach(q => {
-                const input = document.getElementById(`ans-${q.id}`);
-                if (input && payload.answers[q.id]) input.value = payload.answers[q.id];
+    if (saved) {
+        const record = JSON.parse(saved);
+        const worksheetInput = document.getElementById('left-public-worksheet-input');
+        if (worksheetInput && record.public_worksheet_text) worksheetInput.value = record.public_worksheet_text;
+        
+        if (activeLessonData && activeLessonData.retention_questions) {
+            activeLessonData.retention_questions.forEach(q => {
+                const textInput = document.getElementById(`retention-ans-${q.id}`);
+                if (textInput && record.retention_answers[q.id]) textInput.value = record.retention_answers[q.id];
             });
         }
-        const mainstreamInput = document.getElementById('mainstream-worksheet-input');
-        if (mainstreamInput && payload.mainstream_worksheet) mainstreamInput.value = payload.mainstream_worksheet;
         
-        if (payload.committed) {
+        if (record.is_finalized) {
             document.getElementById('mark-complete-toggle').checked = true;
-            toggleInputsLock(true);
-            document.getElementById('save-status-indicator').innerText = "🔒 Complete & Safe in Local Database Record";
+            setLockState(true);
+            document.getElementById('save-status-indicator').innerText = "🔒 Finalized & Logged to Year-End Private Drive File";
         }
     } else {
-        toggleInputsLock(false);
+        setLockState(false);
     }
 }
 
-// Binds checkbox to write to the storage matrix array instantly
 document.getElementById('mark-complete-toggle').addEventListener('change', function(e) {
     const grade = document.getElementById('grade-dropdown').value;
     const subject = document.getElementById('subject-dropdown').value;
     const day = document.getElementById('day-dropdown').value;
-    const prefix = getStoragePrefix(grade, subject, day);
+    const key = getStorageRecordKey(grade, subject, day);
     
     if (e.target.checked) {
-        const answersPayload = {};
-        if (currentLoadedData && currentLoadedData.retention_questions) {
-            currentLoadedData.retention_questions.forEach(q => {
-                const input = document.getElementById(`ans-${q.id}`);
-                if (input) answersPayload[q.id] = input.value;
+        const retAnswers = {};
+        if (activeLessonData && activeLessonData.retention_questions) {
+            activeLessonData.retention_questions.forEach(q => {
+                const el = document.getElementById(`retention-ans-${q.id}`);
+                if (el) retAnswers[q.id] = el.value;
             });
         }
         
-        const mainstreamText = document.getElementById('mainstream-worksheet-input') ? document.getElementById('mainstream-worksheet-input').value : "";
-        
-        // Compile unified metric dataset
         const masterReportRecord = {
             timestamp: new Date().toISOString(),
             grade: grade,
             subject: subject,
             day: day,
-            hash: currentLoadedData ? currentLoadedData.sync_hash : "UNKNOWN",
-            answers: answersPayload,
-            mainstream_worksheet: mainstreamText,
-            committed: true
+            hash: activeLessonData ? activeLessonData.sync_hash : "EMPTY",
+            public_worksheet_text: document.getElementById('left-public-worksheet-input').value,
+            retention_answers: retAnswers,
+            is_finalized: true
         };
         
-        // Save locally first
-        localStorage.setItem(prefix, JSON.stringify(masterReportRecord));
+        localStorage.setItem(key, JSON.stringify(masterReportRecord));
         
-        // END-OF-YEAR COMPILATION PAYLOAD ARCHITECTURE: Append directly to an isolated compilation file log in browser state
-        let backupDriveLog = localStorage.getItem("PRIVATE_EVALUATION_DRIVE_BACKUP");
-        let logArray = backupDriveLog ? JSON.parse(backupDriveLog) : [];
+        // Year-end compiler append
+        let archiveDrive = localStorage.getItem("PRIVATE_EVALUATION_DRIVE_BACKUP");
+        let archiveList = archiveDrive ? JSON.parse(archiveDrive) : [];
+        archiveList = archiveList.filter(item => !(item.grade === grade && item.subject === subject && item.day === day));
+        archiveList.push(masterReportRecord);
+        localStorage.setItem("PRIVATE_EVALUATION_DRIVE_BACKUP", JSON.stringify(archiveList));
         
-        // Evict older entry for this specific day node if it exists, then push updated log
-        logArray = logArray.filter(item => !(item.grade === grade && item.subject === subject && item.day === day));
-        logArray.push(masterReportRecord);
-        localStorage.setItem("PRIVATE_EVALUATION_DRIVE_BACKUP", JSON.stringify(logArray));
-        
-        toggleInputsLock(true);
-        document.getElementById('save-status-indicator').innerText = "🔒 Complete & Safe in Local Database Record";
+        setLockState(true);
+        document.getElementById('save-status-indicator').innerText = "🔒 Finalized & Logged to Year-End Private Drive File";
     } else {
-        // Unlock if box unchecked
-        toggleInputsLock(false);
-        localStorage.removeItem(prefix);
-        document.getElementById('save-status-indicator').innerText = "🔓 Unlocked - Changes Pending Sync";
+        setLockState(false);
+        localStorage.removeItem(key);
+        document.getElementById('save-status-indicator').innerText = "🔓 Form Unlocked";
     }
 });
 
-function toggleInputsLock(isLocked) {
-    if (currentLoadedData && currentLoadedData.retention_questions) {
-        currentLoadedData.retention_questions.forEach(q => {
-            const input = document.getElementById(`ans-${q.id}`);
-            if (input) input.disabled = isLocked;
+function setLockState(lock) {
+    const ws = document.getElementById('left-public-worksheet-input');
+    if (ws) ws.disabled = lock;
+    if (activeLessonData && activeLessonData.retention_questions) {
+        activeLessonData.retention_questions.forEach(q => {
+            const el = document.getElementById(`retention-ans-${q.id}`);
+            if (el) el.disabled = lock;
         });
     }
-    const mainstreamInput = document.getElementById('mainstream-worksheet-input');
-    if (mainstreamInput) mainstreamInput.disabled = isLocked;
 }
-</script>
-</body>
-</html>
