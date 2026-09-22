@@ -8,14 +8,13 @@
         :root {
             --bg-primary: #0b0f19; --bg-panel: #1e293b; --bg-card: #111827; --text-main: #f8fafc;
             --text-muted: #94a3b8; --accent-public: #38bdf8; --accent-private: #fbbf24;
-            --border-color: #334155; --accent-media: #10b981; --accent-teacher: #ec4899;
+            --border-color: #334155;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-main); height: 100vh; display: flex; overflow: hidden; }
         .grade-sidebar { width: 85px; background: #070a12; border-right: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; padding: 1.5rem 0; overflow-y: auto; gap: 0.65rem; }
         .sidebar-brand { font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; }
-        .grade-btn { width: 52px; height: 52px; border-radius: 10px; border: 1px solid var(--border-color); background: transparent; color: var(--text-muted); font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
-        .grade-btn:hover { border-color: var(--accent-public); color: var(--text-main); }
+        .grade-btn { width: 52px; height: 52px; border-radius: 10px; border: 1px solid var(--border-color); background: transparent; color: var(--text-muted); font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .grade-btn.active { background: var(--accent-public); color: #000000; border-color: var(--accent-public); }
         .app-container { display: flex; flex: 1; flex-direction: column; overflow: hidden; }
         header { background: #111827; padding: 0.75rem 2rem; border-bottom: 1px solid var(--border-color); }
@@ -25,23 +24,21 @@
         .control-group label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
         .selector-element { background: var(--bg-primary); color: var(--text-main); border: 1px solid var(--border-color); padding: 0.4rem 1rem; border-radius: 6px; outline: none; font-weight: 600; cursor: pointer; }
         main { display: flex; flex: 1; overflow: hidden; }
-        .pane { flex: 1; display: flex; flex-direction: column; overflow-y: auto; padding: 2.5rem 2rem 2rem 2rem; position: relative; }
-        .pane:first-child { border-right: 1px solid var(--border-color); }
-        .public-pane { background: #131b2e; } .private-pane { background: #090d16; }
-        .pane-badge { position: absolute; top: 1rem; left: 1rem; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 0.25rem 0.5rem; border-radius: 4px; }
+        .pane { flex: 1; display: flex; flex-direction: column; overflow: hidden; padding: 1.5rem; position: relative; }
+        .pane:first-child { border-right: 1px solid var(--border-color); padding: 0; } /* Zero padding to allow iframe to stretch full bleed */
+        .public-pane { background: #131b2e; } .private-pane { background: #090d16; overflow-y: auto; }
+        .pane-badge { position: absolute; top: 1rem; left: 1rem; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 0.25rem 0.5rem; border-radius: 4px; z-index: 10; }
         .public-badge { background: rgba(56, 189, 248, 0.1); color: var(--accent-public); }
         .private-badge { background: rgba(251, 191, 36, 0.1); color: var(--accent-private); }
-        .lesson-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem; color: #ffffff; }
-        .lesson-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; font-weight: 600; text-transform: uppercase; }
+        
+        /* Interactive Web-Embed Frame Styling Dimensions */
+        .curriculum-iframe { width: 100%; height: 100%; border: none; background: #ffffff; }
+        
+        .lesson-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.25rem; color: #ffffff; margin-top: 1.5rem; }
+        .lesson-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; text-transform: uppercase; }
         .section-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.25rem; }
-        .section-card-header { font-size: 0.85rem; font-weight: 700; color: var(--accent-public); text-transform: uppercase; margin-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.35rem; }
-        .formatted-p { line-height: 1.8; font-size: 1.05rem; color: #e2e8f0; margin-bottom: 1rem; }
-        .resource-layout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
-        .resource-sub-column { background: rgba(15, 23, 42, 0.3); border: 1px solid var(--border-color); padding: 1rem; border-radius: 6px; }
-        .resource-column-title { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem; }
-        .resource-link-item { display: flex; align-items: center; gap: 0.5rem; color: #38bdf8; text-decoration: none; font-size: 0.95rem; margin-bottom: 0.4rem; font-weight: 600; }
+        .formatted-p { line-height: 1.8; font-size: 1.05rem; color: #e2e8f0; }
         .forensic-block { background: rgba(251, 191, 36, 0.02); border-left: 4px solid var(--accent-private); padding: 1.25rem; margin-top: 1.25rem; border-radius: 0 6px 6px 0; }
-        .forensic-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-private); text-transform: uppercase; margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -84,21 +81,26 @@
         </div>
 
         <main>
+            <!-- TRACK 1: MULTI-PORTAL CONTENT EMBED VIEWPORT -->
             <section class="pane public-pane">
                 <span class="pane-badge public-badge">Public Learning Node</span>
-                <div id="publicContent">Loading dynamic web framework...</div>
+                <div id="iframeContainer" style="width:100%; height:100%;">
+                    <p style="color:var(--text-muted); padding: 2rem;">Loading public portal assets...</p>
+                </div>
             </section>
+
+            <!-- TRACK 2: DYNAMIC INDEPENDENT OVERLAY PANELS -->
             <section class="pane private-pane">
                 <span class="pane-badge private-badge">Private Forensic Ledger</span>
-                <div id="privateContent">Synchronizing overlays...</div>
+                <div id="privateContent"></div>
             </section>
         </main>
     </div>
+
     <script>
         let currentGrade = 'K';
         let currentSubject = 'Mathematics';
         let currentDay = 1;
-        let databaseCache = [];
 
         function generateDayDropdown() {
             const daySelect = document.getElementById('daySelect');
@@ -121,55 +123,27 @@
 
         async function fetchPayload() {
             try {
-                // FIXED: Passes grade, subject, and day together to align perfectly with the scraper parameters
                 const response = await fetch(`https://onrender.com{currentGrade}&subject=${encodeURIComponent(currentSubject)}&day=${currentDay}`);
-                databaseCache = await response.json();
-                renderView();
+                const data = await response.json();
+                
+                // MOUNT WEB-EMBED TEXTBOOK MODULE INSTANTLY
+                document.getElementById('iframeContainer').innerHTML = `
+                    <iframe src="${data.embed_url}" class="curriculum-iframe" allowfullscreen></iframe>
+                `;
+                
+                // MOUNT FORENSIC TEXT PANELS
+                document.getElementById('privateContent').innerHTML = `
+                    <h2 class="lesson-title">${data.title}</h2>
+                    <div class="lesson-subtitle">Active Matrix Location: Day ${currentDay} of 180</div>
+                    <div class="section-card">
+                        <div class="forensic-block">
+                            <p class="formatted-p" style="white-space:pre-wrap; font-style:italic;">${data.biblical_body}</p>
+                        </div>
+                    </div>
+                `;
             } catch (error) {
-                document.getElementById('publicContent').innerHTML = `<p style="color:#ef4444">Connecting to live cloud stream...</p>`;
+                document.getElementById('privateContent').innerHTML = `<p style="color:#ef4444; padding-top:2rem;">Connecting to live data stream core...</p>`;
             }
-        }
-
-        function renderView() {
-            const publicContainer = document.getElementById('publicContent');
-            const privateContainer = document.getElementById('privateContent');
-            
-            if (!databaseCache || databaseCache.length === 0) {
-                publicContainer.innerHTML = `<div class="section-card"><p style="color:var(--text-muted)">Harvesting curriculum from online portals...</p></div>`;
-                return;
-            }
-
-            const record = databaseCache[0]; // Server handles sorting natively now
-
-            let assetHTML = '';
-            if (record.student_worksheets?.length || record.powerpoints?.length || record.internet_links?.length || record.teacher_guides?.length) {
-                assetHTML = `<div class="resource-layout-grid"><div class="resource-sub-column"><div class="resource-column-title" style="color:var(--accent-public)">✏️ Student Activity & Media</div>`;
-                if (record.student_worksheets) record.student_worksheets.forEach(w => { assetHTML += `<a href="${w.url}" class="resource-link-item" download>📄 Worksheet: ${w.title}</a>`; });
-                if (record.powerpoints) record.powerpoints.forEach(p => { assetHTML += `<a href="${p.url}" class="resource-link-item" download style="color:var(--accent-media)">🖥️ Presentation: ${p.title}</a>`; });
-                if (record.internet_links) record.internet_links.forEach(l => { assetHTML += `<a href="${l.url}" target="_blank" class="resource-link-item" style="color:#fbbf24">🌐 Open Web Resource: ${l.title}</a>`; });
-                assetHTML += `</div><div class="resource-sub-column"><div class="resource-column-title" style="color:var(--accent-teacher)">🔑 Teacher Instructions & Keys</div>`;
-                if (record.teacher_guides) record.teacher_guides.forEach(t => { assetHTML += `<a href="${t.url}" class="resource-link-item" download style="color:var(--accent-teacher)">🛡️ Guide File: ${t.title}</a>`; });
-                assetHTML += `</div></div>`;
-            }
-
-            publicContainer.innerHTML = `
-                <h2 class="lesson-title">${record.title}</h2>
-                <div class="lesson-subtitle">Grade Track: ${currentGrade} | Subject Node: ${currentSubject} | Day: ${currentDay} of 180</div>
-                ${assetHTML}
-                <div class="section-card">
-                    <div class="section-card-header">Lesson Presentation Material</div>
-                    <p class="formatted-p" style="white-space:pre-wrap;">${record.mainstream_body}</p>
-                </div>
-            `;
-
-            privateContainer.innerHTML = `
-                <h2 class="lesson-title" style="color:var(--accent-private)">Forensic Overlays</h2>
-                <div class="lesson-subtitle">Sync Parameter: Day ${currentDay}</div>
-                <div class="forensic-block">
-                    <div class="forensic-title">Scriptural Cross Reference / Context</div>
-                    <p class="formatted-p" style="line-height:1.75; white-space:pre-wrap;">${record.biblical_body}</p>
-                </div>
-            `;
         }
 
         window.onload = () => { generateDayDropdown(); changeGrade('K'); };
