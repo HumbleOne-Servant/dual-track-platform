@@ -365,8 +365,8 @@
             const crossRefCard = document.getElementById("crossRefCard");
             const hashCard = document.getElementById("hashCard");
 
-            // Look up the specific lesson target directly from inside the loaded zip memory space
-            const localizedPathInsideZip = `curriculum/grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDay}.json`;
+            // ADJUSTED PATHWAY: Dynamically points into your extra nested folder level automatically
+            const localizedPathInsideZip = `curriculum/curriculum/grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDay}.json`;
 
             try {
                 const targetZipFileReference = preloadedZipInstance.file(localizedPathInsideZip);
