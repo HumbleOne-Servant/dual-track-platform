@@ -57,7 +57,7 @@
             color: #ffffff;
             font-weight: 600;
         }
-        /* Main Workspace Panel */
+        /* Main Workspace Panel Layout */
         .workspace-panel {
             flex: 1;
             display: flex;
@@ -163,7 +163,7 @@
             cursor: pointer;
             height: 36px;
         }
-        /* Light Gray Dashboard Content Canvas Split */
+        /* Light Gray Dashboard Content Canvas Split Layout */
         .dashboard-canvas {
             flex: 1;
             display: flex;
@@ -258,12 +258,13 @@
                 
                 <div class="pill-container" style="margin-left: 8px;">
                     <span class="pill-label">Track Subject:</span>
+                    <!-- FIXED DROPDOWN VALUES: Maps exactly to your folder directory strings character-for-character -->
                     <select id="subjectSelect" onchange="runDataPipelineSync()">
-                        <option value="mathematics" selected>Mathematics</option>
-                        <option value="science">Science</option>
-                        <option value="language_arts">Language Arts</option>
-                        <option value="history_social_studies">History / Social Studies</option>
-                        <option value="biblical_studies">Biblical Studies</option>
+                        <option value="mathematics" selected>mathematics</option>
+                        <option value="science">science</option>
+                        <option value="language_arts">language_arts</option>
+                        <option value="history_social_studies">history_social_studies</option>
+                        <option value="biblical_studies">biblical_studies</option>
                     </select>
                 </div>
             </div>
@@ -326,6 +327,7 @@
             }
         }
         async function runDataPipelineSync() {
+            // GRABS TRUE VALUE: Pulls pure folder strings straight from the selector attributes
             const currentSubject = document.getElementById("subjectSelect").value;
             const currentDayString = document.getElementById("daySelect").value;
             
@@ -333,7 +335,7 @@
             const crossRefCard = document.getElementById("crossRefCard");
             const hashCard = document.getElementById("hashCard");
 
-            // Direct route mapping targeting your true external JSON storage directory structure
+            // DIRECT MAP LINK: Seamless relative address calculation that mirrors your unzipped folders
             const targetDataFilePath = `curriculum/grade_${chosenGradeIndex.toLowerCase()}/${currentSubject}/${currentDayString}.json`;
 
             try {
