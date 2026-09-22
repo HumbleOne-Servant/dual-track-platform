@@ -9,239 +9,285 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            background-color: #ffffff;
+            color: #1f2937;
             display: flex;
             height: 100vh;
             overflow: hidden;
         }
-        /* Master Sidebar Rail */
-        .sidebar {
-            width: 70px;
+        /* Left Vertical Grade Sidebar Rail */
+        .sidebar-rail {
+            width: 65px;
             background-color: #ffffff;
-            border-right: 1px solid #e2e8f0;
+            border-right: 1px solid #e5e7eb;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px 0;
-            gap: 10px;
+            padding: 20px 0;
+            gap: 8px;
             z-index: 10;
         }
-        .logo-box {
-            width: 44px;
-            height: 44px;
-            background-color: #0f172a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 20px;
-            margin-bottom: 15px;
+        .hat-icon {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #111827;
         }
-        .grade-btn {
-            width: 40px;
-            height: 40px;
+        .grade-item {
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            border: 1px solid transparent;
+            border: none;
             background: transparent;
-            color: #64748b;
-            font-weight: 600;
-            font-size: 14px;
+            color: #4b5563;
+            font-weight: 500;
+            font-size: 13px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: all 0.15s ease;
         }
-        .grade-btn:hover {
-            background-color: #f1f5f9;
-            color: #0f172a;
+        .grade-item:hover {
+            background-color: #f3f4f6;
+            color: #111827;
         }
-        .grade-btn.active {
-            background-color: #0f172a;
+        .grade-item.active {
+            background-color: #111827;
             color: #ffffff;
+            font-weight: 600;
         }
-        /* Main Right Workspace Container */
-        .workspace {
+        /* Main Workspace Window Layout */
+        .workspace-panel {
             flex: 1;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-        }
-        /* Header Bar Style */
-        .main-header {
             background-color: #ffffff;
-            padding: 15px 25px;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header-titles h1 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: 700;
-            color: #0f172a;
-        }
-        .header-titles p {
-            margin: 3px 0 0 0;
-            font-size: 12px;
-            color: #64748b;
-        }
-        .tracker-badge {
-            background-color: #f1f5f9;
-            border: 1px solid #e2e8f0;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #334155;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            overflow: hidden;
         }
     </style>
 </head>
     <style>
-        /* Sub-navigation Controls Header Row */
-        .sub-nav-bar {
-            background-color: #ffffff;
-            padding: 10px 25px;
-            border-bottom: 1px solid #e2e8f0;
+        /* Top Navigation Header Row */
+        .header-strip {
+            padding: 15px 30px;
+            border-bottom: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            background-color: #ffffff;
         }
-        .nav-controls-left {
+        .header-strip h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+            letter-spacing: -0.3px;
+        }
+        .header-strip p {
+            margin: 4px 0 0 0;
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .days-counter {
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+        }
+        /* Filter Control Ribbon */
+        .control-ribbon {
+            padding: 12px 30px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+        }
+        .ribbon-left {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
-        .selector-box {
+        .pill-container {
             display: flex;
             align-items: center;
             background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 4px 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 5px 12px;
             gap: 8px;
+            height: 36px;
         }
-        .selector-label {
+        .pill-label {
             font-size: 11px;
             font-weight: 700;
-            color: #94a3b8;
+            color: #9ca3af;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        select {
-            border: none;
-            background: transparent;
-            color: #0f172a;
-            font-size: 14px;
-            font-weight: 600;
-            outline: none;
-            cursor: pointer;
-            padding-right: 5px;
-        }
-        .nav-btn {
+        .arrow-button {
             background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            width: 32px;
-            height: 32px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #64748b;
-            font-weight: bold;
+            color: #4b5563;
+            font-size: 14px;
         }
-        .nav-btn:hover { background-color: #f8fafc; color: #0f172a; }
-        .complete-action {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .arrow-button:hover { background-color: #f9fafb; }
+        select {
+            border: none;
+            background: transparent;
+            color: #111827;
             font-size: 13px;
             font-weight: 600;
-            color: #334155;
+            outline: none;
+            cursor: pointer;
         }
-        /* Split Presentation Workspace Canvas */
-        .content-split {
-            flex: 1;
+        .completion-toggle {
             display: flex;
-            background-color: #f8fafc;
-            overflow: hidden;
-        }
-        .node-left {
-            flex: 1;
-            padding: 25px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .ledger-right {
-            width: 380px;
-            border-left: 1px solid #e2e8f0;
-            background-color: #ffffff;
-            padding: 25px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            gap: 8px;
+            cursor: pointer;
+            height: 36px;
         }
     </style>
+    <style>
+        /* Light Gray Dashboard Content Wrapper */
+        .dashboard-canvas {
+            flex: 1;
+            display: flex;
+            background-color: #f9fafb;
+            padding: 25px;
+            gap: 25px;
+            overflow: hidden;
+        }
+        /* Left Column Public Viewport Frame */
+        .left-node-panel {
+            flex: 1;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .left-node-panel iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #ffffff;
+        }
+        /* Right Column Ledger Board Style */
+        .right-ledger-panel {
+            width: 380px;
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .ledger-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+        }
+        .ledger-card-body {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #374151;
+        }
+        .hash-string {
+            font-family: Menlo, Monaco, Consolas, monospace;
+            color: #0284c7;
+            font-weight: 500;
+        }
+        .status-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #ffffff;
+            padding: 40px;
+            text-align: center;
+            font-size: 15px;
+            color: #6b7280;
+        }
+    </style>
+</head>
 <body>
 
-    <!-- Left Grade Select Navigation Column -->
-    <div class="sidebar">
-        <div class="logo-box">🎓</div>
-        <button class="grade-btn active" onclick="changeGrade('K', this)">K</button>
-        <button class="grade-btn" onclick="changeGrade('1', this)">1</button>
-        <button class="grade-btn" onclick="changeGrade('2', this)">2</button>
-        <button class="grade-btn" onclick="changeGrade('3', this)">3</button>
-        <button class="grade-btn" onclick="changeGrade('4', this)">4</button>
-        <button class="grade-btn" onclick="changeGrade('5', this)">5</button>
-        <button class="grade-btn" onclick="changeGrade('6', this)">6</button>
-        <button class="grade-btn" onclick="changeGrade('7', this)">7</button>
-        <button class="grade-btn" onclick="changeGrade('8', this)">8</button>
-        <button class="grade-btn" onclick="changeGrade('9', this)">9</button>
-        <button class="grade-btn" onclick="changeGrade('10', this)">10</button>
-        <button class="grade-btn" onclick="changeGrade('11', this)">11</button>
-        <button class="grade-btn" onclick="changeGrade('12', this)">12</button>
-    </div>
+    <!-- Left Rail Selection Rail Matrix -->
+    <nav class="sidebar-rail">
+        <div class="hat-icon">🎓</div>
+        <button class="grade-item" onclick="updateActiveGrade('K', this)">K</button>
+        <button class="grade-item" onclick="updateActiveGrade('1', this)">1</button>
+        <button class="grade-item" onclick="updateActiveGrade('2', this)">2</button>
+        <button class="grade-item" onclick="updateActiveGrade('3', this)">3</button>
+        <button class="grade-item" onclick="updateActiveGrade('4', this)">4</button>
+        <button class="grade-item active" onclick="updateActiveGrade('5', this)">5</button>
+        <button class="grade-item" onclick="updateActiveGrade('6', this)">6</button>
+        <button class="grade-item" onclick="updateActiveGrade('7', this)">7</button>
+        <button class="grade-item" onclick="updateActiveGrade('8', this)">8</button>
+        <button class="grade-item" onclick="updateActiveGrade('9', this)">9</button>
+        <button class="grade-item" onclick="updateActiveGrade('10', this)">10</button>
+        <button class="grade-item" onclick="updateActiveGrade('11', this)">11</button>
+        <button class="grade-item" onclick="updateActiveGrade('12', this)">12</button>
+    </nav>
 
-    <!-- Right Window App Desktop Wrapper -->
-    <div class="workspace">
-        
-        <!-- Core Platform Title Row -->
-        <header class="main-header">
-            <div class="header-titles">
+    <!-- Master Desktop Window Viewport Container -->
+    <div class="workspace-panel">
+        <header class="header-strip">
+            <div>
                 <h1>Dual-Track Learning Platform</h1>
                 <p>Public instruction node · private forensic ledger · 180-day calendar</p>
             </div>
-            <div class="tracker-badge">📅 0/180 days</div>
+            <div class="days-counter">📁 0/180 days</div>
         </header>
 
-        <!-- Dynamic Control Settings Row with all 5 Core Custom Subjects -->
-        <section class="sub-nav-bar">
-            <div class="nav-controls-left">
-                <button class="nav-btn" onclick="shiftDay(-1)">&lt;</button>
-                <div class="selector-box">
-                    <select id="daySelect" onchange="triggerDataSync()">
-                        <!-- Dynamic list generation populated down below via script logic -->
-                    </select>
+        <!-- Dynamic Filter Control Ribbon Block Section -->
+        <section class="control-ribbon">
+            <div class="ribbon-left">
+                <button class="arrow-button" onclick="adjustActiveDay(-1)">&lt;</button>
+                <div class="pill-container">
+                    <select id="daySelect" onchange="runDataPipelineSync()"></select>
                 </div>
-                <button class="nav-btn" onclick="shiftDay(1)">&gt;</button>
+                <button class="arrow-button" onclick="adjustActiveDay(1)">&gt;</button>
                 
-                <div class="selector-box" style="margin-left: 10px;">
-                    <span class="selector-label">Track Subject:</span>
-                    <select id="subjectSelect" onchange="triggerDataSync()">
-                        <option value="Mathematics">Mathematics</option>
+                <div class="pill-container" style="margin-left: 8px;">
+                    <span class="pill-label">Track Subject:</span>
+                    <select id="subjectSelect" onchange="runDataPipelineSync()">
+                        <option value="Mathematics" selected>Mathematics</option>
                         <option value="Science">Science</option>
                         <option value="Language Arts">Language Arts</option>
                         <option value="History">History</option>
@@ -250,115 +296,120 @@
                 </div>
             </div>
             
-            <div class="complete-action">
-                <input type="checkbox" id="completeCheck" style="transform: scale(1.1); cursor: pointer;">
-                <label for="completeCheck" style="cursor: pointer;">Mark day complete to unlock next</label>
-            </div>
+            <label class="completion-toggle">
+                <input type="checkbox" id="markDayComplete" style="margin: 0; cursor: pointer; transform: scale(1.05);">
+                <span>Mark day complete to unlock next</span>
+            </label>
         </section>
 
-        <!-- Master Split Frame Panels Block Area -->
-        <main class="content-split">
+        <!-- Main Screen Canvas Panels Arena -->
+        <main class="dashboard-canvas">
             
-            <!-- LEFT SCREEN VIEW: Dynamic Public Instructional content container -->
-            <div class="node-left">
-                <iframe id="contentIframe" src="about:blank" style="width:100%; height:100%; border:none; background-color:transparent;"></iframe>
+            <!-- LEFT PANEL CONTAINER -->
+            <div class="left-node-panel">
+                <div id="iframeStatusScreen" class="status-container">Loading public portal assets...</div>
+                <iframe id="publicTextbookFrame" src="about:blank" style="display: none;"></iframe>
             </div>
 
-            <!-- RIGHT SCREEN VIEW: Private Historical Verification Cross Reference Ledger Column -->
-            <div class="ledger-right">
-                <div style="font-size: 14px; font-weight: 700; color: #0f172a; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 5px;">📋 Forensic Ledger</div>
+            <!-- RIGHT PANEL CONTAINER -->
+            <div class="right-ledger-panel">
+                <div style="font-size: 15px; font-weight: 700; color: #111827; border-bottom: 1px solid #f3f4f6; padding-bottom: 12px; margin-bottom: 4px;">📜 Forensic Ledger</div>
                 
                 <div>
-                    <div style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px;">Cross-References</div>
-                    <div id="ledgerReferenceBox" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; font-size: 13px; line-height: 1.5; color: #334155;">
-                        Awaiting data pipeline validation...
-                    </div>
+                    <div class="ledger-section-title">Cross-References</div>
+                    <div id="crossRefCard" class="ledger-card-body">Connecting to live data stream core...</div>
                 </div>
 
                 <div>
-                    <div style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px;">Structural Sync Hash</div>
-                    <div id="ledgerHashBox" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 15px; font-family: monospace; font-size: 13px; color: #0ea5e9; word-break: break-all;">
-                        0x00000000
-                    </div>
+                    <div class="ledger-section-title">Structural Sync Hash</div>
+                    <div id="hashCard" class="ledger-card-body hash-string">0x00000000</div>
                 </div>
             </div>
 
         </main>
     </div>
     <script>
-        // CONFIGURATION LINK: Replace this placeholder link text with your live Render application url
+        // 🚨 CONFIGURATION ACTION REQUIRED: Change this placeholder link text to your live Render application URL
         const BACKEND_URL = "https://onrender.com";
         
-        let activeGradeSelection = "K";
+        let chosenGradeIndex = "5";
 
-        // Programmatically populate the dropdown to hold a full 180 day school structure
-        function buildDayOptionsDropdown() {
-            const daySelectElement = document.getElementById("daySelect");
-            daySelectElement.innerHTML = "";
-            for (let dayIndex = 1; dayIndex <= 180; dayIndex++) {
+        // Generate the 180 day options cleanly inside the select element box
+        function initializeCalendarDropdown() {
+            const dayDropdown = document.getElementById("daySelect");
+            dayDropdown.innerHTML = "";
+            for (let d = 1; d <= 180; d++) {
                 const opt = document.createElement("option");
-                opt.value = `Day ${dayIndex}`;
-                opt.innerText = `Day ${dayIndex} / 180`;
-                daySelectElement.appendChild(opt);
+                opt.value = `Day ${d}`;
+                opt.innerText = `Day ${d} / 180`;
+                dayDropdown.appendChild(opt);
             }
         }
 
-        function changeGrade(gradeCode, clickedButtonElement) {
-            document.querySelectorAll('.grade-btn').forEach(button => button.classList.remove('active'));
-            clickedButtonElement.classList.add('active');
-            activeGradeSelection = gradeCode;
-            triggerDataSync();
+        function updateActiveGrade(gradeCode, buttonElement) {
+            document.querySelectorAll('.grade-item').forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+            chosenGradeIndex = gradeCode;
+            runDataPipelineSync();
         }
 
-        function shiftDay(directionValue) {
-            const daySelectElement = document.getElementById("daySelect");
-            let currentSelectedIndex = daySelectElement.selectedIndex;
-            let targetIndex = currentSelectedIndex + directionValue;
-            
-            if (targetIndex >= 0 && targetIndex < daySelectElement.options.length) {
-                daySelectElement.selectedIndex = targetIndex;
-                triggerDataSync();
+        function adjustActiveDay(stepDirection) {
+            const dayDropdown = document.getElementById("daySelect");
+            let currentIndex = dayDropdown.selectedIndex;
+            let targetIndex = currentIndex + stepDirection;
+            if (targetIndex >= 0 && targetIndex < dayDropdown.options.length) {
+                dayDropdown.selectedIndex = targetIndex;
+                runDataPipelineSync();
             }
         }
 
-        async function triggerDataSync() {
-            const selectedSubject = document.getElementById("subjectSelect").value;
-            const selectedDay = document.getElementById("daySelect").value;
+        async function runDataPipelineSync() {
+            const currentSubject = document.getElementById("subjectSelect").value;
+            const currentDay = document.getElementById("daySelect").value;
             
-            const ledgerReferenceBox = document.getElementById("ledgerReferenceBox");
-            const ledgerHashBox = document.getElementById("ledgerHashBox");
-            const contentIframe = document.getElementById("contentIframe");
+            const iframeStatusScreen = document.getElementById("iframeStatusScreen");
+            const publicTextbookFrame = document.getElementById("publicTextbookFrame");
+            const crossRefCard = document.getElementById("crossRefCard");
+            const hashCard = document.getElementById("hashCard");
 
-            ledgerReferenceBox.innerText = "Synchronizing live tracking core ledger...";
-            ledgerHashBox.innerText = "COMPUTING_HASH_NODE...";
+            // Reset workspace screens immediately to an elegant loading layout state on every input change
+            iframeStatusScreen.style.display = "flex";
+            iframeStatusScreen.innerText = "Loading public portal assets...";
+            publicTextbookFrame.style.display = "none";
+            
+            crossRefCard.innerText = "Synchronizing ledger entries...";
+            hashCard.innerText = "COMPUTING_HASH...";
 
-            // Assemble correct parameter tags dynamically on the fly matching backend engine requirements
-            const queryURL = `${BACKEND_URL}?grade=${encodeURIComponent("Grade " + activeGradeSelection)}&subject=${encodeURIComponent(selectedSubject)}&day=${encodeURIComponent(selectedDay)}`;
+            // Match query structural parameters exactly to the python backend engine configuration
+            const corePipelineUrl = `${BACKEND_URL}?grade=${encodeURIComponent("Grade " + chosenGradeIndex)}&subject=${encodeURIComponent(currentSubject)}&day=${encodeURIComponent(currentDay)}`;
 
             try {
-                const webResponse = await fetch(queryURL, { method: 'GET' });
-                if (!webResponse.ok) throw new Error(`Communication Error Code: ${webResponse.status}`);
+                const networkResponse = await fetch(corePipelineUrl, { method: 'GET' });
+                if (!networkResponse.ok) throw new Error(`Server Response Failure Status: ${networkResponse.status}`);
                 
-                const payloadJSON = await webResponse.json();
+                const dataResponsePayload = await networkResponse.json();
 
-                // 1. Load the dynamic web textbook asset path securely inside the Left Node panel 
-                contentIframe.src = payloadJSON.iframe_target;
+                // 1. Hide the tracking screen placeholder and fill out your left iframe textbook source
+                iframeStatusScreen.style.display = "none";
+                publicTextbookFrame.src = dataResponsePayload.iframe_target;
+                publicTextbookFrame.style.display = "block";
 
-                // 2. Refresh cross-references and tracking hashes safely on the Right Ledger view
-                ledgerReferenceBox.innerText = payloadJSON.ledger_payload.cross_reference;
-                ledgerHashBox.innerText = payloadJSON.ledger_payload.sync_hash;
+                // 2. Safely output your calculated ledger texts and tracking hashes onto the boards
+                crossRefCard.innerText = dataResponsePayload.ledger_payload.cross_reference;
+                hashCard.innerText = dataResponsePayload.ledger_payload.sync_hash;
 
             } catch (networkError) {
-                console.error("Data pipeline broken:", networkError);
-                ledgerReferenceBox.innerText = "Connection Broken. Verify backend service on Render is awake and running.";
-                ledgerHashBox.innerText = "ERROR_DISCONNECTED_NODE";
+                console.error("Pipeline failure log summary:", networkError);
+                iframeStatusScreen.innerText = "Public instruction node currently unreachable.";
+                crossRefCard.innerText = "Connection Broken. Verify backend service on Render is awake and running.";
+                hashCard.innerText = "ERROR_DISCONNECTED_NODE";
             }
         }
 
-        // Initialize and fire layout loops cleanly on window loading sequence triggers
+        // Auto trigger setup and connection scripts upon window load processing routines
         window.onload = function() {
-            buildDayOptionsDropdown();
-            triggerDataSync();
+            initializeCalendarDropdown();
+            runDataPipelineSync();
         };
     </script>
 </body>
