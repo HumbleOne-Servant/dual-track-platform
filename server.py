@@ -181,7 +181,7 @@ def load_master_ledger():
 
 if __name__ == "__main__":
     CURRICULUM_DATA = load_master_ledger()
-    server_address = ('', PORT)
+    server_address = ('0.0.0.0', PORT)
     httpd = HTTPServer(server_address, DualLedgerAPIHandler)
     print(f"\n=======================================================")
     print(f"Structure-Aware Media Processing Stream Active on Port: {PORT}")
