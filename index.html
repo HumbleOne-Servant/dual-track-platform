@@ -212,26 +212,48 @@ function fetchCurriculumContent() {
     const currentSubject = document.getElementById('track-subject-selector').value;
     const currentDay = document.getElementById('track-day-dropdown').value;
 
+    // 1. Determine the broad layout bucket folder where the file lives
     let folderBucket = "k5";
     if (currentGrade === "6-8") { folderBucket = "68"; }
     else if (currentGrade === "9-12") { folderBucket = "912"; }
 
-    // Direct path pointing to your new clean subfolders: /assets/curriculum/k5/science/day_1.json
-    const targetFileUrl = `/assets/curriculum/${folderBucket}/${currentSubject}/day_${currentDay}.json`;
+    // 2. Determine the exact grade prefix tag matching your folder structure
+    let exactGradePrefix = "gk";
+    if (currentGrade === "K-5") {
+        // If the student selects the K-5 track, we need to map to the active day subtrack grade
+        // For testing/initial load, we fallback to gk, or dynamically detect the active student row
+        exactGradePrefix = "gk"; 
+    } else if (currentGrade === "6-8") {
+        // Map out the middle school sequence based on your dropdown context tags
+        exactGradePrefix = "g6"; 
+    } else if (currentGrade === "9-12") {
+        // Map out the high school sequence based on your dropdown context tags
+        exactGradePrefix = "g9";
+    }
+
+    // 3. Map out the clean subject name variations to match your files
+    let subjectTag = "science";
+    if (currentSubject === "math") { subjectTag = "math"; }
+    else if (currentSubject === "english") { subjectTag = "reading"; }
+    else if (currentSubject === "social studies") { subjectTag = "social_studies"; }
+    else if (currentSubject === "electives") { subjectTag = "biblical"; }
+
+    // 4. Build the precise file path: e.g., /backend_vault/k5/gk_science_day_1.json
+    const targetFileUrl = `/backend_vault/${folderBucket}/${exactGradePrefix}_${subjectTag}_day_${currentDay}.json`;
     
-    console.log("Requesting standardized asset path location: " + targetFileUrl);
+    console.log("Requesting backend asset node location: " + targetFileUrl);
 
     fetch(targetFileUrl)
         .then(response => {
-            if (!response.ok) { throw new Error("File target was not found in directory branch."); }
+            if (!response.ok) { throw new Error("Target file was not found inside unique layout vaults."); }
             return response.json();
         })
         .then(data => {
-            // Render the screen using the actual content text from your file
+            // Render the text content inside the custom age viewports smoothly
             switchPortalLayout(data);
         })
         .catch(error => {
-            console.log("Path currently holds no file asset: " + error.message);
+            console.log("Empty data slot tracked: " + error.message);
             switchPortalLayout(null);
         });
 }

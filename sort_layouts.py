@@ -5,73 +5,102 @@ import re
 SOURCE_CURRICULUM_DIR = r"C:\DualTrackLearning_Online\curriculum"
 BACKEND_VAULT_OUTPUT = r"C:\DualTrackLearning_Online\backend_vault"
 
-# Ensure the target vault output folder is active on disk
-os.makedirs(BACKEND_VAULT_OUTPUT, exist_ok=True)
-
-def extract_exact_metadata_from_path(file_path, file_name):
+def parse_deep_curriculum_path(file_path):
     """
-    Scans the folder path to convert labels like grade_k, grade_5, 
-    and grade_12 into clean prefixes like gk, g5, and g12.
+    Analyzes the complete folder structure to extract the correct group bucket,
+    the exact grade code, the mapped subject, and the day tracking digit.
     """
-    clean_name = file_name.lower()
-    parts = file_path.lower().replace("\\", "/").split("/")
+    normalized_path = file_path.lower().replace("\\", "/")
+    parts = normalized_path.split("/")
     
-    # 1. Parse the exact individual folder name to determine the short grade prefix
-    short_grade = "gk"
+    exact_grade = "gk"
+    subject = "science"
+    day_number = "1"
+    layout_bucket = "k5"
+    
+    # 1. Parse the folder level name for the exact grade layer code
     for part in parts:
         if "grade_" in part:
-            grade_val = part.split("grade_")[1]
-            if grade_val == "k":
-                short_grade = "gk"
+            raw_grade = part.replace("grade_", "").strip()
+            if raw_grade == "k":
+                exact_grade = "gk"
+                layout_bucket = "k5"
             else:
-                short_grade = f"g{grade_val}"
+                exact_grade = f"g{raw_grade}"
+                try:
+                    num_grade = int(raw_grade)
+                    if 6 <= num_grade <= 8:
+                        layout_bucket = "68"
+                    elif 9 <= num_grade <= 12:
+                        layout_bucket = "912"
+                    else:
+                        layout_bucket = "k5"
+                except ValueError:
+                    layout_bucket = "k5"
             break
 
-    # 2. Identify the true day number directly from the file name (e.g., day_8 -> 8)
-    day_match = re.search(r'day_(\d+)', clean_name)
-    day_number = day_match.group(1) if day_match else "1"
-        
-    # 3. Identify the subject based on the folder name it lives in
-    subject = "electives"
-    if "math" in parts or "arithmetic" in parts:
-        subject = "math"
-    elif "english" in parts or "reading" in parts or "language" in parts:
-        subject = "reading"
-    elif "science" in parts:
-        subject = "science"
-    elif "social" in parts or "history" in parts:
-        subject = "social_studies"
-        
-    return short_grade, subject, day_number
-def run_exact_grade_naming_inversion():
-    print(f"Scanning curriculum paths at: {SOURCE_CURRICULUM_DIR}")
+    # 2. Parse the subject folder level name matching your system options
+    subject_map = {
+        "biblical_studies": "biblical",
+        "historical_social_studies": "social_studies",
+        "laguage_arts": "reading",
+        "language_arts": "reading",
+        "mathematics": "math",
+        "science": "science"
+    }
+    
+    for part in parts:
+        if part in subject_map:
+            subject = subject_map[part]
+            break
+
+    # 3. Parse the day folder level tracking digit
+    for part in parts:
+        if "day_" in part and part.replace("day_", "").isdigit():
+            day_number = part.replace("day_", "").strip()
+            break
+            
+    return layout_bucket, exact_grade, subject, day_number
+def run_nested_layout_distribution():
+    print(f"Scanning deep curriculum folder structure at: {SOURCE_CURRICULUM_DIR}")
     if not os.path.exists(SOURCE_CURRICULUM_DIR):
         print(f"ERROR: Target directory {SOURCE_CURRICULUM_DIR} does not exist!")
         return
 
     processed_count = 0
-    print("Beginning exact individual grade file conversion...")
+    print("Beginning structural file parsing, unique renaming, and bucket routing...")
     
     for root, dirs, files in os.walk(SOURCE_CURRICULUM_DIR):
         for current_file in files:
             if current_file.lower().endswith(".json"):
                 full_source_path = os.path.join(root, current_file)
                 
-                # Extract customized short grade, subject name, and day digits
-                short_grade, subject, day_num = extract_exact_metadata_from_path(full_source_path, current_file)
+                # Extract metadata features directly from the folder paths
+                layout_bucket, exact_grade, subject, day_num = parse_deep_curriculum_path(full_source_path)
                 
-                # Build the precise name format requested: e.g., g5_math_day_7.json
-                standardized_name = f"{short_grade}_{subject}_day_{day_num}.json"
-                final_destination_path = os.path.join(BACKEND_VAULT_OUTPUT, standardized_name)
+                # Group files cleanly into k5, 68, and 912 subfolders
+                target_folder_path = os.path.join(BACKEND_VAULT_OUTPUT, layout_bucket)
+                os.makedirs(target_folder_path, exist_ok=True)
+                
+                # FORCE PRECISE UNIQUE FILE NAME: e.g., g5_math_day_7.json or gk_science_day_1.json
+                standardized_name = f"{exact_grade}_{subject}_day_{day_num}.json"
+                final_destination_path = os.path.join(target_folder_path, standardized_name)
                 
                 try:
                     shutil.copy2(full_source_path, final_destination_path)
-                    print(f" SUCCESS ROUTED: {current_file} -> {standardized_name}")
                     processed_count += 1
-                except Exception as e:
-                    print(f" Error processing item {current_file}: {str(e)}")
                     
-    print(f"\nOperation complete. Successfully synchronized {processed_count} files with exact grade labels.")
+                    if processed_count % 1000 == 0:
+                        print(f" -> Successfully processed and unique-named {processed_count} files...")
+                except Exception as e:
+                    print(f" Error transferring file {current_file}: {str(e)}")
+                    
+    print("\n========================================================================")
+    print("           UNIQUE VAULT ROUTING COMPLETION REPORT                       ")
+    print("========================================================================")
+    print(f" Successfully Organized & Copied: {processed_count} unique-named files")
+    print(f" Target Output Folders:           {BACKEND_VAULT_OUTPUT}\\(k5, 68, 912)")
+    print("========================================================================")
 
 if __name__ == "__main__":
-    run_grade_aware_naming_inversion()
+    run_nested_layout_distribution()
