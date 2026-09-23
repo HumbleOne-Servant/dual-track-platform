@@ -9,55 +9,81 @@
 
 <div id="learning-platform-container" style="background: #f0f8ff; min-height: 100vh; font-family: 'Comic Sans MS', sans-serif; padding-bottom: 40px; transition: background-color 0.3s ease;">
     
-    <!-- Dynamic Header Bar changing colors based on selected grade -->
+    <!-- Dynamic Header Bar that adapts colors based on selected grade level track -->
     <header id="dynamic-header-bar" style="background: linear-gradient(135deg, #ff7675, #6c5ce7); padding: 20px; display: flex; justify-content: space-between; align-items: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: background 0.3s ease;">
         <div style="font-size: 24px; font-weight: bold; letter-spacing: 2px;">🌟 DUAL-TRACK LEARNING HUB</div>
         <div style="display: flex; gap: 15px; align-items: center;">
             
+            <!-- Granular Grade Selector covering all 13 individual grade buckets -->
             <select id="track-grade-selector" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #ffeaa7; cursor: pointer;">
-                <option value="K-5">🖍️ Elementary Track (Grades K-5)</option>
-                <option value="6-8">📘 Middle School Track (Grades 6-8)</option>
-                <option value="9-12">🎓 High School Track (Grades 9-12)</option>
+                <optgroup label="🖍️ Elementary Track (k5 Folder)">
+                    <option value="gk">Kindergarten</option>
+                    <option value="g1">Grade 1</option>
+                    <option value="g2">Grade 2</option>
+                    <option value="g3">Grade 3</option>
+                    <option value="g4">Grade 4</option>
+                    <option value="g5">Grade 5</option>
+                </optgroup>
+                <optgroup label="📘 Middle School Track (68 Folder)">
+                    <option value="g6">Grade 6</option>
+                    <option value="g7">Grade 7</option>
+                    <option value="g8">Grade 8</option>
+                </optgroup>
+                <optgroup label="🎓 High School Track (912 Folder)">
+                    <option value="g9">Grade 9</option>
+                    <option value="g10">Grade 10</option>
+                    <option value="g11">Grade 11</option>
+                    <option value="g12">Grade 12</option>
+                </optgroup>
             </select>
             
+            <!-- Subject Tracker Control Menu -->
             <select id="track-subject-selector" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #fab1a0; cursor: pointer;">
                 <option value="math">🔢 Math Adventures</option>
-                <option value="english">🔤 Reading & Words</option>
                 <option value="science">🔬 Science Secrets</option>
-                <option value="social studies">🌍 World History</option>
-                <option value="electives">🎨 Creative Arts</option>
+                <option value="reading">🔤 Reading & Words</option>
+                <option value="social_studies">🌍 World History</option>
+                <option value="biblical">📖 Biblical Studies</option>
             </select>
             
-            <!-- Upgraded Day Tracker from text label into a 180-Day Selection Dropdown Menu -->
+            <!-- Day Selection Dropdown Menu covering 1 to 180 days -->
             <select id="track-day-dropdown" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #55efc4; color: #2d3436; cursor: pointer;">
-                <!-- Auto-populated by initialization script -->
+                <!-- Populated automatically by script initialization -->
             </select>
             
         </div>
     </header>
 
-    <!-- Dynamic Learning Viewport -->
+    <!-- Main Learning Presentation Stage Viewport -->
     <main id="adaptive-portal-viewport" style="max-width: 1200px; margin: 30px auto; padding: 20px; box-sizing: border-box;">
-        <!-- Injected layout profiles load directly here -->
+        <!-- Age specific responsive design mockups load directly inside here -->
     </main>
 </div>
 <style>
-/* K-5 Design Profiles */
-.game-card-container { background: #ffffff; border: 5px solid #55efc4; border-radius: 35px; padding: 40px; text-align: center; box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
-.big-interactive-button { background: #0984e3; color: white; font-size: 22px; font-weight: bold; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 0 #076bba; }
+/* K-5 Design Profiles: High color, playful canvas controls, bold titles */
+.game-card-container { background: #ffffff; border: 5px solid #55efc4; border-radius: 35px; padding: 40px; text-align: center; box-shadow: 0 12px 25px rgba(0,0,0,0.08); transition: transform 0.2s ease; }
+.game-card-container:hover { transform: scale(1.01); }
+.big-interactive-button { background: linear-gradient(to bottom, #0984e3, #74b9ff); color: white; font-size: 20px; font-weight: bold; padding: 15px 40px; border: 3px solid #fff; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 0 #06528e; transition: all 0.1s ease; }
+.big-interactive-button:hover { filter: brightness(1.05); transform: translateY(-2px); box-shadow: 0 8px 0 #06528e; }
+.big-interactive-button:active { transform: translateY(4px); box-shadow: 0 2px 0 #06528e; }
 
-/* 6-8 Design Profiles */
+/* 6-8 Design Profiles: Modern clean pipeline trackers, rounded layouts */
 .clean-teen-wrapper { background: #ffffff; min-height: 480px; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-.teen-pipeline-card { background: #f8f9fa; border-radius: 12px; border-left: 6px solid #00a8ff; padding: 20px; margin-bottom: 15px; }
-.teen-action-btn { background: #00a8ff; color: white; padding: 12px 30px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
+.teen-pipeline-card { background: #f8f9fa; border-radius: 12px; border-left: 6px solid #00a8ff; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+.teen-action-btn { background: #00a8ff; color: white; padding: 12px 32px; font-weight: bold; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s ease; }
+.teen-action-btn:hover { background: #25b7ff; }
 
-/* 9-12 Design Profiles */
+/* 9-12 Design Profiles: Minimalist matte split column university desk workstation */
 .adult-workstation-wrapper { background: #ffffff; min-height: 520px; color: #2c3e50; display: grid; grid-template-columns: 240px 1fr; gap: 30px; border: 1px solid #dcdde1; border-radius: 16px; padding: 20px; }
 .workstation-sidebar { background: #1e272e; color: #f5f6fa; padding: 25px; border-radius: 12px; display: flex; flex-direction: column; gap: 15px; }
-.workstation-paper { background: #fdfefe; border: 1px solid #ced6e0; border-radius: 8px; padding: 35px; }
-.workstation-btn { background: #2f3542; color: white; padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer; }
+.workstation-link { color: #a4b0be; text-decoration: none; font-size: 15px; font-weight: 500; padding: 5px 0; transition: color 0.2s ease; }
+.workstation-link:hover { color: #ffffff; }
+.workstation-paper { background: #fdfefe; border: 1px solid #ced6e0; border-radius: 8px; padding: 35px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+.workstation-btn { background: #2f3542; color: white; padding: 14px 28px; font-size: 14px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; border: none; border-radius: 4px; cursor: pointer; transition: background 0.2s ease; }
+.workstation-btn:hover { background: #57606f; }
 </style>
 <script>
+// Dynamic appearance setup profiles matching layout groups
 const THEME_PROFILES = {
     "K-5": {
         header: "linear-gradient(135deg, #ff7675, #6c5ce7)",
@@ -76,12 +102,20 @@ const THEME_PROFILES = {
     }
 };
 
-function applyGradeLevelLayoutTheme() {
+function updateGradeDropdownDependencies() {
     const selectedGrade = document.getElementById('track-grade-selector').value;
-    const currentTheme = THEME_PROFILES[selectedGrade];
     const platformContainer = document.getElementById('learning-platform-container');
     const platformHeader = document.getElementById('dynamic-header-bar');
     
+    // Group exact short strings cleanly into visual presentation blocks
+    let layoutGroup = "K-5";
+    if (["g6", "g7", "g8"].includes(selectedGrade)) {
+        layoutGroup = "6-8";
+    } else if (["g9", "g10", "g11", "g12"].includes(selectedGrade)) {
+        layoutGroup = "9-12";
+    }
+    
+    const currentTheme = THEME_PROFILES[layoutGroup];
     if (platformContainer && platformHeader) {
         platformContainer.style.backgroundColor = currentTheme.background;
         platformContainer.style.fontFamily = currentTheme.bodyFont;
@@ -93,11 +127,11 @@ function switchPortalLayout(incomingLessonData = null) {
     const selectedGrade = document.getElementById('track-grade-selector').value;
     document.getElementById('adaptive-portal-viewport').innerHTML = "";
 
-    if (selectedGrade === 'K-5') {
+    if (["gk", "g1", "g2", "g3", "g4", "g5"].includes(selectedGrade)) {
         renderElementaryInterface(incomingLessonData);
-    } else if (selectedGrade === '6-8') {
+    } else if (["g6", "g7", "g8"].includes(selectedGrade)) {
         renderMiddleSchoolInterface(incomingLessonData);
-    } else if (selectedGrade === '9-12') {
+    } else if (["g9", "g10", "g11", "g12"].includes(selectedGrade)) {
         renderHighSchoolInterface(incomingLessonData);
     }
 }
@@ -105,167 +139,153 @@ function switchPortalLayout(incomingLessonData = null) {
 <script>
 function renderElementaryInterface(data) {
     const viewport = document.getElementById('adaptive-portal-viewport');
+    const grade = document.getElementById('track-grade-selector').value.toUpperCase();
+    const subject = document.getElementById('track-subject-selector').value.toUpperCase();
     
-    // Extract our new clean properties directly from your topic JSON file
-    const title = data?.lesson_title || "Lesson Loading...";
-    const coreText = data?.public_core_concept || "Awaiting database stream.";
-    const topic = data?.topic_folder || "general";
-    
-    // Inject the interactive, student-facing lesson display layout
+    // Sourcing metadata parameters from your pristine topic database files
+    const heading = data?.lesson_title || `STUDY MODULE: ${subject} (${grade})`;
+    const coreText = data?.public_core_concept || "Ready for discovery? Select an academic school calendar day from the list choices to begin!";
+    const topic = data?.topic_folder || "foundations_alpha";
+
     viewport.innerHTML = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 25px;">
-            <!-- Left Panel / Main Lesson Box -->
-            <div class="game-card-container" style="width: 100%; max-width: 700px; border-color: #ff7675;">
-                <div style="font-size: 50px; margin-bottom: 10px;">☀️🍂</div>
-                <span style="background: #ffeaa7; color: #d63031; padding: 5px 15px; font-weight: bold; border-radius: 10px; font-size: 14px; text-transform: uppercase;">
-                    Topic: ${topic.replace('_', ' ')}
+            <button class="big-interactive-button" style="background: #6c5ce7; box-shadow: 0 6px 0 #4f3bb1;" onclick="triggerVoiceSynthesis('${coreText.replace(/'/g, "\\'")}')">
+                🔊 Click to Hear My Lesson Out Loud
+            </button>
+            
+            <div class="game-card-container" style="width: 100%; max-width: 750px; border-color: #55efc4;">
+                <div style="font-size: 70px; margin-bottom: 10px;">🎨🚀</div>
+                <span style="background: #ffeaa7; color: #d63031; padding: 6px 16px; font-weight: bold; border-radius: 12px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Active Focus: ${topic.replace('_', ' ')}
                 </span>
-                <h2 style="font-size: 28px; color: #2d3436; margin: 15px 0;">${title}</h2>
+                <h2 style="font-size: 28px; color: #2d3436; margin: 20px 0;">${heading}</h2>
                 
-                <!-- The Pure Academic Textbook Text Pane -->
-                <p style="font-size: 18px; color: #2d3436; text-align: left; background: #fffdf0; padding: 25px; border-radius: 15px; line-height: 1.6; border: 2px dashed #ffeaa7;">
+                <p style="font-size: 19px; color: #2d3436; text-align: left; background: #fffdf0; padding: 30px; border-radius: 20px; line-height: 1.6; border: 2px dashed #ffeaa7; margin-bottom: 25px;">
                     ${coreText}
                 </p>
                 
-                <button class="big-interactive-button" onclick="playVoiceAssistance('${coreText.replace(/'/g, "\\'")}')">
-                    🔊 Listen to Lesson Text
+                <button class="big-interactive-button" onclick="alert('Launching interactive drawing tool canvas asset...')">
+                    Let's Play! 🌟
                 </button>
             </div>
             
-            <!-- Injected Assignment Container (Generated dynamically right below) -->
-            <div id="generated-assignment-dock" style="width: 100%; max-width: 700px;">
-                ${generateAssignmentModule(data)}
+            <div id="elementary-assignment-dock" style="width: 100%; max-width: 750px;">
+                ${buildElementaryAssignmentBox(topic)}
             </div>
-        </div>
-    `;
+        </div>`;
 }
-
-function playVoiceAssistance(textToSpeak) {
-    // Standard web browser text-to-speech engine
-    const speech = new SpeechSynthesisUtterance(textToSpeak);
-    speech.rate = 0.9;
-    window.speechSynthesis.speak(speech);
-}
-function generateAssignmentModule(data) {
-    const topic = data?.topic_folder || "general";
-    
-    // Builds a targeted visual assignment based directly on the topic layer name
+</script>
+<script>
+function buildElementaryAssignmentBox(topic) {
     if (topic === "weather_seasons") {
         return `
             <div class="game-card-container" style="border-color: #74b9ff; background: #f1f7ff;">
-                <h3 style="color: #0984e3; margin-top: 0; font-size: 22px;">📝 Today's Creative Playground Assignment</h3>
-                <p style="font-size: 16px; color: #4b4b4b;">Look out the window! Use your mouse or touchscreen inside the drawing box below to draw the active weather parameters you see outside right now.</p>
-                
-                <!-- Interactive Drawing Canvas Element for Young Learners -->
-                <div style="background: white; border: 3px solid #74b9ff; border-radius: 15px; height: 200px; display: flex; align-items: center; justify-content: center; margin: 20px 0; color: #b2bec3; font-weight: bold; cursor: crosshair;" onclick="alert('Drawing tool activated!')">
-                    🎨 [Click to Draw Clouds, Sun, or Rain Canvas]
+                <h3 style="color: #0984e3; margin-top: 0; font-size: 22px;">📝 Creative Weather Assignment</h3>
+                <p style="font-size: 16px; color: #4b4b4b;">Look outside! Use your mouse or tablet screen inside the drawing box template below to sketch the current weather features you observe.</p>
+                <div style="background: white; border: 3px dashed #74b9ff; border-radius: 15px; height: 18px; padding: 80px 0; text-align: center; color: #b2bec3; font-weight: bold; cursor: crosshair;" onclick="alert('Drawing tool initialized.')">
+                    🎨 [Click Here to Open Drawing Slate Canvas]
                 </div>
-                
-                <button class="big-interactive-button" style="background: #20bf6b; box-shadow: 0 6px 0 #1b8a4c;" onclick="alert('Assignment submitted successfully for teacher review!')">
-                    🌟 Submit Drawing
+                <button class="big-interactive-button" style="background: #20bf6b; box-shadow: 0 6px 0 #1b8a4c;" onclick="alert('Your drawing has been submitted successfully for verification review!')">
+                    Submit Work File 🌟
                 </button>
-            </div>
-        `;
+            </div>`;
     }
-    
-    // Default fallback assignment layout for general topics
     return `
-        <div class="game-card-container" style="border-color: #a55eea;">
-            <h3 style="color: #6f00ff; margin-top: 0;">📝 Lesson Reflection Assignment</h3>
-            <p>Tell your parent one important variable or concept you discovered in today's lesson text.</p>
-        </div>
-    `;
+        <div class="game-card-container" style="border-color: #a55eea; background: #faf5ff;">
+            <h3 style="color: #6f00ff; margin-top: 0; font-size: 22px;">📝 Lesson Retentive Task</h3>
+            <p style="font-size: 16px; color: #4b4b4b;">Share one interesting concept or structural parameter you observed in today's textbook reading passage with your parent.</p>
+        </div>`;
 }
-function fetchCurriculumContent() {
-    const currentGrade = document.getElementById('track-grade-selector').value;
-    const currentSubject = document.getElementById('track-subject-selector').value;
-    
-    // Standard defaults mapping targets directly to your new deep folders
-    let gradePath = "gk";
-    if (currentGrade === "6-8") gradePath = "g5"; 
-    if (currentGrade === "9-12") gradePath = "g12";
 
-    // Hardcoded target to test Part 1 of your new weather_seasons folder structure safely
-    const targetFileUrl = `/pure_curriculum_vault/${gradePath}/${currentSubject}/weather_seasons/lesson_1.json`;
-    
-    console.log("Requesting pure baseline data file asset: " + targetFileUrl);
-
-    fetch(targetFileUrl)
-        .then(response => {
-            if (!response.ok) { throw new Error("Target file missing inside deep topic layers."); }
-            return response.json();
-        })
-        .then(data => {
-            switchPortalLayout(data);
-        })
-        .catch(error => {
-            console.log("Empty layout path: " + error.message);
-            switchPortalLayout(null);
-        });
+function triggerVoiceSynthesis(textToRead) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.rate = 0.95;
+    window.speechSynthesis.speak(utterance);
 }
+</script>
+<script>
 function renderMiddleSchoolInterface(data) {
     const viewport = document.getElementById('adaptive-portal-viewport');
+    const grade = document.getElementById('track-grade-selector').value.toUpperCase();
     const subject = document.getElementById('track-subject-selector').value;
     
-    const lessonHeading = data?.title || `Focus Lesson: ${subject.toUpperCase()}`;
-    const coreConceptText = data?.public_core_concept || "Select an academic subject timeline from the selector keys above to fill your task logs.";
-    
-    // Extracted target data for the alternative matching framework highlights
-    const biblicalProofText = data?.alignment_triggers?.parameters?.biblical_truth || "Awaiting dynamic data link...";
-    const alternateFrameworkModel = data?.alignment_triggers?.parameters?.alternative_framework || "Analyzing alternative framework properties...";
+    const heading = data?.lesson_title || `Daily Tracker Module: ${subject.toUpperCase()} (${grade})`;
+    const coreText = data?.public_core_concept || "Select an active schedule track element up in the selection bars to pull core lesson logs.";
+    const topic = data?.topic_folder || "ratios_and_proportions";
 
     viewport.innerHTML = `
         <div class="clean-teen-wrapper">
-            <div style="display: grid; grid-template-columns: 300px 1fr; gap: 25px;">
+            <div style="display: grid; grid-template-columns: 300px 1fr; gap: 30px;">
+                <!-- Left Sidebar Navigation Block -->
                 <aside>
-                    <h3 style="color: #2980b9; margin-top: 0;">📋 Progress Tracker</h3>
-                    <div class="teen-pipeline-card" style="border-left-color: #4cd137;"><strong>✓ Core Target:</strong><br>${data?.subject || subject} Track</div>
-                    <div class="teen-pipeline-card" style="border-left-color: #eccc68;"><strong>💡 Framework Sync:</strong><br>${alternateFrameworkModel}</div>
-                </aside>
-                <section style="background: white; padding: 30px; border-radius: 16px;">
-                    <h2 style="color: #2c3e50; font-size: 24px; margin-top: 0;">${lessonHeading}</h2>
-                    <p style="color: #718093; line-height: 1.6; font-size: 16px;">${coreConceptText}</p>
-                    
-                    <!-- Highlighted Alternative Framework Principle Box -->
-                    <div style="margin-top: 25px; padding: 20px; background: #fff9db; border-left: 6px solid #fab1a0; border-radius: 4px; color: #2f3542;">
-                        <h4 style="margin: 0 0 5px 0; color: #e67e22;">✨ Comparative Framework Principles</h4>
-                        <p style="margin: 5px 0 0 0; font-style: italic;"><strong>Source Baseline:</strong> ${biblicalProofText}</p>
+                    <h3 style="color: #2980b9; margin-top: 0; font-size: 20px;">📋 Student Pipeline</h3>
+                    <div class="teen-pipeline-card" style="border-left-color: #20bf6b;">
+                        <strong style="color: #20bf6b;">✓ Complete:</strong><br>Unit Path Index
                     </div>
+                    <div class="teen-pipeline-card" style="border-left-color: #00a8ff;">
+                        <strong style="color: #00a8ff;">→ Active Target:</strong><br>${topic.replace('_', ' ').title()}
+                    </div>
+                </aside>
+                
+                <!-- Main Content Panel Area -->
+                <section style="background: #ffffff; padding: 10px 20px;">
+                    <span style="background: #e3fafc; color: #0b7285; padding: 6px 14px; font-weight: bold; border-radius: 6px; font-size: 13px; text-transform: uppercase;">
+                        Course Pipeline Viewport
+                    </span>
+                    <h2 style="color: #2c3e50; font-size: 26px; margin: 15px 0 20px 0;">${heading}</h2>
+                    <p style="color: #4b5563; line-height: 1.7; font-size: 16px; margin-bottom: 30px;">${coreText}</p>
+                    
+                    <div style="background: #f8f9fa; border: 1px solid #e5e7eb; padding: 20px; border-radius: 12px; margin-bottom: 25px;">
+                        <h4 style="margin: 0 0 10px 0; color: #4b5563; font-size: 16px;">📝 Required Practice Assignment Task</h4>
+                        <p style="margin: 0; color: #6b7280; font-size: 15px;">Read the textbook content log attentively. Draft a 2-sentence structural reflection summary details block inside your local portfolio binder tracker.</p>
+                    </div>
+                    <button class="teen-action-btn" onclick="alert('Submission system connecting to local folder hub...')">
+                        Open Project Submission Dock
+                    </button>
                 </section>
             </div>
         </div>`;
 }
+</script>
+<script>
 function renderHighSchoolInterface(data) {
     const viewport = document.getElementById('adaptive-portal-viewport');
+    const subject = document.getElementById('track-subject-selector').value;
     
-    const lessonHeading = data?.title || "Academic Syllabus Module - High School";
-    const coreConceptText = data?.public_core_concept || "Select a targeted timeline element to synchronize active workstation nodes.";
-    
-    const biblicalProofText = data?.alignment_triggers?.parameters?.biblical_truth || "Awaiting source confirmation...";
-    const alternateFrameworkModel = data?.alignment_triggers?.parameters?.alternative_framework || "Structural model trace pending.";
-    const retentionPrompt = data?.retention_questions?.[0]?.text || "Complete required essay uploads inside the hub.";
+    const heading = data?.lesson_title || "Advanced Syllabus Module Core Node";
+    const coreText = data?.public_core_concept || "Ingestion path standby. Update top header criteria logs to query textbook matrices.";
+    const topic = data?.topic_folder || "advanced_equations";
 
     viewport.innerHTML = `
         <div class="adult-workstation-wrapper">
+            <!-- Left Academic Navigation Panel -->
             <nav class="workstation-sidebar">
-                <strong style="font-size: 14px; color: #747d8c; letter-spacing: 1px;">SYLLABUS PORTAL</strong>
-                <a href="#" style="color: white; text-decoration: none;">📊 Main Dashboard</a>
-                <a href="#" style="color: #a4b0be; text-decoration: none;">📖 Course Readings</a>
+                <strong style="font-size: 13px; color: #747d8c; letter-spacing: 1px; text-transform: uppercase;">Syllabus Directory</strong>
+                <a href="#" class="workstation-link" style="color: #ffffff;">📊 Core Dashboard</a>
+                <a href="#" class="workstation-link">📖 Document Readings</a>
+                <a href="#" class="workstation-link">📝 Gradebook Log</a>
             </nav>
+            
+            <!-- Rigorous Clean Workspace Document Sheet -->
             <main class="workstation-paper">
-                <h2 style="margin-top: 0; font-size: 26px; color: #1e272e; border-bottom: 2px solid #f1f2f6; padding-bottom: 10px;">${lessonHeading}</h2>
-                <p style="line-height: 1.8; font-size: 16px; color: #2f3542;">${coreConceptText}</p>
-                
-                <!-- Professional Advanced Framework Pane -->
-                <div style="background: #f1f2f6; padding: 20px; border-radius: 6px; font-size: 15px; margin-bottom: 25px; border-left: 4px solid #2c3e50;">
-                    <strong style="color: #2c3e50;">⚖️ Analytical Comparison Models:</strong>
-                    <p style="margin: 5px 0;"><strong>Historical Framework:</strong> ${alternateFrameworkModel}</p>
-                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #57606f;">References: ${biblicalProofText}</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f2f6; padding-bottom: 15px; margin-bottom: 25px;">
+                    <h1 style="font-size: 26px; font-weight: 600; margin: 0; color: #1e272e;">${heading}</h1>
+                    <span style="font-size: 14px; color: #747d8c; font-weight: 500;">Topic Branch: ${topic.toUpperCase()}</span>
                 </div>
                 
-                <div style="border: 2px dashed #ced6e0; padding: 25px; text-align: center; border-radius: 6px; background: #ffffff;">
-                    <p style="margin: 0 0 15px 0; font-size: 14px; color: #747d8c;"><strong>Required Output:</strong> ${retentionPrompt}</p>
-                    <button class="workstation-btn">Upload Assignment Asset</button>
+                <article style="line-height: 1.8; color: #2f3542; font-size: 16.5px; margin-bottom: 40px; text-align: justify;">
+                    ${coreText}
+                </article>
+                
+                <!-- Professional Document File Drop Area -->
+                <div style="border: 2px dashed #ced6e0; padding: 30px; text-align: center; border-radius: 8px; background: #ffffff;">
+                    <p style="margin: 0 0 15px 0; font-size: 14px; color: #747d8c; font-weight: 500;">
+                        <strong>🎓 Required Academic Output:</strong> Construct a comprehensive analytical document response paper matching your target course metrics.
+                    </p>
+                    <button class="workstation-btn" onclick="alert('Launching professional local drive explorer upload terminal...')">
+                        Upload Completed Document Asset
+                    </button>
                 </div>
             </main>
         </div>`;
@@ -273,52 +293,35 @@ function renderHighSchoolInterface(data) {
 </script>
 <script>
 function fetchCurriculumContent() {
-    const currentGrade = document.getElementById('track-grade-selector').value;
+    const exactGrade = document.getElementById('track-grade-selector').value;
     const currentSubject = document.getElementById('track-subject-selector').value;
     const currentDay = document.getElementById('track-day-dropdown').value;
 
-    // 1. Determine the broad layout bucket folder where the file lives
+    // 1. Convert specific grade short code strings to broad container bucket folders
     let folderBucket = "k5";
-    if (currentGrade === "6-8") { folderBucket = "68"; }
-    else if (currentGrade === "9-12") { folderBucket = "912"; }
+    if (["g6", "g7", "g8"].includes(exactGrade)) { folderBucket = "68"; }
+    else if (["g9", "g10", "g11", "g12"].includes(exactGrade)) { folderBucket = "912"; }
 
-    // 2. Determine the exact grade prefix tag matching your folder structure
-    let exactGradePrefix = "gk";
-    if (currentGrade === "K-5") {
-        // If the student selects the K-5 track, we need to map to the active day subtrack grade
-        // For testing/initial load, we fallback to gk, or dynamically detect the active student row
-        exactGradePrefix = "gk"; 
-    } else if (currentGrade === "6-8") {
-        // Map out the middle school sequence based on your dropdown context tags
-        exactGradePrefix = "g6"; 
-    } else if (currentGrade === "9-12") {
-        // Map out the high school sequence based on your dropdown context tags
-        exactGradePrefix = "g9";
-    }
+    // 2. Identify the active specific topic folder name layer based on age group mapping rules
+    let activeTopic = "weather_seasons";
+    if (folderBucket === "68") { activeTopic = "ecosystems_flow"; }
+    else if (folderBucket === "912") { activeTopic = "thermodynamics"; }
 
-    // 3. Map out the clean subject name variations to match your files
-    let subjectTag = "science";
-    if (currentSubject === "math") { subjectTag = "math"; }
-    else if (currentSubject === "english") { subjectTag = "reading"; }
-    else if (currentSubject === "social studies") { subjectTag = "social_studies"; }
-    else if (currentSubject === "electives") { subjectTag = "biblical"; }
-
-    // 4. Build the precise file path: e.g., /backend_vault/k5/gk_science_day_1.json
-    const targetFileUrl = `/backend_vault/${folderBucket}/${exactGradePrefix}_${subjectTag}_day_${currentDay}.json`;
+    // 3. Assemble the exact target file URL path matching your 46,800 database paths
+    const targetFileUrl = `/pure_curriculum_vault/${folderBucket}/${exactGrade}/${currentSubject}/${activeTopic}/lesson_${currentDay}.json`;
     
-    console.log("Requesting backend asset node location: " + targetFileUrl);
+    console.log("Querying precise disk data node: " + targetFileUrl);
 
     fetch(targetFileUrl)
         .then(response => {
-            if (!response.ok) { throw new Error("Target file was not found inside unique layout vaults."); }
+            if (!response.ok) { throw new Error("File node target was missing inside database directories."); }
             return response.json();
         })
         .then(data => {
-            // Render the text content inside the custom age viewports smoothly
             switchPortalLayout(data);
         })
         .catch(error => {
-            console.log("Empty data slot tracked: " + error.message);
+            console.log("Path currently empty: " + error.message);
             switchPortalLayout(null);
         });
 }
@@ -328,27 +331,28 @@ function initializeTrackDayDropdown() {
     if (!dayDropdown) return;
     
     dayDropdown.innerHTML = "";
-    for (let d = 1; d <= 180; d++) {
-        const opt = document.createElement('option');
-        opt.value = d;
-        opt.innerText = "📆 Day " + d;
-        dayDropdown.appendChild(opt);
+    for (let currentDayIndex = 1; currentDayIndex <= 180; currentDayIndex++) {
+        const optionNode = document.createElement('option');
+        optionNode.value = currentDayIndex;
+        optionNode.innerText = "📆 Day " + currentDayIndex;
+        dayDropdown.appendChild(optionNode);
     }
 }
 
-// Master boot sequence to run the entire framework on startup
+// Master bootstrap sequence to run the entire visual platform framework safely on start
 window.addEventListener('DOMContentLoaded', () => {
     initializeTrackDayDropdown();
     
     document.getElementById('track-grade-selector').addEventListener('change', () => {
-        applyGradeLevelLayoutTheme();
+        updateGradeDropdownDependencies();
         fetchCurriculumContent();
     });
     
     document.getElementById('track-subject-selector').addEventListener('change', fetchCurriculumContent);
     document.getElementById('track-day-dropdown').addEventListener('change', fetchCurriculumContent);
     
-    applyGradeLevelLayoutTheme();
+    // Perform layout paint operations instantly on page launch
+    updateGradeDropdownDependencies();
     fetchCurriculumContent();
 });
 </script>
