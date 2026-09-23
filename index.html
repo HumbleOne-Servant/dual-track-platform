@@ -1,130 +1,169 @@
-<div id="learning-platform-container" style="background: #f0f8ff; min-height: 100vh; font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; padding-bottom: 40px;">
-    
-    <header style="background: linear-gradient(135deg, #ff7675, #6c5ce7); padding: 20px; border-bottom: 6px solid #fdcbc3; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; color: white;">
-        <div style="font-size: 24px; font-weight: bold; letter-spacing: 2px;">🌟 DUAL-TRACK LEARNING HUB</div>
-        <div style="display: flex; gap: 15px; align-items: center;">
-            <select id="track-grade-selector" onchange="switchPortalLayout()" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; border: 3px solid #fff; font-weight: bold; background: #ffeaa7; cursor: pointer;">
-                <option value="K-5">🖍️ Elementary Track (Grades K-5)</option>
-                <option value="6-8">📘 Middle School Track (Grades 6-8)</option>
-                <option value="9-12">🎓 High School Track (Grades 9-12)</option>
-            </select>
-            <select id="track-subject-selector" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; border: 3px solid #fff; font-weight: bold; background: #fab1a0; cursor: pointer;">
-                <option value="math">🔢 Math Adventures</option>
-                <option value="english">🔤 Reading & Words</option>
-                <option value="science">🔬 Science Secrets</option>
-                <option value="social studies">🌍 World History</option>
-                <option value="electives">🎨 Creative Arts</option>
-            </select>
-            <div style="background: #55efc4; color: #2d3436; padding: 10px 25px; font-size: 18px; font-weight: bold; border-radius: 30px; border: 3px solid #fff; box-shadow: 0 4px 0 #00b894;">
-                Day <span id="current-day-display">1</span>
-            </div>
-        </div>
-    </header>
-
-    <main id="adaptive-portal-viewport" style="max-width: 1200px; margin: 30px auto; padding: 20px; box-sizing: border-box;">
-        <!-- The interface graphics switch instantly here -->
-    </main>
-</div>
 <style>
-    .big-interactive-button {
-        background: #0984e3;
-        color: white;
-        font-size: 22px;
-        font-weight: bold;
-        padding: 15px 40px;
-        border: none;
-        border-radius: 50px;
-        box-shadow: 0 6px 0 #076bba, 0 8px 15px rgba(0,0,0,0.2);
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-    .big-interactive-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 0 #076bba, 0 10px 20px rgba(0,0,0,0.3);
-        background: #74b9ff;
-    }
-    .big-interactive-button:active {
-        transform: translateY(4px);
-        box-shadow: 0 2px 0 #076bba;
-    }
-    .game-card-container {
-        background: #ffffff;
-        border: 5px solid #55efc4;
-        border-radius: 35px;
-        padding: 40px;
-        box-shadow: 0 12px 25px rgba(0,0,0,0.08);
-        text-align: center;
-        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .game-card-container:hover {
-        transform: scale(1.02);
-    }
+/* ==========================================
+   GRADES 6-8: CLEAN TEEN INTERFACE ENVIRONMENT 
+   ========================================== */
+.clean-teen-wrapper {
+    background: #eef2f7;
+    min-height: 85vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 25px;
+    border-radius: 20px;
+}
+.teen-pipeline-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border-left: 6px solid #00a8ff;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 15px;
+}
+.teen-action-btn {
+    background: #00a8ff;
+    color: white;
+    padding: 12px 30px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #0088cc;
+}
+.teen-action-btn:hover { background: #33b5ff; }
+
+/* ==========================================
+   GRADES 9-12: HIGH TEEN / ADULT WORKSTATION 
+   ========================================== */
+.adult-workstation-wrapper {
+    background: #ffffff;
+    min-height: 85vh;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: #2c3e50;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 30px;
+}
+.workstation-sidebar {
+    background: #1e272e;
+    color: #f5f6fa;
+    padding: 25px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.workstation-paper {
+    background: #f8f9fa;
+    border: 1px solid #dcdde1;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.workstation-btn {
+    background: #2f3542;
+    color: white;
+    padding: 14px 28px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    border: 1px solid #1e272e;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.workstation-btn:hover { background: #57606f; }
 </style>
 <script>
-function switchPortalLayout() {
+function renderMiddleSchoolInterface(lessonData) {
+    const viewport = document.getElementById('adaptive-portal-viewport');
+    const subjectName = document.getElementById('track-subject-selector').value;
+    
+    // Fallback labels if server data is still loading
+    const title = lessonData?.lesson_title || `Daily Exercise: Focus on ${subjectName}`;
+    const mainText = lessonData?.body_content || "Select a subject option above to sync your daily content pipeline tasks.";
+    
+    viewport.innerHTML = `
+        <div class="clean-teen-wrapper">
+            <div style="display: grid; grid-template-columns: 320px 1fr; gap: 25px;">
+                <aside>
+                    <h3 style="color: #487eb0; margin-top: 0;">📋 Core Progress Pipeline</h3>
+                    <div class="teen-pipeline-card" style="border-left-color: #4cd137;">
+                        <strong style="color: #4cd137;">✓ Status: Ready</strong><br>Topic Overview Log
+                    </div>
+                    <div class="teen-pipeline-card">
+                        <strong>→ Active Assignment</strong><br>${title}
+                    </div>
+                </aside>
+                
+                <section style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                    <span style="background: #dff9fb; color: #0097e6; padding: 6px 12px; font-weight: bold; border-radius: 6px; font-size: 13px; text-transform: uppercase;">
+                        Active Workspace
+                    </span>
+                    <h2 style="font-size: 26px; color: #2f3640; margin: 15px 0;">${title}</h2>
+                    <div style="line-height: 1.6; color: #718093; font-size: 16px; margin-bottom: 25px;">
+                        ${mainText}
+                    </div>
+                    <button class="teen-action-btn" onclick="alert('Submission dock online.')">
+                        Launch Project Space
+                    </button>
+                </section>
+            </div>
+        </div>
+    `;
+}
+</script>
+<script>
+function renderHighSchoolInterface(lessonData) {
+    const viewport = document.getElementById('adaptive-portal-viewport');
+    const subjectName = document.getElementById('track-subject-selector').value;
+    
+    const title = lessonData?.lesson_title || `Academic Module: Advanced Analysis`;
+    const mainText = lessonData?.body_content || "Data stream initializing. Choose a designated syllabus course track to populate content nodes.";
+    
+    viewport.innerHTML = `
+        <div class="adult-workstation-wrapper">
+            <nav class="workstation-sidebar">
+                <div style="font-weight: bold; font-size: 12px; text-transform: uppercase; color: #718093; letter-spacing: 1px;">Syllabus Navigation</div>
+                <a href="#" style="color: white; text-decoration: none; font-size: 15px;">📊 Main Dashboard</a>
+                <a href="#" style="color: #a4b0be; text-decoration: none; font-size: 15px;">📖 Source Documents</a>
+                <a href="#" style="color: #a4b0be; text-decoration: none; font-size: 15px;">📈 Analytical Metrics</a>
+            </nav>
+            
+            <main class="workstation-paper">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f2f6; padding-bottom: 15px; margin-bottom: 20px;">
+                    <h1 style="font-size: 28px; font-weight: 600; margin: 0; color: #1e272e;">${title}</h1>
+                    <span style="font-size: 14px; color: #747d8c;">Course Element: ${subjectName.toUpperCase()}</span>
+                </div>
+                
+                <article style="line-height: 1.8; color: #2f3542; font-size: 16px; margin-bottom: 35px;">
+                    ${mainText}
+                </article>
+                
+                <div style="border: 2px dashed #ced6e0; padding: 25px; text-align: center; border-radius: 8px; background: #ffffff;">
+                    <p style="margin: 0 0 15px 0; font-size: 14px; color: #747d8c;">Drag and drop research files here to complete verification processing</p>
+                    <button class="workstation-btn">Upload Document Asset</button>
+                </div>
+            </main>
+        </div>
+    `;
+}
+</script>
+<script>
+// Replace your old layout script motor with this data-linked controller
+function switchPortalLayout(incomingLessonData = null) {
     const selectedGrade = document.getElementById('track-grade-selector').value;
     
     if (selectedGrade === 'K-5') {
-        renderElementaryInterface();
+        renderElementaryInterface(incomingLessonData);
     } else if (selectedGrade === '6-8') {
-        renderMiddleSchoolInterface();
+        renderMiddleSchoolInterface(incomingLessonData);
     } else if (selectedGrade === '9-12') {
-        renderHighSchoolInterface();
+        renderHighSchoolInterface(incomingLessonData);
     }
 }
-</script>
-<script>
-function renderElementaryInterface() {
-    const viewport = document.getElementById('adaptive-portal-viewport');
-    const subject = document.getElementById('track-subject-selector').value.toUpperCase();
-    
-    viewport.innerHTML = `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 25px;">
-            <button class="big-interactive-button" style="background: #6c5ce7; box-shadow: 0 6px 0 #4f3bb1;" onclick="console.log('Audio playback triggered')">
-                🔊 Click to Hear My Lesson
-            </button>
-            
-            <div class="game-card-container" style="width: 100%; max-width: 650px;">
-                <div style="font-size: 80px; margin-bottom: 10px;">🚀</div>
-                <h2 style="font-size: 32px; color: #2d3436; margin: 0 0 20px 0; letter-spacing: 1px;">
-                    START MY ${subject} LEVEL ACTIVITY
-                </h2>
-                <button class="big-interactive-button" onclick="alert('Opening lesson playground...')">
-                    Let's Play! 🌟
-                </button>
-            </div>
-            
-            <div style="background: #ffeaa7; border: 3px dashed #ffb8b8; border-radius: 20px; padding: 15px 30px; font-size: 16px; color: #636e72; font-weight: bold; text-align: center; margin-top: 20px;">
-                🔒 Parent Options: Printable handwriting sheets and progress monitoring keys are located in the secure panel.
-            </div>
-        </div>
-    `;
-}
-</script>
-<script>
-function renderMiddleSchoolInterface() {
-    const viewport = document.getElementById('adaptive-portal-viewport');
-    viewport.innerHTML = `
-        <div style="background: white; padding: 30px; border-radius: 15px; border: 2px solid #dcdde1;">
-            <h2>📚 Middle School Learning Tracker</h2>
-            <p>Your daily core subject assignments are loaded sequentially below.</p>
-        </div>
-    `;
-}
 
-function renderHighSchoolInterface() {
-    const viewport = document.getElementById('adaptive-portal-viewport');
-    viewport.innerHTML = `
-        <div style="background: white; padding: 30px; border-radius: 15px; border: 2px solid #b2bec3;">
-            <h2>🎓 High School Academic Dashboard</h2>
-            <p>Access your course overview materials, research panels, and document upload nodes.</p>
-        </div>
-    `;
+// Intercepts server network fetches and feeds the actual JSON text directly to our screens
+function populateActiveWorkspace(curriculumData) {
+    if (curriculumData) {
+        // Redraws the portal layout passing along the actual text items from the folder files
+        switchPortalLayout(curriculumData);
+    }
 }
-
-// Automatically mount the dynamic layouts as soon as the webpage opens
-window.addEventListener('DOMContentLoaded', () => {
-    switchPortalLayout();
-    document.getElementById('track-subject-selector').addEventListener('change', switchPortalLayout);
-});
 </script>
