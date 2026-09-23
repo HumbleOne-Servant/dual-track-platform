@@ -105,38 +105,103 @@ function switchPortalLayout(incomingLessonData = null) {
 <script>
 function renderElementaryInterface(data) {
     const viewport = document.getElementById('adaptive-portal-viewport');
-    const subject = document.getElementById('track-subject-selector').value.toUpperCase();
     
-    // Direct maps matching your file's specific layout properties
-    const lessonHeading = data?.title || `START MY ${subject} LEVEL ACTIVITY`;
-    const coreConceptText = data?.public_core_concept || "Ready to explore? Choose a day selection from the list bar options above to begin!";
-    const audioScript = data?.audio_instructions || "Audio playback initialization pending.";
+    // Extract our new clean properties directly from your topic JSON file
+    const title = data?.lesson_title || "Lesson Loading...";
+    const coreText = data?.public_core_concept || "Awaiting database stream.";
+    const topic = data?.topic_folder || "general";
     
-    // Safely pull the embedded visual and gamified retention details
-    const retentionPrompt = data?.retention_questions?.[0]?.text || "Printable sheets are located inside the parent configuration window.";
-    const secretWord = data?.alignment_triggers?.parameters?.game_word || "LEARNING EXPLORER";
-
+    // Inject the interactive, student-facing lesson display layout
     viewport.innerHTML = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 25px;">
-            <button class="big-interactive-button" style="background: #6c5ce7; box-shadow: 0 6px 0 #4f3bb1;" onclick="alert('${audioScript}')">
-                🔊 Click to Hear My Lesson
-            </button>
-            <div class="game-card-container" style="width: 100%; max-width: 650px;">
-                <div style="font-size: 80px; margin-bottom: 10px;">🚀</div>
-                <h2 style="font-size: 26px; color: #2d3436; margin: 0 0 20px 0;">${lessonHeading}</h2>
-                <p style="font-size: 18px; color: #636e72; margin-bottom: 25px; line-height: 1.5;">${coreConceptText}</p>
+            <!-- Left Panel / Main Lesson Box -->
+            <div class="game-card-container" style="width: 100%; max-width: 700px; border-color: #ff7675;">
+                <div style="font-size: 50px; margin-bottom: 10px;">☀️🍂</div>
+                <span style="background: #ffeaa7; color: #d63031; padding: 5px 15px; font-weight: bold; border-radius: 10px; font-size: 14px; text-transform: uppercase;">
+                    Topic: ${topic.replace('_', ' ')}
+                </span>
+                <h2 style="font-size: 28px; color: #2d3436; margin: 15px 0;">${title}</h2>
                 
-                <!-- Gamified Interaction Block -->
-                <div style="background: #e8f5e9; border: 2px solid #81c784; padding: 10px; border-radius: 12px; font-weight: bold; color: #2e7d32; margin-bottom: 20px;">
-                    🎯 Secret Game Word Challenge: ${secretWord}
+                <!-- The Pure Academic Textbook Text Pane -->
+                <p style="font-size: 18px; color: #2d3436; text-align: left; background: #fffdf0; padding: 25px; border-radius: 15px; line-height: 1.6; border: 2px dashed #ffeaa7;">
+                    ${coreText}
+                </p>
+                
+                <button class="big-interactive-button" onclick="playVoiceAssistance('${coreText.replace(/'/g, "\\'")}')">
+                    🔊 Listen to Lesson Text
+                </button>
+            </div>
+            
+            <!-- Injected Assignment Container (Generated dynamically right below) -->
+            <div id="generated-assignment-dock" style="width: 100%; max-width: 700px;">
+                ${generateAssignmentModule(data)}
+            </div>
+        </div>
+    `;
+}
+
+function playVoiceAssistance(textToSpeak) {
+    // Standard web browser text-to-speech engine
+    const speech = new SpeechSynthesisUtterance(textToSpeak);
+    speech.rate = 0.9;
+    window.speechSynthesis.speak(speech);
+}
+function generateAssignmentModule(data) {
+    const topic = data?.topic_folder || "general";
+    
+    // Builds a targeted visual assignment based directly on the topic layer name
+    if (topic === "weather_seasons") {
+        return `
+            <div class="game-card-container" style="border-color: #74b9ff; background: #f1f7ff;">
+                <h3 style="color: #0984e3; margin-top: 0; font-size: 22px;">📝 Today's Creative Playground Assignment</h3>
+                <p style="font-size: 16px; color: #4b4b4b;">Look out the window! Use your mouse or touchscreen inside the drawing box below to draw the active weather parameters you see outside right now.</p>
+                
+                <!-- Interactive Drawing Canvas Element for Young Learners -->
+                <div style="background: white; border: 3px solid #74b9ff; border-radius: 15px; height: 200px; display: flex; align-items: center; justify-content: center; margin: 20px 0; color: #b2bec3; font-weight: bold; cursor: crosshair;" onclick="alert('Drawing tool activated!')">
+                    🎨 [Click to Draw Clouds, Sun, or Rain Canvas]
                 </div>
                 
-                <button class="big-interactive-button" onclick="alert('Launching visual canvas: ${data?.visual_assets?.[0]}')">Let's Play! 🌟</button>
+                <button class="big-interactive-button" style="background: #20bf6b; box-shadow: 0 6px 0 #1b8a4c;" onclick="alert('Assignment submitted successfully for teacher review!')">
+                    🌟 Submit Drawing
+                </button>
             </div>
-            <div style="background: #ffeaa7; border: 3px dashed #ffb8b8; border-radius: 20px; padding: 15px 30px; font-size: 15px; color: #636e72; font-weight: bold; text-align: center; width: 100%; max-width: 590px; box-sizing: border-box;">
-                🔒 Parent Checkpoint Challenge: ${retentionPrompt}
-            </div>
-        </div>`;
+        `;
+    }
+    
+    // Default fallback assignment layout for general topics
+    return `
+        <div class="game-card-container" style="border-color: #a55eea;">
+            <h3 style="color: #6f00ff; margin-top: 0;">📝 Lesson Reflection Assignment</h3>
+            <p>Tell your parent one important variable or concept you discovered in today's lesson text.</p>
+        </div>
+    `;
+}
+function fetchCurriculumContent() {
+    const currentGrade = document.getElementById('track-grade-selector').value;
+    const currentSubject = document.getElementById('track-subject-selector').value;
+    
+    // Standard defaults mapping targets directly to your new deep folders
+    let gradePath = "gk";
+    if (currentGrade === "6-8") gradePath = "g5"; 
+    if (currentGrade === "9-12") gradePath = "g12";
+
+    // Hardcoded target to test Part 1 of your new weather_seasons folder structure safely
+    const targetFileUrl = `/pure_curriculum_vault/${gradePath}/${currentSubject}/weather_seasons/lesson_1.json`;
+    
+    console.log("Requesting pure baseline data file asset: " + targetFileUrl);
+
+    fetch(targetFileUrl)
+        .then(response => {
+            if (!response.ok) { throw new Error("Target file missing inside deep topic layers."); }
+            return response.json();
+        })
+        .then(data => {
+            switchPortalLayout(data);
+        })
+        .catch(error => {
+            console.log("Empty layout path: " + error.message);
+            switchPortalLayout(null);
+        });
 }
 function renderMiddleSchoolInterface(data) {
     const viewport = document.getElementById('adaptive-portal-viewport');
