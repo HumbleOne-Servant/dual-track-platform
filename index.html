@@ -1,32 +1,29 @@
 <!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 1 OF 2: WORKSHEET IMAGE CONTAINER VISUAL STYLING -->
-        /* Styles an auto-scaling viewport container for local curriculum images */
-        .worksheet-image-viewport {
-            width: 100%;
-            max-height: 450px;
-            object-fit: contain;
-            border: 2px solid #cbd5e1;
-            border-radius: 12px;
-            background-color: #ffffff;
-            margin-top: 15px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            display: none; /* Stays hidden until an image asset is successfully loaded */
-        }
+<!-- BOX 1 OF 4: GRAPHIC VIEWPORT LAYOUT STYLE SHEET -->
+<style>
+/* Insert this style rule right before the closing </style> tag in Box 3 */
+.worksheet-image-viewport {
+    width: 100%;
+    max-height: 480px;
+    object-fit: contain;
+    border: 3px solid #cbd5e1;
+    border-radius: 12px;
+    background-color: #ffffff;
+    margin-top: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    display: none;
+}
+</style>
+<!-- FILE: C:\DualTrackLearning_Online\index.html -->
+<!-- BOX 2 OF 4: PHYSICAL HTML IMG ELEMENT FRAME CONTAINER -->
+<!-- Insert this image tag directly inside Box 5, right below the '<div id="left-visual-game-stage"></div>' line -->
+<img id="worksheet-image-display-frame" class="worksheet-image-viewport" src="" alt="Handout Material Sheet">
 // FILE: C:\DualTrackLearning_Online\index.html
-// BOX 2 OF 2: DYNAMIC IMAGE INGESTION LOADER UTILITY
-function updateLeftPanelWithLocalWorksheetImage(grade, subject, day) {
-    const viewport = document.getElementById('worksheet-image-display-frame');
-    
-    // Automatically looks for an image matching your standardized file naming pattern
-    const expectedImagePath = `curriculum/${grade}/${subject}/${day}.png`;
-    
-    if (viewport) {
-        viewport.src = expectedImagePath;
-        viewport.style.display = 'block';
-        
-        // Falling back gracefully if a specific day's image isn't downloaded yet
-        viewport.onerror = function() {
-            viewport.style.display = 'none';
-        };
-    }
+// BOX 3 OF 4: DYNAMIC PATH LIFECYCLE RESOLVER TRIGGER
+// Insert this execution line right inside the 'renderMeticulousDualTrack' function in Box 8, at the very first line
+const frameNode = document.getElementById('worksheet-image-display-frame');
+if (frameNode) {
+    frameNode.src = `curriculum/${grade}/${subject}/${day}.png`;
+    frameNode.style.display = 'block';
+    frameNode.onerror = function() { frameNode.style.display = 'none'; };
 }
