@@ -1,51 +1,96 @@
-<div id="learning-platform-container" style="background: #f0f8ff; min-height: 100vh; font-family: 'Comic Sans MS', sans-serif; padding-bottom: 40px;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual-Track Learning Hub</title>
+</head>
+<body style="margin: 0; padding: 0;">
+
+<div id="learning-platform-container" style="background: #f0f8ff; min-height: 100vh; font-family: 'Comic Sans MS', sans-serif; padding-bottom: 40px; transition: background-color 0.3s ease;">
     
-    <!-- Unified Interactive Header Control Bar -->
-    <header style="background: linear-gradient(135deg, #ff7675, #6c5ce7); padding: 20px; display: flex; justify-content: space-between; align-items: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    <!-- Dynamic Header Bar changing colors based on selected grade -->
+    <header id="dynamic-header-bar" style="background: linear-gradient(135deg, #ff7675, #6c5ce7); padding: 20px; display: flex; justify-content: space-between; align-items: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: background 0.3s ease;">
         <div style="font-size: 24px; font-weight: bold; letter-spacing: 2px;">🌟 DUAL-TRACK LEARNING HUB</div>
         <div style="display: flex; gap: 15px; align-items: center;">
-            <select id="track-grade-selector" onchange="switchPortalLayout()" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #ffeaa7; cursor: pointer;">
+            
+            <select id="track-grade-selector" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #ffeaa7; cursor: pointer;">
                 <option value="K-5">🖍️ Elementary Track (Grades K-5)</option>
                 <option value="6-8">📘 Middle School Track (Grades 6-8)</option>
                 <option value="9-12">🎓 High School Track (Grades 9-12)</option>
             </select>
-            <select id="track-subject-selector" onchange="switchPortalLayout()" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #fab1a0; cursor: pointer;">
+            
+            <select id="track-subject-selector" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #fab1a0; cursor: pointer;">
                 <option value="math">🔢 Math Adventures</option>
                 <option value="english">🔤 Reading & Words</option>
                 <option value="science">🔬 Science Secrets</option>
                 <option value="social studies">🌍 World History</option>
                 <option value="electives">🎨 Creative Arts</option>
             </select>
-            <div style="background: #55efc4; color: #2d3436; padding: 10px 25px; font-size: 18px; font-weight: bold; border-radius: 30px;">
-                Day <span id="current-day-display">1</span>
-            </div>
+            
+            <!-- Upgraded Day Tracker from text label into a 180-Day Selection Dropdown Menu -->
+            <select id="track-day-dropdown" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #55efc4; color: #2d3436; cursor: pointer;">
+                <!-- Auto-populated by initialization script -->
+            </select>
+            
         </div>
     </header>
 
-    <!-- The Adaptive Stage Where Grade Designs Load -->
+    <!-- Dynamic Learning Viewport -->
     <main id="adaptive-portal-viewport" style="max-width: 1200px; margin: 30px auto; padding: 20px; box-sizing: border-box;">
-        <!-- Injected views go here -->
+        <!-- Injected layout profiles load directly here -->
     </main>
 </div>
 <style>
-/* K-5 Elements */
+/* K-5 Design Profiles */
 .game-card-container { background: #ffffff; border: 5px solid #55efc4; border-radius: 35px; padding: 40px; text-align: center; box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
 .big-interactive-button { background: #0984e3; color: white; font-size: 22px; font-weight: bold; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 0 #076bba; }
 
-/* 6-8 Elements */
-.clean-teen-wrapper { background: #eef2f7; min-height: 500px; font-family: sans-serif; padding: 25px; border-radius: 20px; }
-.teen-pipeline-card { background: #ffffff; border-radius: 12px; border-left: 6px solid #00a8ff; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+/* 6-8 Design Profiles */
+.clean-teen-wrapper { background: #ffffff; min-height: 480px; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+.teen-pipeline-card { background: #f8f9fa; border-radius: 12px; border-left: 6px solid #00a8ff; padding: 20px; margin-bottom: 15px; }
+.teen-action-btn { background: #00a8ff; color: white; padding: 12px 30px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
 
-/* 9-12 Elements */
-.adult-workstation-wrapper { background: #ffffff; min-height: 500px; font-family: sans-serif; color: #2c3e50; display: grid; grid-template-columns: 240px 1fr; gap: 30px; }
-.workstation-sidebar { background: #1e272e; color: #f5f6fa; padding: 25px; border-radius: 16px; display: flex; flex-direction: column; gap: 15px; }
-.workstation-paper { background: #f8f9fa; border: 1px solid #dcdde1; border-radius: 12px; padding: 40px; }
+/* 9-12 Design Profiles */
+.adult-workstation-wrapper { background: #ffffff; min-height: 520px; color: #2c3e50; display: grid; grid-template-columns: 240px 1fr; gap: 30px; border: 1px solid #dcdde1; border-radius: 16px; padding: 20px; }
+.workstation-sidebar { background: #1e272e; color: #f5f6fa; padding: 25px; border-radius: 12px; display: flex; flex-direction: column; gap: 15px; }
+.workstation-paper { background: #fdfefe; border: 1px solid #ced6e0; border-radius: 8px; padding: 35px; }
+.workstation-btn { background: #2f3542; color: white; padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer; }
 </style>
 <script>
+const THEME_PROFILES = {
+    "K-5": {
+        header: "linear-gradient(135deg, #ff7675, #6c5ce7)",
+        background: "#f0f8ff",
+        bodyFont: "'Comic Sans MS', sans-serif"
+    },
+    "6-8": {
+        header: "linear-gradient(135deg, #2c3e50, #2980b9)",
+        background: "#eef2f7",
+        bodyFont: "sans-serif"
+    },
+    "9-12": {
+        header: "linear-gradient(135deg, #1e272e, #485460)",
+        background: "#ffffff",
+        bodyFont: "serif"
+    }
+};
+
+function applyGradeLevelLayoutTheme() {
+    const selectedGrade = document.getElementById('track-grade-selector').value;
+    const currentTheme = THEME_PROFILES[selectedGrade];
+    const platformContainer = document.getElementById('learning-platform-container');
+    const platformHeader = document.getElementById('dynamic-header-bar');
+    
+    if (platformContainer && platformHeader) {
+        platformContainer.style.backgroundColor = currentTheme.background;
+        platformContainer.style.fontFamily = currentTheme.bodyFont;
+        platformHeader.style.background = currentTheme.header;
+    }
+}
+
 function switchPortalLayout(incomingLessonData = null) {
     const selectedGrade = document.getElementById('track-grade-selector').value;
-    
-    // Clear out any crashing layouts before building the new view
     document.getElementById('adaptive-portal-viewport').innerHTML = "";
 
     if (selectedGrade === 'K-5') {
@@ -61,28 +106,52 @@ function switchPortalLayout(incomingLessonData = null) {
 function renderElementaryInterface(data) {
     const viewport = document.getElementById('adaptive-portal-viewport');
     const subject = document.getElementById('track-subject-selector').value.toUpperCase();
-    const txt = data?.body_content || "Ready to explore? Click below to start!";
+    
+    // Dynamic text variables sourced from your real JSON layout folders
+    const lessonHeading = data?.lesson_title || `START MY ${subject} LEVEL ACTIVITY`;
+    const lessonBodyText = data?.body_content || "Ready to explore? Choose a day from the list options above to begin!";
+    const assignmentNotice = data?.assignment_details || "Printable sheets are located inside the parents configuration panel.";
+
     viewport.innerHTML = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 25px;">
+            <button class="big-interactive-button" style="background: #6c5ce7; box-shadow: 0 6px 0 #4f3bb1;" onclick="alert('Playing voice assistance audio tracking...')">
+                🔊 Click to Hear My Lesson
+            </button>
             <div class="game-card-container" style="width: 100%; max-width: 650px;">
                 <div style="font-size: 80px; margin-bottom: 10px;">🚀</div>
-                <h2 style="font-size: 32px; color: #2d3436; margin: 0 0 20px 0;">START MY ${subject} LEVEL ACTIVITY</h2>
-                <p style="font-size: 18px; color: #636e72; margin-bottom: 25px;">${txt}</p>
-                <button class="big-interactive-button" onclick="alert('Opening lesson space!')">Let's Play! 🌟</button>
+                <h2 style="font-size: 28px; color: #2d3436; margin: 0 0 20px 0;">${lessonHeading}</h2>
+                <p style="font-size: 18px; color: #636e72; margin-bottom: 25px; line-height: 1.5;">${lessonBodyText}</p>
+                <button class="big-interactive-button" onclick="alert('Loading interactive playground layout...')">Let's Play! 🌟</button>
+            </div>
+            <div style="background: #ffeaa7; border: 3px dashed #ffb8b8; border-radius: 20px; padding: 15px 30px; font-size: 15px; color: #636e72; font-weight: bold; text-align: center;">
+                🔒 Parent Options: ${assignmentNotice}
             </div>
         </div>`;
 }
-
+</script>
+<script>
 function renderMiddleSchoolInterface(data) {
     const viewport = document.getElementById('adaptive-portal-viewport');
-    const txt = data?.body_content || "Select a subject track option to load tasks.";
+    const subject = document.getElementById('track-subject-selector').value;
+    
+    const lessonHeading = data?.lesson_title || `Focus Lesson: ${subject.toUpperCase()}`;
+    const lessonBodyText = data?.body_content || "Select an academic subject timeline from the selector keys above to fill your task logs.";
+    const assignmentNotice = data?.assignment_details || "Complete the accompanying project assignment tracker sheet once core content review is finished.";
+
     viewport.innerHTML = `
         <div class="clean-teen-wrapper">
             <div style="display: grid; grid-template-columns: 280px 1fr; gap: 25px;">
-                <aside><div class="teen-pipeline-card"><strong>→ Active Assignment</strong></div></aside>
-                <section style="background: white; padding: 30px; border-radius: 16px;">
-                    <h2>Middle School Task Space</h2>
-                    <p style="color: #718093; line-height: 1.6;">${txt}</p>
+                <aside>
+                    <h3 style="color: #2980b9; margin-top: 0;">📋 Progress Tracker</h3>
+                    <div class="teen-pipeline-card" style="border-left-color: #4cd137;"><strong>✓ Status: Ready</strong><br>Topic Core Concept Review</div>
+                    <div class="teen-pipeline-card"><strong>→ Active Work</strong><br>Independent Evaluation Log</div>
+                </aside>
+                <section>
+                    <h2 style="color: #2c3e50; font-size: 24px;">${lessonHeading}</h2>
+                    <p style="color: #718093; line-height: 1.6; font-size: 16px;">${lessonBodyText}</p>
+                    <div style="margin-top: 20px; padding: 15px; background: #f1f2f6; border-radius: 8px; color: #2f3542;">
+                        <strong>📝 Assignment Task:</strong> ${assignmentNotice}
+                    </div>
                 </section>
             </div>
         </div>`;
@@ -90,19 +159,87 @@ function renderMiddleSchoolInterface(data) {
 
 function renderHighSchoolInterface(data) {
     const viewport = document.getElementById('adaptive-portal-viewport');
-    const txt = data?.body_content || "Academic data feed initializing.";
+    
+    const lessonHeading = data?.lesson_title || "Academic Syllabus Module - High School";
+    const lessonBodyText = data?.body_content || "Select a targeted timeline element to synchronize active workstation nodes.";
+    const assignmentNotice = data?.assignment_details || "Submit multi-page research documents to the file validation hub drop box below.";
+
     viewport.innerHTML = `
         <div class="adult-workstation-wrapper">
-            <nav class="workstation-sidebar"><strong>Syllabus Hub</strong></nav>
+            <nav class="workstation-sidebar">
+                <strong style="font-size: 14px; color: #747d8c; letter-spacing: 1px;">SYLLABUS PORTAL</strong>
+                <a href="#" style="color: white; text-decoration: none;">📊 Main Dashboard</a>
+                <a href="#" style="color: #a4b0be; text-decoration: none;">📖 Course Readings</a>
+            </nav>
             <main class="workstation-paper">
-                <h2>Advanced Analysis Module</h2>
-                <hr><p style="line-height: 1.8;">${txt}</p>
+                <h2 style="margin-top: 0; font-size: 26px; color: #1e272e; border-bottom: 2px solid #f1f2f6; padding-bottom: 10px;">${lessonHeading}</h2>
+                <p style="line-height: 1.8; font-size: 16px; color: #2f3542;">${lessonBodyText}</p>
+                <div style="background: #eef2f7; padding: 20px; border-radius: 6px; font-size: 15px; margin-bottom: 25px;">
+                    <strong>🎓 Required Output:</strong> ${assignmentNotice}
+                </div>
+                <div style="border: 2px dashed #ced6e0; padding: 20px; text-align: center; border-radius: 6px;">
+                    <button class="workstation-btn">Upload Assignment Asset</button>
+                </div>
             </main>
         </div>`;
 }
+</script>
+<script>
+function fetchCurriculumContent() {
+    const currentGrade = document.getElementById('track-grade-selector').value;
+    const currentSubject = document.getElementById('track-subject-selector').value;
+    const currentDay = document.getElementById('track-day-dropdown').value;
 
-// Boot up the visual configuration engine instantly on startup
+    let folderBucket = "k5";
+    if (currentGrade === "6-8") { folderBucket = "68"; }
+    else if (currentGrade === "9-12") { folderBucket = "912"; }
+
+    // Direct path targeting your local structured asset buckets
+    const targetFileUrl = `/assets/curriculum/${folderBucket}/day_${currentDay}_${currentSubject}.json`;
+    
+    fetch(targetFileUrl)
+        .then(response => {
+            if (!response.ok) { throw new Error("File missing on disk layout."); }
+            return response.json();
+        })
+        .then(data => {
+            switchPortalLayout(data);
+        })
+        .catch(error => {
+            // Render an elegant empty layout placeholder if the file hasn't been generated yet
+            switchPortalLayout(null);
+        });
+}
+
+function initializeTrackDayDropdown() {
+    const dayDropdown = document.getElementById('track-day-dropdown');
+    if (!dayDropdown) return;
+    
+    dayDropdown.innerHTML = "";
+    for (let d = 1; d <= 180; d++) {
+        const opt = document.createElement('option');
+        opt.value = d;
+        opt.innerText = "📆 Day " + d;
+        dayDropdown.appendChild(opt);
+    }
+}
+
+// Master boot sequence to run the entire framework on startup
 window.addEventListener('DOMContentLoaded', () => {
-    switchPortalLayout();
+    initializeTrackDayDropdown();
+    
+    document.getElementById('track-grade-selector').addEventListener('change', () => {
+        applyGradeLevelLayoutTheme();
+        fetchCurriculumContent();
+    });
+    
+    document.getElementById('track-subject-selector').addEventListener('change', fetchCurriculumContent);
+    document.getElementById('track-day-dropdown').addEventListener('change', fetchCurriculumContent);
+    
+    applyGradeLevelLayoutTheme();
+    fetchCurriculumContent();
 });
 </script>
+
+</body>
+</html>
