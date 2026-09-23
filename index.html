@@ -1,270 +1,169 @@
-<!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 1 OF 8: APP STRUCTURE AND PRIMARY WEB CANVAS STYLING -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dual-Track Learning Platform</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f0f4f8; color: #1e293b; }
-        .control-panel { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; gap: 15px; }
-        select, button { padding: 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 14px; font-weight: 500; }
-        button { background-color: #2563eb; color: white; cursor: pointer; border: none; transition: background 0.2s; }
-        button:hover { background-color: #1d4ed8; }
-        .canvas-container { display: flex; gap: 24px; min-height: 600px; }
-        .track-panel { flex: 1; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #e2e8f0; }
-        .panel-header { border-bottom: 3px solid #2563eb; padding-bottom: 12px; margin-top: 0; color: #0f172a; font-size: 20px; }
-<!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 2 OF 8: EARLY EDUCATION AND KINDERGARTEN INTERACTIVE LAYOUT RULES -->
-        .k-mode-header { font-size: 22px; color: #ea580c; font-weight: bold; background: #fff7ed; padding: 10px; border-radius: 6px; border-left: 5px solid #ea580c; }
-        .k-interactive-card { background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 20px; margin-top: 15px; }
-        .k-bullet-button { display: block; width: 100%; text-align: left; background: #ffffff; border: 2px solid #e2e8f0; padding: 15px; margin-bottom: 12px; border-radius: 8px; font-size: 16px; font-weight: 600; color: #334155; cursor: pointer; transition: all 0.2s; }
-        .k-bullet-button:hover { background: #eff6ff; border-color: #3b82f6; transform: translateY(-2px); }
-        .k-bullet-button.checked { background: #dcfce7; border-color: #22c55e; color: #15803d; text-decoration: line-through; }
-        .k-counting-game { display: flex; gap: 10px; margin-top: 15px; justify-content: center; background: #f1f5f9; padding: 15px; border-radius: 8px; }
-        .k-game-token { width: 45px; height: 45px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px; cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .k-game-token.matched { background: #22c55e; transform: scale(1.1); }
-<!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 3 OF 8: SKETCHPAD POSITIONING AND TRUTH PORTAL ENVIRONMENT STYLING -->
-        .upper-concept-box { background: #f8fafc; border-left: 4px solid #475569; padding: 15px; border-radius: 0 6px 6px 0; margin-bottom: 15px; }
-        .upper-bullet-item { background: #ffffff; border: 1px solid #e2e8f0; padding: 12px; margin-bottom: 8px; border-radius: 6px; font-size: 14px; font-family: 'Courier New', Courier, monospace; }
-        .student-textbox { width: 100%; box-sizing: border-box; padding: 12px; border-radius: 6px; border: 1px solid #94a3b8; font-size: 14px; margin-top: 8px; font-family: inherit; }
-        .alignment-portal { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; padding: 20px; border-radius: 8px; margin-top: 15px; display: none; }
-        .status-footer { display: flex; justify-content: space-between; align-items: center; background: #e2e8f0; padding: 15px; border-radius: 8px; margin-top: 20px; }
-        
-        /* Fixed Sketchpad housing locked inside the Left Curriculum Column */
-        .canvas-drawing-container { position: relative; width: 100%; max-width: 500px; margin-top: 15px; border: 3px solid #cbd5e1; border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: none; }
-        .worksheet-background-img { width: 100%; height: auto; display: block; pointer-events: none; }
-        .interactive-sketch-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: none; }
-        .canvas-toolbar { background: #f1f5f9; padding: 8px; display: flex; gap: 10px; border-bottom: 1px solid #cbd5e1; align-items: center; }
-        .color-dot { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); cursor: pointer; }
-        .color-dot.active { border-color: #0f172a; transform: scale(1.1); }
-    </style>
-</head>
-<!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 4 OF 8: GRADE SELECTORS AND LESSON INGESTION ENGINE BUTTONS -->
-<body>
-    <div class="control-panel">
-        <select id="grade-dropdown">
-            <option value="grade_k">Kindergarten</option>
-            <option value="grade_1">Grade 1</option>
-            <option value="grade_2">Grade 2</option>
-            <option value="grade_5">Grade 5</option>
-            <option value="grade_10">Grade 10</option>
-            <option value="grade_12">Grade 12</option>
-        </select>
-        <select id="subject-dropdown">
-            <option value="mathematics">mathematics</option>
-            <option value="science">science</option>
-            <option value="language_arts">language_arts</option>
-            <option value="history_social_studies">history_social_studies</option>
-            <option value="biblical_studies">biblical_studies</option>
-        </select>
-        <select id="day-dropdown">
-            <!-- Populated sequentially by launcher loop scripts -->
-        </select>
-        <button onclick="loadCurriculumDay()">Open Selected Lesson</button>
-    </div>
-<!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 5 OF 8: LEFT APPLIED HANDOUT LAYOUT CONTAINER -->
-    <div class="canvas-container">
-        <!-- LEFT PANEL: HOLDS BOTH CONTENT AND INTERACTIVE WORKSHEET DRAWING TILES -->
-        <div class="track-panel" id="left-track">
-            <div style="overflow-y: auto; max-height: 85vh; padding-right: 10px;">
-                <h2 class="panel-header" id="left-panel-title">🏫 Left Side: Academic Workspace Handout</h2>
-                <h3 id="lesson-title-display" style="margin-top:15px; color:#0f172a; font-size:22px;"></h3>
-                <div id="left-dynamic-content-area"></div>
-                
-                <!-- Interactive Drawing Sketchpad Canvas stays completely locked inside this Left Column -->
-                <div id="worksheet-canvas-wrapper" class="canvas-drawing-container">
-                    <div class="canvas-toolbar">
-                        <button onclick="clearInteractiveCanvas()" style="padding: 4px 8px; font-size: 11px; background:#ef4444; border:none; color:white; border-radius:4px;">Erase Screen</button>
-                        <div class="color-dot active" style="background:#000000;" onclick="setDrawColor(this, '#000000')"></div>
-                        <div class="color-dot" style="background:#2563eb;" onclick="setDrawColor(this, '#2563eb')"></div>
-                        <div class="color-dot" style="background:#ea580c;" onclick="setDrawColor(this, '#ea580c')"></div>
-                        <div class="color-dot" style="background:#22c55e;" onclick="setDrawColor(this, '#22c55e')"></div>
-                    </div>
-                    <img id="worksheet-background-img" class="worksheet-background-img" src="" alt="Worksheet Sheet">
-                    <canvas id="interactive-sketch-layer" class="interactive-sketch-layer"></canvas>
-                </div>
-            </div>
+[FILE ID: index.html - Part 1: Layout Core]
+========================================================================
+<!-- Replace your main platform layout area with these adaptive containers -->
+<div id="learning-platform-container">
+    <!-- Top Global Header Control -->
+    <header class="platform-header">
+        <div class="logo-area">www.dualtracklearning.org</div>
+        <div class="global-selectors">
+            <select id="track-grade-selector" onchange="switchPortalLayout()">
+                <option value="K-5">Elementary Track (Grades K-5)</option>
+                <option value="6-8">Middle School Track (Grades 6-8)</option>
+                <option value="9-12">High School Track (Grades 9-12)</option>
+            </select>
+            <select id="track-subject-selector">
+                <option value="math">math</option>
+                <option value="english">english</option>
+                <option value="science">science</option>
+                <option value="social studies">social studies</option>
+                <option value="electives">electives</option>
+            </select>
+            <div id="day-tracker-widget">Day <span id="current-day-display">1</span></div>
         </div>
-<!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 6 OF 8: RIGHT HIGH-PRIORITY INTEGRATED ALIGNMENT ENVIRONMENT -->
-        <!-- RIGHT PANEL: EXCLUSIVELY RESERVED FOR TRUTH ALIGNMENT PORTAL -->
-        <div class="track-panel" id="right-track">
-            <div>
-                <h2 class="panel-header">🛡️ Right Side: Truth Alignment Portal & Game Check</h2>
-                <div id="portal-instructions" style="color: #64748b; font-style: italic; text-align: center; margin-top: 40px;">
-                    Click any highlighted dynamic keyword or block parameter on the left panel to trigger biblical principles, alternative frameworks, and unlock muscle-memory tracking.
-                </div>
-                
-                <div id="alignment-portal-display" class="alignment-portal">
-                    <h3 style="margin-top:0; color:#1d4ed8; border-bottom:1px solid #bfdbfe; padding-bottom:5px;">🔗 Dynamic Alignment Connection</h3>
-                    <div style="margin-bottom:12px;">
-                        <div style="font-weight:bold; color:#1e40af; font-size:12px; text-transform:uppercase;">✝️ Biblical Principle Comparison</div>
-                        <div id="portal-bible-text" style="font-size:15px; margin-top:4px;"></div>
-                    </div>
-                    <div style="margin-bottom:12px;">
-                        <div style="font-weight:bold; color:#1e40af; font-size:12px; text-transform:uppercase;">🔬 Uploaded Alternative Framework</div>
-                        <div id="portal-alternative-text" style="font-size:15px; margin-top:4px;"></div>
-                    </div>
-                </div>
-                
-                <div id="retention-questions-block" style="margin-top:25px; display:none;">
-                    <h3 style="color:#0f172a; margin-bottom:5px; font-size:16px;">🧠 Retention Verification Answers</h3>
-                    <div id="questions-container"></div>
-                </div>
-            </div>
-            
-            <div class="status-footer">
-                <label style="font-weight: bold; cursor: pointer; font-size:14px;">
-                    <input type="checkbox" id="mark-complete-toggle"> 🔒 Lock Responses & Save to Private Evaluation Drive
-                </label>
-                <div id="save-status-indicator" style="font-weight: bold; color: #16a34a; font-size:13px;"></div>
-            </div>
-        </div>
-    </div>
-<!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 7 OF 8: 180-DAY DROPDOWN INITIALIZER AND FILE LOADER CODE -->
+    </header>
+
+    <!-- Dynamic Adaptive Portal Viewport -->
+    <main id="adaptive-portal-viewport" class="layout-k5">
+        <!-- Layout variations will be injected here dynamically by JavaScript -->
+    </main>
+</div>
+========================================================================
+[FILE ID: index.html - Part 2: Layout Styles]
+========================================================================
+<style>
+/* Base Viewport Settings */
+#adaptive-portal-viewport { width: 100%; min-height: 80vh; padding: 20px; box-sizing: border-box; }
+
+/* K-5 Elementary Layout Mode: Large, flat, no scroll bars, huge text */
+.layout-k5 .canvas-grid { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+.layout-k5 .big-subject-card { width: 80%; max-width: 500px; padding: 40px; font-size: 28px; text-align: center; border-radius: 20px; border: 4px solid #4CAF50; background: #e8f5e9; cursor: pointer; font-weight: bold; }
+.layout-k5 .audio-assist-btn { font-size: 24px; padding: 10px 20px; border-radius: 50px; background: #2196F3; color: white; border: none; margin-bottom: 20px; }
+
+/* 6-8 Middle School Layout Mode: Split view tracking sequential steps */
+.layout-68 .split-grid { display: grid; grid-template-columns: 300px 1fr; gap: 20px; }
+.layout-68 .sidebar-tasks { background: #f5f5f5; border-right: 2px solid #ddd; padding: 15px; border-radius: 8px; }
+.layout-68 .task-item { padding: 12px; margin-bottom: 8px; background: white; border-radius: 4px; border-left: 5px solid #ff9800; font-weight: 500; }
+.layout-68 .workspace-area { padding: 20px; background: #fff; border: 1px solid #ccc; border-radius: 8px; }
+
+/* 9-12 High School Layout Mode: Traditional deep academic system view */
+.layout-912 .lms-grid { display: grid; grid-template-columns: 220px 1fr; gap: 30px; }
+.layout-912 .lms-navigation { background: #2c3e50; color: white; padding: 20px; border-radius: 8px; min-height: 500px; }
+.layout-912 .lms-link { color: #ecf0f1; padding: 10px; display: block; text-decoration: none; border-bottom: 1px solid #34495e; }
+.layout-912 .document-viewer { padding: 30px; background: #ffffff; border: 1px solid #b2bec3; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.layout-912 .file-drop-hub { margin-top: 30px; border: 3px dashed #74b9ff; padding: 30px; text-align: center; background: #f1f7ff; border-radius: 8px; font-weight: bold; }
+</style>
+========================================================================
+[FILE ID: index.html - Part 3: Interface Switcher Engine]
+========================================================================
 <script>
-let activeLessonData = null;
-let isDrawing = false;
-let drawColor = "#000000";
-let lastX = 0;
-let lastY = 0;
+function switchPortalLayout() {
+    const gradeSelector = document.getElementById('track-grade-selector');
+    const viewport = document.getElementById('adaptive-portal-viewport');
+    const selectedGrade = gradeSelector.value;
 
-window.addEventListener('DOMContentLoaded', () => {
-    const daySelect = document.getElementById('day-dropdown');
-    daySelect.innerHTML = "";
-    for (let d = 1; d <= 180; d++) {
-        let opt = document.createElement('option');
-        opt.value = `day_${d}`;
-        opt.innerText = `Day ${d}`;
-        daySelect.appendChild(opt);
-    }
-    setupDrawingCanvasListeners();
-});
+    // Reset layout classes completely
+    viewport.className = '';
 
-async function loadCurriculumDay() {
-    const grade = document.getElementById('grade-dropdown').value;
-    const subject = document.getElementById('subject-dropdown').value;
-    const day = document.getElementById('day-dropdown').value;
-    const targetUrl = `curriculum/${grade}/${subject}/${day}.json`;
-    try {
-        const response = await fetch(targetUrl);
-        if (!response.ok) throw new Error("File missing.");
-        activeLessonData = await response.json();
-        
-        const wrapperNode = document.getElementById('worksheet-canvas-wrapper');
-        const imgNode = document.getElementById('worksheet-background-img');
-        if (imgNode && wrapperNode) {
-            imgNode.src = `curriculum/${grade}/${subject}/${day}.png`;
-            wrapperNode.style.display = 'block';
-            imgNode.onload = function() { resizeInteractiveCanvasLayer(); };
-            imgNode.onerror = function() { wrapperNode.style.display = 'none'; };
-        }
-
-        assembleAgeAppropriateLayout(grade, activeLessonData);
-        loadSavedMetrics(grade, subject, day);
-    } catch (err) {
-        document.getElementById('left-dynamic-content-area').innerHTML = `❌ Error: Unable to load asset at ${targetUrl}`;
+    if (selectedGrade === 'K-5') {
+        viewport.classList.add('layout-k5');
+        renderElementaryInterface();
+    } else if (selectedGrade === '6-8') {
+        viewport.classList.add('layout-68');
+        renderMiddleSchoolInterface();
+    } else if (selectedGrade === '9-12') {
+        viewport.classList.add('layout-912');
+        renderHighSchoolInterface();
     }
 }
-<!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 8 OF 8: AGE-ADAPTIVE DISPLAY BUILDERS AND VAULT TRANSACTION HANDLERS -->
-function assembleAgeAppropriateLayout(grade, data) {
-    document.getElementById('lesson-title-display').innerText = data.title;
-    const container = document.getElementById('left-dynamic-content-area');
-    container.innerHTML = "";
-    
-    let parsedConcept = data.concept;
-    ["matrix", "parameters", "coefficients", "boundary"].forEach(word => {
-        const regex = new RegExp(`\\b(${word})\\b`, 'gi');
-        parsedConcept = parsedConcept.replace(regex, `<span style="background:#fef08a; border-bottom:2px solid #eab308; padding:0 4px; font-weight:700; border-radius:4px; cursor:pointer;" onclick="clickTriggerKeyword('${word}')">$1</span>`);
-    });
-
-    if (grade === "grade_k" || grade === "grade_1") {
-        document.getElementById('left-panel-title').innerText = "🎨 Kindergarten / 1st Grade Interactive Workbook";
-        let html = `<div class="k-mode-header">🎵 PARENT GUIDE: Read to your child</div><p style="font-size:18px; font-weight:500; margin-top:10px;">"${data.description}"</p><div class="k-interactive-card"><p style="font-size:14px; margin:0 0 10px 0; color:#475569;">Focus: ${parsedConcept}</p><strong style="color:#2563eb; display:block; margin-bottom:8px;">👉 ACTIVITY: Complete tasks below!</strong>`;
-        data.bullets.forEach((b, i) => { html += `<button class="k-bullet-button" onclick="this.classList.toggle('checked'); clickTriggerKeyword('matrix');">⬜ Task ${i+1}: ${b}</button>`; });
-        html += `</div><div class="k-interactive-card" style="background:#f0fdf4;"><p>Cross-Ref: ${data.cross_reference}</p><div class="k-counting-game"><div class="k-game-token" onclick="clickTriggerKeyword('parameters');">★</div><div class="k-game-token" onclick="clickTriggerKeyword('matrix');">★</div></div></div>`;
-        container.innerHTML = html;
-    } else {
-        document.getElementById('left-panel-title').innerText = "🏫 Upper Grade Academic Ledger & Examination Handout";
-        let html = `<div class="upper-concept-box"><strong>Objective:</strong><p style="margin:5px 0 0 0;">${data.description}</p><small style="display:block; margin-top:5px; color:#64748b;">System Focus: ${parsedConcept}</small></div><div style="background:#fafafa; padding:20px; border-radius:8px;">`;
-        data.bullets.forEach((b, i) => { html += `<div class="upper-bullet-item"><strong>Task ${i+1}:</strong> ${b}<textarea class="student-textbox" rows="2" placeholder="Enter findings..."></textarea></div>`; });
-        html += `<textarea id="left-public-worksheet-input" class="student-textbox" rows="4" placeholder="Compile summary parameters..."></textarea></div>`;
-        container.innerHTML = html;
-    }
-}
-function setupDrawingCanvasListeners() {
-    const cvs = document.getElementById('interactive-sketch-layer');
-    if (!cvs) return;
-    const ctx = cvs.getContext('2d');
-    function draw(e) {
-        if (!isDrawing) return;
-        ctx.strokeStyle = drawColor; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(lastX, lastY);
-        const rect = cvs.getBoundingClientRect();
-        const clientX = e.touches ? e.touches.clientX : e.clientX;
-        const clientY = e.touches ? e.touches.clientY : e.clientY;
-        const x = clientX - rect.left; const y = clientY - rect.top;
-        ctx.lineTo(x, y); ctx.stroke(); [lastX, lastY] = [x, y];
-    }
-    cvs.addEventListener('mousedown', (e) => { isDrawing = true; const rect = cvs.getBoundingClientRect(); [lastX, lastY] = [e.clientX - rect.left, e.clientY - rect.top]; });
-    cvs.addEventListener('mousemove', draw);
-    cvs.addEventListener('mouseup', () => isDrawing = false);
-    cvs.addEventListener('mouseleave', () => isDrawing = false);
-    cvs.addEventListener('touchstart', (e) => { isDrawing = true; const rect = cvs.getBoundingClientRect(); [lastX, lastY] = [e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top]; });
-    cvs.addEventListener('touchmove', draw);
-    cvs.addEventListener('touchend', () => isDrawing = false);
-}
-function resizeInteractiveCanvasLayer() {
-    const cvs = document.getElementById('interactive-sketch-layer');
-    const img = document.getElementById('worksheet-background-img');
-    if(cvs && img) { cvs.width = img.clientWidth; cvs.height = img.clientHeight; }
-}
-function clearInteractiveCanvas() {
-    const cvs = document.getElementById('interactive-sketch-layer');
-    if(cvs) { const ctx = cvs.getContext('2d'); ctx.clearRect(0, 0, cvs.width, cvs.height); }
-}
-function setDrawColor(dot, color) {
-    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
-    dot.classList.add('active'); drawColor = color;
-}
-function clickTriggerKeyword(w) {
-    if (!activeLessonData || !activeLessonData.alignment_triggers[w]) return;
-    const t = activeLessonData.alignment_triggers[w];
-    document.getElementById('portal-instructions').style.display = 'none';
-    document.getElementById('alignment-portal-display').style.display = 'block';
-    document.getElementById('retention-questions-block').style.display = 'block';
-    document.getElementById('portal-bible-text').innerText = t.biblical_truth;
-    document.getElementById('portal-alternative-text').innerText = t.alternative_framework;
-    let qHtml = "";
-    activeLessonData.retention_questions.forEach(q => { qHtml += `<div><label style="font-weight:700; font-size:13px; color:#334155; margin-top:10px; display:block;">${q.text}</label><textarea id="retention-ans-${q.id}" class="student-textbox" rows="2" placeholder="Type notes here..."></textarea></div>`; });
-    document.getElementById('questions-container').innerHTML = qHtml;
-}
-function loadSavedMetrics(g, s, d) {
-    const k = `dualtrack_vault_${g}_${s}_${d}`;
-    const saved = localStorage.getItem(k);
-    if (saved) {
-        const r = JSON.parse(saved);
-        if (document.getElementById('left-public-worksheet-input') && r.public_worksheet_text) document.getElementById('left-public-worksheet-input').value = r.public_worksheet_text;
-        if (r.is_finalized) { document.getElementById('mark-complete-toggle').checked = true; document.getElementById('save-status-indicator').innerText = "🔒 Finalized Setup"; }
-    }
-}
-document.getElementById('mark-complete-toggle').addEventListener('change', function(e) {
-    const g = document.getElementById('grade-dropdown').value;
-    const s = document.getElementById('subject-dropdown').value;
-    const d = document.getElementById('day-dropdown').value;
-    const k = `dualtrack_vault_${g}_${s}_${d}`;
-    if (e.target.checked) {
-        const record = { timestamp: new Date().toISOString(), grade: g, subject: s, day: d, public_worksheet_text: "COMPLETE", retention_answers: {}, is_finalized: true };
-        localStorage.setItem(k, JSON.stringify(record));
-        document.getElementById('save-status-indicator').innerText = "🔒 Saved to Drive";
-    } else { localStorage.removeItem(k); }
-});
-window.addEventListener('resize', resizeInteractiveCanvasLayer);
 </script>
-</body>
-</html>
+========================================================================
+[FILE ID: index.html - Part 4: Elementary Content Generator]
+========================================================================
+<script>
+function renderElementaryInterface() {
+    const viewport = document.getElementById('adaptive-portal-viewport');
+    const currentSubject = document.getElementById('track-subject-selector').value;
+    
+    viewport.innerHTML = `
+        <div class="canvas-grid">
+            <button class="audio-assist-btn" onclick="speakText('Welcome back! Let us click your big dashboard buttons to do your learning today.')">🔊 Click to Hear Instructions</button>
+            <div class="big-subject-card" onclick="alert('Launching your interactive playground assignment!')">
+                🌟 START MY ${currentSubject.toUpperCase()} DAILY ACTIVITY 🌟
+            </div>
+            <div style="font-size: 20px; color: #555; text-align: center; margin-top: 20px;">
+                Parents: Printable hands-on worksheet uploads are located inside the security lock options.
+            </div>
+        </div>
+    `;
+}
+</script>
+========================================================================
+[FILE ID: index.html - Part 5: Middle School Content Generator]
+========================================================================
+<script>
+function renderMiddleSchoolInterface() {
+    const viewport = document.getElementById('adaptive-portal-viewport');
+    const currentSubject = document.getElementById('track-subject-selector').value;
+    
+    viewport.innerHTML = `
+        <div class="split-grid">
+            <aside class="sidebar-tasks">
+                <h3>Your Daily Track</h3>
+                <div class="task-item" style="border-left-color: #4CAF50;">✅ Step 1: Vocabulary Match</div>
+                <div class="task-item">➡️ Step 2: Core ${currentSubject} Concept Reading</div>
+                <div class="task-item" style="border-left-color: #ccc;">🔒 Step 3: Interactive Progress Checkpoint</div>
+            </aside>
+            <section class="workspace-area">
+                <h2>Lesson Viewport Area</h2>
+                <p style="background: #fdfefe; padding: 15px; border: 1px solid #e2e4e6;">Please read your parallel tracking information sheet, then use the workspace area options below to complete your matching tasks.</p>
+                <div style="margin-top: 20px;">
+                    <label><strong>Select the best structural match option:</strong></label><br>
+                    <select style="margin-top: 10px; padding: 8px; width: 250px;">
+                        <option>-- Make your choices --</option>
+                        <option>Core Framework Principle A</option>
+                        <option>Alternative Structural Model B</option>
+                    </select>
+                </div>
+            </section>
+        </div>
+    `;
+}
+</script>
+========================================================================
+[FILE ID: index.html - Part 6: High School Generator & Boot]
+========================================================================
+<script>
+function renderHighSchoolInterface() {
+    const viewport = document.getElementById('adaptive-portal-viewport');
+    const currentSubject = document.getElementById('track-subject-selector').value;
+    
+    viewport.innerHTML = `
+        <div class="lms-grid">
+            <nav class="lms-navigation">
+                <h3>Course Portal</h3>
+                <a href="#" class="lms-link">📊 Main Dashboard</a>
+                <a href="#" class="lms-link">📖 Course Modules</a>
+                <a href="#" class="lms-link">📝 Gradebook Metrics</a>
+                <a href="#" class="lms-link">💬 Academic Forum Threads</a>
+            </nav>
+            <section class="document-viewer">
+                <h2>${currentSubject.toUpperCase()} - High School Division</h2>
+                <hr>
+                <p>Review the comprehensive source material document files. Your analysis assignments must be constructed to address foundational core concepts, highlight structural alternative interpretations, and track critical keywords.</p>
+                <div class="file-drop-hub">
+                    🗂️ Drag & Drop Your Finished Document Files Here to Submit (.docx, .pdf)
+                </div>
+            </section>
+        </div>
+    `;
+}
+
+// Automatically trigger layout distribution setup on initial portal load
+window.addEventListener('DOMContentLoaded', () => {
+    switchPortalLayout();
+    
+    // Attach listener to update contents if subject selection dropdown switches
+    document.getElementById('track-subject-selector').addEventListener('change', switchPortalLayout);
+});
+</script>
+========================================================================
