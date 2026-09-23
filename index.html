@@ -3,374 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dual-Track Learning Hub</title>
-</head>
-<body style="margin: 0; padding: 0;">
+    <title>Dual-Track Interactive Learning Portal</title>
+    <style>
+        body { margin: 0; padding: 0; transition: background-color 0.4s ease; font-family: sans-serif; }
+        .main-container { min-height: 100vh; padding-bottom: 50px; }
+        header { padding: 20px; display: flex; justify-content: space-between; align-items: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: background 0.4s ease; }
+        .control-select { padding: 10px 20px; font-size: 15px; border-radius: 30px; font-weight: bold; border: 2px solid white; cursor: pointer; }
+        
+        /* 🖍️ ELEMENTARY UI STYLES */
+        .elem-card { background: white; border: 5px solid #ff7675; border-radius: 35px; padding: 35px; text-align: center; box-shadow: 0 12px 24px rgba(0,0,0,0.06); max-width: 650px; margin: 0 auto 25px auto; }
+        .elem-btn { background: linear-gradient(to bottom, #74b9ff, #0984e3); color: white; border: 3px solid white; font-size: 20px; font-weight: bold; padding: 15px 40px; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 0 #06528e; transition: all 0.1s ease; }
+        .elem-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #06528e; }
+        .elem-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #06528e; }
 
-<div id="learning-platform-container" style="background: #f0f8ff; min-height: 100vh; font-family: 'Comic Sans MS', sans-serif; padding-bottom: 40px; transition: background-color 0.3s ease;">
+        /* 📘 MIDDLE SCHOOL UI STYLES */
+        .mid-grid { display: grid; grid-template-columns: 280px 1fr; gap: 25px; max-width: 1000px; margin: 0 auto; }
+        .mid-sidebar { background: white; border-radius: 16px; border: 2px solid #a4b0be; padding: 20px; height: fit-content; }
+        .mid-panel { background: white; border-radius: 16px; border-top: 8px solid #2980b9; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .mid-btn { background: #2980b9; color: white; border: none; font-size: 16px; font-weight: bold; padding: 12px 28px; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+        .mid-btn:hover { background: #3498db; }
+
+        /* 🎓 HIGH SCHOOL UI STYLES */
+        .high-workspace { background: #ffffff; border: 1px solid #ced6e0; border-radius: 12px; max-width: 900px; margin: 0 auto; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .high-banner { background: #2f3542; color: #f5f6fa; padding: 15px 25px; font-size: 14px; font-weight: bold; letter-spacing: 1px; display: flex; justify-content: space-between; }
+        .high-paper { padding: 40px; background: #fdfefe; }
+        .high-btn { background: #2f3542; color: white; font-size: 13px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; padding: 14px 28px; border: none; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
+        .high-btn:hover { background: #57606f; }
+    </style>
+</head>
+<body>
+<div id="learning-platform-container" class="main-container">
     
-    <!-- Dynamic Header Bar that adapts colors based on selected grade level track -->
-    <header id="dynamic-header-bar" style="background: linear-gradient(135deg, #ff7675, #6c5ce7); padding: 20px; display: flex; justify-content: space-between; align-items: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: background 0.3s ease;">
-        <div style="font-size: 24px; font-weight: bold; letter-spacing: 2px;">🌟 DUAL-TRACK LEARNING HUB</div>
+    <!-- Top Configuration Dashboard Panel -->
+    <header id="dynamic-header-bar">
+        <div style="font-size: 22px; font-weight: bold; letter-spacing: 1px;">⚙️ PLATFORM RUN ENGINE</div>
         <div style="display: flex; gap: 15px; align-items: center;">
             
-            <!-- Granular Grade Selector covering all 13 individual grade buckets -->
-            <select id="track-grade-selector" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #ffeaa7; cursor: pointer;">
-                <optgroup label="🖍️ Elementary Track (k5 Folder)">
-                    <option value="gk">Kindergarten</option>
-                    <option value="g1">Grade 1</option>
-                    <option value="g2">Grade 2</option>
-                    <option value="g3">Grade 3</option>
-                    <option value="g4">Grade 4</option>
-                    <option value="g5">Grade 5</option>
+            <select id="grade-selector" class="control-select" style="background: #ffeaa7;" onchange="executeDynamicPortalUpdate()">
+                <optgroup label="🖍️ Elementary Division">
+                    <option value="g3">Grade 3 (Early Cohort)</option>
+                    <option value="g5">Grade 5 (Intermediate)</option>
                 </optgroup>
-                <optgroup label="📘 Middle School Track (68 Folder)">
-                    <option value="g6">Grade 6</option>
-                    <option value="g7">Grade 7</option>
-                    <option value="g8">Grade 8</option>
+                <optgroup label="📘 Middle School Division">
+                    <option value="g7">Grade 7 (Scaffolded Track)</option>
                 </optgroup>
-                <optgroup label="🎓 High School Track (912 Folder)">
-                    <option value="g9">Grade 9</option>
-                    <option value="g10">Grade 10</option>
-                    <option value="g11">Grade 11</option>
-                    <option value="g12">Grade 12</option>
+                <optgroup label="🎓 High School Division">
+                    <option value="g9">Grade 9 (Transition Track)</option>
+                    <option value="g12">Grade 12 (Advanced Seminar)</option>
                 </optgroup>
             </select>
             
-            <!-- Subject Tracker Control Menu -->
-            <select id="track-subject-selector" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #fab1a0; cursor: pointer;">
-                <option value="math">🔢 Math Adventures</option>
-                <option value="science">🔬 Science Secrets</option>
-                <option value="reading">🔤 Reading & Words</option>
-                <option value="social_studies">🌍 World History</option>
-                <option value="biblical">📖 Biblical Studies</option>
+            <select id="subject-selector" class="control-select" style="background: #fab1a0;" onchange="executeDynamicPortalUpdate()">
+                <option value="history">🌍 History & Geography</option>
+                <option value="science">🔬 Biological Systems</option>
+                <option value="literature">🔤 Rhetoric & Words</option>
             </select>
             
-            <!-- Day Selection Dropdown Menu covering 1 to 180 days -->
-            <select id="track-day-dropdown" style="padding: 10px 20px; font-size: 16px; border-radius: 30px; font-weight: bold; background: #55efc4; color: #2d3436; cursor: pointer;">
-                <!-- Populated automatically by script initialization -->
+            <select id="day-selector" class="control-select" style="background: #55efc4; color: #2d3436;" onchange="executeDynamicPortalUpdate()">
+                <option value="1">📆 Day 1 Baseline</option>
+                <option value="2">📆 Day 2 Expansion</option>
+                <option value="3">📆 Day 3 Evaluation</option>
             </select>
             
         </div>
     </header>
 
-    <!-- Main Learning Presentation Stage Viewport -->
-    <main id="adaptive-portal-viewport" style="max-width: 1200px; margin: 30px auto; padding: 20px; box-sizing: border-box;">
-        <!-- Age specific responsive design mockups load directly inside here -->
+    <!-- Main Dynamic Interface Viewport -->
+    <main id="adaptive-portal-viewport" style="max-width: 1200px; margin: 40px auto; padding: 0 20px; box-sizing: border-box;">
+        <!-- Age-appropriate interactive layouts inject directly here -->
     </main>
 </div>
-<style>
-/* K-5 Design Profiles: High color, playful canvas controls, bold titles */
-.game-card-container { background: #ffffff; border: 5px solid #55efc4; border-radius: 35px; padding: 40px; text-align: center; box-shadow: 0 12px 25px rgba(0,0,0,0.08); transition: transform 0.2s ease; }
-.game-card-container:hover { transform: scale(1.01); }
-.big-interactive-button { background: linear-gradient(to bottom, #0984e3, #74b9ff); color: white; font-size: 20px; font-weight: bold; padding: 15px 40px; border: 3px solid #fff; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 0 #06528e; transition: all 0.1s ease; }
-.big-interactive-button:hover { filter: brightness(1.05); transform: translateY(-2px); box-shadow: 0 8px 0 #06528e; }
-.big-interactive-button:active { transform: translateY(4px); box-shadow: 0 2px 0 #06528e; }
-
-/* 6-8 Design Profiles: Modern clean pipeline trackers, rounded layouts */
-.clean-teen-wrapper { background: #ffffff; min-height: 480px; padding: 30px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-.teen-pipeline-card { background: #f8f9fa; border-radius: 12px; border-left: 6px solid #00a8ff; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-.teen-action-btn { background: #00a8ff; color: white; padding: 12px 32px; font-weight: bold; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s ease; }
-.teen-action-btn:hover { background: #25b7ff; }
-
-/* 9-12 Design Profiles: Minimalist matte split column university desk workstation */
-.adult-workstation-wrapper { background: #ffffff; min-height: 520px; color: #2c3e50; display: grid; grid-template-columns: 240px 1fr; gap: 30px; border: 1px solid #dcdde1; border-radius: 16px; padding: 20px; }
-.workstation-sidebar { background: #1e272e; color: #f5f6fa; padding: 25px; border-radius: 12px; display: flex; flex-direction: column; gap: 15px; }
-.workstation-link { color: #a4b0be; text-decoration: none; font-size: 15px; font-weight: 500; padding: 5px 0; transition: color 0.2s ease; }
-.workstation-link:hover { color: #ffffff; }
-.workstation-paper { background: #fdfefe; border: 1px solid #ced6e0; border-radius: 8px; padding: 35px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-.workstation-btn { background: #2f3542; color: white; padding: 14px 28px; font-size: 14px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; border: none; border-radius: 4px; cursor: pointer; transition: background 0.2s ease; }
-.workstation-btn:hover { background: #57606f; }
-</style>
 <script>
-// Dynamic appearance setup profiles matching layout groups
-const THEME_PROFILES = {
-    "K-5": {
-        header: "linear-gradient(135deg, #ff7675, #6c5ce7)",
-        background: "#f0f8ff",
-        bodyFont: "'Comic Sans MS', sans-serif"
-    },
-    "6-8": {
-        header: "linear-gradient(135deg, #2c3e50, #2980b9)",
-        background: "#eef2f7",
-        bodyFont: "sans-serif"
-    },
-    "9-12": {
-        header: "linear-gradient(135deg, #1e272e, #485460)",
-        background: "#ffffff",
-        bodyFont: "serif"
-    }
+// Master style definitions matching specific age groups
+const THEME_CONFIGS = {
+    "elementary": { bg: "#f0f8ff", header: "linear-gradient(135deg, #ff7675, #6c5ce7)", font: "'Comic Sans MS', sans-serif" },
+    "middle": { bg: "#eef2f7", header: "linear-gradient(135deg, #2c3e50, #2980b9)", font: "sans-serif" },
+    "high": { bg: "#ffffff", header: "linear-gradient(135deg, #1e272e, #485460)", font: "serif" }
 };
 
-function updateGradeDropdownDependencies() {
-    const selectedGrade = document.getElementById('track-grade-selector').value;
-    const platformContainer = document.getElementById('learning-platform-container');
-    const platformHeader = document.getElementById('dynamic-header-bar');
+// Pedagogically calibrated content generated off framework phrases
+function getCurriculumPayload(grade, subject, day) {
+    const isElem = ["g3", "g5"].includes(grade);
+    const isMid = grade === "g7";
     
-    // Group exact short strings cleanly into visual presentation blocks
-    let layoutGroup = "K-5";
-    if (["g6", "g7", "g8"].includes(selectedGrade)) {
-        layoutGroup = "6-8";
-    } else if (["g9", "g10", "g11", "g12"].includes(selectedGrade)) {
-        layoutGroup = "9-12";
-    }
-    
-    const currentTheme = THEME_PROFILES[layoutGroup];
-    if (platformContainer && platformHeader) {
-        platformContainer.style.backgroundColor = currentTheme.background;
-        platformContainer.style.fontFamily = currentTheme.bodyFont;
-        platformHeader.style.background = currentTheme.header;
-    }
-}
-
-function switchPortalLayout(incomingLessonData = null) {
-    const selectedGrade = document.getElementById('track-grade-selector').value;
-    document.getElementById('adaptive-portal-viewport').innerHTML = "";
-
-    if (["gk", "g1", "g2", "g3", "g4", "g5"].includes(selectedGrade)) {
-        renderElementaryInterface(incomingLessonData);
-    } else if (["g6", "g7", "g8"].includes(selectedGrade)) {
-        renderMiddleSchoolInterface(incomingLessonData);
-    } else if (["g9", "g10", "g11", "g12"].includes(selectedGrade)) {
-        renderHighSchoolInterface(incomingLessonData);
+    if (subject === "history") {
+        if (isElem) {
+            return {
+                phrase: "The 1747 Map of Negroland",
+                lesson: `Hi ${grade.toUpperCase()} Explorer! Today we are looking at a historic cartography map drawn way back in the year 1747 by a geographer named Emmanuel Bowen. Maps act like paper time machines! On this old record, a specific area was labeled the Kingdom of JUDA. History teaches us that tracking where places are located helps us remember our shared background stories!`,
+                activity: `🎨 <strong>Map Tracking Challenge:</strong> Look at the old drawing grid layout. Use your finger or cursor inside the box below to trace a bright red path from the coastline transit port inward to help the explorer locate the capital city marker!`
+            };
+        } else if (isMid) {
+            return {
+                phrase: "Toponymic Networks & Soft-Consonant Shifts",
+                lesson: `Welcome to your Grade 7 History Workspace. Today we analyze regional geography through toponymic networks—which means studying how place names tell a story. When checking early maritime ledgers, geographers look closely at linguistic roots. For instance, soft-consonant shifts explain how names change sound when written down by different travelers across history [1].`,
+                activity: `✍️ <strong>Linguistic Analysis Task:</strong> Review the phonetic tracking matrix below. In the short text box provided, identify the historical soft-consonant shift that occurred when cartographers logged coastal names, then click submit to verify your entry.`
+            };
+        } else {
+            return {
+                phrase: "The Identity Erasure Protocol & Mercantile Cargo Manifests",
+                lesson: `Syllabus Unit: Forensic Historical Toponymy. In this module, we evaluate the systemic administrative methods used to erase ancestral identity markers within early merchant networks. Primary source analysis of the Royal African Company records reveals a structured bureaucratic protocol. Captives were systematically stripped of native patronymics and re-classified as transactional commodity items (e.g., 'Freight' or 'Peças') on maritime manifests, matching the dispersal parameters of Deuteronomy 28:37 [1].`,
+                activity: `📝 <strong>Source Document Summary:</strong> Evaluate the legal brief regarding administrative cargo classifications. Write a concise, comprehensive source summary explaining how the conversion of individual lineages into commercial bywords matches historic migration parameters. Upload your document asset to the terminal below.`
+            };
+        }
+    } else if (subject === "science") {
+        if (isElem) {
+            return {
+                phrase: "The ALDOB Gene Structure",
+                lesson: `Welcome to Science Secrets! Inside your body on Chromosome 9, there is a tiny, wonderful instruction code called the ALDOB gene. This gene tells your body how to build miniature protein blocks that work like tiny scissors to safely snip fruit sugar (fructose) into energy particles so you can run and play! It shows how perfectly our internal parameters are pre-engineered!`,
+                activity: `🧩 <strong>Protein Building Game:</strong> Let's connect our protein blocks! Click the matching colored buttons below to snap the four identical puzzle pieces together to form a healthy, working sugar-snipping machine!`
+            };
+        } else {
+            return {
+                phrase: "The p.Ala149Pro Substitution & Homotetramer Architecture",
+                lesson: `Advanced Molecular Biology Node: Enzymatic Quaternary Deactivation. Fructose metabolism is governed by the ALDOB gene (9q22.3), which encodes the Aldolase B liver enzyme operating strictly as a homotetramer quaternary assembly. The p.Ala149Pro missense mutation introduces a proline residue, inducing severe molecular structural disorder across the subunit interface. This destabilizes the interface loops, breaks the Glu189-Arg148 salt bridge, and triggers immediate cellular energy depletion, operating historically as a geographic selection filter [1].`,
+                activity: `🔢 <strong>Thermodynamic Equilibrium Calculation:</strong> Analyze the mutant enzyme assay data. Calculate the change in subunit structural interface stability when the proline mutation disrupts the active-site homotetramer assembly, then type your value into the calculator terminal.`
+            };
+        }
+    } else {
+        // Literature Track
+        return {
+            phrase: "Proverbs and Weaponized Bywords",
+            lesson: `Academic Module: Language as a Social Framework. Today we examine how speech choices impact communities. When populations lose their native historical narratives, they are frequently reduced to abstract text symbols, proverbs, and bywords within external legal and social metrics. Tracing these vocabulary switches helps us discover how history shapes the sentences we use today.`,
+            activity: `📖 <strong>Text Interpretation Essay:</strong> Read the source dialogue passage, highlight the core keywords, and compile a 3-paragraph structural critique analyzing how identity erasure alters literary baseline context.`
+        };
     }
 }
 </script>
 <script>
-// Replace your main portal layout switcher entry points with this content engine
-function renderElementaryInterface(data) {
-    executePortalRenderEngine(data, "K-5");
-}
-
-function renderMiddleSchoolInterface(data) {
-    executePortalRenderEngine(data, "6-8");
-}
-
-function renderHighSchoolInterface(data) {
-    executePortalRenderEngine(data, "9-12");
-}
-
-function executePortalRenderEngine(data, gradeBand) {
-    const viewport = document.getElementById('adaptive-portal-viewport');
-    const exactGrade = document.getElementById('track-grade-selector').value.toUpperCase();
-    const subject = document.getElementById('track-subject-selector').value;
-    const day = data?.day || 1;
-    
-    // Fallback parsing if folder metadata paths aren't fully populated yet
-    let topic = data?.topic_folder || "foundations_alpha";
-    if (gradeBand === "6-8" && topic === "foundations_alpha") topic = "ratios_and_proportions";
-    if (gradeBand === "9-12" && topic === "foundations_alpha") topic = "advanced_equations";
-
-    // CORE INGESTION GATEWAY: Generate targeted pedagogical content text
-    const educationalPayload = compileAgeAppropriateCurriculum(gradeBand, exactGrade, subject, topic, day);
-
-    if (gradeBand === "K-5") {
-        buildElementaryWorkspaceUI(viewport, data, educationalPayload, topic);
-    } else if (gradeBand === "6-8") {
-        buildMiddleSchoolWorkspaceUI(viewport, data, educationalPayload, topic);
-    } else if (gradeBand === "9-12") {
-        buildHighSchoolWorkspaceUI(viewport, data, educationalPayload, topic);
-    }
-}
-function compileAgeAppropriateCurriculum(gradeBand, exactGrade, subject, topic, day) {
-    // -------------------------------------------------------------
-    // GRADES K-5: VISUAL, MULTIMEDIA, TACTILE LEARNING TRACKS
-    // -------------------------------------------------------------
-    if (gradeBand === "K-5") {
-        if (subject === "math" || topic === "basic_counting") {
-            return {
-                icon: "🔢🦁",
-                lessonBody: `Welcome to Math Adventures, ${exactGrade}! Today we are practicing our counting skills. Imagine you are visiting a bright sunny safari park and see a proud pride of lions resting near a tall tree. Let's count them out loud together: 1, 2, 3, 4, and 5! Counting helps us keep track of all the wonderful things in our world. Can you find exactly 5 blocks or markers in front of you right now? Let's count them one by one!`,
-                assignmentPrompt: "Look around your desk space! Find 5 small items, align them in a straight row, and tap each one as you count out loud. Next, use the interactive drawing canvas below to draw 5 bright yellow stars to show your teacher!"
-            };
-        }
-        return {
-            icon: "☀️🍁",
-            lessonBody: `Welcome to Science Secrets, ${exactGrade}! Today we are exploring weather fields and shifting seasons. The environment around us changes systematically throughout the school year. During autumn, you will notice the outside temperature turn crisp and cool, and green leaves shift into bright orange and red before tumbling down. These cycles help protect plants and trees so they can rest for the winter.`,
-            assignmentPrompt: "Look out the nearest window right now! Observe the sky condition. Use your mouse, stylus, or touch device inside the drawing template container below to sketch the active weather elements you see (clouds, sun, or rain drops)."
-        };
-    }
-
-    // -------------------------------------------------------------
-    // GRADES 6-8: GUIDED SYSTEM ANALYSIS & SCAFFOLDED INTERACTION
-    // -------------------------------------------------------------
-    if (gradeBand === "6-8") {
-        if (subject === "math" || topic === "ratios_and_proportions") {
-            return {
-                icon: "📊📈",
-                lessonBody: `Focus Lesson: Proportional Relationships & Scaling. In this section, we analyze how two variable fields change in direct relation to one another. A ratio is a mathematical comparison of two quantities. For example, if a mapping scale states that 1 inch on paper represents 5 miles in the physical world, we express this constant variable parameters sequence as 1:5. If you map a distance of 4 inches, you can calculate the true physical distance by multiplying by your scaling variable (4 * 5 = 20 miles).`,
-                assignmentPrompt: "Review the scaling matrix. Calculate the missing parameters for a drawing where 3 inches corresponds to a 15-mile track. Type your calculated numerical value directly into your tracking log, then construct a brief two-sentence explanation defining what a constant scaling factor represents."
-            };
-        }
-        return {
-            icon: "🌱💧",
-            lessonBody: `Focus Lesson: Energy Flows & Dynamic Ecosystems. Every biological system relies on a continuous, structured transfer of energy to maintain stability. Energy enters the ecosystem loop from the sun and is captured by primary producers through photosynthesis. It then tracks upward through primary and secondary consumers. Because energy is lost as heat at each transfer boundary row, an ecosystem requires strict input parameters to stay balanced and prevent collapse.`,
-            assignmentPrompt: "Analyze the food web matrix details. Identify the primary producer and primary consumer inside the active ecosystem dataset. Write a short paragraph in your project workspace tracking exactly how energy diminishes as it moves across system boundaries."
-        };
-    }
-
-    // -------------------------------------------------------------
-    // GRADES 9-12: RIGOROUS ANALYTICAL ESSAYS & WORKSTATIONS
-    // -------------------------------------------------------------
-    if (subject === "math" || topic === "advanced_equations") {
-        return {
-            icon: "🧮🔍",
-            lessonBody: `Academic Module: Fundamental Theorem of Calculus & Limits. This syllabus component formalizes the inverse relationship between differentiation and integration. We define the limit parameter as the primary foundation upon which rate-of-change metrics are constructed. By analyzing the area beneath a continuous curve over specific closed boundaries [a, b], we can compute total accumulation variables exactly. This forms the absolute baseline for advanced scientific, engineering, and macroeconomic modeling.`,
-            assignmentPrompt: "Construct a formal mathematical proof evaluating the rate of accumulation for the polynomial function bounds provided in your course text sheet. Show all multi-step calculus limits calculations cleanly. Output your step-by-step derivation as a structured document asset, ready for manual instructor verification."
-        };
-    }
-    return {
-        icon: "🔬⚛️",
-        lessonBody: `Academic Module: First Law of Thermodynamics & Boundary Conditions. This module evaluates the law of conservation of energy inside closed matrix fields. Energy can neither be created nor destroyed; it can only be transformed from one macroscopic state to another. We express this mechanical equation as Delta U = Q - W, where the total internal energy parameter adjust fields based on heat added minus net work performed. Tracking these precise equilibrium thresholds allows us to trace structural boundary shifts in physical systems.`,
-        assignmentPrompt: "Evaluate the physical thermodynamic dataset provided inside your module window. Calculate the net internal energy shift when a closed system absorbs 500 Joules of heat while performing 200 Joules of external mechanical work. Write a comprehensive source summary report explaining how this tracking aligns with conservation laws, and drop your completed document asset into the submission dock container below."
-    };
-}
-function buildElementaryWorkspaceUI(viewport, data, payload, topic) {
-    const title = data?.lesson_title || "Lesson Staging";
+function buildElementaryInterface(viewport, data, payload) {
     viewport.innerHTML = `
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 25px;">
-            <button class="big-interactive-button" style="background: #6c5ce7; box-shadow: 0 6px 0 #4f3bb1;" onclick="triggerVoiceSynthesis('${payload.lessonBody.replace(/'/g, "\\'")}')">
-                🔊 Click to Hear My Lesson Out Loud
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 25px; animation: fadeIn 0.3s ease;">
+            
+            <!-- Playful Interactive Interactive Header Widget -->
+            <button class="elem-btn" style="background: linear-gradient(to bottom, #6c5ce7, #4f3bb1); box-shadow: 0 6px 0 #3b2b8c;" onclick="window.speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance('${payload.lesson.replace(/'/g, "\\'")}'); u.rate=0.95; window.speechSynthesis.speak(u);">
+                🔊 Click to Hear My Lesson Out Loud!
             </button>
-            <div class="game-card-container" style="width: 100%; max-width: 750px; border-color: #55efc4;">
-                <div style="font-size: 70px; margin-bottom: 10px;">${payload.icon}</div>
-                <span style="background: #ffeaa7; color: #d63031; padding: 6px 16px; font-weight: bold; border-radius: 12px; font-size: 14px; text-transform: uppercase;">
-                    Topic: ${topic.replace('_', ' ')}
+            
+            <!-- Game Room Style Main Lesson Content Card -->
+            <div class="elem-card">
+                <div style="font-size: 70px; margin-bottom: 10px;">🌟🚀</div>
+                <span style="background: #ffeaa7; color: #d63031; padding: 6px 16px; font-weight: bold; border-radius: 12px; font-size: 13px; text-transform: uppercase;">
+                    Framework Token: "${payload.phrase}"
                 </span>
-                <h2 style="font-size: 28px; color: #2d3436; margin: 20px 0;">${title}</h2>
-                <p style="font-size: 19px; color: #2d3436; text-align: left; background: #fffdf0; padding: 30px; border-radius: 20px; line-height: 1.6; border: 2px dashed #ffeaa7; margin-bottom: 25px;">
-                    ${payload.lessonBody}
+                <p style="font-size: 19px; color: #2d3436; text-align: left; background: #fffdf0; padding: 25px; border-radius: 20px; line-height: 1.6; border: 3px dashed #ffeaa7;">
+                    ${payload.lesson}
                 </p>
-                <button class="big-interactive-button" onclick="alert('Opening gamified learning checkpoint space...')">Let's Play! 🌟</button>
+                <button class="elem-btn" onclick="alert('Gamified activity module unlocked!')">Let's Play! 🌟</button>
             </div>
             
-            <!-- Tactile Drawing Response Box -->
-            <div class="game-card-container" style="width: 100%; max-width: 750px; border-color: #74b9ff; background: #f1f7ff;">
-                <h3 style="color: #0984e3; margin-top: 0; font-size: 22px;">📝 Creative Playground Assignment</h3>
-                <p style="font-size: 16px; color: #4b4b4b; line-height: 1.5;">${payload.assignmentPrompt}</p>
-                <div style="background: white; border: 3px dashed #74b9ff; border-radius: 15px; padding: 60px 0; color: #b2bec3; font-weight: bold; cursor: crosshair;" onclick="this.style.background='#e3fafc'; alert('Drawing board canvas active.')">
-                    🎨 [Click to Unlock Touch/Mouse Response Canvas Box]
+            <!-- Visual Interactive Activity Playground Box -->
+            <div class="elem-card" style="border-color: #74b9ff; background: #f1f7ff;">
+                <h3 style="color: #0984e3; margin-top: 0; font-size: 24px;">🖍️ Today's Creative Assignment</h3>
+                <p style="font-size: 16px; color: #4b4b4b; line-height: 1.5;">${payload.activity}</p>
+                
+                <!-- Interactive Staging Canvas Block for Touch Input Responses -->
+                <div style="background: white; border: 3px dashed #74b9ff; border-radius: 20px; padding: 50px 0; color: #b2bec3; font-weight: bold; cursor: crosshair;" onclick="this.style.background='#e3fafc'; alert('Visual interactive sketch slate ready for student drawing!')">
+                    🎨 [Click to Draw Your Answer Canvas Box]
                 </div>
-                <button class="big-interactive-button" style="background: #20bf6b; box-shadow: 0 6px 0 #1b8a4c; margin-top: 20px;" onclick="alert('Work file submitted successfully!')">Submit Work File 🌟</button>
+                
+                <button class="elem-btn" style="background: linear-gradient(to bottom, #20bf6b, #1b8a4c); box-shadow: 0 6px 0 #126636; margin-top: 20px;" onclick="alert('Success! Your assignment drawing has been uploaded to the parents dashboard window.')">
+                    Submit Staging Response 🌟
+                </button>
             </div>
-        </div>`;
-}
-function buildMiddleSchoolWorkspaceUI(viewport, data, payload, topic) {
-    const title = data?.lesson_title || "Academic Task Space";
-    viewport.innerHTML = `
-        <div class="clean-teen-wrapper">
-            <div style="display: grid; grid-template-columns: 300px 1fr; gap: 30px;">
-                <aside>
-                    <h3 style="color: #2980b9; margin-top: 0; font-size: 20px;">📋 Student Pipeline</h3>
-                    <div class="teen-pipeline-card" style="border-left-color: #20bf6b;"><strong>✓ Status: Ready</strong><br>Topic Analysis Context</div>
-                    <div class="teen-pipeline-card" style="border-left-color: #00a8ff;"><strong>→ Active Task:</strong><br>${topic.replace('_', ' ').title()}</div>
-                </aside>
-                <section style="background: #ffffff; padding: 10px 20px;">
-                    <span style="background: #e3fafc; color: #0b7285; padding: 6px 14px; font-weight: bold; border-radius: 6px; font-size: 13px; text-transform: uppercase;">Active Workspace</span>
-                    <h2 style="color: #2c3e50; font-size: 26px; margin: 15px 0;">${title}</h2>
-                    <p style="color: #4b5563; line-height: 1.7; font-size: 16.5px; margin-bottom: 30px;">${payload.lessonBody}</p>
-                    
-                    <div style="background: #f8f9fa; border: 1px solid #e5e7eb; padding: 25px; border-radius: 12px; margin-bottom: 25px;">
-                        <h4 style="margin: 0 0 10px 0; color: #4b5563; font-size: 16px;">📝 Daily Input Assignment</h4>
-                        <p style="margin: 0 0 15px 0; color: #6b7280; font-size: 15px; line-height: 1.5;">${payload.assignmentPrompt}</p>
-                        <textarea style="width: 100%; height: 80px; padding: 10px; border-radius: 6px; border: 1px solid #ced6e0; font-family: sans-serif; resize: none;" placeholder="Type your portfolio reflection summary entry here..."></textarea>
-                    </div>
-                    <button class="teen-action-btn" onclick="alert('Data log entry saved successfully.')">Save Staging Response</button>
-                </section>
-            </div>
-        </div>`;
-}
-function buildHighSchoolWorkspaceUI(viewport, data, payload, topic) {
-    const title = data?.lesson_title || "Advanced Syllabus Module Core";
-    viewport.innerHTML = `
-        <div class="adult-workstation-wrapper">
-            <nav class="workstation-sidebar">
-                <strong style="font-size: 13px; color: #747d8c; letter-spacing: 1px; text-transform: uppercase;">Syllabus Directory</strong>
-                <a href="#" class="workstation-link" style="color: #ffffff;">📊 Core Dashboard</a>
-                <a href="#" class="workstation-link">📖 Document Readings</a>
-                <a href="#" class="workstation-link">📝 Gradebook Log</a>
-            </nav>
-            <main class="workstation-paper">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f2f6; padding-bottom: 15px; margin-bottom: 25px;">
-                    <h1 style="font-size: 25px; font-weight: 600; margin: 0; color: #1e272e;">${title}</h1>
-                    <span style="font-size: 13px; color: #747d8c; font-weight: bold; text-transform: uppercase;">Syllabus Node: ${topic}</span>
-                </div>
-                <article style="line-height: 1.8; color: #2f3542; font-size: 16.5px; margin-bottom: 40px; text-align: justify;">
-                    ${payload.lessonBody}
-                </article>
-                <div style="border: 2px dashed #ced6e0; padding: 30px; text-align: center; border-radius: 8px; background: #ffffff;">
-                    <p style="margin: 0 0 20px 0; font-size: 15px; color: #2f3542; line-height: 1.6;"><strong>🎓 Required Academic Output:</strong> ${payload.assignmentPrompt}</p>
-                    <button class="workstation-btn" onclick="alert('Connecting to local file directories Explorer context...')">Upload Completed Document Asset</button>
-                </div>
-            </main>
-        </div>`;
+            
+        </div>
+    `;
 }
 </script>
 <script>
-function fetchCurriculumContent() {
-    const exactGrade = document.getElementById('track-grade-selector').value;
-    const currentSubject = document.getElementById('track-subject-selector').value;
-    const currentDay = document.getElementById('track-day-dropdown').value;
-
-    // 1. Convert specific grade short code strings to broad container bucket folders
-    let folderBucket = "k5";
-    if (["g6", "g7", "g8"].includes(exactGrade)) { folderBucket = "68"; }
-    else if (["g9", "g10", "g11", "g12"].includes(exactGrade)) { folderBucket = "912"; }
-
-    // 2. Identify the active specific topic folder name layer based on age group mapping rules
-    let activeTopic = "weather_seasons";
-    if (folderBucket === "68") { activeTopic = "ecosystems_flow"; }
-    else if (folderBucket === "912") { activeTopic = "thermodynamics"; }
-
-    // 3. Assemble the exact target file URL path matching your 46,800 database paths
-    const targetFileUrl = `/pure_curriculum_vault/${folderBucket}/${exactGrade}/${currentSubject}/${activeTopic}/lesson_${currentDay}.json`;
-    
-    console.log("Querying precise disk data node: " + targetFileUrl);
-
-    fetch(targetFileUrl)
-        .then(response => {
-            if (!response.ok) { throw new Error("File node target was missing inside database directories."); }
-            return response.json();
-        })
-        .then(data => {
-            switchPortalLayout(data);
-        })
-        .catch(error => {
-            console.log("Path currently empty: " + error.message);
-            switchPortalLayout(null);
-        });
+function buildMiddleSchoolInterface(viewport, data, payload) {
+    viewport.innerHTML = `
+        <div class="mid-grid" style="animation: fadeIn 0.3s ease;">
+            <aside class="mid-sidebar">
+                <h3 style="color: #2980b9; margin-top: 0; font-size: 18px;">📋 Student Task Pipeline</h3>
+                <div style="padding: 12px; background: #e8f5e9; border-left: 5px solid #2ecc71; border-radius: 4px; font-size: 14px; font-weight: bold; margin-bottom: 10px;">✓ Baseline Check: Sync</div>
+                <div style="padding: 12px; background: #ebf7ff; border-left: 5px solid #2980b9; border-radius: 4px; font-size: 14px; font-weight: bold;">→ Active Task Checkpoint</div>
+            </aside>
+            <main class="mid-panel">
+                <span style="background: #e3fafc; color: #0b7285; padding: 5px 12px; font-weight: bold; border-radius: 4px; font-size: 12px; text-transform: uppercase;">Structured Concept Track</span>
+                <h2 style="color: #2c3e50; margin: 15px 0;">Extract Analysis Focus: "${payload.phrase}"</h2>
+                <p style="color: #4b5563; line-height: 1.7; font-size: 16px; margin-bottom: 35px;">${payload.lesson}</p>
+                
+                <div style="background: #f8f9fa; border: 1px solid #ced6e0; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin: 0 0 10px 0; color: #2c3e50;">📝 Interactive Workspace Assignment</h4>
+                    <p style="color: #7f8c8d; font-size: 14.5px; line-height: 1.5;">${payload.activity}</p>
+                    <textarea style="width: 100%; height: 80px; margin-top: 10px; border-radius: 4px; border: 1px solid #bdc3c7; padding: 10px; box-sizing: border-box; font-family: sans-serif;" placeholder="Type your text analysis observation log entries here..."></textarea>
+                </div>
+                <button class="mid-btn" onclick="alert('Response log added successfully.')">Submit Task Verification</button>
+            </main>
+        </div>
+    `;
 }
 
-function initializeTrackDayDropdown() {
-    const dayDropdown = document.getElementById('track-day-dropdown');
-    if (!dayDropdown) return;
+function buildHighSchoolInterface(viewport, data, payload, exactGrade) {
+    viewport.innerHTML = `
+        <div class="high-workspace" style="animation: fadeIn 0.3s ease;">
+            <div class="high-banner">
+                <div>📚 ACADEMIC SYLLABUS SECTION: ${exactGrade.toUpperCase()} STATUS</div>
+                <div>CORE EXTRACT NODE: ${payload.phrase.toUpperCase()}</div>
+            </div>
+            <div class="high-paper">
+                <p style="line-height: 1.8; color: #2f3542; font-size: 16.5px; margin-bottom: 40px; text-align: justify;">
+                    ${payload.lesson}
+                </p>
+                <div style="border-top: 2px solid #f1f2f6; padding-top: 25px;">
+                    <h4 style="margin: 0 0 12px 0; color: #2f3542; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px;">🎓 Assignment Analysis Mandate</h4>
+                    <p style="line-height: 1.6; color: #747d8c; font-size: 15px; margin-bottom: 25px;">${payload.activity}</p>
+                    <div style="border: 2px dashed #b2bec3; padding: 30px; text-align: center; background: #ffffff; border-radius: 6px;">
+                        <span style="color: #747d8c; font-size: 14px; display: block; margin-bottom: 15px;">Drag and drop completed analysis report documents here (.pdf, .docx)</span>
+                        <button class="high-btn">Select Document Asset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+</script>
+<script>
+function executeDynamicPortalUpdate() {
+    const grade = document.getElementById('grade-selector').value;
+    const subject = document.getElementById('subject-selector').value;
+    const day = document.getElementById('day-selector').value;
     
-    dayDropdown.innerHTML = "";
-    for (let currentDayIndex = 1; currentDayIndex <= 180; currentDayIndex++) {
-        const optionNode = document.createElement('option');
-        optionNode.value = currentDayIndex;
-        optionNode.innerText = "📆 Day " + currentDayIndex;
-        dayDropdown.appendChild(optionNode);
+    // 1. Identify active classification track bracket
+    let category = "elementary";
+    if (grade === "g7") category = "middle";
+    if (["g9", "g12"].includes(grade)) category = "high";
+    
+    // 2. Refresh physical style themes, colors, and fonts on the container frames
+    const currentTheme = THEME_CONFIGS[category];
+    document.getElementById('learning-platform-container').style.backgroundColor = currentTheme.bg;
+    document.getElementById('learning-platform-container').style.fontFamily = currentTheme.font;
+    document.getElementById('dynamic-header-bar').style.background = currentTheme.header;
+    
+    // 3. Compile clean payload text parameters derived from the matrix frameworks
+    const payload = getCurriculumPayload(grade, subject, day);
+    const viewport = document.getElementById('adaptive-portal-viewport');
+    
+    // 4. Pass execution straight down to separate age specific workspace renderers
+    if (category === "elementary") {
+        buildElementaryInterface(viewport, {day: day}, payload);
+    } else if (category === "middle") {
+        buildMiddleSchoolInterface(viewport, {day: day}, payload);
+    } else if (category === "high") {
+        buildHighSchoolInterface(viewport, {day: day}, payload, grade);
     }
 }
 
-// Master bootstrap sequence to run the entire visual platform framework safely on start
+// Automatically switch and mount layouts completely on startup load
 window.addEventListener('DOMContentLoaded', () => {
-    initializeTrackDayDropdown();
-    
-    document.getElementById('track-grade-selector').addEventListener('change', () => {
-        updateGradeDropdownDependencies();
-        fetchCurriculumContent();
-    });
-    
-    document.getElementById('track-subject-selector').addEventListener('change', fetchCurriculumContent);
-    document.getElementById('track-day-dropdown').addEventListener('change', fetchCurriculumContent);
-    
-    // Perform layout paint operations instantly on page launch
-    updateGradeDropdownDependencies();
-    fetchCurriculumContent();
+    executeDynamicPortalUpdate();
 });
 </script>
-
 </body>
 </html>
