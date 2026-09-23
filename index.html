@@ -1,10 +1,10 @@
-<!-- [File: index.html - Box 1 of 5: Chameleon Track Design & Global Styles] -->
+<!-- [File: index.html - Box 1 of 9: Master Design Rules & Adaptive Track Styles] -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Educational Core Framework Portal</title>
+    <title id="pageTitle">Dual-Track Learning Platform Portal</title>
     <style>
         :root {
             --primary: #1e3a8a;
@@ -14,76 +14,118 @@
             --bg-main: #f8fafc;
             --text-dark: #0f172a;
             --panel-radius: 12px;
+            --canvas-bg: #ffffff;
         }
-        /* THEME 1: EARLY PRIMARY (K-3) */
-        body.track-k3 { --primary: #db2777; --primary-light: #fdf2f8; --bg-main: #fff1f2; --text-dark: #4c0519; --panel-radius: 24px; font-size: 18px; }
-        /* THEME 2: INTERMEDIATE LOGIC (4-8) */
-        body.track-48 { --primary: #0284c7; --primary-light: #f0f9ff; --bg-main: #f0fdf4; --text-dark: #0c4a6e; }
-        /* THEME 3: ADVANCED RHETORIC (9-12) */
-        body.track-912 { --primary: #0f172a; --primary-light: #f8fafc; --bg-main: #f1f5f9; --text-dark: #0f172a; }
-
+        /* GRADE LEVEL 1: EARLY PRIMARY TRACK (K-3) STYLE PROPERTIES */
+        body.track-k3 { 
+            --primary: #db2777; 
+            --primary-light: #fdf2f8; 
+            --bg-main: #fff1f2; 
+            --text-dark: #4c0519; 
+            --panel-radius: 24px; 
+            font-size: 18px; 
+        }
+        /* GRADE LEVEL 2: INTERMEDIATE LOGIC TRACK (4-8) STYLE PROPERTIES */
+        body.track-48 { 
+            --primary: #0284c7; 
+            --primary-light: #f0f9ff; 
+            --bg-main: #f0fdf4; 
+            --text-dark: #0c4a6e; 
+            --panel-radius: 12px; 
+        }
+        /* GRADE LEVEL 3: ADVANCED RHETORIC TRACK (9-12) STYLE PROPERTIES */
+        body.track-912 { 
+            --primary: #0f172a; 
+            --primary-light: #f8fafc; 
+            --bg-main: #e2e8f0; 
+            --text-dark: #0f172a; 
+            --panel-radius: 4px; 
+        }
+<!-- [File: index.html - Box 2 of 9: Layout Grid and Portal Components CSS] -->
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-dark); padding: 25px; transition: all 0.3s ease; }
-        .container { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        body { background-color: var(--bg-main); color: var(--text-dark); padding: 25px; transition: all 0.2s ease; }
+        
+        .container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
         header { grid-column: span 2; background: linear-gradient(135deg, var(--primary), #3b82f6); color: white; padding: 30px; border-radius: var(--panel-radius); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .badge { display: inline-block; padding: 6px 14px; background: rgba(255,255,255,0.25); border-radius: 20px; font-weight: 700; font-size: 13px; text-transform: uppercase; margin-bottom: 10px; }
+        
         .panel { background: white; border: 1px solid #cbd5e1; border-radius: var(--panel-radius); padding: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); position: relative; }
         .panel-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 3px solid var(--primary-light); color: var(--primary); }
-<!-- [File: index.html - Box 2 of 5: Multi-Track Assignment Elements UI] -->
-        .highlight-word { background-color: #fef08a; border-bottom: 2px dashed #ca8a04; padding: 2px 6px; cursor: pointer; font-weight: 700; border-radius: 6px; }
+        
+        .highlight-word { background-color: #fef08a; border-bottom: 2px dashed #ca8a04; padding: 2px 6px; cursor: pointer; font-weight: 700; border-radius: 6px; transition: background 0.15s; }
+        .highlight-word:hover { background-color: #fde047; }
+        
         .alignment-portal { display: none; margin-top: 20px; background-color: #fffbeb; border-left: 6px solid var(--accent-amber); border-radius: 8px; padding: 18px; animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .portal-active { display: block; }
         .portal-label { font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
         .label-biblical { color: var(--accent-green); }
         .label-alternative { color: var(--accent-amber); }
-        
-        /* WORKSPACE CANVAS CONFIGURATIONS */
+<!-- [File: index.html - Box 3 of 9: Chameleon Sketchpad Canvas Grids CSS] -->
+        /* ADAPTIVE WORKSPACE BACKGROUND GRID CONFIGURATIONS */
         .canvas-frame { border: 3px solid var(--primary); border-radius: 12px; background: #ffffff; overflow: hidden; margin-top: 12px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
         canvas { display: block; width: 100%; height: 280px; cursor: crosshair; }
-        body.track-k3 canvas { background: #fafafa url('data:image/svg+xml;utf8,<svg xmlns="http://w3.org" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="%23e2e8f0" stroke-width="2" fill="none" stroke-dasharray="5,5"/></svg>') center no-repeat; background-size: 180px; }
-        body.track-48 canvas { background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px); background-size: 25px 25px; }
-        body.track-912 canvas { background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px); background-size: 50px 100%; }
-
+        
+        /* K-3 Canvas: Displays clean shape tracing backgrounds */
+        body.track-k3 canvas { 
+            background: #fafafa url('data:image/svg+xml;utf8,<svg xmlns="http://w3.org" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="%23e2e8f0" stroke-width="2" fill="none" stroke-dasharray="5,5"/></svg>') center no-repeat; 
+            background-size: 180px; 
+        }
+        /* 4-8 Canvas: Displays math coordinate tracking lattices */
+        body.track-48 canvas { 
+            background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px); 
+            background-size: 25px 25px; 
+        }
+        /* 9-12 Canvas: Displays clean lining structures suitable for research annotations */
+        body.track-912 canvas { 
+            background-image: linear-gradient(to bottom, #f1f5f9 1px, transparent 1px); 
+            background-size: 100% 30px; 
+        }
+<!-- [File: index.html - Box 4 of 9: Inputs and Game UI Styles] -->
         .btn-row { display: flex; gap: 12px; margin-top: 12px; }
         .btn { padding: 10px 20px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; transition: transform 0.1s; font-size: 14px; }
         .btn:active { transform: scale(0.97); }
         .btn-main { background-color: var(--primary); color: white; }
         .btn-clear { background-color: #e2e8f0; color: #475569; }
         
-        textarea { width: 100%; min-height: 90px; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 14px; margin-top: 6px; }
+        textarea { width: 100%; min-height: 95px; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 14px; margin-top: 6px; resize: vertical; }
         body.track-k3 textarea { font-size: 18px; border-radius: 16px; border-color: #f472b6; }
+        
+        .game-box { background-color: var(--primary-light); border: 1px solid #cbd5e1; border-radius: 8px; padding: 18px; margin-top: 25px; }
+        .game-input-row { display: flex; gap: 8px; margin-top: 10px; }
+        .game-input-row input { flex-grow: 1; padding: 10px 14px; border: 2px solid #cbd5e1; border-radius: 6px; font-weight: 700; text-transform: uppercase; }
+        
         @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @media (max-width: 900px) { .container { grid-template-columns: 1fr; } header { grid-column: span 1; } }
     </style>
 </head>
-<!-- [File: index.html - Box 3 of 5: Adaptive Layout Layout Panels] -->
 <body>
+<!-- [File: index.html - Box 5 of 9: Student Interface Structure Framework] -->
 <div class="container">
     <header id="assignmentHeader">
-        <div class="badge" id="trackBadge">Loading Track...</div>
-        <h1 class="header-title" id="lessonTitle">Loading Lesson Target Title...</h1>
-        <p id="lessonDesc">Reading source context matrices...</p>
-        <button class="btn" style="background:rgba(255,255,255,0.25); color:white; margin-top:12px;" onclick="speakLessonInstructions()">
-            🔊 Click to Hear Instructions Spoken Aloud
+        <div class="badge" id="trackBadge">Loading Framework Track...</div>
+        <h1 class="header-title" id="lessonTitle">Loading Lesson Title...</h1>
+        <p id="lessonDesc">Verifying systemic structural parameters...</p>
+        <button class="btn" style="background: rgba(255,255,255,0.25); color: white; margin-top: 12px;" onclick="speakLessonInstructions()">
+            🔊 Listen to Assignment Instructions
         </button>
     </header>
 
-    <!-- LEFT PANEL: Dynamic Multi-Format Core Content -->
+    <!-- LEFT PANEL: Core Textbook Reading Panel -->
     <div class="panel">
-        <h2 class="panel-title" id="leftPanelTitle">📚 Core Study Area</h2>
+        <h2 class="panel-title" id="leftPanelTitle">📖 Public School Curriculum Text</h2>
         <div id="textbookBody" style="line-height: 1.8; color: #334155; white-space: pre-line;">
-            <!-- Automated system content drop target -->
+            <!-- Content automatically drops here -->
         </div>
         <div id="dynamicPortals"></div>
     </div>
 
-    <!-- RIGHT PANEL: Adaptive Student Worksheets Assignments Area -->
+    <!-- RIGHT PANEL: Adaptive Student Worksheet Assignment -->
     <div class="panel">
-        <h2 class="panel-title">✏️ Active Student Assignment</h2>
+        <h2 class="panel-title" id="rightPanelTitle">✏️ Student Response Workspace</h2>
         <p style="font-size: 15px; font-weight: 600; margin-bottom: 10px;" id="worksheetInstructions">
             Loading assignment requirements...
         </p>
         
-        <!-- Chameleon Drawing/Interactive Canvas Canvas Frame -->
         <div class="canvas-frame">
             <canvas id="worksheetGrid"></canvas>
         </div>
@@ -91,77 +133,99 @@
             <button class="btn btn-clear" onclick="clearCanvasSurface()">Clear Drawing Canvas</button>
         </div>
 
-        <!-- Dynamic Context Driven Text Inputs Area -->
         <div style="margin-top: 25px;" id="questionsContainer">
-            <!-- Programmatic response lines loaded here -->
+            <!-- Dynamic assessment fields load here -->
+        </div>
+
+        <!-- Gamified Retention Lock -->
+        <div class="game-box" id="retentionGameBox">
+            <div style="font-weight: 700; color: var(--primary);" id="gameBoxTitle">🎯 Key Retention Secret Code</div>
+            <p style="font-size: 14px; margin-top: 4px;">Unlock the validation circuit by typing the target Alternative Framework phrase from the portals.</p>
+            <div class="game-input-row">
+                <input type="text" id="secretCodeInput" placeholder="Enter secret code phrase...">
+                <button class="btn btn-main" onclick="verifySecretCodePhrase()">Verify Code</button>
+            </div>
+            <div id="gameFeedback" style="margin-top: 10px; font-weight: 600; display: none;"></div>
         </div>
     </div>
 </div>
-<!-- [File: index.html - Box 4 of 5: Dynamic Track Compiler Template Engine Script] -->
+<!-- [File: index.html - Box 6 of 9: Core Application Layout Router Script] -->
 <script>
     let activeInstructionsText = "";
+    let activeSecretWord = "";
 
     function renderDynamicAssignment(lessonData) {
-        const gradeLevel = lessonData.grade_level || "K-3";
+        const gradeLevel = lessonData.grade_level || "4-8";
         const bodyTag = document.body;
         
-        // 1. Flush past classes and set the clean theme track boundary
+        // 1. Reset theme trackers and morph backgrounds instantly
         bodyTag.className = ""; 
         if (gradeLevel === "K-3") {
             bodyTag.classList.add("track-k3");
             document.getElementById("trackBadge").innerText = "Early Primary Track (Grades K-3)";
-            document.getElementById("leftPanelTitle").innerText = "🎨 Today's Story & Reading Picture Block";
+            document.getElementById("leftPanelTitle").innerText = "🎨 Today's Story & Reading Image Block";
+            document.getElementById("rightPanelTitle").innerText = "✏️ Guided Tracing Activity Sheet";
         } else if (gradeLevel === "4-8") {
             bodyTag.classList.add("track-48");
             document.getElementById("trackBadge").innerText = "Logic Track (Grades 4-8)";
             document.getElementById("leftPanelTitle").innerText = "📋 Textbook Exploration Analysis Segment";
+            document.getElementById("rightPanelTitle").innerText = "✏️ Measurement Plotting Sheet";
         } else {
             bodyTag.classList.add("track-912");
             document.getElementById("trackBadge").innerText = "Advanced Rhetoric Track (Grades 9-12)";
             document.getElementById("leftPanelTitle").innerText = "🏛️ Research Core Thesis Text Block";
+            document.getElementById("rightPanelTitle").innerText = "✏️ Thesis Evaluation Lab Response";
         }
 
-        // 2. Set Text Nodes
+        // 2. Map Core Metadata
         document.getElementById("pageTitle").innerText = lessonData.title;
         document.getElementById("lessonTitle").innerText = lessonData.title;
         document.getElementById("lessonDesc").innerText = lessonData.description;
         document.getElementById("worksheetInstructions").innerText = lessonData.public_worksheet_instructions;
         activeInstructionsText = lessonData.audio_instructions || lessonData.public_worksheet_instructions;
-
-        // 3. Match and Build Interactive Keywords Portals
+<!-- [File: index.html - Box 7 of 9: Dynamic Keyword Portal Mapping Logic] -->
+        // 3. Scan textbook lines to build background portals
         let coreText = lessonData.public_core_concept || "";
         let portalOutput = "";
         
-        Object.keys(lessonData.alignment_triggers).forEach(keyword => {
-            const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
-            coreText = coreText.replace(regex, `<span class="highlight-word" onclick="togglePortalBlock('portal-${keyword}')">$1</span>`);
-            
-            const trigger = lessonData.alignment_triggers[keyword];
-            portalOutput += `
-                <div id="portal-${keyword}" class="alignment-portal">
-                    <div class="portal-label label-biblical">🛡️ Biblical Truth Integration</div>
-                    <p style="font-size:14px; color:#14532d; font-weight:500; margin-bottom:8px;">${trigger.biblical_truth}</p>
-                    <div class="portal-label label-alternative">🔄 Alternative Framework Matrix</div>
-                    <p style="font-size:14px; color:#78350f; font-weight:500;">${trigger.alternative_framework}</p>
-                </div>`;
-        });
+        if (lessonData.alignment_triggers) {
+            Object.keys(lessonData.alignment_triggers).forEach(keyword => {
+                const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
+                coreText = coreText.replace(regex, `<span class="highlight-word" onclick="togglePortalBlock('portal-${keyword}')">$1</span>`);
+                
+                const trigger = lessonData.alignment_triggers[keyword];
+                if (trigger.game_word) {
+                    activeSecretWord = trigger.game_word.toUpperCase();
+                }
+                
+                portalOutput += `
+                    <div id="portal-${keyword}" class="alignment-portal">
+                        <div class="portal-label label-biblical">🛡️ Biblical Truth Integration</div>
+                        <p style="font-size:14px; color:#14532d; font-weight:500; margin-bottom:8px;">${trigger.biblical_truth}</p>
+                        <div class="portal-label label-alternative">🔄 Alternative Framework Matrix</div>
+                        <p style="font-size:14px; color:#78350f; font-weight:500;">${trigger.alternative_framework}</p>
+                    </div>`;
+            });
+        }
         
         document.getElementById("textbookBody").innerHTML = coreText;
         document.getElementById("dynamicPortals").innerHTML = portalOutput;
-<!-- [File: index.html - Box 5 of 5: Dynamic Canvas and Execution Scripts] -->
-        // 4. Inject Variable Response Text Input Fields
+
+        // 4. Inject Variable Input Fields
         let fieldsHtml = "";
-        lessonData.retention_questions.forEach((q, idx) => {
-            fieldsHtml += `
-                <div style="margin-bottom: 18px;">
-                    <label style="font-weight: 700; display:block; color:var(--primary);">${gradeLevel === "K-3" ? "✏️ Draw or Write:" : "Question " + (idx+1) + ":"} ${q.text}</label>
-                    <textarea placeholder="${gradeLevel === "K-3" ? "Write big letters here..." : "Type analytical verification notes here..."}"></textarea>
-                </div>`;
-        });
+        if (lessonData.retention_questions) {
+            lessonData.retention_questions.forEach((q, idx) => {
+                fieldsHtml += `
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-weight: 700; display:block; color:var(--primary);">${gradeLevel === "K-3" ? "✏️ Draw or Write:" : "Question " + (idx+1) + ":"} ${q.text}</label>
+                        <textarea placeholder="${gradeLevel === "K-3" ? "Write big letters here..." : "Type analytical verification notes here..."}"></textarea>
+                    </div>`;
+            });
+        }
         document.getElementById("questionsContainer").innerHTML = fieldsHtml;
         initializeCanvasDrawingEngine();
     }
-
+<!-- [File: index.html - Box 8 of 9: Canvas Interaction and Audio Code] -->
     function togglePortalBlock(id) {
         document.querySelectorAll('.alignment-portal').forEach(p => p.style.display = 'none');
         const target = document.getElementById(id);
@@ -172,12 +236,11 @@
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(activeInstructionsText);
-            utterance.rate = 0.90;
+            utterance.rate = 0.92;
             window.speechSynthesis.speak(utterance);
         }
     }
 
-    // Drawing Logic Canvas Engine
     const surfaceCanvas = document.getElementById('worksheetGrid');
     const drawCtx = surfaceCanvas.getContext('2d');
     let isDrawing = false;
@@ -191,45 +254,91 @@
 
     surfaceCanvas.addEventListener('mousedown', () => isDrawing = true);
     surfaceCanvas.addEventListener('mouseup', () => { isDrawing = false; drawCtx.beginPath(); });
-    surfaceCanvas.addEventListener('mousemove', executeLineDraw);
-
-    function executeLineDraw(e) {
+    surfaceCanvas.addEventListener('mousemove', (e) => {
         if (!isDrawing) return;
-        const dimensions = surfaceCanvas.getBoundingClientRect();
-        drawCtx.lineWidth = document.body.classList.contains("track-k3") ? 8 : 3;
+        const dims = surfaceCanvas.getBoundingClientRect();
+        drawCtx.lineWidth = document.body.classList.contains("track-k3") ? 7 : 3;
         drawCtx.strokeStyle = document.body.classList.contains("track-k3") ? "#db2777" : "#0284c7";
         drawCtx.lineCap = 'round';
-        drawCtx.lineTo(e.clientX - dimensions.left, e.clientY - dimensions.top);
-        drawCtx.stroke();
-        drawCtx.beginPath();
-        drawCtx.moveTo(e.clientX - dimensions.left, e.clientY - dimensions.top);
-    }
+        drawCtx.lineTo(e.clientX - dims.left, e.clientY - dims.top);
+        drawCtx.stroke(); drawCtx.beginPath(); drawCtx.moveTo(e.clientX - dims.left, e.clientY - dims.top);
+    });
 
     function clearCanvasSurface() {
         drawCtx.clearRect(0, 0, surfaceCanvas.width, surfaceCanvas.height);
         drawCtx.beginPath();
     }
 
-    // TEST THE COMPILER ENGINE INTERACTION: Change grade_level to "K-3", "4-8", or "9-12" to see layout transformations instantly!
-    const incomingDataJson = {
-      "grade_level": "K-3", 
-      "title": "Science Lesson — Day 6 Block",
-      "description": "Investigating physical changes and matrix parameters.",
-      "audio_instructions": "Hello! Welcome to Science Day 6. Let's trace the massive circle shapes inside the white sketch pad box. Then, tap on the bright yellow words to see God's design properties!",
-      "public_core_concept": "Every action inside our world operates under clean rules. Look at how physical objects stay inside their boundaries and properties. We trace coordinates across a clean structural matrix.",
-      "public_worksheet_instructions": "Trace inside the circle lines using a bright pink line, or draw a picture of a physical object showing stable boundary parameters.",
-      "alignment_triggers": {
-        "matrix": {
-          "biblical_truth": "Colossians 1:17 — By him all things hold together.",
-          "alternative_framework": "Our alternative framework proves the grid is a designed lattice holding systemic information in absolute unity."
+    function verifySecretCodePhrase() {
+        const input = document.getElementById('secretCodeInput').value.trim().toUpperCase();
+        const fb = document.getElementById('gameFeedback');
+        fb.style.display = 'block';
+        if(input === activeSecretWord || activeSecretWord === "") {
+            fb.innerText = "⭐ Code Unlocked! Verification Standards Met.";
+            fb.style.color = "var(--accent-green)";
+        } else {
+            fb.innerText = "❌ Incorrect Key Phrase. Review the portal criteria details.";
+            fb.style.color = "#dc2626";
         }
+    }
+<!-- [File: index.html - Box 9 of 9: URL Parameter Route Catch Engine & Database Mocks] -->
+    // --- STANDARDIZED ROUTER DETECTION LINK ENGINE ---
+    // Reads URL fields instantly to boot the exact class level assignment profile needed.
+    window.onload = () => {
+        const urlParameters = new URLSearchParams(window.location.search);
+        const urlGrade = urlParameters.get('grade') || '4-8'; 
+        
+        if (urlGrade.toUpperCase() === 'K-3') {
+            renderDynamicAssignment(productionK3Mock);
+        } else if (urlGrade.toUpperCase() === '9-12') {
+            renderDynamicAssignment(production912Mock);
+        } else {
+            renderDynamicAssignment(production48Mock);
+        }
+    };
+
+    const productionK3Mock = {
+      "grade_level": "K-3",
+      "title": "Early Elementary Science — Day 6",
+      "description": "Learning about natural limits, bounds, and parameters.",
+      "audio_instructions": "Hello! Today let's look at how things stay safe inside their boundaries. Click on the yellow keyword links to see hidden truths, then trace inside the big circle shape!",
+      "public_core_concept": "Every element inside our massive world operates under clean rules. Look at how objects stay inside stable parameters.",
+      "public_worksheet_instructions": "Trace your finger inside the target shape space using a bright pink line.",
+      "alignment_triggers": {
+         "parameters": { "biblical_truth": "Job 38:10 — I set bars and doors.", "alternative_framework": "God designed structural boundaries to save elements from chaos.", "game_word": "DECREED PLACE" }
+      },
+      "retention_questions": [{"text": "Can you draw or write one natural boundary structure you learned about today?"}]
+    };
+
+    const production48Mock = {
+      "grade_level": "4-8", 
+      "title": "Middle School Physics: Energy Matrix Grid Node 6",
+      "description": "Analyzing structural tracking coordinates and mechanical parameter vectors across physical networks.",
+      "audio_instructions": "Welcome to the Logic Track Day 6 Physics worksheet. Review the reading text on the left. Click on the keywords to reveal alternative frameworks. Plot your measurement trajectory across the blue coordinate grid map.",
+      "public_core_concept": "Every thermodynamic system requires a stable tracking matrix to capture structural changes. When a fluid changes state, researchers record variable parameters to determine energy conservation limits across the boundary lines.",
+      "public_worksheet_instructions": "Plot a linear structural progression link from coordinate node 0,0 directly to coordinate node 4,4 across the grid matrix framework.",
+      "alignment_triggers": {
+        "matrix": { "biblical_truth": "Colossians 1:17 — In Him all things hold together.", "alternative_framework": "Our framework proves the coordinates are a purposeful lattice canvas holding information in unity.", "game_word": "HOLD TOGETHER" },
+        "parameters": { "biblical_truth": "Job 38:10 — I broke up for it my decreed place.", "alternative_framework": "Constants do not adapt via chaotic paths; they are boundaries engineered to protect structural limits.", "game_word": "DECREED PLACE" }
       },
       "retention_questions": [
-        {"text": "What stable laws did you notice while looking at today's reading lesson?"}
+        {"text": "Explain why adjusting a system matrix parameter collapses the integrity of a rule calculation."},
+        {"text": "Contrast how secular frameworks view physical limits versus how a designed model explains steady laws."}
       ]
     };
 
-    window.onload = () => renderDynamicAssignment(incomingDataJson);
+    const production912Mock = {
+      "grade_level": "9-12",
+      "title": "Advanced Rhetoric Physics: High School System Analysis Day 6",
+      "description": "Deconstructing thermodynamic boundary metrics and field tensor equations inside open system environments.",
+      "audio_instructions": "Begin the secondary thesis audit. Trace the underlying baseline properties on the chart overlay and write out your deductive data proofs below.",
+      "public_core_concept": "An analysis of macro-physical systems reveals that systemic parameters function with absolute alignment accuracy. Secular paradigms claim this matrix emerged through chaotic baseline developments.",
+      "public_worksheet_instructions": "Map the system data variance trends across the linear analysis sheet margins.",
+      "alignment_triggers": {
+        "matrix": { "biblical_truth": "Hebrews 11:3 — The universe was formed at God's command.", "alternative_framework": "The structural tracking grid is an absolute designed blueprint lattice mathematical matrix.", "game_word": "HOLD TOGETHER" }
+      },
+      "retention_questions": [{"text": "Formulate a critical thesis defense contrasting baseline parameter mathematical logic strings."}]
+    };
 </script>
 </body>
 </html>
