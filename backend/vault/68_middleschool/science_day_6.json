@@ -1,0 +1,29 @@
+{
+  "grade_level": "6-8",
+  "day": 6,
+  "subject": "science",
+  "title": "Thermodynamic Matrix Fields & Parameters",
+  "alignment_triggers": {
+    "parameters": {
+      "biblical_truth": "Job 38:10 — I set bars and doors.",
+      "alternative_framework": "Limits protect design values.",
+      "game_word": "DECREED PLACE"
+    }
+  },
+  "left_content_panel": {
+    "title": "Instructional Reading Material",
+    "body_text": "Every physical system requires tracking limits to trace structural adjustments inside boundary rows."
+  },
+  "right_workspace_fields": {
+    "instructions": "Complete the measurement and input paths.",
+    "fields_type": "dropdown_and_typing"
+  },
+  "retention_questions": [
+    {
+      "text": "Explain the calculation variance within the tracking matrix grid."
+    },
+    {
+      "text": "How do parameters verify structural laws?"
+    }
+  ]
+}

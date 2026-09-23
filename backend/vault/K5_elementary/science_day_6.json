@@ -1,0 +1,23 @@
+{
+  "grade_level": "K-5",
+  "day": 6,
+  "subject": "science",
+  "title": "Thermodynamic Matrix Fields & Parameters",
+  "alignment_triggers": {
+    "parameters": {
+      "biblical_truth": "Job 38:10 — I set bars and doors.",
+      "alternative_framework": "Limits protect design values.",
+      "game_word": "DECREED PLACE"
+    }
+  },
+  "audio_instructions": "Welcome! Let's listen to today's short text: Investigating physical system changes, properties, and design variables.",
+  "public_core_concept": "Every physical system requires tracking limits to trace structural adjustments inside boundary rows.",
+  "visual_assets": [
+    "interactive_drawing_board"
+  ],
+  "retention_questions": [
+    {
+      "text": "Draw or write what you observed about today's lesson boundary parameters."
+    }
+  ]
+}
