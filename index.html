@@ -167,3 +167,79 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 ========================================================================
+[FILE ID: index.html - Part 7: Dynamic Fetch Path Locator]
+========================================================================
+<script>
+function fetchCurriculumContent() {
+    // Read the current dropdown selections on the platform header
+    const currentGrade = document.getElementById('track-grade-selector').value;
+    const currentSubject = document.getElementById('track-subject-selector').value;
+    const currentDay = document.getElementById('current-day-display').innerText;
+
+    // Convert selection values into a standardized folder name match
+    let folderBucket = "k5";
+    if (currentGrade === "6-8") {
+        folderBucket = "68";
+    } else if (currentGrade === "9-12") {
+        folderBucket = "912";
+    }
+
+    // Build the precise folder URL path to locate the sorted files
+    const fileTargetUrl = `/assets/curriculum/${folderBucket}/day_${currentDay}_${currentSubject}.json`;
+    
+    // Pass the calculated file path down to the network retrieval engine
+    loadDataAssetFromServer(fileTargetUrl);
+}
+</script>
+========================================================================
+[FILE ID: index.html - Part 8: Asset Network Fetcher]
+========================================================================
+<script>
+function loadDataAssetFromServer(targetUrl) {
+    console.log("Requesting curriculum target asset: " + targetUrl);
+
+    // Ping the storage server to pull down the dynamic text content
+    fetch(targetUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Target file was not found inside layout bucket.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Send the retrieved content directly to the active layout viewer
+            populateActiveWorkspace(data);
+        })
+        .catch(error => {
+            console.log("Retrieval failure: " + error.message);
+            handleMissingAssetLayout();
+        });
+}
+</script>
+========================================================================
+[FILE ID: index.html - Part 9: Fallback Display Workspace]
+========================================================================
+<script>
+function populateActiveWorkspace(curriculumData) {
+    // Inject the retrieved text data into the open viewport window smoothly
+    const contentArea = document.getElementById('adaptive-portal-viewport');
+    if (contentArea && curriculumData.body_content) {
+        // Adjust text layout automatically matching your selected data profiles
+        switchPortalLayout(); 
+    }
+}
+
+function handleMissingAssetLayout() {
+    const contentArea = document.getElementById('adaptive-portal-viewport');
+    if (contentArea) {
+        contentArea.innerHTML = `
+            <div style="padding: 40px; text-align: center; color: #721c24; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 8px;">
+                <h3>Lesson Content Currently Not Configured</h3>
+                <p>Verify that your local python folder sorting script has finished distributing files for this specific day track selection.</p>
+            </div>
+        `;
+    }
+}
+</script>
+========================================================================
+
