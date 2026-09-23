@@ -1,0 +1,23 @@
+{
+  "grade_level": "K-5",
+  "day": 178,
+  "subject": "math",
+  "title": "Academic Module: Math Core Study - Track 178",
+  "alignment_triggers": {
+    "parameters": {
+      "biblical_truth": "Review baseline alignment options for day 178.",
+      "alternative_framework": "Comparative structural elements active.",
+      "game_word": "EXPLORER"
+    }
+  },
+  "audio_instructions": "Welcome! Let's listen to today's short text tracking for day 178.",
+  "public_core_concept": "Investigating foundational academic math systems, boundaries, and variables.",
+  "visual_assets": [
+    "interactive_drawing_board"
+  ],
+  "retention_questions": [
+    {
+      "text": "Write down what you observed about today's lesson parameters."
+    }
+  ]
+}
