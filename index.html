@@ -216,19 +216,22 @@ function fetchCurriculumContent() {
     if (currentGrade === "6-8") { folderBucket = "68"; }
     else if (currentGrade === "9-12") { folderBucket = "912"; }
 
-    // Direct path targeting your local structured asset buckets
-    const targetFileUrl = `/assets/curriculum/${folderBucket}/day_${currentDay}_${currentSubject}.json`;
+    // Direct path pointing to your new clean subfolders: /assets/curriculum/k5/science/day_1.json
+    const targetFileUrl = `/assets/curriculum/${folderBucket}/${currentSubject}/day_${currentDay}.json`;
     
+    console.log("Requesting standardized asset path location: " + targetFileUrl);
+
     fetch(targetFileUrl)
         .then(response => {
-            if (!response.ok) { throw new Error("File missing on disk layout."); }
+            if (!response.ok) { throw new Error("File target was not found in directory branch."); }
             return response.json();
         })
         .then(data => {
+            // Render the screen using the actual content text from your file
             switchPortalLayout(data);
         })
         .catch(error => {
-            // Render an elegant empty layout placeholder if the file hasn't been generated yet
+            console.log("Path currently holds no file asset: " + error.message);
             switchPortalLayout(null);
         });
 }

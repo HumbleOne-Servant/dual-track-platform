@@ -1,90 +1,68 @@
-[FILE ID: sort_layouts.py - Part 1: Configuration Setup]
-========================================================================
 import os
 import shutil
-import json
+import re
 
-# Define your source file vault and target web asset directories
 SOURCE_VAULT_DIR = r"C:\DualTrackLearning_Online\vault"
 WEB_OUTPUT_DIR = r"C:\DualTrackLearning_Online\assets\curriculum"
 
-# Map out the exact destination directories for the new layout groups
-LAYOUT_PATHS = {
-    "k5": os.path.join(WEB_OUTPUT_DIR, "k5"),
-    "68": os.path.join(WEB_OUTPUT_DIR, "68"),
-    "912": os.path.join(WEB_OUTPUT_DIR, "912")
-}
-
-# Ensure all target folders exist on disk before sorting begins
-for folder_path in LAYOUT_PATHS.values():
-    os.makedirs(folder_path, exist_ok=True)
-
-print("Starting layout structure verification and directory routing...")
-========================================================================
-[FILE ID: sort_layouts.py - Part 2: Routing Logic Function]
-========================================================================
-def determine_layout_bucket(file_name):
+def extract_metadata_from_filename(file_name):
     """
-    Analyzes the file name structure to assign it to the correct layout container.
-    Expected naming formats include indicators like grade_k, grade_5, g6, etc.
+    Parses names like 'science_day_1.json' to dynamically extract 
+    the active subject, grade level, and specific day number.
     """
     clean_name = file_name.lower()
     
-    # Check for High School indicators (Grades 9 to 12)
-    high_school_tags = ["grade_9", "grade_10", "grade_11", "grade_12", "g9", "g10", "g11", "g12", "highschool"]
-    if any(tag in clean_name for tag in high_school_tags):
-        return "912"
+    # Identify subject component keys
+    subject = "electives"
+    if "math" in clean_name or "arithmetic" in clean_name:
+        subject = "math"
+    elif "english" in clean_name or "reading" in clean_name or "language" in clean_name:
+        subject = "english"
+    elif "science" in clean_name or "thermo" in clean_name:
+        subject = "science"
+    elif "history" in clean_name or "social" in clean_name:
+        subject = "social studies"
         
-    # Check for Middle School indicators (Grades 6 to 8)
-    middle_school_tags = ["grade_6", "grade_7", "grade_8", "g6", "g7", "g8", "middleschool"]
-    if any(tag in clean_name for tag in middle_school_tags):
-        return "68"
+    # Identify grade bracket parameters
+    grade_bucket = "k5"
+    if any(tag in clean_name for tag in ["grade_9", "grade_10", "grade_11", "grade_12", "g9", "g10", "g11", "g12", "highschool"]):
+        grade_bucket = "912"
+    elif any(tag in clean_name for tag in ["grade_6", "grade_7", "grade_8", "g6", "g7", "g8", "middleschool"]):
+        grade_bucket = "68"
         
-    # Default fallback to Elementary for early childhood grades (K to 5)
-    return "k5"
-========================================================================
-[FILE ID: sort_layouts.py - Part 3: Ingestion Loop Engine]
-========================================================================
-processed_counter = 0
-skipped_counter = 0
-
-# Scan through all available dynamic files inside your curriculum source folder
-for root, dirs, files in os.walk(SOURCE_VAULT_DIR):
-    for current_file in files:
-        # Process only standard curriculum data files
-        if current_file.endswith(".json") or current_file.endswith(".html"):
-            source_file_path = os.path.join(root, current_file)
-            
-            # Identify which layout design bucket this file belongs to
-            target_bucket = determine_layout_bucket(current_file)
-            destination_dir = LAYOUT_PATHS[target_bucket]
-            destination_file_path = os.path.join(destination_dir, current_file.lower())
-            
-            try:
-                # Copy the file over while applying consistent lowercase formatting
-                shutil.copy2(source_file_path, destination_file_path)
-                processed_counter += 1
-            except Exception as e:
-                print(f"Unable to process file {current_file}. Issue: {str(e)}")
-                skipped_counter += 1
-        else:
-            skipped_counter += 1
-========================================================================
-[FILE ID: sort_layouts.py - Part 4: Completion Summary Reporter]
-========================================================================
-# Calculate total files scanned during the operation
-grand_total = processed_counter + skipped_counter
-
-print("========================================================================")
-print("              LAYOUT BUCKET ROUTING COMPLETION REPORT                   ")
-print("========================================================================")
-print(f" Successfully Sorted & Routed: {processed_counter} layout-targeted files")
-print(f" Skipped / Unchanged Files:     {skipped_counter} records")
-print(f" Total Vault Files Evaluated:   {grand_total} files verified")
-print("========================================================================")
-print(" Status: Distribution complete. Web layouts are now mapped to disk structures.")
+    # Extract the day numeric digit using standard expressions
+    day_match = re.search(r'day_(\d+)', clean_name)
+    day_number = day_match.group(1) if day_match else "1"
+    
+    return grade_bucket, subject, day_number
+def run_intelligent_vault_distribution():
+    print("Beginning structural file parsing operations...")
+    file_counter = 0
+    
+    for root, dirs, files in os.walk(SOURCE_VAULT_DIR):
+        for current_file in files:
+            if current_file.endswith(".json"):
+                source_file_path = os.path.join(root, current_file)
+                
+                # Parse metadata out of the actual file name elements
+                grade_bucket, subject_folder, day_num = extract_metadata_from_filename(current_file)
+                
+                # Build organized nested tree directory branches
+                target_directory = os.path.join(WEB_OUTPUT_DIR, grade_bucket, subject_folder)
+                os.makedirs(target_directory, exist_ok=True)
+                
+                # Standardize output naming: 'science_day_1.json' -> 'day_1.json' inside /science/
+                standardized_name = f"day_{day_num}.json"
+                final_destination_path = os.path.join(target_directory, standardized_name)
+                
+                try:
+                    shutil.copy2(source_file_path, final_destination_path)
+                    print(f"Routed: {current_file} -> {grade_bucket}/{subject_folder}/{standardized_name}")
+                    file_counter += 1
+                except Exception as e:
+                    print(f"Error transferring {current_file}: {str(e)}")
+                    
+    print(f"\nCompleted operation. Successfully processed {file_counter} curriculum assets.")
 
 if __name__ == "__main__":
-    # This enables running the logic directly from your Command Prompt window
-    pass
-========================================================================
+    run_intelligent_vault_distribution()
