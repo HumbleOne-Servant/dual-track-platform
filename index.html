@@ -137,155 +137,170 @@ function switchPortalLayout(incomingLessonData = null) {
 }
 </script>
 <script>
+// Replace your main portal layout switcher entry points with this content engine
 function renderElementaryInterface(data) {
-    const viewport = document.getElementById('adaptive-portal-viewport');
-    const grade = document.getElementById('track-grade-selector').value.toUpperCase();
-    const subject = document.getElementById('track-subject-selector').value.toUpperCase();
-    
-    // Sourcing metadata parameters from your pristine topic database files
-    const heading = data?.lesson_title || `STUDY MODULE: ${subject} (${grade})`;
-    const coreText = data?.public_core_concept || "Ready for discovery? Select an academic school calendar day from the list choices to begin!";
-    const topic = data?.topic_folder || "foundations_alpha";
+    executePortalRenderEngine(data, "K-5");
+}
 
+function renderMiddleSchoolInterface(data) {
+    executePortalRenderEngine(data, "6-8");
+}
+
+function renderHighSchoolInterface(data) {
+    executePortalRenderEngine(data, "9-12");
+}
+
+function executePortalRenderEngine(data, gradeBand) {
+    const viewport = document.getElementById('adaptive-portal-viewport');
+    const exactGrade = document.getElementById('track-grade-selector').value.toUpperCase();
+    const subject = document.getElementById('track-subject-selector').value;
+    const day = data?.day || 1;
+    
+    // Fallback parsing if folder metadata paths aren't fully populated yet
+    let topic = data?.topic_folder || "foundations_alpha";
+    if (gradeBand === "6-8" && topic === "foundations_alpha") topic = "ratios_and_proportions";
+    if (gradeBand === "9-12" && topic === "foundations_alpha") topic = "advanced_equations";
+
+    // CORE INGESTION GATEWAY: Generate targeted pedagogical content text
+    const educationalPayload = compileAgeAppropriateCurriculum(gradeBand, exactGrade, subject, topic, day);
+
+    if (gradeBand === "K-5") {
+        buildElementaryWorkspaceUI(viewport, data, educationalPayload, topic);
+    } else if (gradeBand === "6-8") {
+        buildMiddleSchoolWorkspaceUI(viewport, data, educationalPayload, topic);
+    } else if (gradeBand === "9-12") {
+        buildHighSchoolWorkspaceUI(viewport, data, educationalPayload, topic);
+    }
+}
+function compileAgeAppropriateCurriculum(gradeBand, exactGrade, subject, topic, day) {
+    // -------------------------------------------------------------
+    // GRADES K-5: VISUAL, MULTIMEDIA, TACTILE LEARNING TRACKS
+    // -------------------------------------------------------------
+    if (gradeBand === "K-5") {
+        if (subject === "math" || topic === "basic_counting") {
+            return {
+                icon: "🔢🦁",
+                lessonBody: `Welcome to Math Adventures, ${exactGrade}! Today we are practicing our counting skills. Imagine you are visiting a bright sunny safari park and see a proud pride of lions resting near a tall tree. Let's count them out loud together: 1, 2, 3, 4, and 5! Counting helps us keep track of all the wonderful things in our world. Can you find exactly 5 blocks or markers in front of you right now? Let's count them one by one!`,
+                assignmentPrompt: "Look around your desk space! Find 5 small items, align them in a straight row, and tap each one as you count out loud. Next, use the interactive drawing canvas below to draw 5 bright yellow stars to show your teacher!"
+            };
+        }
+        return {
+            icon: "☀️🍁",
+            lessonBody: `Welcome to Science Secrets, ${exactGrade}! Today we are exploring weather fields and shifting seasons. The environment around us changes systematically throughout the school year. During autumn, you will notice the outside temperature turn crisp and cool, and green leaves shift into bright orange and red before tumbling down. These cycles help protect plants and trees so they can rest for the winter.`,
+            assignmentPrompt: "Look out the nearest window right now! Observe the sky condition. Use your mouse, stylus, or touch device inside the drawing template container below to sketch the active weather elements you see (clouds, sun, or rain drops)."
+        };
+    }
+
+    // -------------------------------------------------------------
+    // GRADES 6-8: GUIDED SYSTEM ANALYSIS & SCAFFOLDED INTERACTION
+    // -------------------------------------------------------------
+    if (gradeBand === "6-8") {
+        if (subject === "math" || topic === "ratios_and_proportions") {
+            return {
+                icon: "📊📈",
+                lessonBody: `Focus Lesson: Proportional Relationships & Scaling. In this section, we analyze how two variable fields change in direct relation to one another. A ratio is a mathematical comparison of two quantities. For example, if a mapping scale states that 1 inch on paper represents 5 miles in the physical world, we express this constant variable parameters sequence as 1:5. If you map a distance of 4 inches, you can calculate the true physical distance by multiplying by your scaling variable (4 * 5 = 20 miles).`,
+                assignmentPrompt: "Review the scaling matrix. Calculate the missing parameters for a drawing where 3 inches corresponds to a 15-mile track. Type your calculated numerical value directly into your tracking log, then construct a brief two-sentence explanation defining what a constant scaling factor represents."
+            };
+        }
+        return {
+            icon: "🌱💧",
+            lessonBody: `Focus Lesson: Energy Flows & Dynamic Ecosystems. Every biological system relies on a continuous, structured transfer of energy to maintain stability. Energy enters the ecosystem loop from the sun and is captured by primary producers through photosynthesis. It then tracks upward through primary and secondary consumers. Because energy is lost as heat at each transfer boundary row, an ecosystem requires strict input parameters to stay balanced and prevent collapse.`,
+            assignmentPrompt: "Analyze the food web matrix details. Identify the primary producer and primary consumer inside the active ecosystem dataset. Write a short paragraph in your project workspace tracking exactly how energy diminishes as it moves across system boundaries."
+        };
+    }
+
+    // -------------------------------------------------------------
+    // GRADES 9-12: RIGOROUS ANALYTICAL ESSAYS & WORKSTATIONS
+    // -------------------------------------------------------------
+    if (subject === "math" || topic === "advanced_equations") {
+        return {
+            icon: "🧮🔍",
+            lessonBody: `Academic Module: Fundamental Theorem of Calculus & Limits. This syllabus component formalizes the inverse relationship between differentiation and integration. We define the limit parameter as the primary foundation upon which rate-of-change metrics are constructed. By analyzing the area beneath a continuous curve over specific closed boundaries [a, b], we can compute total accumulation variables exactly. This forms the absolute baseline for advanced scientific, engineering, and macroeconomic modeling.`,
+            assignmentPrompt: "Construct a formal mathematical proof evaluating the rate of accumulation for the polynomial function bounds provided in your course text sheet. Show all multi-step calculus limits calculations cleanly. Output your step-by-step derivation as a structured document asset, ready for manual instructor verification."
+        };
+    }
+    return {
+        icon: "🔬⚛️",
+        lessonBody: `Academic Module: First Law of Thermodynamics & Boundary Conditions. This module evaluates the law of conservation of energy inside closed matrix fields. Energy can neither be created nor destroyed; it can only be transformed from one macroscopic state to another. We express this mechanical equation as Delta U = Q - W, where the total internal energy parameter adjust fields based on heat added minus net work performed. Tracking these precise equilibrium thresholds allows us to trace structural boundary shifts in physical systems.`,
+        assignmentPrompt: "Evaluate the physical thermodynamic dataset provided inside your module window. Calculate the net internal energy shift when a closed system absorbs 500 Joules of heat while performing 200 Joules of external mechanical work. Write a comprehensive source summary report explaining how this tracking aligns with conservation laws, and drop your completed document asset into the submission dock container below."
+    };
+}
+function buildElementaryWorkspaceUI(viewport, data, payload, topic) {
+    const title = data?.lesson_title || "Lesson Staging";
     viewport.innerHTML = `
         <div style="display: flex; flex-direction: column; align-items: center; gap: 25px;">
-            <button class="big-interactive-button" style="background: #6c5ce7; box-shadow: 0 6px 0 #4f3bb1;" onclick="triggerVoiceSynthesis('${coreText.replace(/'/g, "\\'")}')">
+            <button class="big-interactive-button" style="background: #6c5ce7; box-shadow: 0 6px 0 #4f3bb1;" onclick="triggerVoiceSynthesis('${payload.lessonBody.replace(/'/g, "\\'")}')">
                 🔊 Click to Hear My Lesson Out Loud
             </button>
-            
             <div class="game-card-container" style="width: 100%; max-width: 750px; border-color: #55efc4;">
-                <div style="font-size: 70px; margin-bottom: 10px;">🎨🚀</div>
-                <span style="background: #ffeaa7; color: #d63031; padding: 6px 16px; font-weight: bold; border-radius: 12px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">
-                    Active Focus: ${topic.replace('_', ' ')}
+                <div style="font-size: 70px; margin-bottom: 10px;">${payload.icon}</div>
+                <span style="background: #ffeaa7; color: #d63031; padding: 6px 16px; font-weight: bold; border-radius: 12px; font-size: 14px; text-transform: uppercase;">
+                    Topic: ${topic.replace('_', ' ')}
                 </span>
-                <h2 style="font-size: 28px; color: #2d3436; margin: 20px 0;">${heading}</h2>
-                
+                <h2 style="font-size: 28px; color: #2d3436; margin: 20px 0;">${title}</h2>
                 <p style="font-size: 19px; color: #2d3436; text-align: left; background: #fffdf0; padding: 30px; border-radius: 20px; line-height: 1.6; border: 2px dashed #ffeaa7; margin-bottom: 25px;">
-                    ${coreText}
+                    ${payload.lessonBody}
                 </p>
-                
-                <button class="big-interactive-button" onclick="alert('Launching interactive drawing tool canvas asset...')">
-                    Let's Play! 🌟
-                </button>
+                <button class="big-interactive-button" onclick="alert('Opening gamified learning checkpoint space...')">Let's Play! 🌟</button>
             </div>
             
-            <div id="elementary-assignment-dock" style="width: 100%; max-width: 750px;">
-                ${buildElementaryAssignmentBox(topic)}
+            <!-- Tactile Drawing Response Box -->
+            <div class="game-card-container" style="width: 100%; max-width: 750px; border-color: #74b9ff; background: #f1f7ff;">
+                <h3 style="color: #0984e3; margin-top: 0; font-size: 22px;">📝 Creative Playground Assignment</h3>
+                <p style="font-size: 16px; color: #4b4b4b; line-height: 1.5;">${payload.assignmentPrompt}</p>
+                <div style="background: white; border: 3px dashed #74b9ff; border-radius: 15px; padding: 60px 0; color: #b2bec3; font-weight: bold; cursor: crosshair;" onclick="this.style.background='#e3fafc'; alert('Drawing board canvas active.')">
+                    🎨 [Click to Unlock Touch/Mouse Response Canvas Box]
+                </div>
+                <button class="big-interactive-button" style="background: #20bf6b; box-shadow: 0 6px 0 #1b8a4c; margin-top: 20px;" onclick="alert('Work file submitted successfully!')">Submit Work File 🌟</button>
             </div>
         </div>`;
 }
-</script>
-<script>
-function buildElementaryAssignmentBox(topic) {
-    if (topic === "weather_seasons") {
-        return `
-            <div class="game-card-container" style="border-color: #74b9ff; background: #f1f7ff;">
-                <h3 style="color: #0984e3; margin-top: 0; font-size: 22px;">📝 Creative Weather Assignment</h3>
-                <p style="font-size: 16px; color: #4b4b4b;">Look outside! Use your mouse or tablet screen inside the drawing box template below to sketch the current weather features you observe.</p>
-                <div style="background: white; border: 3px dashed #74b9ff; border-radius: 15px; height: 18px; padding: 80px 0; text-align: center; color: #b2bec3; font-weight: bold; cursor: crosshair;" onclick="alert('Drawing tool initialized.')">
-                    🎨 [Click Here to Open Drawing Slate Canvas]
-                </div>
-                <button class="big-interactive-button" style="background: #20bf6b; box-shadow: 0 6px 0 #1b8a4c;" onclick="alert('Your drawing has been submitted successfully for verification review!')">
-                    Submit Work File 🌟
-                </button>
-            </div>`;
-    }
-    return `
-        <div class="game-card-container" style="border-color: #a55eea; background: #faf5ff;">
-            <h3 style="color: #6f00ff; margin-top: 0; font-size: 22px;">📝 Lesson Retentive Task</h3>
-            <p style="font-size: 16px; color: #4b4b4b;">Share one interesting concept or structural parameter you observed in today's textbook reading passage with your parent.</p>
-        </div>`;
-}
-
-function triggerVoiceSynthesis(textToRead) {
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(textToRead);
-    utterance.rate = 0.95;
-    window.speechSynthesis.speak(utterance);
-}
-</script>
-<script>
-function renderMiddleSchoolInterface(data) {
-    const viewport = document.getElementById('adaptive-portal-viewport');
-    const grade = document.getElementById('track-grade-selector').value.toUpperCase();
-    const subject = document.getElementById('track-subject-selector').value;
-    
-    const heading = data?.lesson_title || `Daily Tracker Module: ${subject.toUpperCase()} (${grade})`;
-    const coreText = data?.public_core_concept || "Select an active schedule track element up in the selection bars to pull core lesson logs.";
-    const topic = data?.topic_folder || "ratios_and_proportions";
-
+function buildMiddleSchoolWorkspaceUI(viewport, data, payload, topic) {
+    const title = data?.lesson_title || "Academic Task Space";
     viewport.innerHTML = `
         <div class="clean-teen-wrapper">
             <div style="display: grid; grid-template-columns: 300px 1fr; gap: 30px;">
-                <!-- Left Sidebar Navigation Block -->
                 <aside>
                     <h3 style="color: #2980b9; margin-top: 0; font-size: 20px;">📋 Student Pipeline</h3>
-                    <div class="teen-pipeline-card" style="border-left-color: #20bf6b;">
-                        <strong style="color: #20bf6b;">✓ Complete:</strong><br>Unit Path Index
-                    </div>
-                    <div class="teen-pipeline-card" style="border-left-color: #00a8ff;">
-                        <strong style="color: #00a8ff;">→ Active Target:</strong><br>${topic.replace('_', ' ').title()}
-                    </div>
+                    <div class="teen-pipeline-card" style="border-left-color: #20bf6b;"><strong>✓ Status: Ready</strong><br>Topic Analysis Context</div>
+                    <div class="teen-pipeline-card" style="border-left-color: #00a8ff;"><strong>→ Active Task:</strong><br>${topic.replace('_', ' ').title()}</div>
                 </aside>
-                
-                <!-- Main Content Panel Area -->
                 <section style="background: #ffffff; padding: 10px 20px;">
-                    <span style="background: #e3fafc; color: #0b7285; padding: 6px 14px; font-weight: bold; border-radius: 6px; font-size: 13px; text-transform: uppercase;">
-                        Course Pipeline Viewport
-                    </span>
-                    <h2 style="color: #2c3e50; font-size: 26px; margin: 15px 0 20px 0;">${heading}</h2>
-                    <p style="color: #4b5563; line-height: 1.7; font-size: 16px; margin-bottom: 30px;">${coreText}</p>
+                    <span style="background: #e3fafc; color: #0b7285; padding: 6px 14px; font-weight: bold; border-radius: 6px; font-size: 13px; text-transform: uppercase;">Active Workspace</span>
+                    <h2 style="color: #2c3e50; font-size: 26px; margin: 15px 0;">${title}</h2>
+                    <p style="color: #4b5563; line-height: 1.7; font-size: 16.5px; margin-bottom: 30px;">${payload.lessonBody}</p>
                     
-                    <div style="background: #f8f9fa; border: 1px solid #e5e7eb; padding: 20px; border-radius: 12px; margin-bottom: 25px;">
-                        <h4 style="margin: 0 0 10px 0; color: #4b5563; font-size: 16px;">📝 Required Practice Assignment Task</h4>
-                        <p style="margin: 0; color: #6b7280; font-size: 15px;">Read the textbook content log attentively. Draft a 2-sentence structural reflection summary details block inside your local portfolio binder tracker.</p>
+                    <div style="background: #f8f9fa; border: 1px solid #e5e7eb; padding: 25px; border-radius: 12px; margin-bottom: 25px;">
+                        <h4 style="margin: 0 0 10px 0; color: #4b5563; font-size: 16px;">📝 Daily Input Assignment</h4>
+                        <p style="margin: 0 0 15px 0; color: #6b7280; font-size: 15px; line-height: 1.5;">${payload.assignmentPrompt}</p>
+                        <textarea style="width: 100%; height: 80px; padding: 10px; border-radius: 6px; border: 1px solid #ced6e0; font-family: sans-serif; resize: none;" placeholder="Type your portfolio reflection summary entry here..."></textarea>
                     </div>
-                    <button class="teen-action-btn" onclick="alert('Submission system connecting to local folder hub...')">
-                        Open Project Submission Dock
-                    </button>
+                    <button class="teen-action-btn" onclick="alert('Data log entry saved successfully.')">Save Staging Response</button>
                 </section>
             </div>
         </div>`;
 }
-</script>
-<script>
-function renderHighSchoolInterface(data) {
-    const viewport = document.getElementById('adaptive-portal-viewport');
-    const subject = document.getElementById('track-subject-selector').value;
-    
-    const heading = data?.lesson_title || "Advanced Syllabus Module Core Node";
-    const coreText = data?.public_core_concept || "Ingestion path standby. Update top header criteria logs to query textbook matrices.";
-    const topic = data?.topic_folder || "advanced_equations";
-
+function buildHighSchoolWorkspaceUI(viewport, data, payload, topic) {
+    const title = data?.lesson_title || "Advanced Syllabus Module Core";
     viewport.innerHTML = `
         <div class="adult-workstation-wrapper">
-            <!-- Left Academic Navigation Panel -->
             <nav class="workstation-sidebar">
                 <strong style="font-size: 13px; color: #747d8c; letter-spacing: 1px; text-transform: uppercase;">Syllabus Directory</strong>
                 <a href="#" class="workstation-link" style="color: #ffffff;">📊 Core Dashboard</a>
                 <a href="#" class="workstation-link">📖 Document Readings</a>
                 <a href="#" class="workstation-link">📝 Gradebook Log</a>
             </nav>
-            
-            <!-- Rigorous Clean Workspace Document Sheet -->
             <main class="workstation-paper">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f2f6; padding-bottom: 15px; margin-bottom: 25px;">
-                    <h1 style="font-size: 26px; font-weight: 600; margin: 0; color: #1e272e;">${heading}</h1>
-                    <span style="font-size: 14px; color: #747d8c; font-weight: 500;">Topic Branch: ${topic.toUpperCase()}</span>
+                    <h1 style="font-size: 25px; font-weight: 600; margin: 0; color: #1e272e;">${title}</h1>
+                    <span style="font-size: 13px; color: #747d8c; font-weight: bold; text-transform: uppercase;">Syllabus Node: ${topic}</span>
                 </div>
-                
                 <article style="line-height: 1.8; color: #2f3542; font-size: 16.5px; margin-bottom: 40px; text-align: justify;">
-                    ${coreText}
+                    ${payload.lessonBody}
                 </article>
-                
-                <!-- Professional Document File Drop Area -->
                 <div style="border: 2px dashed #ced6e0; padding: 30px; text-align: center; border-radius: 8px; background: #ffffff;">
-                    <p style="margin: 0 0 15px 0; font-size: 14px; color: #747d8c; font-weight: 500;">
-                        <strong>🎓 Required Academic Output:</strong> Construct a comprehensive analytical document response paper matching your target course metrics.
-                    </p>
-                    <button class="workstation-btn" onclick="alert('Launching professional local drive explorer upload terminal...')">
-                        Upload Completed Document Asset
-                    </button>
+                    <p style="margin: 0 0 20px 0; font-size: 15px; color: #2f3542; line-height: 1.6;"><strong>🎓 Required Academic Output:</strong> ${payload.assignmentPrompt}</p>
+                    <button class="workstation-btn" onclick="alert('Connecting to local file directories Explorer context...')">Upload Completed Document Asset</button>
                 </div>
             </main>
         </div>`;
