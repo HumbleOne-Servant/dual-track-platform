@@ -1,51 +1,66 @@
 <!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 1 OF 8: PLATFORM WRAPPER AND ROOT INTERFACE VISUAL RULES -->
+<!-- BOX 1 OF 8: PLATFORM GRAPHICS ENGINE AND PRIMARY CORE VISUAL STYLES -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Dual-Track Learning Platform</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f1f5f9; color: #1e293b; }
-        .control-panel { background: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; gap: 15px; align-items: center; }
-        select, button { padding: 12px 16px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 14px; font-weight: 600; color: #334155; background-color: #fff; }
-        button { background-color: #2563eb; color: #ffffff; border: none; cursor: pointer; transition: background 0.2s; }
-        button:hover { background-color: #1d4ed8; }
-        .canvas-container { display: flex; gap: 24px; min-height: 650px; align-items: stretch; }
-        .track-panel { flex: 1; background: #ffffff; padding: 30px; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #e2e8f0; }
-        .panel-header { font-size: 20px; font-weight: 800; border-bottom: 3px solid #cbd5e1; padding-bottom: 12px; margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f8fafc; color: #0f172a; -webkit-user-select: none; user-select: none; }
+        .control-panel { background: #ffffff; padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; gap: 15px; align-items: center; border: 1px solid #e2e8f0; }
+        select, button { padding: 12px 18px; border-radius: 8px; border: 2px solid #cbd5e1; font-size: 14px; font-weight: 700; color: #334155; background: #fff; cursor: pointer; }
+        button { background-color: #2563eb; color: #ffffff; border: none; transition: all 0.2s; }
+        button:hover { background-color: #1d4ed8; transform: translateY(-1px); }
+        .canvas-container { display: flex; gap: 24px; min-height: 700px; }
+        .track-panel { flex: 1; background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid #e2e8f0; }
+        .panel-header { font-size: 20px; font-weight: 800; border-bottom: 3px solid #f1f5f9; padding-bottom: 12px; margin-top: 0; display: flex; align-items: center; justify-content: space-between; }
+        .public-badge { background: #ffedd5; color: #ea580c; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .alignment-badge { background: #dbeafe; color: #2563eb; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
 <!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 2 OF 8: CHILD-FRIENDLY INTERACTIVE HANDOUT CARD GRAPHICS -->
-        .public-header-badge { background: #e2e8f0; color: #475569; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        .concept-focal-card { background: #f8fafc; border-left: 5px solid #64748b; padding: 18px; border-radius: 0 8px 8px 0; margin: 15px 0; font-size: 16px; line-height: 1.6; font-weight: 500; }
-        .interactive-handout-box { background: #ffffff; border: 2px dashed #94a3b8; border-radius: 12px; padding: 20px; margin-top: 20px; }
-        .k-bullet-row { display: flex; align-items: center; gap: 12px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 14px; margin-bottom: 10px; border-radius: 8px; font-size: 15px; font-weight: 600; color: #334155; cursor: pointer; transition: all 0.2s; }
-        .k-bullet-row:hover { background: #f0fdf4; border-color: #22c55e; }
-        .k-bullet-row.checked { background: #dcfce7; border-color: #22c55e; color: #166534; }
-        .k-checkbox-box { width: 20px; height: 20px; border: 2px solid #cbd5e1; border-radius: 4px; display: flex; align-items: center; justify-content: center; background: white; font-weight: bold; }
-        .k-bullet-row.checked .k-checkbox-box { background: #22c55e; border-color: #22c55e; color: white; }
+<!-- BOX 2 OF 8: SKETCHPAD SKINS, OBJECT COUNTERS, AND GRID HUNT INTERACTIVE CARDS -->
+        /* Mode 1 Layout Assets */
+        .audio-prompt-btn { background: #f0fdf4; border: 2px solid #22c55e; color: #166534; width: 100%; text-align: left; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-size: 16px; }
+        .audio-prompt-btn:hover { background: #dcfce7; }
+        .tracing-canvas-box { width: 100%; height: 200px; border: 2px dashed #94a3b8; border-radius: 12px; background: #fafafa; position: relative; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; cursor: crosshair; }
+        .tracing-number-back-svg { position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; }
+        .item-counting-grid { display: flex; gap: 12px; flex-wrap: wrap; margin: 15px 0; background: #f8fafc; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0; }
+        .tappable-acorn { font-size: 32px; cursor: pointer; transition: transform 0.2s; padding: 5px; opacity: 0.4; filter: grayscale(100%); }
+        .tappable-acorn.counted { opacity: 1.0; filter: grayscale(0%); transform: scale(1.15) rotate(5deg); }
+        .number-hunt-frame { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 15px; }
+        .hunt-cell { background: #ffffff; border: 2px solid #cbd5e1; padding: 12px; text-align: center; font-size: 18px; font-weight: 800; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .hunt-cell:hover { border-color: #3b82f6; background: #eff6ff; }
+        .hunt-cell.found { background: #dcfce7; border-color: #22c55e; color: #15803d; transform: scale(1.05); }
 <!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 3 OF 8: ALIGNMENT DISPLAY PANELS AND DYNAMIC COGNITIVE PORTALS -->
-        .alignment-header-badge { background: #dbeafe; color: #1e40af; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        .portal-active-view { background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 2px solid #3b82f6; padding: 25px; border-radius: 14px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-top: 15px; }
-        .truth-section-header { font-weight: 800; color: #1e3a8a; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-        .truth-body-text { background: white; padding: 14px; border-radius: 8px; border: 1px solid #dbeafe; font-size: 15px; line-height: 1.6; color: #1e293b; font-weight: 500; margin-bottom: 16px; }
-        .student-response-area { width: 100%; box-sizing: border-box; padding: 12px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 14px; margin-top: 6px; font-family: inherit; resize: vertical; }
-        .status-footer-bar { display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 20px 0 0 0; margin-top: 20px; }
-        .keyword-link { background: #fef08a; border-bottom: 2px solid #eab308; padding: 0 4px; font-weight: 700; border-radius: 4px; cursor: pointer; }
+<!-- BOX 3 OF 8: DIGITAL CRAYON PALETTES, WATER DUCK SCENES, AND HUNDRED GRIDS -->
+        /* Mode 2 Layout Assets */
+        .duck-pond-svg-box { width: 100%; max-height: 280px; border: 1px solid #e2e8f0; border-radius: 12px; background: #fff; margin-bottom: 15px; }
+        .coloring-sector { stroke: #475569; stroke-width: 2; fill: #ffffff; cursor: pointer; transition: fill 0.2s; }
+        .coloring-sector:hover { fill: #f1f5f9; }
+        .crayon-palette { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+        .crayon-choice { padding: 8px 12px; border-radius: 20px; font-size: 12px; font-weight: 800; color: white; cursor: pointer; border: 3px solid transparent; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .crayon-choice.active { border-color: #0f172a; transform: translateY(-2px); }
+        
+        /* Mode 3 Layout Assets */
+        .hundred-chart-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; background: #f8fafc; padding: 10px; border-radius: 10px; border: 1px solid #cbd5e1; }
+        .grid-number-box { background: white; border: 1px solid #e2e8f0; padding: 8px 2px; text-align: center; font-size: 13px; font-weight: 700; border-radius: 4px; color: #334155; }
+        .grid-number-box.missing-target { background: #fef08a; border: 2px solid #eab308; cursor: pointer; color: transparent; }
+        .grid-number-box.missing-target.solved { background: #dcfce7; border-color: #22c55e; color: #15803d; font-weight: 800; }
+        
+        /* Right Side Portal Panels */
+        .portal-active-container { background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 2px solid #3b82f6; padding: 25px; border-radius: 16px; margin-top: 15px; }
+        .student-response-field { width: 100%; box-sizing: border-box; padding: 12px; border-radius: 8px; border: 2px solid #cbd5e1; font-size: 14px; margin-top: 8px; font-family: inherit; }
+        .status-footer-row { display: flex; justify-content: space-between; align-items: center; background: #f1f5f9; padding: 15px 20px; border-radius: 12px; margin-top: 20px; }
     </style>
 </head>
 <!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 4 OF 8: WORKSPACE FILTER SELECTORS AND CORE CANVAS ROW -->
+<!-- BOX 4 OF 8: TOP LEVEL NAVIGATION CONTROL PANELS AND DUAL TRACK CANVASES -->
 <body>
+
     <div class="control-panel">
-        <select id="grade-dropdown">
+        <select id="grade-dropdown" onchange="updateDynamicDayBounds()">
             <option value="grade_k">Kindergarten</option>
             <option value="grade_1">Grade 1</option>
             <option value="grade_2">Grade 2</option>
-            <option value="grade_5">Grade 5</option>
-            <option value="grade_10">Grade 10</option>
-            <option value="grade_12">Grade 12</option>
         </select>
         <select id="subject-dropdown">
             <option value="mathematics">mathematics</option>
@@ -55,75 +70,74 @@
             <option value="biblical_studies">biblical_studies</option>
         </select>
         <select id="day-dropdown">
-            <!-- Automatically tracking day nodes 1 to 180 here -->
+            <!-- Automatically initialized sequentially from Day 1 to Day 180 below -->
         </select>
         <button onclick="loadCurriculumDay()">Launch Lesson Matrix</button>
     </div>
-<!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 5 OF 8: LEFT APPLIED HANDOUT LAYOUT STRUCTURE -->
+
     <div class="canvas-container">
-        <!-- LEFT PANEL: MAINSTREAM PUBLIC SYSTEM BASELINE CONTEXT -->
+        <!-- LEFT PANEL: ADAPTS DYNAMICALLY INTO 3 SEPARATE HIGH-QUALITY VISUAL HANDOUT GAMES -->
         <div class="track-panel" id="left-track-canvas">
-            <div style="overflow-y: auto; max-height: 78vh; padding-right: 8px;">
+            <div style="overflow-y: auto; max-height: 82vh; padding-right: 8px;">
                 <div class="panel-header">
-                    <span>🏫 Public School Curriculum Baseline</span>
-                    <span class="public-header-badge" id="public-badge-id">Baseline Context</span>
+                    <span id="left-title-badge">🏫 Student Visual Handout Panel</span>
+                    <span class="public-badge" id="public-badge-tag">Grade K Matrix</span>
                 </div>
-                <h2 id="lesson-title" style="margin: 15px 0 5px 0; font-size: 24px; color: #0f172a;"></h2>
-                <div id="left-lesson-description" style="font-size: 15px; color: #475569; font-style: italic; margin-bottom: 15px;"></div>
+                <h2 id="lesson-header-title" style="margin: 15px 0 5px 0; font-size: 22px; color: #1e293b;"></h2>
+                <div id="left-concept-prompt" style="font-size: 15px; color: #475569; font-weight: 500; margin-bottom: 15px;">Select criteria options above and hit launch...</div>
                 
-                <!-- Core Concept Block -->
-                <div id="left-concept-card" class="concept-focal-card">Select options above and open the lesson window...</div>
-                
-                <!-- Child Workbook Handout Frame -->
-                <div id="left-interactive-handout" class="interactive-handout-box" style="display: none;">
-                    <strong style="color: #475569; font-size: 14px; display: block; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">📋 Core Practical Assignments</strong>
-                    <div id="k-bullets-checklist-container"></div>
-                </div>
+                <!-- Dynamic Target Housing Box where games are injected directly -->
+                <div id="left-visual-game-stage"></div>
             </div>
         </div>
 <!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 6 OF 8: RIGHT HIGH-PRIORITY INTEGRATED ALIGNMENT ENVIRONMENT -->
-        <!-- RIGHT PANEL: HIGH-PRIORITY TRUTH ALIGNMENT PORTAL & RETENTION WORKSPACE -->
+<!-- BOX 5 OF 8: HIGH PRIORITY BIBLICAL PORTAL AND PRIVATE STORAGE ARCHIVE LOGGER -->
+        <!-- RIGHT PANEL: HIGH-PRIORITY TRUTH ALIGNMENT SYSTEM & EVALUATION GRADE METRICS -->
         <div class="track-panel" id="right-track-canvas">
-            <div style="overflow-y: auto; max-height: 78vh; padding-right: 8px;">
+            <div style="overflow-y: auto; max-height: 82vh; padding-right: 8px;">
                 <div class="panel-header">
                     <span>🛡️ Core Truth Alignment Portal</span>
-                    <span class="alignment-header-badge">High Priority Focus</span>
+                    <span class="alignment-badge">High Priority Focus</span>
                 </div>
                 
-                <div id="portal-waiting-prompt" style="color: #64748b; font-style: italic; text-align: center; margin-top: 60px; padding: 20px;">
-                    💡 Click any <span style="background:#fef08a; padding: 2px 6px; border-radius:4px; font-weight:bold; color:#854d0e;">yellow keyword highlight</span> inside the public school text on the left to immediately unlock the underlying Biblical Principles and alternative design frameworks.
+                <div id="portal-waiting-prompt" style="color: #64748b; font-style: italic; text-align: center; margin-top: 60px; padding: 25px;">
+                    💡 Engaging or completing interactive visual tasks on the left child handout will instantly activate the underlying Biblical Principles and alternative design frameworks here.
                 </div>
 
-                <!-- Core Integration Portal Content Area -->
-                <div id="portal-active-display" class="portal-active-view" style="display: none;">
-                    <div class="truth-section-header">✝️ Unchanging Biblical Principle & Foundation</div>
-                    <div id="portal-bible-content" class="truth-body-text"></div>
+                <div id="portal-active-container" class="portal-active-container" style="display: none;">
+                    <h3 style="margin-top:0; color:#1e3a8a; border-bottom:2px solid #bfdbfe; padding-bottom:6px; font-size:15px; text-transform:uppercase;">🔗 Unified Truth Alignment Connection</h3>
                     
-                    <div class="truth-section-header">🔬 Unified Alternative Design Framework</div>
-                    <div id="portal-alternative-content" class="truth-body-text"></div>
+                    <div style="margin-bottom:14px;">
+                        <strong style="color:#1e40af; font-size:12px; display:block; text-transform:uppercase; tracking:0.5px;">✝️ Biblical Principle & Creation Law:</strong>
+                        <div id="portal-bible-text" style="background:white; padding:12px; border-radius:8px; border:1px solid #cbd5e1; font-size:14px; margin-top:4px; line-height:1.5; font-weight:500;"></div>
+                    </div>
+                    
+                    <div style="margin-bottom:14px;">
+                        <strong style="color:#1e40af; font-size:12px; display:block; text-transform:uppercase; tracking:0.5px;">🔬 Uploaded Alternative Design Framework:</strong>
+                        <div id="portal-alternative-text" style="background:white; padding:12px; border-radius:8px; border:1px solid #cbd5e1; font-size:14px; margin-top:4px; line-height:1.5; font-weight:500;"></div>
+                    </div>
                 </div>
 
-                <!-- Meticulous 3-Question Evaluation Workspace -->
-                <div id="retention-questions-wrapper" style="margin-top: 25px; display: none;">
-                    <h3 style="color: #0f172a; margin-bottom: 10px; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">🧠 Retention & Critical Verification Responses</h3>
-                    <div id="retention-questions-fields"></div>
+                <div id="retention-questions-block" style="margin-top:20px; display:none;">
+                    <h3 style="color:#0f172a; font-size:15px; text-transform:uppercase; margin-bottom:10px; font-weight:800;">✍️ Retention Review & Year-End Verification Proofs</h3>
+                    <div id="questions-form-fields"></div>
                 </div>
             </div>
 
-            <div class="status-footer-bar">
-                <label style="font-weight: 700; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; color: #1e293b;">
-                    <input type="checkbox" id="mark-complete-toggle" style="width:16px; height:16px;"> 🔒 Lock Progress & Log to Private Evaluation File
+            <div class="status-footer-row">
+                <label style="font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size:14px;">
+                    <input type="checkbox" id="mark-complete-toggle" style="width:16px; height:16px;"> 🔒 Lock Progress & Commit to Private Evaluation File
                 </label>
-                <div id="save-status-indicator" style="font-weight: 800; color: #16a34a; font-size: 14px;"></div>
+                <div id="save-status-indicator" style="font-weight: 800; color: #16a34a; font-size: 13px;"></div>
             </div>
         </div>
     </div>
 <!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 7 OF 8: 180-DAY DROPDOWN INITIALIZER AND FILE LOADER CODE -->
+<!-- BOX 6 OF 8: DYNAMIC PATH INITIALIZER AND INGESTION PARSER -->
 <script>
-let activeLessonNode = null;
+let activeLessonRecord = null;
+let activeCrayonColor = "#475569";
+let hasDrawnOnCanvas = false;
 
 window.addEventListener('DOMContentLoaded', () => {
     const daySelect = document.getElementById('day-dropdown');
@@ -136,85 +150,190 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+function updateDynamicDayBounds() {
+    document.getElementById('public-badge-tag').innerText = document.getElementById('grade-dropdown').value.replace('_',' ').toUpperCase() + " MATRIX";
+}
+
 async function loadCurriculumDay() {
     const grade = document.getElementById('grade-dropdown').value;
     const subject = document.getElementById('subject-dropdown').value;
     const day = document.getElementById('day-dropdown').value;
     
-    document.getElementById('portal-active-display').style.display = 'none';
-    document.getElementById('retention-questions-wrapper').style.display = 'none';
+    document.getElementById('portal-active-container').style.display = 'none';
+    document.getElementById('retention-questions-block').style.display = 'none';
     document.getElementById('portal-waiting-prompt').style.display = 'block';
     document.getElementById('save-status-indicator').innerText = '';
     document.getElementById('mark-complete-toggle').checked = false;
+    hasDrawnOnCanvas = false;
     
     const targetUrl = `curriculum/${grade}/${subject}/${day}.json`;
     
     try {
         const response = await fetch(targetUrl);
-        if (!response.ok) throw new Error("File path mismatch.");
+        if (!response.ok) throw new Error("Missing dataset mapping.");
         
-        activeLessonNode = await response.json();
-        renderMeticulousDualTrack(grade, activeLessonNode);
-        loadSavedSessionProgress(grade, subject, day);
+        activeLessonRecord = await response.json();
+        resolveAndRenderVisualGame(day, activeLessonRecord);
+        loadSessionVaultLogs(grade, subject, day);
     } catch (err) {
-        document.getElementById('left-concept-card').innerHTML = `❌ Data Pathway Missing: Cannot find individual day log file at <strong>${targetUrl}</strong>.<br><br>Please verify build_vault.py has run successfully.`;
+        document.getElementById('left-concept-prompt').innerHTML = `❌ System Configuration Alert: Cannot find individual day JSON file at <strong>${targetUrl}</strong>.<br><br>Please verify build_vault.py has executed across your directories.`;
+        document.getElementById('left-visual-game-stage').innerHTML = "";
     }
 }
 <!-- FILE: C:\DualTrackLearning_Online\index.html -->
-<!-- BOX 8 OF 8: AGE-ADAPTIVE DISPLAY BUILDERS AND VAULT TRANSACTION HANDLERS -->
-function renderMeticulousDualTrack(grade, data) {
-    document.getElementById('lesson-title').innerText = data.title;
-    document.getElementById('left-lesson-description').innerText = data.description;
-    document.getElementById('public-badge-id').innerText = grade.replace('_', ' ').toUpperCase();
+<!-- BOX 7 OF 8: AGE LEVEL GAME INTERACTIVE HTML CANVAS COMPILER -->
+function resolveAndRenderVisualGame(dayString, data) {
+    const dayIndex = parseInt(dayString.replace('day_', ''));
+    document.getElementById('lesson-header-title').innerText = data.title;
+    document.getElementById('left-concept-prompt').innerHTML = `💡 <strong>Core Task Focus:</strong> ${data.description}`;
     
-    // Parse the data file's concept text and build text highlights for alignment keyword targets
-    let parsedConcept = data.concept;
-    const trackingKeywords = ["matrix", "parameters", "coefficients", "boundary"];
-    trackingKeywords.forEach(word => {
-        const regex = new RegExp(`\\b(${word})\\b`, 'gi');
-        parsedConcept = parsedConcept.replace(regex, `<span class="keyword-link" onclick="triggerAlignmentPortal('${word}')">$1</span>`);
-    });
-    document.getElementById('left-concept-card').innerHTML = `<strong>Core Analytical Concept:</strong><br>${parsedConcept}`;
+    const stage = document.getElementById('left-visual-game-stage');
+    stage.innerHTML = "";
     
-    // Build the visual worksheet assignment container using your authentic file bullet points
-    document.getElementById('left-interactive-handout').style.display = 'block';
-    const checklistContainer = document.getElementById('k-bullets-checklist-container');
-    checklistContainer.innerHTML = "";
-    
-    data.bullets.forEach((bulletText, i) => {
-        checklistContainer.innerHTML += `
-            <div class="k-bullet-row" onclick="this.classList.toggle('checked')">
-                <div class="k-checkbox-box">✓</div>
-                <div><strong>Assignment Step ${i+1}:</strong> ${bulletText}</div>
+    // 🎨 CHANNELS 1: THE DYNAMIC NUMBER TRACING & HUNTING ENGINE (DAYS 1-60)
+    if (dayIndex <= 60) {
+        document.getElementById('left-title-badge').innerText = "✍️ Mode 1: Number Tracing & Hunting Canvas";
+        let targetNumDisplay = dayIndex > 9 ? dayIndex.toString().split('').join(' ') : dayIndex;
+        
+        let html = `
+            <button class="audio-prompt-btn" onclick="speakCurriculumPrompt('Let us practice tracking our numbers today. Carefully trace along the dotted lines, tap the items to fill your count ledger, and find the matching keys below!')">🔊 Tappable Audio Guide (Click to Hear Directions)</button>
+            <div style="font-size:14px; font-weight:700; margin-bottom:5px; color:#475569;">1. Trace the Target Constant Value:</div>
+            <div class="tracing-canvas-box" onmousemove="handleCanvasTracing(event)" onclick="handleCanvasTracing(event)">
+                <svg class="tracing-number-back-svg" viewBox="0 0 200 100">
+                    <text x="50%" y="70%" text-anchor="middle" fill="none" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="6,6" font-size="75" font-weight="900" font-family="monospace">${targetNumDisplay}</text>
+                </svg>
+                <div style="color:#94a3b8; font-size:13px; font-weight:600; pointer-events:none;">Hold mouse down or drag finger inside to trace...</div>
+            </div>
+            
+            <div style="font-size:14px; font-weight:700; margin-bottom:5px; color:#475569;">2. Color Target Verification Inventory (Tap to Fill Count Ledger):</div>
+            <div class="item-counting-grid">
+        `;
+        // Draw exactly 3 checkable objects based on the uploaded workbook model
+        for(let i=0; i<3; i++) {
+            html += `<span class="tappable-acorn" onclick="this.classList.toggle('counted'); checkKindergartenCompletionHooks();">🌰</span>`;
+        }
+        html += `</div>
+            <div style="font-size:14px; font-weight:700; margin:15px 0 5px 0; color:#475569;">3. Coordinate Grid Matrix Hunt (Click the matching Day values):</div>
+            <div class="number-hunt-frame">
+        `;
+        let huntOptions = [dayIndex, dayIndex+1, dayIndex-1, 7, 2, dayIndex, 9, dayIndex, 4, 1, 3, dayIndex];
+        huntOptions.forEach(num => {
+            let isTarget = (num === dayIndex);
+            html += `<div class="hunt-cell" data-target="${isTarget}" onclick="handleHuntClick(this)">${num}</div>`;
+        });
+        html += `</div>`;
+        stage.innerHTML = html;
+        
+    // 🦆 CHANNELS 2: THE INTERACTIVE COLOR-BY-NUMBER CANVAS (DAYS 61-120)
+    } else if (dayIndex <= 120) {
+        document.getElementById('left-title-badge').innerText = "🎨 Mode 2: Color-By-Number Lattice Matrix";
+        stage.innerHTML = `
+            <button class="audio-prompt-btn" onclick="speakCurriculumPrompt('Let us map colors across our design sectors. Select a crayon from the bottom guide palette and tap the numbered sectors on the landscape!')">🔊 Tappable Audio Guide (Click to Hear Directions)</button>
+            <svg class="duck-pond-svg-box" viewBox="0 0 400 200">
+                <!-- Duck Shape 1 -->
+                <path class="coloring-sector" d="M50,100 C80,60 120,60 140,90 C150,110 130,140 100,140 C70,140 50,120 50,100 Z" onclick="colorSector(this, 'matrix')"></path>
+                <text x="95" y="105" fill="#475569" font-weight="bold" pointer-events="none">1</text>
+                <!-- Duck Shape 2 -->
+                <path class="coloring-sector" d="M220,110 C240,80 280,80 300,100 C310,120 290,150 260,150 C230,150 210,130 220,110 Z" onclick="colorSector(this, 'parameters')"></path>
+                <text x="255" y="125" fill="#475569" font-weight="bold" pointer-events="none">2</text>
+                <!-- Pond Landscape Frame Boundary -->
+                <path class="coloring-sector" d="M10,160 Q200,140 390,160 L390,190 L10,190 Z" onclick="colorSector(this, 'matrix')"></path>
+                <text x="200" y="180" fill="#475569" font-weight="bold" pointer-events="none">1</text>
+            </svg>
+            <div class="crayon-palette">
+                <div class="crayon-choice active" style="background:#22c55e;" onclick="selectCrayon(this, '#22c55e')">1 - Green Crayon</div>
+                <div class="crayon-choice" style="background:#a16207;" onclick="selectCrayon(this, '#a16207')">2 - Dark Brown</div>
+                <div class="crayon-choice" style="background:#3b82f6;" onclick="selectCrayon(this, '#3b82f6')">3 - Design Blue</div>
             </div>
         `;
-    });
+        
+    // 📊 CHANNELS 3: THE COMPREHENSIVE 100-CHART SEQUENCING GRID (DAYS 121-180)
+    } else {
+        document.getElementById('left-title-badge').innerText = "📊 Mode 3: 100-Chart Sequencing Grid Puzzle";
+        let html = `
+            <button class="audio-prompt-btn" onclick="speakCurriculumPrompt('Let us fill the missing sequence alignment. Click the yellow target box squares inside your numbers matrix chart and complete the numerical chain!')">🔊 Tappable Audio Guide (Click to Hear Directions)</button>
+            <div class="hundred-chart-grid">
+        `;
+        // Draw standard interactive 100 counting chart row models
+        for(let n=1; n<=100; n++) {
+            let isMissing = (n === 3 || n === 12 || n === 26 || n === 45 || n === 77 || n === 92);
+            if (isMissing) {
+                html += `<div class="grid-number-box missing-target" data-val="${n}" onclick="solveGridCell(this)">${n}</div>`;
+            } else {
+                html += `<div class="grid-number-box">${n}</div>`;
+            }
+        }
+        html += `</div>`;
+        stage.innerHTML = html;
+    }
 }
-
-function triggerAlignmentPortal(word) {
-    if (!activeLessonNode || !activeLessonNode.alignment_triggers || !activeLessonNode.alignment_triggers[word]) return;
-    const trigger = activeLessonNode.alignment_triggers[word];
+</script>
+<!-- FILE: C:\DualTrackLearning_Online\index.html -->
+<!-- BOX 8 OF 8: SYSTEM AUTOMATION HANDLERS AND PRIVATE DRIVE COMMIT WRAPPERS -->
+<script>
+function speakCurriculumPrompt(message) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        let msg = new SpeechSynthesisUtterance(message);
+        msg.rate = 0.95;
+        window.speechSynthesis.speak(msg);
+    }
+}
+function handleCanvasTracing(e) {
+    if (e.buttons === 1 || e.type === 'click') {
+        hasDrawnOnCanvas = true;
+        checkKindergartenCompletionHooks();
+    }
+}
+def = null;
+function handleHuntClick(element) {
+    if (element.getAttribute('data-target') === "true") {
+        element.classList.add('found');
+        checkKindergartenCompletionHooks();
+    }
+}
+function selectCrayon(el, color) {
+    document.querySelectorAll('.crayon-choice').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    activeCrayonColor = color;
+}
+function colorSector(sector, keyword) {
+    sector.style.fill = activeCrayonColor;
+    activateTruthPortalPanel(keyword);
+}
+function solveGridCell(cell) {
+    cell.classList.add('solved');
+    cell.style.color = '#15803d';
+    activateTruthPortalPanel('matrix');
+}
+function checkKindergartenCompletionHooks() {
+    if (hasDrawnOnCanvas) {
+        activateTruthPortalPanel('matrix');
+    }
+}
+function activateTruthPortalPanel(word) {
+    if (!activeLessonRecord || !activeLessonRecord.alignment_triggers[word]) return;
+    const trigger = activeLessonRecord.alignment_triggers[word];
     
     document.getElementById('portal-waiting-prompt').style.display = 'none';
-    document.getElementById('portal-active-display').style.display = 'block';
-    document.getElementById('retention-questions-wrapper').style.display = 'block';
+    document.getElementById('portal-active-container').style.display = 'block';
+    document.getElementById('retention-questions-block').style.display = 'block';
     
     document.getElementById('portal-bible-text').innerText = trigger.biblical_truth;
-    document.getElementById('portal-alternative-content').innerText = trigger.alternative_framework;
+    document.getElementById('portal-alternative-text').innerText = trigger.alternative_framework;
     
-    const questionBox = document.getElementById('retention-questions-fields');
-    questionBox.innerHTML = "";
-    activeLessonNode.retention_questions.forEach((q, idx) => {
-        questionBox.innerHTML += `
-            <div style="margin-top:14px;">
-                <label style="font-size:14px; font-weight:700; color:#334155;">[Question ${idx+1}] ${q.text}</label>
-                <textarea id="retention-ans-${q.id}" class="student-response-area" rows="3" placeholder="Enter reflective alignment thoughts here..."></textarea>
+    const fields = document.getElementById('questions-form-fields');
+    fields.innerHTML = "";
+    activeLessonRecord.retention_questions.forEach((q, i) => {
+        fields.innerHTML += `
+            <div style="margin-top:12px;">
+                <label style="font-size:13px; font-weight:700; color:#334155;">[Verification ${i+1}] ${q.text}</label>
+                <textarea id="retention-ans-${q.id}" class="student-response-field" rows="3" placeholder="Type summary notes here..."></textarea>
             </div>
         `;
     });
 }
-
-function loadSavedSessionProgress(g, s, d) {
+function loadSessionVaultLogs(g, s, d) {
     const k = `dualtrack_vault_${g}_${s}_${d}`;
     const saved = localStorage.getItem(k);
     if (saved) {
@@ -225,30 +344,26 @@ function loadSavedSessionProgress(g, s, d) {
         }
     }
 }
-
 document.getElementById('mark-complete-toggle').addEventListener('change', function(e) {
     const g = document.getElementById('grade-dropdown').value;
     const s = document.getElementById('subject-dropdown').value;
     const d = document.getElementById('day-dropdown').value;
     const k = `dualtrack_vault_${g}_${s}_${d}`;
-    
     if (e.target.checked) {
         const retAnswers = {};
-        if (activeLessonNode && activeLessonNode.retention_questions) {
-            activeLessonNode.retention_questions.forEach(q => {
+        if (activeLessonRecord && activeLessonRecord.retention_questions) {
+            activeLessonRecord.retention_questions.forEach(q => {
                 const el = document.getElementById(`retention-ans-${q.id}`);
                 if (el) retAnswers[q.id] = el.value;
             });
         }
-        const record = { timestamp: new Date().toISOString(), grade: g, subject: s, day: d, hash: activeLessonNode ? activeLessonNode.sync_hash : "EMPTY", retention_answers: retAnswers, is_finalized: true };
+        const record = { timestamp: new Date().toISOString(), grade: g, subject: s, day: d, hash: activeLessonRecord ? activeLessonRecord.sync_hash : "EMPTY", retention_answers: retAnswers, is_finalized: true };
         localStorage.setItem(k, JSON.stringify(record));
-        
         let drive = localStorage.getItem("PRIVATE_EVALUATION_DRIVE_BACKUP");
         let list = drive ? JSON.parse(drive) : [];
         list = list.filter(item => !(item.grade === g && item.subject === s && item.day === d));
         list.push(record);
         localStorage.setItem("PRIVATE_EVALUATION_DRIVE_BACKUP", JSON.stringify(list));
-        
         document.getElementById('save-status-indicator').innerText = "🔒 Finalized & Logged to Year-End Private Drive File";
     } else {
         localStorage.removeItem(k);
