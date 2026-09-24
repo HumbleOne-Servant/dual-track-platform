@@ -20,11 +20,11 @@ GROUPS_MAPPING = {
 
 SUBJECTS = ["mathematics", "science", "language_arts", "historical_studies", "biblical"]
 UNITS = ["unit_1_foundations", "unit_2_shapes_spaces", "unit_3_weather_seasons", "unit_4_counting_base"]
-# Box 2: Robust OpenAI Network Request Engine with Hardened Crash Proofing
+# Box 2: Robust OpenAI Network Request Engine (Corrected Flow Control)
 def call_generation_model(prompt_text):
     """
     Communicates with gpt-4o-mini via raw network requests to avoid version bugs.
-    Includes explicit User-Agent strings and a crash-proof JSON data parser.
+    Includes explicit User-Agent strings and an explicit buffered stream reader.
     """
     url = "https://openai.com"
     headers = {
@@ -47,10 +47,10 @@ def call_generation_model(prompt_text):
     for attempt in range(max_retries):
         try:
             req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers=headers)
-            with urllib.request.urlopen(req) as response:
-                raw_data = response.read().decode('utf-8')
+            with urllib.request.urlopen(req, timeout=30) as response:
+                raw_bytes = response.read()
+                raw_data = raw_bytes.decode('utf-8', errors='ignore')
                 
-                # Crash Proof Check: Ensure network content isn't empty before trying to read it
                 if not raw_data.strip():
                     print("   [Network Alert] Received empty response from OpenAI. Retrying...")
                     time.sleep(5)
@@ -60,7 +60,6 @@ def call_generation_model(prompt_text):
                 return res_body['choices']['message']['content'].strip()
                 
         except urllib.error.HTTPError as e:
-            # Direct status checks: 429 is rate limit, 500-504 are server drops
             if e.code == 429 or (e.code >= 500 and e.code <= 504):
                 print(f"   [API Alert] Code {e.code} hit. Pausing for {retry_delay} seconds...")
                 time.sleep(retry_delay)
@@ -68,14 +67,15 @@ def call_generation_model(prompt_text):
             else:
                 print(f"   [HTTP Error] Permanent code received: {e.code}")
                 try:
-                    # Print out any hidden API alerts or credit warnings from OpenAI
                     print(f"   [Server Message] {e.read().decode('utf-8')}")
                 except:
                     pass
                 return None
         except json.JSONDecodeError:
-            print("   [Data Error] Could not parse raw response. Retrying setup connection...")
+            # FIXED: Added time delay and loop skip to prevent fall-through failure
+            print("   [Data Error] Truncated data stream encountered. Pacing connection and retrying...")
             time.sleep(5)
+            continue
         except Exception as e:
             print(f"   [Connection Error] {str(e)}")
             time.sleep(5)
@@ -158,6 +158,142 @@ def generate_and_save_day_node(file_path, group, grade_code, subject, unit, day_
         print(f"✅ Successfully written: Day {day_num}")
     except Exception as e:
         print(f"❌ Disk write failure at {file_path}: {str(e)}")
+# Box 4: JSON Data Node Constructor
+def generate_and_save_day_node(file_path, group, grade_code, subject, unit, day_num):
+    """
+    Assembles the targeted standard prompt, gathers the AI model response,
+    and maps the output keys exactly to the front-end template specifications.
+    """
+    print(f"Processing Target: Day {day_num} for {grade_code} ({group.upper()}) - {subject}")
+    
+    prompt = build_standards_based_prompt(grade_code, subject, unit, day_num)
+    
+    raw_response = call_generation_model(prompt)
+    if not raw_response:
+        print(f"❌ Failed to generate content for Day {day_num}. Skipping step.")
+        return
+
+    # Structure data keys perfectly matching your validated index.html schema
+    lesson_json_data = {
+        "grade_prefix": grade_code,
+        "layout_group": group.upper(),
+        "subject_track": subject,
+        "unit_folder": unit,
+        "day": int(day_num),
+        "lesson_title": f"Grade {grade_code.upper()} {subject.replace('_', ' ').title()} - Day {day_num}",
+        "lesson_body": raw_response,
+        "interactive_assignment": f"Targeted tracking assignment optimized for {grade_code.upper()} active standard requirements.",
+        "daily_assessment": f"Age-appropriate milestone checkout question for Day {day_num}."
+    }
+    
+    try:
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(lesson_json_data, f, indent=4, ensure_ascii=False)
+        print(f"✅ Successfully written: Day {day_num}")
+    except Exception as e:
+        print(f"❌ Disk write failure at {file_path}: {str(e)}")
+# Box 4: JSON Data Node Constructor
+def generate_and_save_day_node(file_path, group, grade_code, subject, unit, day_num):
+    """
+    Assembles the targeted standard prompt, gathers the AI model response,
+    and maps the output keys exactly to the front-end template specifications.
+    """
+    print(f"Processing Target: Day {day_num} for {grade_code} ({group.upper()}) - {subject}")
+    
+    prompt = build_standards_based_prompt(grade_code, subject, unit, day_num)
+    
+    raw_response = call_generation_model(prompt)
+    if not raw_response:
+        print(f"❌ Failed to generate content for Day {day_num}. Skipping step.")
+        return
+
+    # Structure data keys perfectly matching your validated index.html schema
+    lesson_json_data = {
+        "grade_prefix": grade_code,
+        "layout_group": group.upper(),
+        "subject_track": subject,
+        "unit_folder": unit,
+        "day": int(day_num),
+        "lesson_title": f"Grade {grade_code.upper()} {subject.replace('_', ' ').title()} - Day {day_num}",
+        "lesson_body": raw_response,
+        "interactive_assignment": f"Targeted tracking assignment optimized for {grade_code.upper()} active standard requirements.",
+        "daily_assessment": f"Age-appropriate milestone checkout question for Day {day_num}."
+    }
+    
+    try:
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(lesson_json_data, f, indent=4, ensure_ascii=False)
+        print(f"✅ Successfully written: Day {day_num}")
+    except Exception as e:
+        print(f"❌ Disk write failure at {file_path}: {str(e)}")
+# Box 4: JSON Data Node Constructor
+def generate_and_save_day_node(file_path, group, grade_code, subject, unit, day_num):
+    """
+    Assembles the targeted standard prompt, gathers the AI model response,
+    and maps the output keys exactly to the front-end template specifications.
+    """
+    print(f"Processing Target: Day {day_num} for {grade_code} ({group.upper()}) - {subject}")
+    
+    prompt = build_standards_based_prompt(grade_code, subject, unit, day_num)
+    
+    raw_response = call_generation_model(prompt)
+    if not raw_response:
+        print(f"❌ Failed to generate content for Day {day_num}. Skipping step.")
+        return
+
+    # Structure data keys perfectly matching your validated index.html schema
+    lesson_json_data = {
+        "grade_prefix": grade_code,
+        "layout_group": group.upper(),
+        "subject_track": subject,
+        "unit_folder": unit,
+        "day": int(day_num),
+        "lesson_title": f"Grade {grade_code.upper()} {subject.replace('_', ' ').title()} - Day {day_num}",
+        "lesson_body": raw_response,
+        "interactive_assignment": f"Targeted tracking assignment optimized for {grade_code.upper()} active standard requirements.",
+        "daily_assessment": f"Age-appropriate milestone checkout question for Day {day_num}."
+    }
+    
+    try:
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(lesson_json_data, f, indent=4, ensure_ascii=False)
+        print(f"✅ Successfully written: Day {day_num}")
+    except Exception as e:
+        print(f"❌ Disk write failure at {file_path}: {str(e)}")
+# Box 4: JSON Data Node Constructor
+def generate_and_save_day_node(file_path, group, grade_code, subject, unit, day_num):
+    """
+    Assembles the targeted standard prompt, gathers the AI model response,
+    and maps the output keys exactly to the front-end template specifications.
+    """
+    print(f"Processing Target: Day {day_num} for {grade_code} ({group.upper()}) - {subject}")
+    
+    prompt = build_standards_based_prompt(grade_code, subject, unit, day_num)
+    
+    raw_response = call_generation_model(prompt)
+    if not raw_response:
+        print(f"❌ Failed to generate content for Day {day_num}. Skipping step.")
+        return
+
+    # Structure data keys perfectly matching your validated index.html schema
+    lesson_json_data = {
+        "grade_prefix": grade_code,
+        "layout_group": group.upper(),
+        "subject_track": subject,
+        "unit_folder": unit,
+        "day": int(day_num),
+        "lesson_title": f"Grade {grade_code.upper()} {subject.replace('_', ' ').title()} - Day {day_num}",
+        "lesson_body": raw_response,
+        "interactive_assignment": f"Targeted tracking assignment optimized for {grade_code.upper()} active standard requirements.",
+        "daily_assessment": f"Age-appropriate milestone checkout question for Day {day_num}."
+    }
+    
+    try:
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(lesson_json_data, f, indent=4, ensure_ascii=False)
+        print(f"✅ Successfully written: Day {day_num}")
+    except Exception as e:
+        print(f"❌ Disk write failure at {file_path}: {str(e)}")
 # Box 5: Self-Building Directory Framework Generator
 def run_curriculum_batch_engine():
     """
@@ -169,7 +305,7 @@ def run_curriculum_batch_engine():
         return
         
     print("🚀 Initializing Dual-Track Learning Hub Self-Building Loop...")
-    pacing_delay = 1.5
+    pacing_delay = 2.0
     
     # Loop Down Level 1: Group Folders defined in mapping blueprint
     for group, grades_list in GROUPS_MAPPING.items():
@@ -185,7 +321,6 @@ def run_curriculum_batch_engine():
                     # Construct target path location
                     unit_path = os.path.join(DATABASE_ROOT, group, grade, subject, unit)
                     
-                    # SELF-BUILDING UPGRADE: Automatically create directories if they are missing
                     if not os.path.exists(unit_path):
                         os.makedirs(unit_path, exist_ok=True)
 # Box 6: Timeline Index Loop Execution Block
