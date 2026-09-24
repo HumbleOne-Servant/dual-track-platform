@@ -192,7 +192,7 @@
                     Workbook Instructions: Review the reading material below, then complete the assignment dashboard.
                 </div>
             </div>
-<!-- Box 5: Elementary School Viewports (Dynamic SKE Vector Flow & Counting Boards) -->
+<!-- Box 5: Elementary School Viewports (Decoupled Math & Science Interaction Sandboxes) -->
             <div class="interactive-workspace-shield workspace-locked" id="lockShieldWrapper">
                 
                 <!-- Bracket Layer 1: Elementary School Dashboard Content Views -->
@@ -201,7 +201,7 @@
                         .crayon-box-wrapper { display: flex; gap: 16px; border: 2px solid #E2E8F0; padding: 12px 24px; border-radius: 30px; background: white; margin-bottom: 20px; align-items: center; justify-content: center; }
                         .crayon-option { width: 34px; height: 34px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; }
                         .crayon-option.selected-crayon { border-color: #1E293B; transform: scale(1.15); }
-                        .ske-games-box { border: 2px solid #CBD5E1; border-radius: 12px; padding: 16px; background: #F8FAFC; min-height: 280px; }
+                        .ske-games-box { border: 2px solid #CBD5E1; border-radius: 12px; padding: 16px; background: #F8FAFC; min-height: 280px; margin-bottom: 20px; }
                         .pond-svg-canvas { width: 100%; max-width: 440px; background: white; border: 2px solid #E2E8F0; border-radius: 8px; display: block; margin: 0 auto; }
                         .labels-legend-row { text-align: center; margin-top: 14px; font-size: 0.85rem; font-weight: bold; color: #64748B; }
                         .apple-counter-grid { display: flex; gap: 12px; justify-content: center; margin: 20px 0; }
@@ -210,7 +210,7 @@
                     </style>
                     
                     <div class="ske-games-box" id="skeElementaryInteractions">
-                        <!-- Content built dynamically based on Subject routing rules to fix duplications -->
+                        <!-- DECOUPLED TRACK FIX: Strictly divides Subject layout instances to kill duplications -->
                         <div id="elMathWorkspace" style="display: block;">
                             <div class="crayon-box-wrapper">
                                 <span>🎨 CPA Singapore Vector Colors:</span>
@@ -234,7 +234,7 @@
                     </div>
                     <div class="labels-legend-row" id="elProseBodyContainer">K-5 Elementary Content Node Desk</div>
                 </div>
-<!-- Box 6: Middle School Viewports (Variable Balancers & Token Deflectors) -->
+<!-- Box 6: Middle School Viewports (Variable Balancers & Outlier Deflectors) -->
                 <!-- Bracket Layer 2: Middle School Dashboard Content Views -->
                 <div id="middleSchoolWorkspaceView" style="display: none; width: 100%;">
                     <style>
@@ -254,7 +254,7 @@
                         </div>
                     </div>
                 </div>
-<!-- Box 7: High School Viewports (Matrix Optimizers & Rhetorical Strategy Arenas) -->
+<!-- Box 7: High School Viewports (Matrix Optimizers & Critical Thesis Consoles) -->
                 <!-- Bracket Layer 3: High School Dashboard Content Views -->
                 <div id="highSchoolWorkspaceView" style="display: none; width: 100%;">
                     <style>
@@ -270,7 +270,7 @@
                 <button class="btn-submit-worksheet" onclick="alert('Student Workspace File Transferred Successfully!')">SUBMIT WORKSHEET FOR GRADING ✨</button>
             </div> <!-- End Shield Wrapper Box -->
         </div>
-<!-- Box 8: Right Presentation Frame (Providential History & Design Track Desks) -->
+<!-- Box 8: Right Presentation Frame (Providential History & Design Track Panels) -->
         <!-- Right Presentation Frame: The Parallel Viewpoints & Comparative Analysis -->
         <div class="right-alternative-track" id="rightComparativeWorkspace">
             <style>
@@ -324,7 +324,7 @@
             }
         };
 </script>
-<!-- Box 10: Dynamic Path Management, File-Fetching, and Live Script Initializers -->
+<!-- Box 10: Dynamic Path Management, Live Ingestion Database Fetch Pass, and Audio Locks -->
 <script>
         function enforceWorkspaceLockState() {
             audioClickCount = 0;
@@ -371,16 +371,27 @@
             const subject = document.getElementById("subjectTrackSelect").value;
             const day = parseInt(document.getElementById("daySelect").value) || 1;
 
-            // FIX: Dynamic Chronological Unit Routing Matrix
+            // Dynamic Unit Directory Map Rules (Matches your backend python folder structure)
             let unitFolder = "unit_1_foundations";
             if (day > 45 && day <= 90) unitFolder = "unit_2_shapes_spaces";
             else if (day > 90 && day <= 135) unitFolder = "unit_3_weather_seasons";
             else if (day > 135) unitFolder = "unit_4_counting_base";
 
-            // Subject-specific sub-workspace adjustments to destroy duplication loops
+            // CRITICAL FIX: Direct Subject Sandbox Isolation Logic Override Pass
             if (group === "k5") {
-                document.getElementById("elMathWorkspace").style.display = (subject === "mathematics") ? "block" : "none";
-                document.getElementById("elScienceWorkspace").style.display = (subject === "science") ? "block" : "none";
+                const mathCanvasBlock = document.getElementById("elMathWorkspace");
+                const scienceCanvasBlock = document.getElementById("elScienceWorkspace");
+                
+                if (subject === "mathematics") {
+                    if (mathCanvasBlock) mathCanvasBlock.style.display = "block";
+                    if (scienceCanvasBlock) scienceCanvasBlock.style.display = "none";
+                } else if (subject === "science") {
+                    if (mathCanvasBlock) mathCanvasBlock.style.display = "none";
+                    if (scienceCanvasBlock) scienceCanvasBlock.style.display = "block";
+                } else {
+                    if (mathCanvasBlock) mathCanvasBlock.style.display = "none";
+                    if (scienceCanvasBlock) scienceCanvasBlock.style.display = "none";
+                }
             }
 
             const targetJsonUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/${unitFolder}/day_${day}.json`;
@@ -454,9 +465,6 @@
             utter.rate = 0.9;
             window.speechSynthesis.speak(utter);
         }
-
-        function pickCrayonColor(el, hex) { activeCrayonColor = hex; document.querySelectorAll('.crayon-option').forEach(c => c.style.borderColor='transparent'); el.style.borderColor='#1E293B'; }
-        function colorWorksheetSegment(node) { if (node.tagName !== 'svg') { node.setAttribute('fill', activeCrayonColor); } }
 
         function initializeGlobal180DayTimeline() {
             const daySelectorElement = document.getElementById("daySelect");
