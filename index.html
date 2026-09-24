@@ -1,27 +1,28 @@
-<!-- Box 1: Document Setup, Styling, and Main Navigation Bar -->
+<!-- Box 1: Document Head, System Styling, and Core Theme Configurations -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dual-Track Learning Hub - K5 Portal</title>
+    <title>Dual-Track Learning Hub - Student Portal Desk</title>
     <style>
         :root {
             --bg-canvas: #FFFDF9;
-            --bar-gradient: linear-gradient(90deg, #E96B8B, #F9A86C);
+            --bar-gradient: linear-gradient(90deg, #1E293B, #334155);
             --btn-listen: #634EE4;
             --btn-submit: #10B981;
             --border-panel: #E2E8F0;
+            --theme-primary: #E96B8B;
         }
         body {
             margin: 0;
             font-family: 'Segoe UI', system-ui, sans-serif;
-            background-color: #FFF8EE;
+            background-color: #F8FAFC;
             color: #2D3748;
         }
         .top-navbar {
             background: var(--bar-gradient);
-            padding: 12px 24px;
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -29,13 +30,13 @@
             font-weight: bold;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .nav-title { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
+        .nav-title { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; letter-spacing: 0.5px; }
         .nav-selectors { display: flex; gap: 12px; }
         .nav-select {
-            padding: 6px 12px;
+            padding: 8px 16px;
             border-radius: 20px;
-            border: 2px solid white;
-            background-color: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.4);
+            background-color: rgba(255,255,255,0.15);
             color: white;
             font-weight: bold;
             cursor: pointer;
@@ -45,60 +46,80 @@
     </style>
 </head>
 <body>
-    <div class="top-navbar">
-        <div class="nav-title">⭐ DIGITAL WORKSHEET DESK</div>
+<!-- Box 2: Top Navigation Control Elements and Portal Group Switcher Configuration -->
+    <div class="top-navbar" id="mainPortalHeader">
+        <div class="nav-title">🌐 DUAL-TRACK LEARNING HUB</div>
         <div class="nav-selectors">
-            <select class="nav-select" id="portalGroupSelect"><option>Kindergarten Base</option></select>
-            <select class="nav-select" id="subjectTrackSelect"><option>📚 Mathematics Track</option></select>
-            <select class="nav-select" id="daySelect" onchange="switchDaySimulation()">
-                <option value="1">🗓️ Day 1 Track</option>
-                <option value="2">🗓️ Day 2 Track</option>
+            <!-- Dynamic Portal Level Brackets Selection Bar -->
+            <select class="nav-select" id="portalGroupSelect" onchange="adaptPortalStyleBrackets()">
+                <option value="k5">🎒 Elementary Portal (K-5 Bracket)</option>
+                <option value="68">📐 Middle School Portal (6-8 Bracket)</option>
+                <option value="912">🏛️ High School Portal (9-12 Bracket)</option>
+            </select>
+            <select class="nav-select" id="subjectTrackSelect">
+                <option value="mathematics">📚 Mathematics Track</option>
+                <option value="science">🔬 Science Track</option>
+                <option value="language_arts">✍️ Language Arts Track</option>
+                <option value="historical_studies">🌍 Historical Studies Track</option>
+                <option value="biblical">📖 Biblical Alignment Track</option>
+            </select>
+            <select class="nav-select" id="daySelect" onchange="simulateLessonDataLoad()">
+                <option value="1">🗓️ Course Day 1</option>
+                <option value="2">🗓️ Course Day 2</option>
             </select>
         </div>
     </div>
-<!-- Box 2: Split Presentation Layer and Layout Frame Setup -->
+<!-- Box 3: Presentation Layout Blueprint Containers (Dual Side-by-Side Frames) -->
     <style>
         .dual-track-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 24px;
             padding: 24px;
-            max-width: 1600px;
+            max-width: 1650px;
             margin: 0 auto;
         }
         .left-core-track, .right-alternative-track {
             background: white;
             border: 2px solid var(--border-panel);
             border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            min-height: 600px;
+            padding: 28px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+            min-height: 650px;
+            transition: all 0.25s ease;
         }
         .right-alternative-track {
-            background-color: #F8FAFC;
+            background-color: #FAFBFD;
             border-style: dashed;
+            border-color: #CBD5E1;
         }
         .student-meta-row {
             display: flex;
             justify-content: space-between;
-            border-bottom: 2px dashed #CBD5E1;
-            padding-bottom: 12px;
+            border-bottom: 2px dashed #E2E8F0;
+            padding-bottom: 14px;
             margin-bottom: 20px;
             font-size: 0.85rem;
             color: #64748B;
             font-weight: bold;
         }
-        .meta-field { border-bottom: 1px solid #94A3B8; width: 120px; display: inline-block; }
+        .meta-field { border-bottom: 1px solid #94A3B8; width: 130px; display: inline-block; margin-left: 4px; }
     </style>
     <div class="dual-track-container">
-        <!-- Left Side: Core Public K-12 Curriculum Frame -->
+        <!-- Left Presentation Frame: Core Standard Textbook Classroom Workdesk -->
         <div class="left-core-track" id="leftCoreWorkspace">
-<!-- Box 3: Audio Audio Controls and Core Presentation Elements -->
+            <div class="student-meta-row">
+                <div>STUDENT: <span class="meta-field"></span></div>
+                <div>CLASSROOM DATE: <span class="meta-field"></span></div>
+                <div>SCORE RECORD: <span class="meta-field"></span></div>
+            </div>
+<!-- Box 4: Interactive Lesson Guide Bar and Audio Text Reader Controls -->
             <style>
                 .audio-guide-banner {
-                    background-color: #F1F5F9;
+                    background-color: #F8FAFC;
+                    border: 1px solid #E2E8F0;
                     border-radius: 12px;
-                    padding: 16px;
+                    padding: 16px 20px;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
@@ -117,239 +138,198 @@
                     display: flex;
                     align-items: center;
                     gap: 8px;
-                    box-shadow: 0 4px 10px rgba(99,78,228,0.3);
+                    box-shadow: 0 4px 12px rgba(99,78,228,0.25);
+                    white-space: nowrap;
                 }
-                .lesson-header-title { text-align: center; font-size: 1.4rem; color: #1E293B; margin: 20px 0; }
-                .directions-container { background-color: #FFFBEB; border-left: 4px solid #F59E0B; padding: 12px 16px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
-                .directions-text { font-size: 0.95rem; font-weight: 500; color: #B45309; }
+                .lesson-header-title { font-size: 1.5rem; color: #0F172A; margin: 20px 0 10px 0; font-weight: 800; }
+                .directions-container { background-color: #FFFBEB; border-left: 4px solid #F59E0B; padding: 14px 18px; margin-bottom: 24px; border-radius: 0 8px 8px 0; }
+                .directions-text { font-size: 0.95rem; font-weight: 600; color: #B45309; line-height: 1.4; }
             </style>
-            <div class="student-meta-row">
-                <div>NAME: <span class="meta-field"></span></div>
-                <div>DATE: <span class="meta-field"></span></div>
-                <div>SCORE: <span class="meta-field"></span></div>
-            </div>
             <div class="audio-guide-banner">
                 <div class="lesson-guide-text" id="lessonGuideContent">
-                    📄 <strong>Lesson Guide:</strong> Click the speaker button to hear today's counting pond instructions out loud!
+                    📄 <strong>Lesson Guide summary:</strong> Select your learning bracket from the top selector menu to configure the workbook display templates automatically.
                 </div>
-                <button class="btn-audio-listen" onclick="triggerVoiceReader()">🔊 Listen</button>
+                <button class="btn-audio-listen" onclick="triggerVoiceReader()">🔊 Read Out Loud</button>
             </div>
-            <h2 class="lesson-header-title" id="lessonTitleLabel">Grade K Mathematics - Day 1</h2>
+            
+            <h2 class="lesson-header-title" id="lessonTitleLabel">Portal Framework Core</h2>
+            
             <div class="directions-container">
                 <div class="directions-text" id="assignmentDirectionsLabel">
-                    Directions: Select a crayon below, then click the matching numbered shapes inside the pond picture to color them in!
+                    Workbook Instructions: Review the reading material below, then complete the targeted student assignment dashboard.
                 </div>
             </div>
-<!-- Box 4: Interactive Activity Viewports For Both School Days -->
-            <style>
-                .active-assignment-viewport { display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
-                .crayon-box-wrapper { display: flex; gap: 16px; border: 2px solid #E2E8F0; padding: 12px 24px; border-radius: 30px; background: white; margin-bottom: 20px; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-                .crayon-option { width: 36px; height: 36px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: transform 0.1s ease; }
-                .crayon-option.selected-crayon { border-color: #1E293B; transform: scale(1.15); }
-                .crayon-green { background-color: #2ECC71; }
-                .crayon-yellow { background-color: #F1C40F; }
-                .crayon-blue { background-color: #3498DB; }
-                .pond-svg-canvas { width: 100%; max-width: 440px; background: white; border: 2px solid #CBD5E1; border-radius: 12px; }
-                .pond-svg-canvas path, .pond-svg-canvas ellipse, .pond-svg-canvas rect { cursor: pointer; transition: fill 0.2s ease, stroke 0.2s ease; }
-                .labels-legend-row { margin-top: 16px; display: flex; gap: 16px; font-size: 0.85rem; font-weight: bold; color: #64748B; }
-                .apple-counter-grid { display: flex; gap: 12px; justify-content: center; margin: 30px 0; }
-                .apple-touch-card { border: 3px solid #CBD5E1; border-radius: 16px; padding: 16px; width: 65px; text-align: center; background: white; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s ease; }
-                .apple-touch-card.counted-apple { border-color: #10B981; background-color: #ECFDF5; transform: translateY(-4px); }
-                .apple-icon { font-size: 2rem; display: block; margin-bottom: 8px; }
-                .apple-label { font-size: 0.85rem; font-weight: bold; color: #475569; }
-                .btn-submit-worksheet { background-color: var(--btn-submit); color: white; border: none; border-radius: 30px; padding: 14px 36px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 24px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
-            </style>
-            <div class="active-assignment-viewport">
-                <!-- Day 1 Viewport Container: Canvas Drawing -->
-                <div id="day1Viewport" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-                    <div class="crayon-box-wrapper">
-                        <span>🖍️ Crayon Box:</span>
-                        <div class="crayon-option crayon-green selected-crayon" onclick="pickCrayonColor(this, '#2ECC71')"></div>
-                        <div class="crayon-option crayon-yellow" onclick="pickCrayonColor(this, '#F1C40F')"></div>
-                        <div class="crayon-option crayon-blue" onclick="pickCrayonColor(this, '#3498DB')"></div>
-                    </div>
-                    <svg class="pond-svg-canvas" viewBox="0 0 400 300" id="vectorPondMap">
-                        <!-- Sky and Outer Frame Block -->
-                        <rect x="10" y="10" width="380" height="280" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" onclick="colorWorksheetSegment(this)"/>
-                        <!-- Pond Object Block -->
-                        <ellipse cx="200" cy="220" rx="160" ry="50" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" onclick="colorWorksheetSegment(this)"/>
-                        <!-- Grass Blade Asset Shape -->
-                        <path d="M40,230 L55,160 L70,230 Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" onclick="colorWorksheetSegment(this)"/>
-                        <!-- Simple Vector Duck Shape -->
-                        <ellipse cx="190" cy="180" rx="25" ry="18" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" onclick="colorWorksheetSegment(this)"/>
-                        <ellipse cx="210" cy="165" rx="14" ry="14" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" onclick="colorWorksheetSegment(this)"/>
-                        <!-- Text Numbers Anchored Inside SVG Map Paths -->
-                        <text x="195" y="80" font-family="sans-serif" font-size="16" font-weight="bold" fill="#64748B" pointer-events="none">3</text>
-                        <text x="51" y="210" font-family="sans-serif" font-size="14" font-weight="bold" fill="#64748B" pointer-events="none">1</text>
-                        <text x="185" y="185" font-family="sans-serif" font-size="14" font-weight="bold" fill="#64748B" pointer-events="none">2</text>
-                        <text x="200" y="235" font-family="sans-serif" font-size="16" font-weight="bold" fill="#64748B" pointer-events="none">3</text>
-                    </svg>
-                    <div class="labels-legend-row">
-                        <span>1 - Green (Grass)</span><span>2 - Yellow (Duck)</span><span>3 - Blue (Pond & Sky)</span>
-                    </div>
+<!-- Box 5: Elementary School Viewports (Color Canvas & Object Counting Grids) -->
+            <!-- Bracket Layer 1: Elementary School Dashboard Content Views -->
+            <div id="elementaryWorkspaceView" style="display: block; width: 100%;">
+                <style>
+                    .crayon-box-wrapper { display: flex; gap: 16px; border: 2px solid #E2E8F0; padding: 12px 24px; border-radius: 30px; background: white; margin-bottom: 20px; align-items: center; justify-content: center; }
+                    .crayon-option { width: 34px; height: 34px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; }
+                    .crayon-option.selected-crayon { border-color: #1E293B; transform: scale(1.15); }
+                    .pond-svg-canvas { width: 100%; max-width: 440px; background: white; border: 2px solid #CBD5E1; border-radius: 12px; display: block; margin: 0 auto; }
+                    .labels-legend-row { text-align: center; margin-top: 14px; font-size: 0.85rem; font-weight: bold; color: #64748B; }
+                    .apple-counter-grid { display: flex; gap: 12px; justify-content: center; margin: 20px 0; }
+                    .apple-touch-card { border: 3px solid #CBD5E1; border-radius: 16px; padding: 16px; width: 65px; text-align: center; background: white; cursor: pointer; }
+                    .apple-touch-card.counted-apple { border-color: #10B981; background-color: #ECFDF5; }
+                </style>
+                <div class="crayon-box-wrapper">
+                    <span>🖍️ Primary Crayon Palette:</span>
+                    <div class="crayon-option" style="background:#2ECC71;" onclick="pickCrayonColor(this, '#2ECC71')"></div>
+                    <div class="crayon-option" style="background:#F1C40F;" onclick="pickCrayonColor(this, '#F1C40F')"></div>
+                    <div class="crayon-option" style="background:#3498DB;" onclick="pickCrayonColor(this, '#3498DB')"></div>
                 </div>
-<!-- Box 5: Day 2 Counting Viewport Framework and Left Container End -->
-                <!-- Day 2 Viewport Container: Apple Click Elements -->
-                <div id="day2Viewport" style="display: none; flex-direction: column; align-items: center; width: 100%;">
-                    <div class="apple-counter-grid">
-                        <div class="apple-touch-card" onclick="toggleAppleCountingCard(this)">
-                            <span class="apple-icon">🍎</span><span class="apple-label">#1</span>
-                        </div>
-                        <div class="apple-touch-card" onclick="toggleAppleCountingCard(this)">
-                            <span class="apple-icon">🍎</span><span class="apple-label">#2</span>
-                        </div>
-                        <div class="apple-touch-card" onclick="toggleAppleCountingCard(this)">
-                            <span class="apple-icon">🍎</span><span class="apple-label">#3</span>
-                        </div>
-                        <div class="apple-touch-card" onclick="toggleAppleCountingCard(this)">
-                            <span class="apple-icon">🍎</span><span class="apple-label">#4</span>
-                        </div>
-                        <div class="apple-touch-card" onclick="toggleAppleCountingCard(this)">
-                            <span class="apple-icon">🍎</span><span class="apple-label">#5</span>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn-submit-worksheet" onclick="alert('Worksheet Answers Captured Locally!')">HAND IN WORKSHEET 🌟</button>
+                <svg class="pond-svg-canvas" viewBox="0 0 400 300" onclick="colorWorksheetSegment(event.target)">
+                    <rect x="10" y="10" width="380" height="280" fill="#F1F5F9" stroke="#94A3B8" stroke-width="2"/>
+                    <ellipse cx="200" cy="200" rx="140" ry="60" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
+                    <circle cx="200" cy="120" r="25" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
+                </svg>
+                <div class="labels-legend-row">Tactile Sensory Canvas - K-1 Development Track</div>
             </div>
+<!-- Box 6: Middle School Viewports (Textbook Prose Panels & Concept Matching Lists) -->
+            <!-- Bracket Layer 2: Middle School Dashboard Content Views -->
+            <div id="middleSchoolWorkspaceView" style="display: none; width: 100%;">
+                <style>
+                    .ms-textbook-prose { font-size: 1.05rem; line-height: 1.6; color: #334155; margin-bottom: 24px; padding: 0 4px; }
+                    .ms-vocab-box { background-color: #F8FAFC; border: 2px solid #E2E8F0; border-radius: 12px; padding: 20px; margin-top: 20px; }
+                    .ms-vocab-title { font-weight: bold; font-size: 1rem; color: #475569; border-bottom: 2px solid #E2E8F0; padding-bottom: 8px; margin-bottom: 12px; }
+                    .concept-matching-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; background: white; padding: 10px 14px; border-radius: 6px; border: 1px solid #E2E8F0; }
+                    .concept-term { font-weight: bold; color: #1E293B; }
+                    .concept-input { padding: 6px 12px; width: 140px; border: 1px solid #CBD5E1; border-radius: 4px; outline: none; }
+                </style>
+                <div class="ms-textbook-prose" id="msProseBodyContainer">
+                    Middle school data modules focus heavily on core concept definitions, thematic structured outlines, and intermediate reading blocks.
+                </div>
+                <div class="ms-vocab-box">
+                    <div class="ms-vocab-title">📐 CONCEPT & VOCABULARY CROSS-REFERENCE WORKBENCH</div>
+                    <div class="concept-matching-row">
+                        <span class="concept-term">Target Objective Key:</span>
+                        <input type="text" class="concept-input" placeholder="Enter Term Match...">
+                    </div>
+                </div>
+            </div>
+<!-- Box 7: High School Viewports (Academic Prose Portals & Thesis Input Blocks) -->
+            <!-- Bracket Layer 3: High School Dashboard Content Views -->
+            <div id="highSchoolWorkspaceView" style="display: none; width: 100%;">
+                <style>
+                    .hs-academic-viewport { font-size: 1.1rem; line-height: 1.7; color: #1E293B; background: #FCFDFE; border: 1px solid #E2E8F0; padding: 24px; border-radius: 12px; max-height: 320px; overflow-y: auto; margin-bottom: 24px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+                    .hs-thesis-console { width: 100%; box-sizing: border-box; border: 2px solid #CBD5E1; border-radius: 10px; padding: 16px; font-size: 1rem; font-family: inherit; resize: vertical; outline: none; transition: border 0.2s; }
+                    .hs-thesis-console:focus { border-color: #3B82F6; }
+                    .hs-console-label { display: block; font-weight: 700; font-size: 0.9rem; color: #475569; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+                </style>
+                <div class="hs-academic-viewport" id="hsProseBodyContainer">
+                    Advanced high school components load comprehensive prose, primary textbook theories, research documentation entries, and complex logic workflows.
+                </div>
+                <span class="hs-console-label">🏛️ CRITICAL THESIS ANALYSIS & EVIDENCE INPUT BOX</span>
+                <textarea class="hs-thesis-console" rows="4" placeholder="Draft your multi-paragraph analytical summary evidence framework here..."></textarea>
+            </div>
+            
+            <button class="btn-submit-worksheet" onclick="alert('Student Workspace File Transferred Successfully!')">SUBMIT WORKSHEET FOR GRADING ✨</button>
         </div>
-<!-- Box 6: Right Side Presentation Frame (Dual-Track Alternative Frameworks) -->
-        <!-- Right Side: The Parallel Alternative Viewpoints & Comparative Analysis -->
+<!-- Box 8: Right Presentation Frame (Dual-Track Alternative Viewpoint Panels) -->
+        <!-- Right Presentation Frame: The Parallel Viewpoints & Comparative Analysis -->
         <div class="right-alternative-track" id="rightComparativeWorkspace">
             <style>
-                .comparison-headline-bar { display: flex; align-items: center; gap: 8px; color: #B91C1C; font-weight: bold; border-bottom: 2px solid #FCA5A5; padding-bottom: 8px; margin-bottom: 16px; font-size: 1.05rem; }
-                .live-comparison-card { background: white; border: 1px solid #E2E8F0; padding: 16px; border-radius: 12px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.01); }
-                .comparison-card-title { font-size: 0.9rem; font-weight: bold; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+                .comparison-headline-bar { display: flex; align-items: center; gap: 8px; color: #DC2626; font-weight: bold; border-bottom: 2px solid #FCA5A5; padding-bottom: 10px; margin-bottom: 20px; font-size: 1.05rem; }
+                .live-comparison-card { background: white; border: 1px solid #E2E8F0; padding: 18px; border-radius: 12px; margin-bottom: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.01); }
+                .comparison-card-title { font-size: 0.85rem; font-weight: bold; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
                 .comparison-card-text { font-size: 0.95rem; line-height: 1.5; color: #334155; }
                 .keyword-pill-indicator { background: #FEF2F2; color: #DC2626; border: 1px solid #FEE2E2; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
             </style>
-            <div class="comparison-headline-bar">🧬 DUAL-TRACK COMPARISON MATRIX</div>
+            <div class="comparison-headline-bar">🧬 ALTERNATIVE TRACK REFERENCE LAB</div>
+            
             <div id="liveComparisonContainer">
-                <!-- Day 1 Comparative Insights Content Stack -->
-                <div id="day1ComparisonNode">
-                    <div class="live-comparison-card">
-                        <div class="comparison-card-title">🔍 Historical Context <span class="keyword-pill-indicator">Pond / Water</span></div>
-                        <div class="comparison-card-text">Ponds and natural water systems are mapped out in textbook data nodes to explore standard containment and physical observation elements.</div>
-                    </div>
-                    <div class="live-comparison-card">
-                        <div class="comparison-card-title">📖 Biblical Truth Core Alignment</div>
-                        <div class="comparison-card-text">Genesis 1:9 outlines the separation of water frameworks to uncover dry ground structures, proving designed order across creation ecosystems.</div>
-                    </div>
+                <div class="live-comparison-card">
+                    <div class="comparison-card-title">🔍 Comparative Insight Context <span class="keyword-pill-indicator">System Engine</span></div>
+                    <div class="comparison-card-text" id="comparativeContextLabel">The platform automatically reviews active structural elements to display historical frameworks side-by-side.</div>
                 </div>
-                <!-- Day 2 Comparative Insights Content Stack -->
-                <div id="day2ComparisonNode" style="display: none;">
-                    <div class="live-comparison-card">
-                        <div class="comparison-card-title">🔍 Botanical Context <span class="keyword-pill-indicator">Apple / Seed</span></div>
-                        <div class="comparison-card-text">Apples and plant structures represent standard fruit-bearing growth tracking systems within primary public school frameworks.</div>
-                    </div>
-                    <div class="live-comparison-card">
-                        <div class="comparison-card-title">📖 Biblical Truth Core Alignment</div>
-                        <div class="comparison-card-text">Genesis 1:11 highlights the structural design of fruit-bearing plants yielding seed after their kind, emphasizing absolute biological consistency.</div>
-                    </div>
+                <div class="live-comparison-card">
+                    <div class="comparison-card-title">📖 Biblical Truth Alignment Core</div>
+                    <div class="comparison-card-text" id="biblicalAlignmentLabel">Designed order models align structural observations cleanly with comparative viewpoints across standard lesson plans.</div>
                 </div>
             </div>
         </div>
     </div>
-<!-- Box 7: System Variables and Interactive Worksheet State Scripts -->
+<!-- Box 9: Student Dynamic Viewport Router Script Configuration -->
     <script>
-        // Active System State Variables
-        let currentActiveCrayonColor = "#2ECC71";
-        
-        // Target Audio State Flags
+        // System UI Element State Variable Rules
+        let activeCrayonColor = "#2ECC71";
         let hasSpokenSummary = false;
 
-        // Vector Interaction Logic: Handles Crayon Selection
-        function pickCrayonColor(crayonElement, targetHexColor) {
-            // Remove selection border ring from all crayon entities
-            document.querySelectorAll('.crayon-option').forEach(crayon => {
-                crayon.classList.remove('selected-crayon');
-            });
-            // Assign selection state attributes directly to active crayon node
-            crayonElement.classList.add('selected-crayon');
-            currentActiveCrayonColor = targetHexColor;
-        }
-
-        // Vector Color Fill Interaction Behavior
-        function colorWorksheetSegment(regionElement) {
-            // Alter both the fill color property and the stroke path outline color simultaneously
-            regionElement.setAttribute('fill', currentActiveCrayonColor);
-            regionElement.setAttribute('stroke', currentActiveCrayonColor);
-        }
-
-        // Interactive Activity Tracking: Handles Counting Grid Selection
-        function toggleAppleCountingCard(cardElement) {
-            cardElement.classList.toggle('counted-apple');
-        }
-    </script>
-<!-- Box 8: Day-Swapping Presentation Router Script -->
-    <script>
-        // Simple Viewport Engine Router Loop
-        function switchDaySimulation() {
-            const chosenDayIndex = document.getElementById("daySelect").value;
+        // Adaptive Portal Viewport Router: Controls Element Visibilities
+        function adaptPortalStyleBrackets() {
+            const selectedBracket = document.getElementById("portalGroupSelect").value;
             
-            // Critical Reset: Clear the speech tracker so each lesson treats the next click as fresh
+            // Audio Cache Reset
             hasSpokenSummary = false;
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
+            if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); }
 
-            // Document Element Navigation Targets
+            // Document Navigation Workspace Targets
+            const elementaryView = document.getElementById("elementaryWorkspaceView");
+            const middleView = document.getElementById("middleSchoolWorkspaceView");
+            const highView = document.getElementById("highSchoolWorkspaceView");
+            const headerBlock = document.getElementById("mainPortalHeader");
+
+            // Configure Theme Aesthetics and Views based on selection criteria
+            if (selectedBracket === "k5") {
+                document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(90deg, #E96B8B, #F9A86C)');
+                elementaryView.style.display = "block"; middleView.style.display = "none"; highView.style.display = "none";
+            } else if (selectedBracket === "68") {
+                document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(90deg, #3B82F6, #2563EB)');
+                elementaryView.style.display = "none"; middleView.style.display = "block"; highView.style.display = "none";
+            } else { // 912 High School Portal
+                document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(90deg, #1E293B, #0F172A)');
+                elementaryView.style.display = "none"; middleView.style.display = "none"; highView.style.display = "block";
+            }
+            simulateLessonDataLoad();
+        }
+<!-- Box 10: Simulated Content Engine Router and Two-Stage Audio Ingestion Script -->
+        // Simulated Content Engine Loader Loop
+        function simulateLessonDataLoad() {
+            const bracket = document.getElementById("portalGroupSelect").value;
             const titleLabel = document.getElementById("lessonTitleLabel");
-            const guideContent = document.getElementById("lessonGuideContent");
+            const guideLabel = document.getElementById("lessonGuideContent");
             const directionsLabel = document.getElementById("assignmentDirectionsLabel");
             
-            const frame1 = document.getElementById("day1Viewport");
-            const frame2 = document.getElementById("day2Viewport");
-            const matrix1 = document.getElementById("day1ComparisonNode");
-            const matrix2 = document.getElementById("day2ComparisonNode");
-
-            if (chosenDayIndex === "1") {
-                titleLabel.innerText = "Grade K Mathematics - Day 1";
-                guideContent.innerHTML = "📄 <strong>Lesson Guide:</strong> Click the speaker button to hear today's counting pond instructions out loud!";
-                directionsLabel.innerText = "Directions: Select a crayon below, then click the matching numbered shapes inside the pond picture to color them in!";
-                frame1.style.display = "flex"; frame2.style.display = "none";
-                matrix1.style.display = "block"; matrix2.style.display = "none";
+            if (bracket === "k5") {
+                titleLabel.innerText = "Elementary Math Foundations - Day 1";
+                guideLabel.innerHTML = "📄 <strong>Lesson Guide summary:</strong> Click the read button to hear today's tactile object counting pond lesson outline out loud!";
+                directionsLabel.innerText = "Workbook Directions: Pick a primary color palette icon below, then click canvas areas to assign fill stroke paths instantly.";
+            } else if (bracket === "68") {
+                titleLabel.innerText = "Intermediate Algebraic Logic - Day 1";
+                guideLabel.innerHTML = "📄 <strong>Lesson Guide summary:</strong> Welcome to Middle School tracking options. Read through your structured outlining block.";
+                directionsLabel.innerText = "Workbook Directions: Identify the target key variables from the text, then type matching entries into the definition fields.";
+                document.getElementById("msProseBodyContainer").innerText = "Standard Unit Outline: Core equations establish equality criteria using letter markers to represent unknown number structures within numeric rows.";
             } else {
-                titleLabel.innerText = "Grade K Mathematics - Day 2";
-                guideContent.innerHTML = "📄 <strong>Lesson Guide:</strong> Let's practice simple counting! Click below to hear how we map out objects from 1 to 5.";
-                directionsLabel.innerText = "Directions: Touch each target object block below one-by-one to count them out loud from 1 to 5!";
-                frame1.style.display = "none"; frame2.style.display = "flex";
-                matrix1.style.display = "none"; matrix2.style.display = "block";
+                titleLabel.innerText = "Advanced Vector Calculus & Integration - Day 1";
+                guideLabel.innerHTML = "📄 <strong>Lesson Guide summary:</strong> High school research mode. Review the thesis prose document below.";
+                directionsLabel.innerText = "Workbook Directions: Draft a comprehensive critical critique of the primary textbook data structure in the input layout console below.";
+                document.getElementById("hsProseBodyContainer").innerText = "Theoretical Research Document: Multivariable analysis isolates geometric grid boundaries, proving consistent spatial alignment constants across complex vector space formulas.";
             }
         }
-    </script>
-<!-- Box 9: Intelligent Two-Stage Audio Speech Ingestion Script -->
-    <script>
-        // Two-Stage Audio Ingestion Engine
+
+        // Tactile Elementary Vector Interaction Canvas Scripts
+        function pickCrayonColor(element, colorHex) { activeCrayonColor = colorHex; }
+        function colorWorksheetSegment(targetNode) { if (targetNode.tagName !== 'svg') { targetNode.setAttribute('fill', activeCrayonColor); } }
+
+        // Two-Stage Audio Ingestion Speech Engine
         function triggerVoiceReader() {
-            // Safety Pass: Clear lagging or overlapping speech tracks instantly
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            } else {
-                alert("Speech integration elements are unsupported inside this browser framework.");
-                return;
-            }
-
+            if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); } else { return; }
+            
             let textToSpeak = "";
-
-            // Evaluate Audio History Tracking State
             if (!hasSpokenSummary) {
-                // First Click: Extract text content directly from the Lesson Guide summary block
-                const guideElement = document.getElementById('lessonGuideContent');
-                textToSpeak = guideElement ? guideElement.innerText : "Welcome to today's learning track.";
-                
-                // Flip the tracking state flag so subsequent clicks pivot text selection targets
+                textToSpeak = document.getElementById('lessonGuideContent').innerText;
                 hasSpokenSummary = true;
             } else {
-                // Subsequent Clicks: Extract text elements from the active Assignment Directions container
-                const directionsElement = document.getElementById('assignmentDirectionsLabel');
-                textToSpeak = directionsElement ? directionsElement.innerText : "Please follow the workspace instructions.";
+                textToSpeak = document.getElementById('assignmentDirectionsLabel').innerText;
             }
 
-            // Execute Speech Synthesis Delivery Pass
             const vocalUtterance = new SpeechSynthesisUtterance(textToSpeak);
-            vocalUtterance.rate = 0.85; // Slightly metered tempo for K-5 instructional clarity
+            vocalUtterance.rate = 0.9;
             window.speechSynthesis.speak(vocalUtterance);
         }
+
+        // Execute Baseline Initializations
+        adaptPortalStyleBrackets();
     </script>
 </body>
 </html>
