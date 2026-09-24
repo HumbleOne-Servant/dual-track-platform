@@ -1,267 +1,355 @@
+<!-- Box 1: Document Setup, Styling, and Main Navigation Bar -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thematic K-12 Interactive Worksheet Hub</title>
+    <title>Dual-Track Learning Hub - K5 Portal</title>
     <style>
-        body { margin: 0; padding: 0; transition: background-color 0.4s ease; font-family: system-ui, -apple-system, sans-serif; background-color: #f8fafc; }
-        .main-container { min-height: 100vh; padding-bottom: 50px; }
-        header { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.06); transition: background 0.4s ease; }
-        .control-select { padding: 10px 20px; font-size: 15px; border-radius: 30px; font-weight: bold; border: 2px solid white; cursor: pointer; outline: none; }
-        
-        /* 🎨 THEMATIC PRINT-WORKSHEET SIMULATION CANVAS */
-        .classroom-page-wrapper { max-width: 900px; margin: 30px auto; width: 100%; padding: 0 20px; box-sizing: border-box; }
-        .printed-worksheet-paper { background: #ffffff; border: 4px solid #4a5568; border-radius: 20px; padding: 30px; box-shadow: 0 12px 36px rgba(0,0,0,0.05); position: relative; animation: popUp 0.3s ease-out; }
-        
-        /* Interactive Vector Region Mapping */
-        .worksheet-svg-region { cursor: pointer; transition: fill 0.15s ease, stroke 0.15s; stroke: #2d3436; stroke-width: 2; }
-        .worksheet-svg-region:hover { stroke: #e84393; stroke-width: 3.5; }
-        
-        /* Childrens Large Primary Color Palette Swatches */
-        .color-crayon-swatch { width: 55px; height: 55px; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 6px 12px rgba(0,0,0,0.12); cursor: pointer; transition: transform 0.15s; position: relative; }
-        .color-crayon-swatch:hover { transform: scale(1.15) translateY(-3px); }
-        .color-crayon-swatch.active-crayon::after { content: "✏️"; position: absolute; top: -12px; right: -8px; font-size: 20px; }
-
-        /* Big Chunky Kinder Buttons */
-        .primary-audio-btn { background: #6c5ce7; color: white; border: none; font-size: 18px; font-weight: bold; padding: 14px 30px; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 0 #4f3bb1; transition: all 0.1s; display: inline-flex; align-items: center; gap: 10px; }
-        .primary-audio-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 #4f3bb1; }
-
-        .worksheet-submit-btn { background: #20bf6b; color: white; border: none; font-size: 22px; font-weight: bold; padding: 16px 45px; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 0 #179147; transition: all 0.1s; display: block; margin: 30px auto 0 auto; text-transform: uppercase; letter-spacing: 0.5px; }
-        .worksheet-submit-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #179147; }
-
-        @keyframes popUp { from { opacity: 0; transform: scale(0.97) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        :root {
+            --bg-canvas: #FFFDF9;
+            --bar-gradient: linear-gradient(90deg, #E96B8B, #F9A86C);
+            --btn-listen: #634EE4;
+            --btn-submit: #10B981;
+            --border-panel: #E2E8F0;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #FFF8EE;
+            color: #2D3748;
+        }
+        .top-navbar {
+            background: var(--bar-gradient);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav-title { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
+        .nav-selectors { display: flex; gap: 12px; }
+        .nav-select {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 2px solid white;
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+        }
+        .nav-select option { color: #2D3748; }
     </style>
 </head>
 <body>
-<div id="learning-platform-container" class="main-container" style="background: #f0f8ff;">
-    
-    <!-- Top Classroom Control Station Panel -->
-    <header id="dynamic-header-bar" style="background: linear-gradient(135deg, #ff7675, #6c5ce7);">
-        <div style="font-size: 20px; font-weight: bold; letter-spacing: 0.5px;">🏫 DIGITAL WORKSHEET DESK</div>
-        <div style="display: flex; gap: 15px; align-items: center;">
-            
-            <select id="grade-selector" class="control-select" style="background: #ffeaa7;">
-                <optgroup label="🖍️ Elementary Tracks">
-                    <option value="gk">Kindergarten Base</option>
-                </optgroup>
+    <div class="top-navbar">
+        <div class="nav-title">⭐ DIGITAL WORKSHEET DESK</div>
+        <div class="nav-selectors">
+            <select class="nav-select" id="portalGroupSelect"><option>Kindergarten Base</option></select>
+            <select class="nav-select" id="subjectTrackSelect"><option>📚 Mathematics Track</option></select>
+            <select class="nav-select" id="daySelect" onchange="switchDaySimulation()">
+                <option value="1">🗓️ Day 1 Track</option>
+                <option value="2">🗓️ Day 2 Track</option>
             </select>
-            
-            <select id="subject-selector" class="control-select" style="background: #fab1a0;">
-                <option value="mathematics">🔢 Mathematics Track</option>
-                <option value="science">🔬 Scientific Investigations</option>
-            </select>
-            
-            <select id="day-selector" class="control-select" style="background: #55efc4; color: #2d3436;">
-                <!-- Automatically built via the initialization routing script -->
-            </select>
-            
         </div>
-    </header>
-
-    <!-- The Visual Worksheet Stage Viewport -->
-    <main class="classroom-page-wrapper">
-        <div id="adaptive-portal-viewport">
-            <!-- Vector worksheets and custom learning templates inject directly inside here -->
+    </div>
+<!-- Box 2: Split Presentation Layer and Layout Frame Setup -->
+    <style>
+        .dual-track-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 24px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .left-core-track, .right-alternative-track {
+            background: white;
+            border: 2px solid var(--border-panel);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            min-height: 600px;
+        }
+        .right-alternative-track {
+            background-color: #F8FAFC;
+            border-style: dashed;
+        }
+        .student-meta-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px dashed #CBD5E1;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: #64748B;
+            font-weight: bold;
+        }
+        .meta-field { border-bottom: 1px solid #94A3B8; width: 120px; display: inline-block; }
+    </style>
+    <div class="dual-track-container">
+        <!-- Left Side: Core Public K-12 Curriculum Frame -->
+        <div class="left-core-track" id="leftCoreWorkspace">
+<!-- Box 3: Audio Audio Controls and Core Presentation Elements -->
+            <style>
+                .audio-guide-banner {
+                    background-color: #F1F5F9;
+                    border-radius: 12px;
+                    padding: 16px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 16px;
+                    margin-bottom: 24px;
+                }
+                .lesson-guide-text { font-size: 0.95rem; color: #475569; line-height: 1.4; }
+                .btn-audio-listen {
+                    background-color: var(--btn-listen);
+                    color: white;
+                    border: none;
+                    border-radius: 50px;
+                    padding: 12px 28px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    box-shadow: 0 4px 10px rgba(99,78,228,0.3);
+                }
+                .lesson-header-title { text-align: center; font-size: 1.4rem; color: #1E293B; margin: 20px 0; }
+                .directions-container { background-color: #FFFBEB; border-left: 4px solid #F59E0B; padding: 12px 16px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
+                .directions-text { font-size: 0.95rem; font-weight: 500; color: #B45309; }
+            </style>
+            <div class="student-meta-row">
+                <div>NAME: <span class="meta-field"></span></div>
+                <div>DATE: <span class="meta-field"></span></div>
+                <div>SCORE: <span class="meta-field"></span></div>
+            </div>
+            <div class="audio-guide-banner">
+                <div class="lesson-guide-text" id="lessonGuideContent">
+                    📄 <strong>Lesson Guide:</strong> Click the speaker button to hear today's counting pond instructions out loud!
+                </div>
+                <button class="btn-audio-listen" onclick="triggerVoiceReader()">🔊 Listen</button>
+            </div>
+            <h2 class="lesson-header-title" id="lessonTitleLabel">Grade K Mathematics - Day 1</h2>
+            <div class="directions-container">
+                <div class="directions-text" id="assignmentDirectionsLabel">
+                    Directions: Select a crayon below, then click the matching numbered shapes inside the pond picture to color them in!
+                </div>
+            </div>
+<!-- Box 4: Interactive Activity Viewports For Both School Days -->
+            <style>
+                .active-assignment-viewport { display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
+                .crayon-box-wrapper { display: flex; gap: 16px; border: 2px solid #E2E8F0; padding: 12px 24px; border-radius: 30px; background: white; margin-bottom: 20px; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+                .crayon-option { width: 36px; height: 36px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: transform 0.1s ease; }
+                .crayon-option.selected-crayon { border-color: #1E293B; transform: scale(1.15); }
+                .crayon-green { background-color: #2ECC71; }
+                .crayon-yellow { background-color: #F1C40F; }
+                .crayon-blue { background-color: #3498DB; }
+                .pond-svg-canvas { width: 100%; max-width: 440px; background: white; border: 2px solid #CBD5E1; border-radius: 12px; }
+                .pond-svg-canvas path, .pond-svg-canvas ellipse, .pond-svg-canvas rect { cursor: pointer; transition: fill 0.2s ease, stroke 0.2s ease; }
+                .labels-legend-row { margin-top: 16px; display: flex; gap: 16px; font-size: 0.85rem; font-weight: bold; color: #64748B; }
+                .apple-counter-grid { display: flex; gap: 12px; justify-content: center; margin: 30px 0; }
+                .apple-touch-card { border: 3px solid #CBD5E1; border-radius: 16px; padding: 16px; width: 65px; text-align: center; background: white; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.2s ease; }
+                .apple-touch-card.counted-apple { border-color: #10B981; background-color: #ECFDF5; transform: translateY(-4px); }
+                .apple-icon { font-size: 2rem; display: block; margin-bottom: 8px; }
+                .apple-label { font-size: 0.85rem; font-weight: bold; color: #475569; }
+                .btn-submit-worksheet { background-color: var(--btn-submit); color: white; border: none; border-radius: 30px; padding: 14px 36px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 24px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+            </style>
+            <div class="active-assignment-viewport">
+                <!-- Day 1 Viewport Container: Canvas Drawing -->
+                <div id="day1Viewport" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                    <div class="crayon-box-wrapper">
+                        <span>🖍️ Crayon Box:</span>
+                        <div class="crayon-option crayon-green selected-crayon" onclick="pickCrayonColor(this, '#2ECC71')"></div>
+                        <div class="crayon-option crayon-yellow" onclick="pickCrayonColor(this, '#F1C40F')"></div>
+                        <div class="crayon-option crayon-blue" onclick="pickCrayonColor(this, '#3498DB')"></div>
+                    </div>
+                    <svg class="pond-svg-canvas" viewBox="0 0 400 300" id="vectorPondMap">
+                        <!-- Sky and Outer Frame Block -->
+                        <rect x="10" y="10" width="380" height="280" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" onclick="colorWorksheetSegment(this)"/>
+                        <!-- Pond Object Block -->
+                        <ellipse cx="200" cy="220" rx="160" ry="50" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" onclick="colorWorksheetSegment(this)"/>
+                        <!-- Grass Blade Asset Shape -->
+                        <path d="M40,230 L55,160 L70,230 Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" onclick="colorWorksheetSegment(this)"/>
+                        <!-- Simple Vector Duck Shape -->
+                        <ellipse cx="190" cy="180" rx="25" ry="18" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" onclick="colorWorksheetSegment(this)"/>
+                        <ellipse cx="210" cy="165" rx="14" ry="14" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2" onclick="colorWorksheetSegment(this)"/>
+                        <!-- Text Numbers Anchored Inside SVG Map Paths -->
+                        <text x="195" y="80" font-family="sans-serif" font-size="16" font-weight="bold" fill="#64748B" pointer-events="none">3</text>
+                        <text x="51" y="210" font-family="sans-serif" font-size="14" font-weight="bold" fill="#64748B" pointer-events="none">1</text>
+                        <text x="185" y="185" font-family="sans-serif" font-size="14" font-weight="bold" fill="#64748B" pointer-events="none">2</text>
+                        <text x="200" y="235" font-family="sans-serif" font-size="16" font-weight="bold" fill="#64748B" pointer-events="none">3</text>
+                    </svg>
+                    <div class="labels-legend-row">
+                        <span>1 - Green (Grass)</span><span>2 - Yellow (Duck)</span><span>3 - Blue (Pond & Sky)</span>
+                    </div>
+                </div>
+<!-- Box 5: Day 2 Counting Viewport Framework and Left Container End -->
+                <!-- Day 2 Viewport Container: Apple Click Elements -->
+                <div id="day2Viewport" style="display: none; flex-direction: column; align-items: center; width: 100%;">
+                    <div class="apple-counter-grid">
+                        <div class="apple-touch-card" onclick="toggleAppleCountingCard(this)">
+                            <span class="apple-icon">🍎</span><span class="apple-label">#1</span>
+                        </div>
+                        <div class="apple-touch-card" onclick="toggleAppleCountingCard(this)">
+                            <span class="apple-icon">🍎</span><span class="apple-label">#2</span>
+                        </div>
+                        <div class="apple-touch-card" onclick="toggleAppleCountingCard(this)">
+                            <span class="apple-icon">🍎</span><span class="apple-label">#3</span>
+                        </div>
+                        <div class="apple-touch-card" onclick="toggleAppleCountingCard(this)">
+                            <span class="apple-icon">🍎</span><span class="apple-label">#4</span>
+                        </div>
+                        <div class="apple-touch-card" onclick="toggleAppleCountingCard(this)">
+                            <span class="apple-icon">🍎</span><span class="apple-label">#5</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-submit-worksheet" onclick="alert('Worksheet Answers Captured Locally!')">HAND IN WORKSHEET 🌟</button>
+            </div>
         </div>
-    </main>
-</div>
-<script>
-let currentSelectedCrayonColor = "#f1c40f"; 
-
-function executeDynamicPortalUpdate() {
-    const grade = document.getElementById('grade-selector').value;
-    const subject = document.getElementById('subject-selector').value;
-    const day = document.getElementById('day-selector').value;
-    
-    // Set standard layout background colors to make panels look attractive
-    if (subject === "mathematics") {
-        document.getElementById('learning-platform-container').style.backgroundColor = "#fffcf4";
-    } else {
-        document.getElementById('learning-platform-container').style.backgroundColor = "#f4fcf7";
-    }
-    
-    // Core database routing mapping straight to your local vault directory tree
-    const unitFolder = "unit_1_foundations";
-    const targetFileUrl = `/pure_curriculum_vault/k5/${grade}/${subject}/${unitFolder}/day_${day}.json`;
-    
-    console.log("Ingesting raw lesson data map from node: " + targetFileUrl);
-
-    fetch(targetFileUrl)
-        .then(response => {
-            if (!response.ok) { throw new Error("Target file asset missing inside local drives."); }
-            return response.json();
-        })
-        .then(data => {
-            compileThematicPrintWorksheet(subject, parseInt(day), data);
-        })
-        .catch(error => {
-            document.getElementById('adaptive-portal-viewport').innerHTML = `
-                <div style="text-align: center; color: #94a3b8; padding: 40px 0;">
-                    <h2>📖 Active System Content Gateway Standing By</h2>
-                    <p>Launch your local <code>curricullm_engine.py</code> script to map out data strings inside: <code>${targetFileUrl}</code></p>
-                </div>`;
-        });
-}
-
-function selectActiveCrayonColor(swatchElement, colorHex) {
-    currentSelectedCrayonColor = colorHex;
-    document.querySelectorAll('.color-crayon-swatch').forEach(swatch => swatch.classList.remove('active-crayon'));
-    swatchElement.classList.add('active-crayon');
-}
-
-// Fixed function container using unescaped quotes to read variables flawlessly
-function colorWorksheetSegment(regionElement) {
-    regionElement.style.fill = currentSelectedCrayonColor;
-}
-
-function triggerVoiceReader(textToRead) {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(textToRead);
-        utterance.rate = 0.95;
-        window.speechSynthesis.speak(utterance);
-    }
-}
-</script>
-<script>
-function compileThematicPrintWorksheet(subject, day, data) {
-    const viewport = document.getElementById('adaptive-portal-viewport');
-    
-    if (subject === "mathematics") {
-        if (day === 1) {
-            // DAY 1: Interactive Vector Illustrated Duck Pond Worksheet Layout
-            viewport.innerHTML = `
-                <div class="printed-worksheet-paper">
-                    <div style="display: flex; justify-content: space-between; border-bottom: 2px dashed #b2bec3; padding-bottom: 12px; margin-bottom: 20px; font-weight: bold; color: #636e72; font-size: 14px;">
-                        <div>NAME: ___________________________</div>
-                        <div>DATE: ______________</div>
-                        <div>SCORE: _________</div>
+<!-- Box 6: Right Side Presentation Frame (Dual-Track Alternative Frameworks) -->
+        <!-- Right Side: The Parallel Alternative Viewpoints & Comparative Analysis -->
+        <div class="right-alternative-track" id="rightComparativeWorkspace">
+            <style>
+                .comparison-headline-bar { display: flex; align-items: center; gap: 8px; color: #B91C1C; font-weight: bold; border-bottom: 2px solid #FCA5A5; padding-bottom: 8px; margin-bottom: 16px; font-size: 1.05rem; }
+                .live-comparison-card { background: white; border: 1px solid #E2E8F0; padding: 16px; border-radius: 12px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.01); }
+                .comparison-card-title { font-size: 0.9rem; font-weight: bold; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+                .comparison-card-text { font-size: 0.95rem; line-height: 1.5; color: #334155; }
+                .keyword-pill-indicator { background: #FEF2F2; color: #DC2626; border: 1px solid #FEE2E2; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+            </style>
+            <div class="comparison-headline-bar">🧬 DUAL-TRACK COMPARISON MATRIX</div>
+            <div id="liveComparisonContainer">
+                <!-- Day 1 Comparative Insights Content Stack -->
+                <div id="day1ComparisonNode">
+                    <div class="live-comparison-card">
+                        <div class="comparison-card-title">🔍 Historical Context <span class="keyword-pill-indicator">Pond / Water</span></div>
+                        <div class="comparison-card-text">Ponds and natural water systems are mapped out in textbook data nodes to explore standard containment and physical observation elements.</div>
                     </div>
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px 20px; border-radius: 12px; margin-bottom: 25px;">
-                        <div style="font-size: 15px; color: #4a5568; font-weight: 500;">📖 <strong>Lesson Guide:</strong> Click the speaker button to hear today's counting pond instructions out loud!</div>
-                        <button class="primary-audio-btn" onclick="triggerVoiceReader('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Listen</button>
+                    <div class="live-comparison-card">
+                        <div class="comparison-card-title">📖 Biblical Truth Core Alignment</div>
+                        <div class="comparison-card-text">Genesis 1:9 outlines the separation of water frameworks to uncover dry ground structures, proving designed order across creation ecosystems.</div>
                     </div>
-                    
-                    <h2 style="text-align: center; color: #2d3436; margin: 0 0 10px 0; font-size: 26px;">🦆 ${data.lesson_title}</h2>
-                    <h4 style="text-align: center; color: #636e72; margin: 0 0 25px 0; font-weight: 500;">Directions: Select a crayon below, then click the matching numbered shapes inside the pond picture to color them in!</h4>
-                    
-                    <div style="display: flex; gap: 25px; justify-content: center; align-items: center; background: #fff; padding: 15px; border-radius: 15px; border: 1px solid #e2e8f0; width: fit-content; margin: 0 auto 25px auto;">
-                        <span style="font-weight: bold; color: #4a5568; font-size: 15px;">💡 Crayon Box:</span>
-                        <div class="color-crayon-swatch active-crayon" style="background: #2ecc71;" onclick="selectActiveCrayonColor(this, '#2ecc71')"></div>
-                        <div class="color-crayon-swatch" style="background: #f1c40f;" onclick="selectActiveCrayonColor(this, '#f1c40f')"></div>
-                        <div class="color-crayon-swatch" style="background: #3498db;" onclick="selectActiveCrayonColor(this, '#3498db')"></div>
+                </div>
+                <!-- Day 2 Comparative Insights Content Stack -->
+                <div id="day2ComparisonNode" style="display: none;">
+                    <div class="live-comparison-card">
+                        <div class="comparison-card-title">🔍 Botanical Context <span class="keyword-pill-indicator">Apple / Seed</span></div>
+                        <div class="comparison-card-text">Apples and plant structures represent standard fruit-bearing growth tracking systems within primary public school frameworks.</div>
                     </div>
+                    <div class="live-comparison-card">
+                        <div class="comparison-card-title">📖 Biblical Truth Core Alignment</div>
+                        <div class="comparison-card-text">Genesis 1:11 highlights the structural design of fruit-bearing plants yielding seed after their kind, emphasizing absolute biological consistency.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Box 7: System Variables and Interactive Worksheet State Scripts -->
+    <script>
+        // Active System State Variables
+        let currentActiveCrayonColor = "#2ECC71";
+        
+        // Target Audio State Flags
+        let hasSpokenSummary = false;
 
-                    <div style="background: #ffffff; border: 2px solid #2d3436; border-radius: 16px; padding: 15px; max-width: 550px; margin: 0 auto;">
-                        <svg viewBox="0 0 400 240" style="width: 100%; height: auto; display: block;">
-                            <rect x="0" y="0" width="400" height="140" fill="#ffffff" class="worksheet-svg-region" onclick="colorWorksheetSegment(this)"/>
-                            <text x="195" y="45" fill="#2d3436" font-weight="bold" font-size="14">3</text>
-                            
-                            <ellipse cx="200" cy="185" rx="185" ry="45" fill="#ffffff" class="worksheet-svg-region" onclick="colorWorksheetSegment(this)"/>
-                            <text x="200" y="200" fill="#2d3436" font-weight="bold" font-size="15">3</text>
-                            
-                            <path d="M 110 155 Q 135 115 175 155 Q 150 185 110 155" fill="#ffffff" class="worksheet-svg-region" onclick="colorWorksheetSegment(this)"/>
-                            <circle cx="165" cy="140" r="15" fill="#ffffff" class="worksheet-svg-region" onclick="colorWorksheetSegment(this)"/>
-                            <circle cx="168" cy="136" r="2.5" fill="#2d3436"/>
-                            <polygon points="178,136 188,141 178,144" fill="#f39c12" stroke="#2d3436" stroke-width="1.5"/>
-                            <text x="138" y="158" fill="#2d3436" font-weight="bold" font-size="13">2</text>
-                            
-                            <path d="M 30 160 Q 40 100 45 160 M 40 160 Q 55 90 60 160" fill="none" stroke="#2d3436" stroke-width="2.5" class="worksheet-svg-region" onclick="this.style.stroke=currentSelectedCrayonColor"/>
-                            <text x="43" y="130" fill="#2d3436" font-weight="bold" font-size="12">1</text>
-                        </svg>
-                    </div>
-                    
-                    <div style="display: flex; justify-content: center; gap: 30px; font-weight: bold; color: #4a5568; margin-top: 20px; font-size: 14px;">
-                        <div>1 = Green (Grass)</div>
-                        <div>2 = Yellow (Duck)</div>
-                        <div>3 = Blue (Pond & Sky)</div>
-                    </div>
+        // Vector Interaction Logic: Handles Crayon Selection
+        function pickCrayonColor(crayonElement, targetHexColor) {
+            // Remove selection border ring from all crayon entities
+            document.querySelectorAll('.crayon-option').forEach(crayon => {
+                crayon.classList.remove('selected-crayon');
+            });
+            // Assign selection state attributes directly to active crayon node
+            crayonElement.classList.add('selected-crayon');
+            currentActiveCrayonColor = targetHexColor;
+        }
 
-                    <button class="worksheet-submit-btn" onclick="alert('Success! Worksheet uploaded to tracking channels.')">Hand In Worksheet 🌟</button>
-                </div>`;
-        } else {
-            // DAY 2 UNBROKEN CODE BLOCK: Renders the looping card numbers 1 through 5 beautifully without backslash leaks
-            let cardGeneratorHTML = "";
-            for (let i = 1; i <= 5; i++) {
-                cardGeneratorHTML += `
-                    <div style="background: #ffffff; border: 3px solid #2d3436; border-radius: 20px; width: 110px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; box-shadow: 0 8px 0 #2d3436; transition: all 0.1s;" onclick="this.style.background='#ffeaa7'; this.style.transform='translateY(4px)'; this.style.boxShadow='0 4px 0 #2d3436'; window.speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance('${i}'); window.speechSynthesis.speak(u);">
-                        <div style="font-size: 40px; margin: 0;">🍎</div>
-                        <div style="font-weight: bold; font-size: 18px; color: #2d3436;">#${i}</div>
-                    </div>`;
+        // Vector Color Fill Interaction Behavior
+        function colorWorksheetSegment(regionElement) {
+            // Alter both the fill color property and the stroke path outline color simultaneously
+            regionElement.setAttribute('fill', currentActiveCrayonColor);
+            regionElement.setAttribute('stroke', currentActiveCrayonColor);
+        }
+
+        // Interactive Activity Tracking: Handles Counting Grid Selection
+        function toggleAppleCountingCard(cardElement) {
+            cardElement.classList.toggle('counted-apple');
+        }
+    </script>
+<!-- Box 8: Day-Swapping Presentation Router Script -->
+    <script>
+        // Simple Viewport Engine Router Loop
+        function switchDaySimulation() {
+            const chosenDayIndex = document.getElementById("daySelect").value;
+            
+            // Critical Reset: Clear the speech tracker so each lesson treats the next click as fresh
+            hasSpokenSummary = false;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
             }
 
-            viewport.innerHTML = `
-                <div class="printed-worksheet-paper">
-                    <div style="display: flex; justify-content: space-between; border-bottom: 2px dashed #b2bec3; padding-bottom: 12px; margin-bottom: 20px; font-weight: bold; color: #636e72; font-size: 14px;">
-                        <div>NAME: ___________________________</div>
-                        <div>DATE: ______________</div>
-                        <div>SCORE: _________</div>
-                    </div>
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px 20px; border-radius: 12px; margin-bottom: 25px;">
-                        <div style="font-size: 15px; color: #4a5568; font-weight: 500;">📖 <strong>Lesson Guide:</strong> Click the speaker button to hear today's target counting instructions out loud!</div>
-                        <button class="primary-audio-btn" onclick="triggerVoiceReader('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Listen</button>
-                    </div>
-                    
-                    <h2 style="text-align: center; color: #2d3436; margin: 0 0 10px 0; font-size: 26px;">🍎 ${data.lesson_title}</h2>
-                    <h4 style="text-align: center; color: #636e72; margin: 0 0 35px 0; font-weight: 500;">Directions: Touch each target object block below one-by-one to count them out loud from 1 to 5!</h4>
-                    
-                    <div style="display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; padding: 15px 0; margin-bottom: 20px;">
-                        ${cardGeneratorHTML}
-                    </div>
+            // Document Element Navigation Targets
+            const titleLabel = document.getElementById("lessonTitleLabel");
+            const guideContent = document.getElementById("lessonGuideContent");
+            const directionsLabel = document.getElementById("assignmentDirectionsLabel");
+            
+            const frame1 = document.getElementById("day1Viewport");
+            const frame2 = document.getElementById("day2Viewport");
+            const matrix1 = document.getElementById("day1ComparisonNode");
+            const matrix2 = document.getElementById("day2ComparisonNode");
 
-                    <button class="worksheet-submit-btn" onclick="alert('Success! Counting logs saved.')">Hand In Worksheet 🌟</button>
-                </div>`;
+            if (chosenDayIndex === "1") {
+                titleLabel.innerText = "Grade K Mathematics - Day 1";
+                guideContent.innerHTML = "📄 <strong>Lesson Guide:</strong> Click the speaker button to hear today's counting pond instructions out loud!";
+                directionsLabel.innerText = "Directions: Select a crayon below, then click the matching numbered shapes inside the pond picture to color them in!";
+                frame1.style.display = "flex"; frame2.style.display = "none";
+                matrix1.style.display = "block"; matrix2.style.display = "none";
+            } else {
+                titleLabel.innerText = "Grade K Mathematics - Day 2";
+                guideContent.innerHTML = "📄 <strong>Lesson Guide:</strong> Let's practice simple counting! Click below to hear how we map out objects from 1 to 5.";
+                directionsLabel.innerText = "Directions: Touch each target object block below one-by-one to count them out loud from 1 to 5!";
+                frame1.style.display = "none"; frame2.style.display = "flex";
+                matrix1.style.display = "none"; matrix2.style.display = "block";
+            }
         }
-    } else {
-        // Render core baseline structures for your science modules
-        viewport.innerHTML = `
-            <div class="printed-worksheet-paper" style="border-color: #2ecc71;">
-                <div style="display: flex; justify-content: space-between; border-bottom: 2px dashed #b2bec3; padding-bottom: 12px; margin-bottom: 20px; font-weight: bold; color: #636e72; font-size: 14px;">
-                    <div>NAME: ___________________________</div>
-                    <div>DATE: ______________</div>
-                    <div>SCORE: _________</div>
-                </div>
-                <h2 style="text-align: center; color: #2d3436; margin: 0 0 20px 0; font-size: 26px;">🔬 ${data.lesson_title}</h2>
-                <p style="font-size: 17px; line-height: 1.6; color: #2d3436; background: #ffffff; padding: 25px; border-radius: 16px; border: 1px solid #ced6e0; margin-bottom: 30px;">${data.lesson_body}</p>
-                <div style="background: #fff; border: 2px dashed #2ecc71; border-radius: 16px; padding: 25px; text-align: center;">
-                    <h4 style="margin:0 0 10px 0; color:#27ae60;">Active Assignment Focus</h4>
-                    <p style="color:#4a5568; font-size:15px; margin-bottom:20px;">${data.interactive_assignment}</p>
-                    <button class="primary-audio-btn" style="background:#2ecc71; box-shadow:0 5px 0 #1c8843; margin:0 auto;" onclick="alert('Lab records updated.')">📝 Record Lab Observations</button>
-                </div>
-                <button class="worksheet-submit-btn" style="background:#2ecc71; box-shadow:0 6px 0 #179147;" onclick="alert('Lab handed in.')">Hand In Lab Sheet 🌟</button>
-            </div>`;
-    }
-}
-</script>
-<script>
-function buildClassroomDayDropdown() {
-    const dayDropdown = document.getElementById('day-selector');
-    if (!dayDropdown) return;
-    
-    dayDropdown.innerHTML = "";
-    // Dynamically write option parameters matching your full 180 day school cycle
-    for (let dayIndex = 1; dayIndex <= 180; dayIndex++) {
-        const option = document.createElement('option');
-        option.value = dayIndex;
-        option.innerText = "📆 Day " + dayIndex + " Track";
-        dayDropdown.appendChild(option);
-    }
-}
+    </script>
+<!-- Box 9: Intelligent Two-Stage Audio Speech Ingestion Script -->
+    <script>
+        // Two-Stage Audio Ingestion Engine
+        function triggerVoiceReader() {
+            // Safety Pass: Clear lagging or overlapping speech tracks instantly
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            } else {
+                alert("Speech integration elements are unsupported inside this browser framework.");
+                return;
+            }
 
-// Lock event list choices to fire update calls immediately on drop change actions
-window.addEventListener('DOMContentLoaded', () => {
-    buildClassroomDayDropdown();
-    
-    document.getElementById('grade-selector').addEventListener('change', executeDynamicPortalUpdate);
-    document.getElementById('subject-selector').addEventListener('change', executeDynamicPortalUpdate);
-    document.getElementById('day-selector').addEventListener('change', executeDynamicPortalUpdate);
-    
-    // Perform layout paint operations instantly on dashboard initial launch
-    executeDynamicPortalUpdate();
-});
-</script>
+            let textToSpeak = "";
+
+            // Evaluate Audio History Tracking State
+            if (!hasSpokenSummary) {
+                // First Click: Extract text content directly from the Lesson Guide summary block
+                const guideElement = document.getElementById('lessonGuideContent');
+                textToSpeak = guideElement ? guideElement.innerText : "Welcome to today's learning track.";
+                
+                // Flip the tracking state flag so subsequent clicks pivot text selection targets
+                hasSpokenSummary = true;
+            } else {
+                // Subsequent Clicks: Extract text elements from the active Assignment Directions container
+                const directionsElement = document.getElementById('assignmentDirectionsLabel');
+                textToSpeak = directionsElement ? directionsElement.innerText : "Please follow the workspace instructions.";
+            }
+
+            // Execute Speech Synthesis Delivery Pass
+            const vocalUtterance = new SpeechSynthesisUtterance(textToSpeak);
+            vocalUtterance.rate = 0.85; // Slightly metered tempo for K-5 instructional clarity
+            window.speechSynthesis.speak(vocalUtterance);
+        }
+    </script>
 </body>
 </html>
