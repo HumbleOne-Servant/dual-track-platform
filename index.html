@@ -3,38 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Immersion Thematic Classroom Portal</title>
+    <title>Thematic K-12 Interactive Worksheet Hub</title>
     <style>
-        body { margin: 0; padding: 0; transition: background-color 0.4s ease; font-family: system-ui, -apple-system, sans-serif; background-color: #f7f9fc; }
+        body { margin: 0; padding: 0; transition: background-color 0.4s ease; font-family: system-ui, -apple-system, sans-serif; background-color: #f8fafc; }
         .main-container { min-height: 100vh; padding-bottom: 50px; }
-        header { padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: background 0.4s ease; }
+        header { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.06); transition: background 0.4s ease; }
         .control-select { padding: 10px 20px; font-size: 15px; border-radius: 30px; font-weight: bold; border: 2px solid white; cursor: pointer; outline: none; }
         
-        /* 🎨 MASTER CLASSROOM IMPRESSION CARDS */
-        .immersive-viewport-wrapper { max-width: 1000px; margin: 0 auto; width: 100%; animation: slideUp 0.3s ease-out; }
-        .worksheet-paper-container { background: #ffffff; border-radius: 24px; padding: 35px; box-shadow: 0 8px 32px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; position: relative; overflow: hidden; margin-bottom: 30px; }
+        /* 🎨 THEMATIC PRINT-WORKSHEET SIMULATION CANVAS */
+        .classroom-page-wrapper { max-width: 900px; margin: 30px auto; width: 100%; padding: 0 20px; box-sizing: border-box; }
         
-        /* Interactive Thematic SVG Vector Styling */
-        .color-region { cursor: pointer; transition: fill 0.2s ease, stroke-width 0.2s; stroke: #4a5568; stroke-width: 1.5; }
-        .color-region:hover { stroke-width: 3; filter: brightness(0.95); }
+        .printed-worksheet-paper { background: #ffffff; border: 4px solid #4a5568; border-radius: 20px; padding: 30px; box-shadow: 0 12px 36px rgba(0,0,0,0.05); position: relative; animation: popUp 0.3s ease-out; }
         
-        /* Stylized Color Guide Palette Elements */
-        .palette-swatch { width: 45px; height: 45px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 4px 8px rgba(0,0,0,0.15); cursor: pointer; transition: transform 0.2s; position: relative; }
-        .palette-swatch:hover { transform: scale(1.15); }
-        .palette-swatch.selected::after { content: "✓"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: 18px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+        /* Interactive Vector Region Mapping */
+        .worksheet-svg-region { cursor: pointer; transition: fill 0.15s ease, stroke 0.15s; stroke: #2d3436; stroke-width: 2; }
+        .worksheet-svg-region:hover { stroke: #e84393; stroke-width: 3.5; }
         
-        .audio-banner-btn { background: linear-gradient(135deg, #6c5ce7, #574b90); color: white; border: none; padding: 14px 28px; border-radius: 50px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3); transition: all 0.2s; display: block; margin: 0 auto 25px auto; }
-        .audio-banner-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(108, 92, 231, 0.4); }
-        
-        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        /* Childrens Large Primary Color Palette Swatches */
+        .color-crayon-swatch { width: 55px; height: 55px; border-radius: 50%; border: 4px solid #ffffff; box-shadow: 0 6px 12px rgba(0,0,0,0.12); cursor: pointer; transition: transform 0.15s; position: relative; }
+        .color-crayon-swatch:hover { transform: scale(1.15) translateY(-3px); }
+        .color-crayon-swatch.active-crayon::after { content: "✏️"; position: absolute; top: -12px; right: -8px; font-size: 20px; }
+
+        /* Big Chunky Kinder Buttons */
+        .primary-audio-btn { background: #6c5ce7; color: white; border: none; font-size: 18px; font-weight: bold; padding: 14px 30px; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 0 #4f3bb1; transition: all 0.1s; display: inline-flex; align-items: center; gap: 10px; }
+        .primary-audio-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 #4f3bb1; }
+
+        .worksheet-submit-btn { background: #20bf6b; color: white; border: none; font-size: 22px; font-weight: bold; padding: 16px 45px; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 0 #179147; transition: all 0.1s; display: block; margin: 30px auto 0 auto; text-transform: uppercase; letter-spacing: 0.5px; }
+        .worksheet-submit-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #179147; }
+
+        @keyframes popUp { from { opacity: 0; transform: scale(0.97) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
     </style>
 </head>
 <body>
-<div id="learning-platform-container" class="main-container">
+<div id="learning-platform-container" class="main-container" style="background: #f0f8ff;">
     
-    <!-- Top Configuration Dashboard Panel -->
+    <!-- Top Classroom Control Station Panel -->
     <header id="dynamic-header-bar" style="background: linear-gradient(135deg, #ff7675, #6c5ce7);">
-        <div style="font-size: 20px; font-weight: bold; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px;">☀️ DUAL-TRACK INTERACTIVE WORKSTATION</div>
+        <div style="font-size: 20px; font-weight: bold; letter-spacing: 0.5px;">🏫 DIGITAL WORKSHEET DESK</div>
         <div style="display: flex; gap: 15px; align-items: center;">
             
             <select id="grade-selector" class="control-select" style="background: #ffeaa7;" onchange="executeDynamicPortalUpdate()">
@@ -56,41 +61,34 @@
         </div>
     </header>
 
-    <!-- Main Dynamic Interface Viewport -->
-    <main style="padding: 30px 20px;">
-        <div id="adaptive-portal-viewport" class="immersive-viewport-wrapper">
-            <!-- Custom illustrated vector worksheets populate here live -->
+    <!-- The Visual Worksheet Stage Viewport -->
+    <main class="classroom-page-wrapper">
+        <div id="adaptive-portal-viewport">
+            <!-- Custom vector-illustrated worksheets load live here -->
         </div>
     </main>
 </div>
 <script>
-let currentSelectedColor = "#2ecc71"; // Default background color token for active palette fills
-
-const VIEWPORT_BACKGROUNDS = {
-    "mathematics": "#fffcf4",
-    "science": "#f4fcf7"
-};
+let currentSelectedCrayonColor = "#f1c40f"; // Track the active color matching the worksheet guide arrays
 
 function executeDynamicPortalUpdate() {
     const grade = document.getElementById('grade-selector').value;
     const subject = document.getElementById('subject-selector').value;
     const day = document.getElementById('day-selector').value;
     
-    document.getElementById('learning-platform-container').style.backgroundColor = DISPATCH_THEMES[subject] || DISPATCH_THEMES.mathematics;
-    
-    // Core database routing to your local 46,800 layout folder node catalog vault
+    // Set standard asset path mapping to your local 46,800 file catalog vault folders
     const unitFolder = "unit_1_foundations";
     const targetFileUrl = `/pure_curriculum_vault/k5/${grade}/${subject}/${unitFolder}/day_${day}.json`;
     
-    console.log("Ingesting raw lesson data map from: " + targetFileUrl);
+    console.log("Ingesting raw lesson data map from node: " + targetFileUrl);
 
     fetch(targetFileUrl)
         .then(response => {
-            if (!response.ok) { throw new Error("Target file asset missing inside local vaults."); }
+            if (!response.ok) { throw new Error("Target file asset missing inside local drives."); }
             return response.json();
         })
         .then(data => {
-            generateImmersiveThematicWorksheet(subject, parseInt(day), data);
+            compileThematicPrintWorksheet(subject, parseInt(day), data);
         })
         .catch(error => {
             document.getElementById('adaptive-portal-viewport').innerHTML = `
@@ -101,185 +99,168 @@ function executeDynamicPortalUpdate() {
         });
 }
 
-function updateActivePaletteColor(element, colorHex) {
-    currentSelectedColor = colorHex;
-    document.querySelectorAll('.palette-swatch').forEach(swatch => swatch.classList.remove('selected'));
-    element.classList.add('selected');
+function selectActiveCrayonColor(swatchElement, colorHex) {
+    currentSelectedCrayonColor = colorHex;
+    document.querySelectorAll('.color-crayon-swatch').forEach(swatch => swatch.classList.remove('active-crayon'));
+    swatchElement.classList.add('active-crayon');
 }
 
-function fillVectorRegion(regionElement) {
-    regionElement.style.fill = currentSelectedColor;
+function colorWorksheetSegment(regionElement) {
+    regionElement.style.fill = currentSelectedCrayonColor;
 }
-</script>
-<script>
-function generateImmersiveThematicWorksheet(subject, day, data) {
-    const viewport = document.getElementById('adaptive-portal-viewport');
-    
-    if (subject === "mathematics") {
-        if (day === 1) {
-            // THEMATIC WORKSHEET: Color-By-Number Counting Pond Matrix
-            viewport.innerHTML = `
-                <div style="animation: slideUp 0.3s ease-out;">
-                    <button class="audio-banner-btn" onclick="triggerVoiceSynthesis('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Read Lesson Body Out Loud</button>
-                    
-                    <div class="worksheet-paper-container" style="border-top: 8px solid #ff7675;">
-                        <h2 style="margin-top:0; color: #1e293b; font-size: 24px; text-align:center;">🦆 ${data.lesson_title}: Duck Pond Color-By-Number</h2>
-                        <p style="font-size: 16px; line-height: 1.6; color: #4a5568; margin-bottom: 25px;">${data.lesson_body}</p>
-                        
-                        <!-- PALETTE COLOR SELECTOR GUIDE -->
-                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 15px; display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 25px;">
-                            <strong style="color: #4a5568; font-size: 15px;">🎨 Color Guide:</strong>
-                            <div class="palette-swatch selected" style="background: #2ecc71;" onclick="updateActivePaletteColor(this, '#2ecc71')"><span style="position:absolute; bottom:-22px; left:50%; transform:translateX(-50%); font-size:11px; color:#4a5568; font-weight:bold;">1:Green</span></div>
-                            <div class="palette-swatch" style="background: #f1c40f;" onclick="updateActivePaletteColor(this, '#f1c40f')"><span style="position:absolute; bottom:-22px; left:50%; transform:translateX(-50%); font-size:11px; color:#4a5568; font-weight:bold;">2:Yellow</span></div>
-                            <div class="palette-swatch" style="background: #3498db;" onclick="updateActivePaletteColor(this, '#3498db')"><span style="position:absolute; bottom:-22px; left:50%; transform:translateX(-50%); font-size:11px; color:#4a5568; font-weight:bold;">3:Blue</span></div>
-                        </div>
 
-                        <!-- LITTERAL ILLUSTRATED WORKBOOK DRAWING LAYER -->
-                        <div style="text-align: center; background: #fafbfc; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0;">
-                            <svg viewBox="0 0 400 200" style="width: 100%; max-width: 500px; height: auto; margin: 0 auto; display: block;">
-                                <!-- Sky background region (Code 3) -->
-                                <rect x="0" y="0" width="400" height="120" fill="#e0f2fe" class="color-region" onclick="fillVectorRegion(this)"/>
-                                <text x="180" y="40" fill="#64748b" font-weight="bold" font-size="12">3</style>
-                                
-                                <!-- Pond Water region (Code 3) -->
-                                <ellipse cx="200" cy="160" rx="180" ry="35" fill="#bae6fd" class="color-region" onclick="fillVectorRegion(this)"/>
-                                <text x="200" y="170" fill="#0369a1" font-weight="bold" font-size="12">3</text>
-                                
-                                <!-- Duck Body 1 (Code 2) -->
-                                <path d="M 120 140 Q 140 110 170 140 Q 150 160 120 140" fill="#fef08a" class="color-region" onclick="fillVectorRegion(this)"/>
-                                <circle cx="160" cy="130" r="12" fill="#fef08a" class="color-region" onclick="fillVectorRegion(this)"/>
-                                <circle cx="164" cy="128" r="2" fill="#000"/>
-                                <polygon points="172,128 180,132 172,134" fill="#f97316"/>
-                                <text x="140" y="142" fill="#a16207" font-weight="bold" font-size="10">2</text>
-                                
-                                <!-- Reeds and Grass (Code 1) -->
-                                <path d="M 20 150 L 30 110 L 40 150 M 35 150 L 48 100 L 55 150" fill="none" stroke="#86efac" stroke-width="4" class="color-region" onclick="this.style.stroke=currentSelectedColor"/>
-                                <text x="32" y="140" fill="#166534" font-weight="bold" font-size="10">1</text>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Dynamic Visual Interactive Assignment Box -->
-                    <div class="worksheet-paper-container" style="border-top: 8px solid #3498db; background: #f8fafc;">
-                        <h3 style="color: #1e3a8a; margin-top:0;">📝 Lesson Practical Sandbox Activity</h3>
-                        <p style="color: #334155; font-size: 15px; line-height: 1.5;">${data.interactive_assignment}</p>
-                        <div style="background: white; border: 2px dashed #cbd5e1; border-radius: 16px; padding: 25px; text-align: center;">
-                            <button class="audio-banner-btn" style="background:#3b82f6; box-shadow: 0 4px 0 #1d4ed8; margin:0 auto;" onclick="alert('Digital tracing overlays active! Touch elements to verify boundaries.')">✨ Activate Interactive Tracing Overlay</button>
-                        </div>
-                    </div>
-                </div>`;
-        } else if (day === 2) {
-            // Theme: Target Counting Block Matrix
-            viewport.innerHTML = `
-                <div style="animation: slideUp 0.3s ease-out;">
-                    <button class="audio-banner-btn" onclick="triggerVoiceSynthesis('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Read Lesson Body Out Loud</button>
-                    
-                    <div class="worksheet-paper-container" style="border-top: 8px solid #fbc531;">
-                        <h2 style="margin-top:0; color: #1e293b; font-size: 24px; text-align:center;">🍎 ${data.lesson_title}: Interactive Target Counter</h2>
-                        <p style="font-size: 16px; line-height: 1.6; color: #4a5568; margin-bottom: 25px;">${data.lesson_body}</p>
-                        
-                        <!-- VISUAL OBJECT COUNTING BOX MATRIX -->
-                        <h4 style="color: #d35400; text-align:center;">Touch each target apple icon below to verify the complete dataset total:</h4>
-                        <div style="display: flex; gap: 20px; justify-content: center; padding: 20px 0;">
-                            ${Array.from({length: 5}, (_, i) => `
-                                <div style="background: #fff5f5; border: 3px solid #ff7675; border-radius: 50%; width: 65px; height: 65px; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.1s;" onclick="this.style.background='#ffcb74'; window.speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance('\${i+1}'); window.speechSynthesis.speak(u);">🍎</div>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <div class="worksheet-paper-container" style="border-top: 8px solid #e67e22; background: #fffdf7;">
-                        <h3 style="color: #d35400; margin-top:0;">📝 Thematic Activity Space</h3>
-                        <p style="color: #4a5568; font-size: 15px;">${data.interactive_assignment}</p>
-                        <div style="background: white; border: 2px dashed #f39c12; border-radius: 16px; height: 120px; display: flex; align-items: center; justify-content: center; color: #bdc3c7; font-weight: bold; cursor: pointer;" onclick="alert('Sticker collection window overlay initialized.')">
-                            ✨ [Click to Drag Thematic Stickers Onto the Collection Board Container]
-                        </div>
-                    </div>
-                </div>`;
-        }
-    } else {
-        generateImmersiveScienceWorksheet(day, data, viewport);
-    }
-}
-</script>
-<script>
-function generateImmersiveScienceWorksheet(day, data, viewport) {
-    if (day === 1) {
-        // Theme: Matter State Jar Tester
-        viewport.innerHTML = `
-            <div style="animation: slideUp 0.3s ease-out;">
-                <button class="audio-banner-btn" onclick="triggerVoiceSynthesis('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Read Lesson Body Out Loud</button>
-                
-                <div class="worksheet-paper-container" style="border-top: 8px solid #2ecc71;">
-                    <h2 style="margin-top:0; color: #1e293b; font-size: 24px; text-align:center;">🔬 ${data.lesson_title}: Matter Laboratory Jars</h2>
-                    <p style="font-size: 16px; line-height: 1.6; color: #4a5568; margin-bottom: 25px;">${data.lesson_body}</p>
-                    
-                    <!-- VISUAL LAB TEST JAR JAVASCRIPT BLOCKS -->
-                    <div style="display: flex; gap: 20px; justify-content: center; padding: 15px 0; flex-wrap: wrap;">
-                        <div style="background: #f1f2f6; border: 3px solid #a4b0be; border-radius: 20px; width: 140px; padding: 25px 15px; text-align:center; cursor:pointer;" onclick="alert('Solid Test: Atoms are locked tightly! Hard like a real stone brick.')">
-                            <div style="font-size:45px; margin-bottom:10px;">🪨</div>
-                            <strong style="color:#2c3e50;">Solid Jar</strong>
-                        </div>
-                        <div style="background: #e0f2fe; border: 3px solid #38bdf8; border-radius: 20px; width: 140px; padding: 25px 15px; text-align:center; cursor:pointer;" onclick="alert('Liquid Test: Flows and shifts shape to fill the bottom of the container!')">
-                            <div style="font-size:45px; margin-bottom:10px;">💧</div>
-                            <strong style="color:#0369a1;">Liquid Jar</strong>
-                        </div>
-                        <div style="background: #fee2e2; border: 3px solid #f87171; border-radius: 20px; width: 140px; padding: 25px 15px; text-align:center; cursor:pointer;" onclick="alert('Gas Test: Expands widely to fill the entire air room bounds instantly!')">
-                            <div style="font-size:45px; margin-bottom:10px;">💨</div>
-                            <strong style="color:#991b1b;">Gas Jar</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="worksheet-paper-container" style="border-top: 8px solid #27ae60; background: #f4fff7;">
-                    <h3 style="color: #1e3a8a; margin-top:0;">📝 Matter Detective Lab Log</h3>
-                    <p style="color: #334155; font-size: 15px;">${data.interactive_assignment}</p>
-                    <button class="audio-banner-btn" style="background:#2ecc71; box-shadow: 0 4px 0 #1b8a4c; margin: 10px auto 0 auto;" onclick="alert('Camera frame activated. Take a picture of an item.')">📸 Take Object Property Photo</button>
-                </div>
-            </div>`;
-    } else {
-        // Theme: Living vs Non-Living Drag Grid
-        viewport.innerHTML = `
-            <div style="animation: slideUp 0.3s ease-out;">
-                <button class="audio-banner-btn" onclick="triggerVoiceSynthesis('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Read Lesson Body Out Loud</button>
-                
-                <div class="worksheet-paper-container" style="border-top: 8px solid #9c88ff;">
-                    <h2 style="margin-top:0; color: #1e293b; font-size: 24px; text-align:center;">🐜 ${data.lesson_title}: Lifecycle Sorting Station</h2>
-                    <p style="font-size: 16px; line-height: 1.6; color: #4a5568; margin-bottom: 25px;">${data.lesson_body}</p>
-                    
-                    <h4 style="color:#6c5ce7; text-align:center; margin-bottom:10px;">Tap each token card below to classify its core environmental lifecycle parameter:</h4>
-                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; padding: 15px 0;">
-                        <button class="audio-banner-btn" style="background:#ffffff; color:#2d3436; border:2px solid #ced6e0; box-shadow:0 4px 0 #b2bec3; margin:0;" onclick="alert('Correct! Ants breathe, consume energy, and replicate.')">🐜 Busy Ant Token</button>
-                        <button class="audio-banner-btn" style="background:#ffffff; color:#2d3436; border:2px solid #ced6e0; box-shadow:0 4px 0 #b2bec3; margin:0;" onclick="alert('Correct! Trees grow from seeds and drop leaves.')">🌳 Green Tree Token</button>
-                        <button class="audio-banner-btn" style="background:#ffffff; color:#2d3436; border:2px solid #ced6e0; box-shadow:0 4px 0 #b2bec3; margin:0;" onclick="alert('Correct! Cars are static objects made of metal parts, they do not grow.')">🚗 Toy Car Token</button>
-                    </div>
-                </div>
-            </div>`;
-    }
-}
-</script>
-<script>
-const DISPATCH_THEMES = {
-    "mathematics": "#fffbf4",
-    "science": "#f4fcf7"
-};
-
-function triggerVoiceSynthesis(textToRead) {
+function triggerVoiceReader(textToRead) {
     if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(textToRead);
         utterance.rate = 0.95;
-        utterance.pitch = 1.0;
         window.speechSynthesis.speak(utterance);
     }
 }
+</script>
+<script>
+function compileThematicPrintWorksheet(subject, day, data) {
+    const viewport = document.getElementById('adaptive-portal-viewport');
+    const container = document.getElementById('learning-platform-container');
+    
+    if (subject === "mathematics") {
+        container.style.backgroundColor = "#fffbf0"; // Soft warm paper desk background tint
+        
+        if (day === 1) {
+            // DAY 1: Clean, Interactive Vector Illustrated Duck Pond Worksheet Layout
+            viewport.innerHTML = `
+                <div class="printed-worksheet-paper">
+                    <!-- Top Student Info Sheet Row -->
+                    <div style="display: flex; justify-content: space-between; border-bottom: 2px dashed #b2bec3; padding-bottom: 12px; margin-bottom: 20px; font-weight: bold; color: #636e72; font-size: 14px;">
+                        <div>NAME: ___________________________</div>
+                        <div>DATE: ______________</div>
+                        <div>SCORE: _________</div>
+                    </div>
+                    
+                    <!-- Minimized Lesson / Audio Guidance Bar Block -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px 20px; border-radius: 12px; margin-bottom: 25px;">
+                        <div style="font-size: 15px; color: #4a5568; font-weight: 500;">📖 <strong>Lesson Guide:</strong> Click the speaker button to hear today's counting pond instructions out loud!</div>
+                        <button class="primary-audio-btn" onclick="triggerVoiceReader('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Listen</button>
+                    </div>
+                    
+                    <h2 style="text-align: center; color: #2d3436; margin: 0 0 10px 0; font-size: 26px;">🦆 ${data.lesson_title}</h2>
+                    <h4 style="text-align: center; color: #636e72; margin: 0 0 25px 0; font-weight: 500;">Directions: Select a crayon below, then click the matching numbered shapes inside the pond picture to color them in!</h4>
+                    
+                    <!-- LARGE CHUNKY CRAYON PALETTE DISPLAY ROW -->
+                    <div style="display: flex; gap: 25px; justify-content: center; align-items: center; background: #fff; padding: 15px; border-radius: 15px; border: 1px solid #e2e8f0; width: fit-content; margin: 0 auto 25px auto;">
+                        <span style="font-weight: bold; color: #4a5568; font-size: 15px;">🖍️ Crayon Box:</span>
+                        <div class="color-crayon-swatch active-crayon" style="background: #2ecc71;" onclick="selectActiveCrayonColor(this, '#2ecc71')"></div>
+                        <div class="color-crayon-swatch" style="background: #f1c40f;" onclick="selectActiveCrayonColor(this, '#f1c40f')"></div>
+                        <div class="color-crayon-swatch" style="background: #3498db;" onclick="selectActiveCrayonColor(this, '#3498db')"></div>
+                    </div>
 
-// Master bootstrap routine to lock in dashboard interactive triggers
+                    <!-- PURE INLINE VECTOR ILLUSTRATED CLASSROOM WORKSHEET CANVAS -->
+                    <div style="background: #ffffff; border: 2px solid #2d3436; border-radius: 16px; padding: 15px; max-width: 550px; margin: 0 auto; box-shadow: inset 0 4px 10px rgba(0,0,0,0.02);">
+                        <svg viewBox="0 0 400 240" style="width: 100%; height: auto; display: block;">
+                            <!-- Sky Background Node -->
+                            <rect x="0" y="0" width="400" height="140" fill="#ffffff" class="worksheet-svg-region" onclick="colorWorksheetSegment(this)"/>
+                            <text x="195" y="45" fill="#2d3436" font-weight="bold" font-size="14">3</text>
+                            
+                            <!-- Pond Water Node -->
+                            <ellipse cx="200" cy="185" rx="185" ry="45" fill="#ffffff" class="worksheet-svg-region" onclick="colorWorksheetSegment(this)"/>
+                            <text x="200" y="200" fill="#2d3436" font-weight="bold" font-size="15">3</text>
+                            
+                            <!-- Large Illustrated Duck Base Shape Node -->
+                            <path d="M 110 155 Q 135 115 175 155 Q 150 185 110 155" fill="#ffffff" class="worksheet-svg-region" onclick="colorWorksheetSegment(this)"/>
+                            <circle cx="165" cy="140" r="15" fill="#ffffff" class="worksheet-svg-region" onclick="colorWorksheetSegment(this)"/>
+                            <circle cx="168" cy="136" r="2.5" fill="#2d3436"/>
+                            <polygon points="178,136 188,141 178,144" fill="#f39c12" stroke="#2d3436" stroke-width="1.5"/>
+                            <text x="138" y="158" fill="#2d3436" font-weight="bold" font-size="13">2</text>
+                            
+                            <!-- Pond Cat-tails & Tall Marsh Grass Nodes -->
+                            <path d="M 30 160 Q 40 100 45 160 M 40 160 Q 55 90 60 160" fill="none" stroke="#2d3436" stroke-width="2.5" class="worksheet-svg-region" onclick="this.style.stroke=currentSelectedCrayonColor"/>
+                            <text x="43" y="130" fill="#2d3436" font-weight="bold" font-size="12">1</text>
+                        </svg>
+                    </div>
+                    
+                    <!-- Color Guide Key Box -->
+                    <div style="display: flex; justify-content: center; gap: 30px; font-weight: bold; color: #4a5568; margin-top: 20px; font-size: 14px;">
+                        <div>1 = Green (Grass)</div>
+                        <div>2 = Yellow (Duck)</div>
+                        <div>3 = Blue (Pond & Sky)</div>
+                    </div>
+
+                    <button class="worksheet-submit-btn" onclick="alert('Success! Your completed duck pond worksheet drawing has been recorded.')">Hand In Worksheet 🌟</button>
+                </div>`;
+        } else if (day === 2) {
+            // DAY 2: Large Illustrated Primary Target Counter Block Worksheet Layout
+            viewport.innerHTML = `
+                <div class="printed-worksheet-paper">
+                    <div style="display: flex; justify-content: space-between; border-bottom: 2px dashed #b2bec3; padding-bottom: 12px; margin-bottom: 20px; font-weight: bold; color: #636e72; font-size: 14px;">
+                        <div>NAME: ___________________________</div>
+                        <div>DATE: ______________</div>
+                        <div>SCORE: _________</div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px 20px; border-radius: 12px; margin-bottom: 25px;">
+                        <div style="font-size: 15px; color: #4a5568; font-weight: 500;">📖 <strong>Lesson Guide:</strong> Click the speaker button to hear today's target counting instructions out loud!</div>
+                        <button class="primary-audio-btn" onclick="triggerVoiceReader('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Listen</button>
+                    </div>
+                    
+                    <h2 style="text-align: center; color: #2d3436; margin: 0 0 10px 0; font-size: 26px;">🍎 ${data.lesson_title}</h2>
+                    <h4 style="text-align: center; color: #636e72; margin: 0 0 35px 0; font-weight: 500;">Directions: Touch each target object block below one-by-one to count them out loud from 1 to 5!</h4>
+                    
+                    <!-- LARGE, ILLUSTRATED CHUNKY TACTILE BLOCK OBJECTS -->
+                    <div style="display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; padding: 15px 0; margin-bottom: 20px;">
+                        ${Array.from({length: 5}, (_, i) => `
+                            <div style="background: #ffffff; border: 3px solid #2d3436; border-radius: 20px; width: 110px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; box-shadow: 0 8px 0 #2d3436; transition: all 0.1s;" onclick="this.style.background='#ffeaa7'; this.style.transform='translateY(4px)'; this.style.boxShadow='0 4px 0 #2d3436'; window.speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance('\${i+1}'); window.speechSynthesis.speak(u);">
+                                <div style="font-size: 40px; margin: 0;">🍎</div>
+                                <div style="font-weight: bold; font-size: 18px; color: #2d3436;">#\${i+1}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <button class="worksheet-submit-btn" onclick="alert('Success! Your counting checkpoint metrics have been submitted successfully.')">Hand In Worksheet 🌟</button>
+                </div>`;
+        }
+    } else {
+        compileSciencePrintWorksheet(subject, day, data, viewport, container);
+    }
+}
+</script>
+<script>
+function compileSciencePrintWorksheet(subject, day, data, viewport, container) {
+    container.style.backgroundColor = "#f4fcf7"; // Soft green paper desk background tint
+    
+    // Fallback template rendering for science pathways to mirror the high visual format
+    viewport.innerHTML = `
+        <div class="printed-worksheet-paper" style="border-color: #2ecc71;">
+            <div style="display: flex; justify-content: space-between; border-bottom: 2px dashed #b2bec3; padding-bottom: 12px; margin-bottom: 20px; font-weight: bold; color: #636e72; font-size: 14px;">
+                <div>NAME: ___________________________</div>
+                <div>DATE: ______________</div>
+                <div>SCORE: _________</div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #f4fff7; border: 1px solid #a8e6cf; padding: 15px 20px; border-radius: 12px; margin-bottom: 25px;">
+                <div style="font-size: 15px; color: #1e293b; font-weight: 500;">🔬 <strong>Lab Instructions:</strong> Click the speaker button to hear today's scientific investigation out loud!</div>
+                <button class="primary-audio-btn" style="background:#2ecc71; box-shadow:0 5px 0 #1c8843;" onclick="triggerVoiceReader('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Listen</button>
+            </div>
+            
+            <h2 style="text-align: center; color: #2d3436; margin: 0 0 10px 0; font-size: 26px;">🧱 ${data.lesson_title}</h2>
+            <p style="font-size: 17px; line-height: 1.6; color: #2d3436; background: #ffffff; padding: 25px; border-radius: 16px; border: 1px solid #ced6e0; margin-bottom: 30px;">${data.lesson_body}</p>
+            
+            <div style="background: #fff; border: 2px dashed #2ecc71; border-radius: 16px; padding: 30px; text-align: center;">
+                <h4 style="margin:0 0 15px 0; font-size:18px; color:#27ae60;">🔬 Active Practical Observation Assignment</h4>
+                <p style="color:#4a5568; font-size:15px; margin-bottom:20px;">${data.interactive_assignment}</p>
+                <button class="primary-audio-btn" style="background:#2ecc71; box-shadow:0 5px 0 #1c8843; margin:0 auto;" onclick="alert('Observation logged successfully inside local workbook paths.')">📝 Record Lab Observations</button>
+            </div>
+            
+            <button class="worksheet-submit-btn" style="background:#2ecc71; box-shadow:0 6px 0 #179147;" onclick="alert('Lab worksheet handed in.')">Hand In Lab Sheet 🌟</button>
+        </div>`;
+}
+
+// Master bootstrap driver routine to activate event listeners on mount
 window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('grade-selector').addEventListener('change', executeDynamicPortalUpdate);
     document.getElementById('subject-selector').addEventListener('change', executeDynamicPortalUpdate);
     document.getElementById('day-selector').addEventListener('change', executeDynamicPortalUpdate);
     
-    // Auto paint the visual worksheets instantly on browser startup
+    // Paint initial page settings right away on load
     executeDynamicPortalUpdate();
 });
 </script>
