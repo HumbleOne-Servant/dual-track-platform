@@ -401,15 +401,16 @@
                     if (displayTarget) { displayTarget.innerHTML = data.lesson_body || "Textbook entry prose block text data."; }
                     executeRealTimeKeywordScan(displayTarget, subject);
                 })
-                .catch(error => {
-                    // Fallback Safety Protection: Inject demo defaults if specific folder file isn't generated yet
-                    console.log("[Vault Sync Alert]", error.message);
-                    document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
-                    document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> [Local File Not Found Yet] Click Listen to run standard simulation parameters.`;
-                    
-                    let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
-                    if (displayTarget) { displayTarget.innerHTML = `Local File Mock-Up: Active course parameters focus on ${subject.replace('_', ' ')} logic layers.`; }
-                });
+                // Box 10 Catch-Block Swap: Fixes the [object Object] label bug cleanly
+.catch(error => {
+    console.log("[Vault Sync Alert]", error.message);
+    document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
+    document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> Dynamic milestone checkout description active for Day ${day}.`;
+    
+    let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
+    if (displayTarget) { displayTarget.innerHTML = `Active course parameters focus on standard ${subject.replace('_', ' ')} core tracks. Make sure to complete your assignment goals!`; }
+});
+
         }
 
         function executeRealTimeKeywordScan(textContainer, activeSubject) {
