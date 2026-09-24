@@ -1,4 +1,4 @@
-<!-- Box 1: Document Head and System Level Global Style Initializations -->
+<!-- Box 1 of 12: Document Root Definitions & Global System Elements -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +21,7 @@
             background-color: #F8FAFC;
             color: #2D3748;
         }
-<!-- Box 2: Core Header Navbar Layout and Select Box Component Styles -->
+<!-- Box 2 of 12: UI Layout Framework Styles & Navigation Classes -->
         .top-navbar {
             background: var(--bar-gradient);
             padding: 14px 24px;
@@ -56,7 +56,7 @@
     </style>
 </head>
 <body>
-<!-- Box 3: Top Navigation Layout Menu Dropdown Containers Elements -->
+<!-- Box 3 of 12: Top Navigation Control Elements & Infused Selectors -->
     <div class="top-navbar" id="mainPortalHeader">
         <div class="nav-title">🌐 DUAL-TRACK LEARNING HUB</div>
         <div class="nav-selectors">
@@ -66,7 +66,7 @@
                 <option value="912">🏛️ High School Portal (9-12 Bracket)</option>
             </select>
             <select class="nav-select" id="gradePrefixSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
-                <!-- Built Dynamically By System Initialization Scripts -->
+                <!-- Populated dynamically by script loops to match current bracket selection -->
             </select>
             <select class="nav-select" id="subjectTrackSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
                 <option value="mathematics">📚 Mathematics Track</option>
@@ -75,15 +75,11 @@
                 <option value="historical_studies">🌍 Historical Studies Track</option>
             </select>
             <select class="nav-select" id="daySelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
-                <!-- Built Dynamically Counting Day 1 to Day 180 On Window Boot -->
-            </select>
-            <select class="nav-select" id="rigorTrackSelect" onchange="toggleInternationalRigorTrack()">
-                <option value="us_standard">🇺🇸 US Standard Track</option>
-                <option value="east_asian">🇨🇳 East Asian Mastery Track</option>
+                <!-- Populated automatically on startup counting from Day 1 down to Day 180 -->
             </select>
         </div>
     </div>
-<!-- Box 4: Workspace Splitter Grid Blueprint Frame Containers -->
+<!-- Box 4 of 12: Dual Viewport Architecture Styles & Student Meta Desks -->
     <style>
         .dual-track-container {
             display: grid;
@@ -120,13 +116,14 @@
         .meta-field { border-bottom: 1px solid #94A3B8; width: 130px; display: inline-block; margin-left: 4px; }
     </style>
     <div class="dual-track-container">
+        <!-- Left Presentation Frame: Core Standard Textbook Classroom Workdesk -->
         <div class="left-core-track" id="leftCoreWorkspace">
             <div class="student-meta-row">
                 <div>STUDENT: <span class="meta-field"></span></div>
                 <div>CLASSROOM DATE: <span class="meta-field"></span></div>
                 <div>SCORE RECORD: <span class="meta-field"></span></div>
             </div>
-<!-- Box 5: Audio Interface Banner Layout Blocks and Red Warning Signs -->
+<!-- Box 5 of 12: Interactive Audio Guide Banners & Safety Notice Banners -->
             <style>
                 .audio-guide-banner {
                     background-color: #F8FAFC;
@@ -174,9 +171,10 @@
                 .interactive-workspace-shield { transition: opacity 0.3s ease, filter 0.3s ease; }
                 .workspace-locked { pointer-events: none; opacity: 0.45; filter: grayscale(100%); }
             </style>
+<!-- Box 6 of 12: Content Workspace Framework & Audio Sequence Nodes -->
             <div class="audio-guide-banner">
                 <div class="lesson-guide-text" id="lessonGuideContent">
-                    📄 <strong>Brief Lesson Description Summary:</strong> Connecting to data folders...
+                    📄 <strong>Brief Lesson Description Summary:</strong> Connecting to local file tree data...
                 </div>
                 <button class="btn-audio-listen" id="audioDeskButton" onclick="triggerVoiceReader()">🔊 Read Out Loud</button>
             </div>
@@ -192,15 +190,16 @@
                     Workbook Instructions: Review the reading material below, then complete the assignment dashboard.
                 </div>
             </div>
-<!-- Box 6: K-5 Elementary Split Subject Canvas Viewport Panels -->
+            
             <div class="interactive-workspace-shield workspace-locked" id="lockShieldWrapper">
-                
+<!-- Box 7 of 12: Elementary Bracket Layout Modules (Tactile CPA Matrices) -->
+                <!-- Bracket Layer 1: Elementary School Dashboard Content Views -->
                 <div id="elementaryWorkspaceView" style="display: block; width: 100%;">
                     <style>
                         .crayon-box-wrapper { display: flex; gap: 16px; border: 2px solid #E2E8F0; padding: 12px 24px; border-radius: 30px; background: white; margin-bottom: 20px; align-items: center; justify-content: center; }
                         .crayon-option { width: 34px; height: 34px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; }
                         .crayon-option.selected-crayon { border-color: #1E293B; transform: scale(1.15); }
-                        .ske-games-box { border: 2px solid #CBD5E1; border-radius: 12px; padding: 16px; background: #F8FAFC; min-height: 280px; margin-bottom: 20px; }
+                        .ske-games-box { border: 2px solid #CBD5E1; border-radius: 12px; padding: 16px; background: #F8FAFC; min-height: 280px; margin-bottom: 16px; }
                         .pond-svg-canvas { width: 100%; max-width: 440px; background: white; border: 2px solid #E2E8F0; border-radius: 8px; display: block; margin: 0 auto; }
                         .labels-legend-row { text-align: center; margin-top: 14px; font-size: 0.85rem; font-weight: bold; color: #64748B; }
                         .apple-counter-grid { display: flex; gap: 12px; justify-content: center; margin: 20px 0; }
@@ -232,7 +231,8 @@
                     </div>
                     <div class="labels-legend-row" id="elProseBodyContainer">K-5 Elementary Content Node Desk</div>
                 </div>
-<!-- Box 7: Middle and High School Specialized Interactive Viewports -->
+<!-- Box 8 of 12: Middle & High School Workspace Layout Panels -->
+                <!-- Bracket Layer 2: Middle School Dashboard Content Views -->
                 <div id="middleSchoolWorkspaceView" style="display: none; width: 100%;">
                     <style>
                         .ms-textbook-prose { font-size: 1.05rem; line-height: 1.6; color: #334155; margin-bottom: 24px; padding: 0 4px; }
@@ -252,6 +252,7 @@
                     </div>
                 </div>
 
+                <!-- Bracket Layer 3: High School Dashboard Content Views -->
                 <div id="highSchoolWorkspaceView" style="display: none; width: 100%;">
                     <style>
                         .hs-academic-viewport { font-size: 1.1rem; line-height: 1.7; color: #1E293B; background: #FCFDFE; border: 1px solid #E2E8F0; padding: 24px; border-radius: 12px; max-height: 320px; overflow-y: auto; margin-bottom: 24px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
@@ -260,13 +261,14 @@
                     </style>
                     <div class="hs-academic-viewport" id="hsProseBodyContainer">High School Advanced Academic Prose Loading...</div>
                     <span class="hs-console-label">🏛️ ESTONIAN ARCHITECTURE THESIS MATRIX OPTIMIZER</span>
-                    <textarea class="hs-thesis-console" rows="4" placeholder="Input summary evidence logic..."></textarea>
+                    <textarea class="hs-thesis-console" rows="4" placeholder="Input multi-paragraph analytical summary evidence logic..."></textarea>
                 </div>
                 
                 <button class="btn-submit-worksheet" onclick="alert('Student Workspace File Transferred Successfully!')">SUBMIT WORKSHEET FOR GRADING ✨</button>
-            </div>
+            </div> <!-- End Shield Wrapper Box -->
         </div>
-<!-- Box 8: Right Presentation Frame Worldview Panel Containers Layout -->
+<!-- Box 9 of 12: Parallel Worldview Reference Desk Displays -->
+        <!-- Right Presentation Frame: The Parallel Viewpoints & Comparative Analysis -->
         <div class="right-alternative-track" id="rightComparativeWorkspace">
             <style>
                 .comparison-headline-bar { display: flex; align-items: center; gap: 8px; color: #DC2626; font-weight: bold; border-bottom: 2px solid #FCA5A5; padding-bottom: 10px; margin-bottom: 20px; font-size: 1.05rem; }
@@ -289,7 +291,7 @@
             </div>
         </div>
     </div>
-<!-- Box 9: Script Globals and Real-Time Cross-Scanner Reference Array Matrix -->
+<!-- Box 10 of 12: JavaScript Variable Registries & Subject Keyword Indexes -->
     <script>
         let audioClickCount = 0; 
         let activeCrayonColor = "#2ECC71";
@@ -318,9 +320,7 @@
                 "migration": "Acts 17:26 states that the exact times and boundaries of nations are mapped out, revealing purpose behind historical trade routes and population movements."
             }
         };
-</script>
-<!-- Box 10: App State Locks and Multi-Bracket Viewport Routers -->
-<script>
+<!-- Box 11 of 12: Core Router Switches & Polymorphic Data Vault Parsers -->
         function enforceWorkspaceLockState() {
             audioClickCount = 0;
             const shield = document.getElementById("lockShieldWrapper");
@@ -359,7 +359,7 @@
             enforceWorkspaceLockState();
             loadLiveDatabaseFile();
         }
-<!-- Box 11: Dynamic Fetch Pipeline with Live Frontend SKE Splitter Logic -->
+
         function loadLiveDatabaseFile() {
             const group = document.getElementById("portalGroupSelect").value;
             const grade = document.getElementById("gradePrefixSelect").value;
@@ -372,19 +372,8 @@
             else if (day > 135) unitFolder = "unit_4_counting_base";
 
             if (group === "k5") {
-                const mathCanvasBlock = document.getElementById("elMathWorkspace");
-                const scienceCanvasBlock = document.getElementById("elScienceWorkspace");
-                
-                if (subject === "mathematics") {
-                    if (mathCanvasBlock) mathCanvasBlock.style.display = "block";
-                    if (scienceCanvasBlock) scienceCanvasBlock.style.display = "none";
-                } else if (subject === "science") {
-                    if (mathCanvasBlock) mathCanvasBlock.style.display = "none";
-                    if (scienceCanvasBlock) scienceCanvasBlock.style.display = "block";
-                } else {
-                    if (mathCanvasBlock) mathCanvasBlock.style.display = "none";
-                    if (scienceCanvasBlock) scienceCanvasBlock.style.display = "none";
-                }
+                document.getElementById("elMathWorkspace").style.display = (subject === "mathematics") ? "block" : "none";
+                document.getElementById("elScienceWorkspace").style.display = (subject === "science") ? "block" : "none";
             }
 
             const targetJsonUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/${unitFolder}/day_${day}.json`;
@@ -396,6 +385,16 @@
                 })
                 .then(data => {
                     document.getElementById("lessonTitleLabel").innerText = data.lesson_title || `Day ${day} Lesson`;
+                    
+                    let rawAssessmentText = "";
+                    if (data.daily_assessment) {
+                        if (typeof data.daily_assessment === 'object' && data.daily_assessment.prompt) {
+                            rawAssessmentText = data.daily_assessment.prompt;
+                        } else if (typeof data.daily_assessment === 'string') {
+                            rawAssessmentText = data.daily_assessment;
+                        }
+                    }
+
                     let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
                     
                     if (displayTarget) {
@@ -403,40 +402,44 @@
                         fullBodyText = fullBodyText.replace(/###/g, "").replace(/\*\*/g, "").replace(/\*/g, "");
 
                         let phase1Injection = fullBodyText;
-                        let phase2Assignment = "Review the core textbook reading material on the left to configure your manual workbook entries.";
-                        let phase3Assessment = "Formulate your single-step conceptual milestone solution checkout responses.";
-
-                        let assignmentIndex = fullBodyText.search(/Interactive Assignment|Activity/i);
-                        let assessmentIndex = fullBodyText.search(/Check-Out Question|Assessment|Evaluation/i);
-
-                        if (assignmentIndex !== -1 && assessmentIndex !== -1) {
-                            phase1Injection = fullBodyText.substring(0, assignmentIndex);
-                            phase2Assignment = fullBodyText.substring(assignmentIndex, assessmentIndex);
-                            phase3Assessment = fullBodyText.substring(assessmentIndex);
-                        } else if (assignmentIndex !== -1) {
-                            phase1Injection = fullBodyText.substring(0, assignmentIndex);
-                            phase2Assignment = fullBodyText.substring(assignmentIndex);
-                        }
+                        let phase2Assignment = data.interactive_assignment || "Complete active workbook fields.";
+                        let phase3Assessment = rawAssessmentText || "Formulate your validation gate solutions.";
 
                         const purgeRegex = /Lesson Plan:|Introduction|Direct Instruction|\(\d+\s*minutos\)?|\(\d+\s*minutes\)?|\d+\s*minutes/gi;
                         phase1Injection = phase1Injection.replace(purgeRegex, "").replace(/\s+/g, " ").trim();
-                        phase2Assignment = phase2Assignment.replace(purgeRegex, "").replace(/Interactive Assignment:/i, "").replace(/\s+/g, " ").trim();
-                        phase3Assessment = phase3Assessment.replace(purgeRegex, "").replace(/Check-Out Question:/i, "").replace(/\s+/g, " ").trim();
+                        
+                        if (typeof phase2Assignment === 'string') {
+                            phase2Assignment = phase2Assignment.replace(purgeRegex, "").replace(/Interactive Assignment:/i, "").replace(/\s+/g, " ").trim();
+                        }
+                        if (typeof phase3Assessment === 'string') {
+                            phase3Assessment = phase3Assessment.replace(purgeRegex, "").replace(/Check-Out Question:/i, "").replace(/\s+/g, " ").trim();
+                        }
 
                         displayTarget.innerHTML = phase1Injection;
-                        document.getElementById("assignmentDirectionsLabel").innerText = phase2Assignment;
+                        if (typeof drawComputationalLogicSandbox === "function") {
+                            drawComputationalLogicSandbox(displayTarget.id);
+                        }
+
+                        document.getElementById("assignmentDirectionsLabel").innerText = typeof phase2Assignment === 'object' ? JSON.stringify(phase2Assignment) : phase2Assignment;
                         document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> ${phase3Assessment}`;
                     }
+                    
                     executeRealTimeKeywordScan(displayTarget, subject);
                 })
                 .catch(error => {
+                    console.log("[Vault Sync Alert]", error.message);
                     document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
                     document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> Dynamic milestone checkout description active for Day ${day}.`;
                     let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
-                    if (displayTarget) { displayTarget.innerHTML = `Active S-K-E course parameters focus on standard ${subject.replace('_', ' ')} core tracks. Complete your assignment goals!`; }
+                    if (displayTarget) {
+                        displayTarget.innerHTML = `Active S-K-E parameters focus on standard ${subject.replace('_', ' ')} core tracks. Complete your assignment goals!`;
+                        if (typeof drawComputationalLogicSandbox === "function") {
+                            drawComputationalLogicSandbox(displayTarget.id);
+                        }
+                    }
                 });
         }
-<!-- Box 12: Keyword Scanners, Audio Sequencers, and Startup Timelines Initializer -->
+<!-- Box 12 of 12: Real-Time Cross Panel Keyword Scanners & App Boot Launchers -->
         function executeRealTimeKeywordScan(textContainer, activeSubject) {
             if (!textContainer) return;
             let currentContent = textContainer.innerHTML;
@@ -484,6 +487,9 @@
             window.speechSynthesis.speak(utter);
         }
 
+        function pickCrayonColor(el, hex) { activeCrayonColor = hex; document.querySelectorAll('.crayon-option').forEach(c => c.style.borderColor='transparent'); el.style.borderColor='#1E293B'; }
+        function colorWorksheetSegment(node) { if (node.tagName !== 'svg') { node.setAttribute('fill', activeCrayonColor); } }
+
         function initializeGlobal180DayTimeline() {
             const daySelectorElement = document.getElementById("daySelect");
             if (!daySelectorElement) return;
@@ -494,16 +500,8 @@
             adaptPortalStyleBrackets();
         }
 
-        function toggleInternationalRigorTrack() {
-            console.log("[Rigor Track Router Active]");
-        }
-        // Initialize Master App Build Pass Natively
         initializeGlobal180DayTimeline();
     </script>
-    
-    <!-- 🔌 THE MASTER S-K-E PLATFORM LINKING HOOK -->
     <script src="global_standards.js"></script>
 </body>
 </html>
-
-       
