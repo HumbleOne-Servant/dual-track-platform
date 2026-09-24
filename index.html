@@ -75,12 +75,13 @@
                 <option value="language_arts">✍️ Language Arts Track</option>
                 <option value="historical_studies">🌍 Historical Studies Track</option>
             </select>
+            <!-- FIXED: Dynamic 180-day tracker target anchor -->
             <select class="nav-select" id="daySelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
-                <option value="1">🗓️ Course Day 1</option>
-                <option value="2">🗓️ Course Day 2</option>
-                <option value="3">🗓️ Course Day 3</option>
-                <option value="4">🗓️ Course Day 4</option>
-                <option value="5">🗓️ Course Day 5</option>
+                <!-- Populated automatically on startup counting from Day 1 down to Day 180 -->
+            </select>
+            <select class="nav-select" id="rigorTrackSelect" onchange="toggleInternationalRigorTrack()">
+                <option value="us_standard">🇺🇸 US Standard Track</option>
+                <option value="east_asian">🇨🇳 East Asian Mastery Track</option>
             </select>
         </div>
     </div>
@@ -323,7 +324,7 @@
             }
         };
 </script>
-<!-- Box 10: Live Ingestion Database Fetch Pass and Audio Core Controllers -->
+<!-- Box 10: Live Fetch Database Pipeline and 180-Day Automated Initialization Loops -->
 <script>
         function enforceWorkspaceLockState() {
             audioClickCount = 0;
@@ -341,7 +342,6 @@
             const subGradeSelector = document.getElementById("gradePrefixSelect");
             if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); }
 
-            // Clear and rebuild dynamic grade selection nodes based on folder map blueprints
             subGradeSelector.innerHTML = "";
             PORTAL_GRADES_MAP[group].forEach(g => {
                 subGradeSelector.innerHTML += `<option value="${g}">Grade ${g.toUpperCase()}</option>`;
@@ -365,24 +365,20 @@
             loadLiveDatabaseFile();
         }
 
-        // HARDENED LIVE FETCH LOGIC ENGINE
         function loadLiveDatabaseFile() {
             const group = document.getElementById("portalGroupSelect").value;
             const grade = document.getElementById("gradePrefixSelect").value;
             const subject = document.getElementById("subjectTrackSelect").value;
             const day = document.getElementById("daySelect").value;
 
-            // Map standard unit directory targets (assumes Unit 1 foundations folder loop)
             const targetJsonUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/unit_1_foundations/day_${day}.json`;
 
-            // Execute asynchronous browser disk fetch command
             fetch(targetJsonUrl)
                 .then(response => {
                     if (!response.ok) throw new Error("Target File Missing inside Vault Folder Structure.");
                     return response.json();
                 })
                 .then(data => {
-                    // Success Pass: Distribute actual AI generated data fields across UI panels
                     document.getElementById("lessonTitleLabel").innerText = data.lesson_title || "Lesson Node Content";
                     document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> ${data.daily_assessment || 'Instructional day check checkout active.'}`;
                     document.getElementById("assignmentDirectionsLabel").innerText = data.interactive_assignment || "Complete active workbook fields.";
@@ -401,16 +397,14 @@
                     if (displayTarget) { displayTarget.innerHTML = data.lesson_body || "Textbook entry prose block text data."; }
                     executeRealTimeKeywordScan(displayTarget, subject);
                 })
-                // Box 10 Catch-Block Swap: Fixes the [object Object] label bug cleanly
-.catch(error => {
-    console.log("[Vault Sync Alert]", error.message);
-    document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
-    document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> Dynamic milestone checkout description active for Day ${day}.`;
-    
-    let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
-    if (displayTarget) { displayTarget.innerHTML = `Active course parameters focus on standard ${subject.replace('_', ' ')} core tracks. Make sure to complete your assignment goals!`; }
-});
-
+                .catch(error => {
+                    console.log("[Vault Sync Alert]", error.message);
+                    document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
+                    document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> Dynamic milestone checkout description active for Day ${day}.`;
+                    
+                    let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
+                    if (displayTarget) { displayTarget.innerHTML = `Active course parameters focus on standard ${subject.replace('_', ' ')} core tracks. Make sure to complete your assignment goals!`; }
+                });
         }
 
         function executeRealTimeKeywordScan(textContainer, activeSubject) {
@@ -463,8 +457,19 @@
         function pickCrayonColor(el, hex) { activeCrayonColor = hex; document.querySelectorAll('.crayon-option').forEach(c => c.style.borderColor='transparent'); el.style.borderColor='#1E293B'; }
         function colorWorksheetSegment(node) { if (node.tagName !== 'svg') { node.setAttribute('fill', activeCrayonColor); } }
 
-        // Execute Initial System Boot Sequence
-        adaptPortalStyleBrackets();
+        // FIXED: Automated 180-day picker pipeline initializer loop
+        function initializeGlobal180DayTimeline() {
+            const daySelectorElement = document.getElementById("daySelect");
+            if (!daySelectorElement) return;
+            daySelectorElement.innerHTML = "";
+            for (let dayIndex = 1; dayIndex <= 180; dayIndex++) {
+                daySelectorElement.innerHTML += `<option value="${dayIndex}">🗓️ Course Day ${dayIndex}</option>`;
+            }
+            adaptPortalStyleBrackets();
+        }
+
+        // Initialize Master App Build Pass Natively
+        initializeGlobal180DayTimeline();
     </script>
 </body>
 </html>
