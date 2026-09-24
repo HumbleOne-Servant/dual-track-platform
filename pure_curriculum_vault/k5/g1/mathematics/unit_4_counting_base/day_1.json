@@ -1,0 +1,20 @@
+{
+  "grade_prefix": "g1",
+  "layout_group": "K5",
+  "subject_track": "mathematics",
+  "unit_folder": "unit_4_counting_base",
+  "day": 1,
+  "lesson_title": "Grade 1 Mathematics - Day 1",
+  "lesson_body": "Welcome to Day 1 of our mathematics adventure in Grade 1! Today, we will dive into the exciting world of counting and explore the concept of base counting. We will learn how to count from 1 to 10 using various engaging methods! \n\nFirst, let’s gather around the carpet for our counting songs. Did you know that singing while counting can help us remember numbers better? Let's sing the 'Five Little Ducks' song together. As we sing, we’ll use our fingers to count the ducks. This will help us practice counting aloud and associating numbers with objects.\n\nNext, we will move to our number line activity. I will place a large number line on the floor that goes from 0 to 10. I need your help! Each one of you will stand on a number according to the counting sequence. I will call out a number, and when I say ‘go,’ you will hop to the correct spot on the number line. This way, we’ll get to learn the order of numbers while having fun! \n\nAfter that, we will play a game called 'Number Hunt.' I’ll hide number cards (1 to 10) around the classroom. Teams of two will race against each other to find as many numbers as they can. When you find a number, stand in front of your number and say it aloud. This game not only helps us with recognition but also encourages teamwork and movement!\n\nTo wrap up our lesson, we will gather back on the carpet for a short discussion. I will ask you questions like, 'What number comes after 4?' and 'How many fingers do we have?' This will help reinforce what we've learned today. Remember, counting isn’t just about numbers—it’s about understanding how they connect to our world. I am so proud of you, and I can’t wait for our next counting adventure tomorrow!",
+  "interactive_assignment": "For our interactive assignment, we will create a 'Counting Book'! You will receive 10 sheets of paper that you will decorate. On each page, you will draw or paste a picture representing each number from 1 to 10. For example, on the page for 3, you might draw three stars or paste three pieces of candy. After finishing your drawings, we will staple the pages together to make a colorful book. This way, you’ll have a personal counting book to take home and practice your numbers with your family!",
+  "daily_assessment": {
+    "question": "What number comes after 6?",
+    "choices": {
+      "A": "5",
+      "B": "7",
+      "C": "8",
+      "D": "10"
+    },
+    "correct_answer": "B"
+  }
+}

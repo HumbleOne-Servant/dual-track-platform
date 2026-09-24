@@ -1,0 +1,20 @@
+{
+  "grade_prefix": "g1",
+  "layout_group": "K5",
+  "subject_track": "mathematics",
+  "unit_folder": "unit_4_counting_base",
+  "day": 5,
+  "lesson_title": "Grade 1 Mathematics - Day 5",
+  "lesson_body": "Welcome to Day 5 of our exciting unit on Counting Base! Today, we're diving deeper into the fascinating world of numbers! We will learn how to count objects in groups and understand the value of positions in numbers.  Have you ever noticed how we can group things together to make counting easier? Just think of how we can count apples, crayons, or even your favorite toys! \n\nTo begin our lesson, let’s review what we learned about counting the objects yesterday. Remember, counting isn’t just about how many things there are; it's also about how we group those things! When we count by tens, we can make larger numbers easier to manage. For example, if we have 25 balls, we can see that it makes 2 groups of ten plus 5 extra balls! This is called 'group counting.' \n\nNext, let’s explore the Counting Base with a fun story. Imagine a pirate named Captain Count-a-lot who loves to search for treasures on different islands. Each island has a different number of treasure chests, and he counts them in his special way—by groups of ten! Can you help Captain Count-a-lot figure out how many chests are on all the islands? Let’s pretend to have a treasure map and mark down what we discover together! \n\nAs we go on, we will use colorful counters to build our own treasure collections. We’ll make stacks of ten and count how many stacks we create. By the end of the lesson, we will understand why grouping makes counting easier and how to write simple equations to represent our findings. Remember, counting is a treasure hunt in math, and every group of ten is a step closer to finding more!\n\nFinally, we will gather together for a sharing circle where you can show your creations and share your counting stories. Learning can be fun and exciting, and counting is an adventure that helps us unlock new math wonders every day!",
+  "interactive_assignment": "For today's interactive assignment, you will create your own Treasure Island counting game at home or in class! Start by collecting small items around you, such as blocks, buttons, or even crayons. Group these items into sets of ten to make counting easier. Once you have made several groups, draw a map of your Treasure Island showing where each group of treasures is located. Label each group with a number that represents how many are in it. You can also create a story about Captain Count-a-lot who is visiting your Treasure Island and discovering treasures. Share your game and story with your classmates, describing how you counted the items and what treasures you found!",
+  "daily_assessment": {
+    "question": "How many groups of ten are there in the number 47?",
+    "choices": {
+      "A": "4 groups of ten",
+      "B": "5 groups of ten",
+      "C": "6 groups of ten",
+      "D": "2 groups of ten"
+    },
+    "correct_answer": "A"
+  }
+}
