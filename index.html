@@ -365,39 +365,63 @@
             loadLiveDatabaseFile();
         }
 
-        function loadLiveDatabaseFile() {
-            const group = document.getElementById("portalGroupSelect").value;
-            const grade = document.getElementById("gradePrefixSelect").value;
-            const subject = document.getElementById("subjectTrackSelect").value;
-            const day = document.getElementById("daySelect").value;
+        // Box 10 Framework Update: Smart Chronological Unit Folder Router
+function loadLiveDatabaseFile() {
+    const group = document.getElementById("portalGroupSelect").value;
+    const grade = document.getElementById("gradePrefixSelect").value;
+    const subject = document.getElementById("subjectTrackSelect").value;
+    const day = parseInt(document.getElementById("daySelect").value);
 
-            const targetJsonUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/unit_1_foundations/day_${day}.json`;
+    // Dynamic Unit Calculator: Replicates your python script routing logic
+    let unitFolder = "unit_1_foundations";
+    if (day > 45 && day <= 90) {
+        unitFolder = "unit_2_shapes_spaces";
+    } else if (day > 90 && day <= 135) {
+        unitFolder = "unit_3_weather_seasons";
+    } else if (day > 135) {
+        unitFolder = "unit_4_counting_base";
+    }
 
-            fetch(targetJsonUrl)
-                .then(response => {
-                    if (!response.ok) throw new Error("Target File Missing inside Vault Folder Structure.");
-                    return response.json();
-                })
-                .then(data => {
-                    document.getElementById("lessonTitleLabel").innerText = data.lesson_title || "Lesson Node Content";
-                    document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> ${data.daily_assessment || 'Instructional day check checkout active.'}`;
-                    document.getElementById("assignmentDirectionsLabel").innerText = data.interactive_assignment || "Complete active workbook fields.";
-                    
-                    let displayTarget = null;
-                    if (group === "k5") {
-                        displayTarget = document.getElementById("elProseBodyContainer");
-                        document.getElementById("elDay1Workspace").style.display = (day === "1") ? "block" : "none";
-                        document.getElementById("elDay2Workspace").style.display = (day === "2") ? "block" : "none";
-                    } else if (group === "68") {
-                        displayTarget = document.getElementById("msProseBodyContainer");
-                    } else {
-                        displayTarget = document.getElementById("hsProseBodyContainer");
-                    }
+    // Constructs the exact live file path across your 4 chronological unit chapters
+    const targetJsonUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/${unitFolder}/day_${day}.json`;
 
-                    if (displayTarget) { displayTarget.innerHTML = data.lesson_body || "Textbook entry prose block text data."; }
-                    executeRealTimeKeywordScan(displayTarget, subject);
-                })
-                .catch(error => {
+    console.log("[Target Ingestion URL]:", targetJsonUrl);
+
+    fetch(targetJsonUrl)
+        .then(response => {
+            if (!response.ok) throw new Error(`File path not found: ${targetJsonUrl}`);
+            return response.json();
+        })
+        .then(data => {
+            // Success: Inject real textbook prose into the platform layout screens
+            document.getElementById("lessonTitleLabel").innerText = data.lesson_title || "Lesson Node Content";
+            document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> ${data.daily_assessment || 'Instructional checkout parameters active.'}`;
+            document.getElementById("assignmentDirectionsLabel").innerText = data.interactive_assignment || "Complete active workbook fields.";
+            
+            let displayTarget = null;
+            if (group === "k5") {
+                displayTarget = document.getElementById("elProseBodyContainer");
+                // Cycle elementary view visibility switches
+                document.getElementById("elDay1Workspace").style.display = (day === 1) ? "block" : "none";
+                document.getElementById("elDay2Workspace").style.display = (day === 2) ? "block" : "none";
+            } else if (group === "68") {
+                displayTarget = document.getElementById("msProseBodyContainer");
+            } else {
+                displayTarget = document.getElementById("hsProseBodyContainer");
+            }
+
+            if (displayTarget) { displayTarget.innerHTML = data.lesson_body || "Textbook content block loading..."; }
+            executeRealTimeKeywordScan(displayTarget, subject);
+        })
+        .catch(error => {
+            console.log("[Vault Sync Alert]", error.message);
+            document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
+            document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> Dynamic milestone checkout description active for Day ${day}.`;
+            
+            let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
+            if (displayTarget) { displayTarget.innerHTML = `Active course parameters focus on standard ${subject.replace('_', ' ')} core tracks. Make sure to complete your assignment goals!`; }
+        });
+}                .catch(error => {
                     console.log("[Vault Sync Alert]", error.message);
                     document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
                     document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> Dynamic milestone checkout description active for Day ${day}.`;
