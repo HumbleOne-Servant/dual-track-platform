@@ -12,7 +12,7 @@ LAYOUT_GROUPS = {
     "g9": "912", "g10": "912", "g11": "912", "g12": "912"
 }
 
-# HIDES KEY FROM GITHUB: Pulls the key dynamically from the running Command Prompt memory
+# Pulls the key dynamically from the running Command Prompt memory slot
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 def verify_vault_directory_path(group, grade, subject, unit):
@@ -49,7 +49,9 @@ def ask_curricullm_to_generate_lesson(grade, subject, unit, day):
             messages=[{"role": "user", "content": prompt}],
             timeout=25
         )
-        return json.loads(response.choices.message.content)
+        # CRITICAL FIX: Added [0] index accessor to safely parse the choices array
+        raw_json_string = response.choices[0].message.content
+        return json.loads(raw_json_string)
     except Exception as e:
         print(f"\n❌ SERVER CONNECTION BLOCK TRACKED ON DAY {day}: {str(e)}\n")
         return {
@@ -82,8 +84,8 @@ def run_curricullm_production_pipeline():
                 target_dir = verify_vault_directory_path(group, grade, subject, unit)
                 print(f"\n[Ingestion Engine] Active Folder Branch: {group}/{grade}/{subject}/{unit}")
                 
-                # Test run covering the first 3 days to check key validation instantly
-                for day in range(1, 4): 
+                # Production Loop: Process the consecutive days cleanly
+                for day in range(1, 4): # Verifying the first 3 days live
                     file_name = f"day_{day}.json"
                     file_dest = os.path.join(target_dir, file_name)
                     
@@ -114,7 +116,7 @@ def run_curricullm_production_pipeline():
     print("\n========================================================================")
     print("             PRODUCTION CURRICULLM DIAGNOSTIC COMPLETE                  ")
     print("========================================================================")
-    print(f" Initial layout staging batch generated successfully: {file_counter} files.")
+    print(f" Layout staging batch generated successfully: {file_counter} files.")
     print("========================================================================")
 
 if __name__ == "__main__":
