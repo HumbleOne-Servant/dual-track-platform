@@ -1,8 +1,8 @@
-# Box 1: Core System Modules and Structural Definition Blueprints
+# Box 1: Core System Modules and Database Node Rules
 import os
 import json
 import time
-import requests
+from openai import OpenAI
 
 # Root database path confirmation mapping
 DATABASE_ROOT = r"C:\DualTrackLearning_Online\pure_curriculum_vault"
@@ -19,61 +19,45 @@ GROUPS_MAPPING = {
 
 SUBJECTS = ["mathematics", "science", "language_arts", "historical_studies", "biblical"]
 UNITS = ["unit_1_foundations", "unit_2_shapes_spaces", "unit_3_weather_seasons", "unit_4_counting_base"]
-# Box 2: Robust OpenAI Network Request Engine (Diagnostic Logger)
+# Box 2: Secure OpenAI API Request Engine (SDK Client Layer)
 def call_generation_model(prompt_text):
     """
-    Communicates with gpt-4o-mini using standard network calls.
-    Captures raw server exception bodies to expose specific project token restrictions.
+    Communicates with gpt-4o-mini via the official OpenAI client SDK.
+    Bypasses Cloudflare automated challenge barriers natively on secure network channels.
     """
-    url = "https://openai.com"
-    headers = {
-        "Authorization": f"Bearer {API_KEY}",
-        "Content-Type": "application/json",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-    }
-    body = {
-        "model": "gpt-4o-mini",
-        "messages": [
-            {
-                "role": "system", 
-                "content": (
-                    "You are a professional children's textbook author specializing in standard-aligned "
-                    "curriculum design, structured systems analysis, and historical timelines. You write "
-                    "purely in clean, beautifully styled student-facing text paragraphs. Never output markdown hashes, "
-                    "asterisks, or bullet dashes. Never output teacher instructions, lesson plans, or time markers."
-                )
-            },
-            {"role": "user", "content": prompt_text}
-        ],
-        "temperature": 0.4
-    }
+    # Initialize the official client handshake
+    client = OpenAI(api_key=API_KEY)
     
     retry_delay = 5
     for attempt in range(3):
         try:
-            response = requests.post(url, json=body, headers=headers, timeout=45)
-            if response.status_code == 200:
-                res_body = response.json()
-                clean_text = res_body['choices']['message']['content'].strip()
-                clean_text = clean_text.replace("###", "").replace("**", "").replace("### Lesson Plan:", "")
-                return clean_text
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {
+                        "role": "system", 
+                        "content": (
+                            "You are a professional children's textbook author specializing in standard-aligned "
+                            "curriculum design, structured systems analysis, and historical timelines. You write "
+                            "purely in clean, beautifully styled student-facing text paragraphs. Never output markdown hashes, "
+                            "asterisks, or bullet dashes. Never output teacher instructions, lesson plans, or time markers."
+                        )
+                    },
+                    {"role": "user", "content": prompt_text}
+                ],
+                temperature=0.4
+            )
             
-            # DIAGNOSTIC LOG UPGRADE: Print the exact text reasons why OpenAI is blocking your key
-            print(f"   [API Rejection] Server returned status code: {response.status_code}")
-            try:
-                print(f"   [Server Explanation] {response.text}")
-            except:
-                pass
-                
-            if response.status_code == 429 or response.status_code >= 500:
-                time.sleep(retry_delay)
-                retry_delay *= 2
-            else:
-                return None
-                
+            clean_text = response.choices[0].message.content.strip()
+            # Cleanup string filter pass to strip stray formatting remnants safely
+            clean_text = clean_text.replace("###", "").replace("**", "").replace("### Lesson Plan:", "")
+            return clean_text
+            
         except Exception as e:
-            print(f"   [Network Exception] {str(e)}")
-            time.sleep(5)
+            # Handle rate throttling or system exceptions safely
+            print(f"   [API Exception] Handshake delay hit: {str(e)}")
+            time.sleep(retry_delay)
+            retry_delay *= 2
             
     return None
 # Box 3: Advanced Children's Reader Book Prompt Selector (Worldview Aligned)
