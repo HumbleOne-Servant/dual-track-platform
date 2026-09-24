@@ -59,20 +59,28 @@
     <div class="top-navbar" id="mainPortalHeader">
         <div class="nav-title">🌐 DUAL-TRACK LEARNING HUB</div>
         <div class="nav-selectors">
+            <!-- Portal Level Bracket Selectors -->
             <select class="nav-select" id="portalGroupSelect" onchange="adaptPortalStyleBrackets()">
                 <option value="k5">🎒 Elementary Portal (K-5 Bracket)</option>
                 <option value="68">📐 Middle School Portal (6-8 Bracket)</option>
                 <option value="912">🏛️ High School Portal (9-12 Bracket)</option>
             </select>
-            <select class="nav-select" id="subjectTrackSelect" onchange="simulateLessonDataLoad()">
+            <!-- Fine-Grained Sub-Grade Level Selector -->
+            <select class="nav-select" id="gradePrefixSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
+                <!-- Populated dynamically by script loops to match current bracket selection -->
+            </select>
+            <select class="nav-select" id="subjectTrackSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
                 <option value="mathematics">📚 Mathematics Track</option>
                 <option value="science">🔬 Science Track</option>
                 <option value="language_arts">✍️ Language Arts Track</option>
                 <option value="historical_studies">🌍 Historical Studies Track</option>
             </select>
-            <select class="nav-select" id="daySelect" onchange="simulateLessonDataLoad()">
+            <select class="nav-select" id="daySelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
                 <option value="1">🗓️ Course Day 1</option>
                 <option value="2">🗓️ Course Day 2</option>
+                <option value="3">🗓️ Course Day 3</option>
+                <option value="4">🗓️ Course Day 4</option>
+                <option value="5">🗓️ Course Day 5</option>
             </select>
         </div>
     </div>
@@ -170,12 +178,11 @@
             </style>
             <div class="audio-guide-banner">
                 <div class="lesson-guide-text" id="lessonGuideContent">
-                    📄 <strong>Brief Lesson Description Summary:</strong> Learning block configuration.
+                    📄 <strong>Brief Lesson Description Summary:</strong> Connecting to local file tree data...
                 </div>
                 <button class="btn-audio-listen" id="audioDeskButton" onclick="triggerVoiceReader()">🔊 Read Out Loud</button>
             </div>
             
-            <!-- Exact Phrasing Match: Red Locking Instructions Notice Banner -->
             <div class="audio-warning-notice" id="audioLockNoticeBox">
                 ⚠️ ATTENTION: You must click the 'Read Out Loud' button TWICE before this worksheet unlocks. Click once to hear the brief lesson description summary, and a second time to hear your assignment instructions!
             </div>
@@ -253,7 +260,7 @@
                         .hs-thesis-console { width: 100%; box-sizing: border-box; border: 2px solid #CBD5E1; border-radius: 10px; padding: 16px; font-size: 1rem; font-family: inherit; resize: vertical; outline: none; }
                         .hs-console-label { display: block; font-weight: 700; font-size: 0.9rem; color: #475569; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
                     </style>
-                    <div class="hs-academic-viewport" id="hsProseBodyContainer">High School Advanced Analytical Prose Loading...</div>
+                    <div class="hs-academic-viewport" id="hsProseBodyContainer">High School Advanced Academic Prose Loading...</div>
                     <span class="hs-console-label">🏛️ THESIS MATRIX OPTIMIZATION & CRITICAL CRITIQUE DESK</span>
                     <textarea class="hs-thesis-console" rows="4" placeholder="Input multi-paragraph analytical summary evidence logic..."></textarea>
                 </div>
@@ -285,10 +292,17 @@
             </div>
         </div>
     </div>
-<!-- Box 9: Core Application Router Logic and Real-Time Keyword Dictionary -->
+<!-- Box 9: Core Application Configuration and Real-Time Keyword Dictionary -->
     <script>
         let audioClickCount = 0; 
         let activeCrayonColor = "#2ECC71";
+
+        // Structural grade folder map array indices
+        const PORTAL_GRADES_MAP = {
+            "k5": ["gk", "g1", "g2", "g3", "g4", "g5"],
+            "68": ["g6", "g7", "g8"],
+            "912": ["g9", "g10", "g11", "g12"]
+        };
 
         const DUAL_TRACK_KEYWORD_VAULT = {
             "mathematics": {
@@ -309,32 +323,38 @@
             }
         };
 </script>
-<!-- Box 10: State Resets, Text Processing, and Unlocking Logic Engines -->
+<!-- Box 10: Live Ingestion Database Fetch Pass and Audio Core Controllers -->
 <script>
         function enforceWorkspaceLockState() {
             audioClickCount = 0;
             const shield = document.getElementById("lockShieldWrapper");
             const notice = document.getElementById("audioLockNoticeBox");
-            
-            shield.classList.add("workspace-locked");
-            notice.style.backgroundColor = "#FEF2F2";
-            notice.style.borderColor = "#FCA5A5";
-            notice.style.color = "#EF4444";
-            notice.innerHTML = "⚠️ ATTENTION: You must click the 'Read Out Loud' button TWICE before this worksheet unlocks. Click once to hear the brief lesson description summary, and a second time to hear your assignment instructions!";
+            if (shield) shield.classList.add("workspace-locked");
+            if (notice) {
+                notice.style.backgroundColor = "#FEF2F2"; notice.style.borderColor = "#FCA5A5"; notice.style.color = "#EF4444";
+                notice.innerHTML = "⚠️ ATTENTION: You must click the 'Read Out Loud' button TWICE before this worksheet unlocks. Click once to hear the brief lesson description summary, and a second time to hear your assignment instructions!";
+            }
         }
 
         function adaptPortalStyleBrackets() {
-            const selectedBracket = document.getElementById("portalGroupSelect").value;
+            const group = document.getElementById("portalGroupSelect").value;
+            const subGradeSelector = document.getElementById("gradePrefixSelect");
             if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); }
+
+            // Clear and rebuild dynamic grade selection nodes based on folder map blueprints
+            subGradeSelector.innerHTML = "";
+            PORTAL_GRADES_MAP[group].forEach(g => {
+                subGradeSelector.innerHTML += `<option value="${g}">Grade ${g.toUpperCase()}</option>`;
+            });
 
             const elView = document.getElementById("elementaryWorkspaceView");
             const msView = document.getElementById("middleSchoolWorkspaceView");
             const hsView = document.getElementById("highSchoolWorkspaceView");
 
-            if (selectedBracket === "k5") {
+            if (group === "k5") {
                 document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(90deg, #E96B8B, #F9A86C)');
                 elView.style.display = "block"; msView.style.display = "none"; hsView.style.display = "none";
-            } else if (selectedBracket === "68") {
+            } else if (group === "68") {
                 document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(90deg, #3B82F6, #2563EB)');
                 elView.style.display = "none"; msView.style.display = "block"; hsView.style.display = "none";
             } else {
@@ -342,39 +362,54 @@
                 elView.style.display = "none"; msView.style.display = "none"; hsView.style.display = "block";
             }
             enforceWorkspaceLockState();
-            simulateLessonDataLoad();
+            loadLiveDatabaseFile();
         }
 
-        function simulateLessonDataLoad() {
-            const bracket = document.getElementById("portalGroupSelect").value;
-            const chosenDay = document.getElementById("daySelect").value;
+        // HARDENED LIVE FETCH LOGIC ENGINE
+        function loadLiveDatabaseFile() {
+            const group = document.getElementById("portalGroupSelect").value;
+            const grade = document.getElementById("gradePrefixSelect").value;
             const subject = document.getElementById("subjectTrackSelect").value;
-            
-            const titleLabel = document.getElementById("lessonTitleLabel");
-            const guideLabel = document.getElementById("lessonGuideContent");
-            const directionsLabel = document.getElementById("assignmentDirectionsLabel");
-            
-            if (bracket === "k5") {
-                document.getElementById("elDay1Workspace").style.display = (chosenDay === "1") ? "block" : "none";
-                document.getElementById("elDay2Workspace").style.display = (chosenDay === "2") ? "block" : "none";
-            }
+            const day = document.getElementById("daySelect").value;
 
-            let coreProseText = "";
-            if (subject === "mathematics") { coreProseText = "Textbook Core entry: Working with equations allows us to identify balanced vector values."; }
-            else if (subject === "science") { coreProseText = "Textbook Core entry: Natural ecosystems rely on clean water cycles and foundational atomic items called atoms."; }
-            else if (subject === "language_arts") { coreProseText = "Textbook Core entry: Structural rhetoric and valid logic protect textual arguments."; }
-            else { coreProseText = "Textbook Core entry: Geopolitical migration patterns changed rapidly following breakthroughs like the Gutenberg printing press."; }
+            // Map standard unit directory targets (assumes Unit 1 foundations folder loop)
+            const targetJsonUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/unit_1_foundations/day_${day}.json`;
 
-            titleLabel.innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${chosenDay}`;
-            directionsLabel.innerText = `Directions: Complete the active standard worksheet challenge assigned below for Day ${chosenDay}.`;
-            
-            let displayTarget = null;
-            if (bracket === "k5") { displayTarget = document.getElementById("elProseBodyContainer"); guideLabel.innerHTML = "📄 <strong>Brief Lesson Description Summary:</strong> Primary K-5 sensory workbook desk active. Click Listen to check details."; }
-            else if (bracket === "68") { displayTarget = document.getElementById("msProseBodyContainer"); guideLabel.innerHTML = "📄 <strong>Brief Lesson Description Summary:</strong> Intermediate 6-8 outline portal active. Read details."; }
-            else { displayTarget = document.getElementById("hsProseBodyContainer"); guideLabel.innerHTML = "📄 <strong>Brief Lesson Description Summary:</strong> High School advanced critical analytical text engine active."; }
-            
-            if (displayTarget) { displayTarget.innerHTML = coreProseText; }
-            executeRealTimeKeywordScan(displayTarget, subject);
+            // Execute asynchronous browser disk fetch command
+            fetch(targetJsonUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error("Target File Missing inside Vault Folder Structure.");
+                    return response.json();
+                })
+                .then(data => {
+                    // Success Pass: Distribute actual AI generated data fields across UI panels
+                    document.getElementById("lessonTitleLabel").innerText = data.lesson_title || "Lesson Node Content";
+                    document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> ${data.daily_assessment || 'Instructional day check checkout active.'}`;
+                    document.getElementById("assignmentDirectionsLabel").innerText = data.interactive_assignment || "Complete active workbook fields.";
+                    
+                    let displayTarget = null;
+                    if (group === "k5") {
+                        displayTarget = document.getElementById("elProseBodyContainer");
+                        document.getElementById("elDay1Workspace").style.display = (day === "1") ? "block" : "none";
+                        document.getElementById("elDay2Workspace").style.display = (day === "2") ? "block" : "none";
+                    } else if (group === "68") {
+                        displayTarget = document.getElementById("msProseBodyContainer");
+                    } else {
+                        displayTarget = document.getElementById("hsProseBodyContainer");
+                    }
+
+                    if (displayTarget) { displayTarget.innerHTML = data.lesson_body || "Textbook entry prose block text data."; }
+                    executeRealTimeKeywordScan(displayTarget, subject);
+                })
+                .catch(error => {
+                    // Fallback Safety Protection: Inject demo defaults if specific folder file isn't generated yet
+                    console.log("[Vault Sync Alert]", error.message);
+                    document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
+                    document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> [Local File Not Found Yet] Click Listen to run standard simulation parameters.`;
+                    
+                    let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
+                    if (displayTarget) { displayTarget.innerHTML = `Local File Mock-Up: Active course parameters focus on ${subject.replace('_', ' ')} logic layers.`; }
+                });
         }
 
         function executeRealTimeKeywordScan(textContainer, activeSubject) {
@@ -391,50 +426,43 @@
                 if (checkExp.test(currentContent)) {
                     currentContent = currentContent.replace(checkExp, `<mark class="keyword-highlight" style="background-color: #FEF08A; padding: 0 4px; border-radius: 4px; font-weight: bold; color: #1E293B;">$1</mark>`);
                     textContainer.innerHTML = currentContent;
-                    
                     document.getElementById("comparativeContextLabel").innerText = lookupGroup[key];
+                    document.getElementById("biblicalAlignmentLabel").innerText = `Worldview connection unblocked for key focus concept: ${key.toUpperCase()}`;
                     flag = true;
                     break;
                 }
             }
             if (!flag) {
                 document.getElementById("comparativeContextLabel").innerText = "The platform automatically reviews active structural elements to display alternative frameworks side-by-side.";
+                document.getElementById("biblicalAlignmentLabel").innerText = "Designed order models align structural observations cleanly across timeline logs.";
             }
         }
 
         function triggerVoiceReader() {
             if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); } else { return; }
-            
-            let stringData = "";
+            let stringData = (audioClickCount === 0) ? document.getElementById('lessonGuideContent').innerText : document.getElementById('assignmentDirectionsLabel').innerText;
             const shield = document.getElementById("lockShieldWrapper");
             const notice = document.getElementById("audioLockNoticeBox");
 
             if (audioClickCount === 0) {
-                // Click 1: Process Brief Lesson Description Summary
-                stringData = document.getElementById('lessonGuideContent').innerText;
                 audioClickCount = 1;
-                
-                notice.style.backgroundColor = "#FEF3C7";
-                notice.style.borderColor = "#FCD34D";
-                notice.style.color = "#D97706";
+                notice.style.backgroundColor = "#FEF3C7"; notice.style.borderColor = "#FCD34D"; notice.style.color = "#D97706";
                 notice.innerHTML = "⚡ STEP 1 COMPLETE. Now click 'Read Out Loud' one more time to hear your assignment instructions and unlock your worksheet!";
             } else {
-                // Click 2: Process Assignment Instructions & Instantly Open Desk
-                stringData = document.getElementById('assignmentDirectionsLabel').innerText;
                 audioClickCount = 2;
-                
-                shield.classList.remove("workspace-locked");
-                notice.style.backgroundColor = "#D1FAE5";
-                notice.style.borderColor = "#A7F3D0";
-                notice.style.color = "#059669";
+                if (shield) shield.classList.remove("workspace-locked");
+                notice.style.backgroundColor = "#D1FAE5"; notice.style.borderColor = "#A7F3D0"; notice.style.color = "#059669";
                 notice.innerHTML = "✅ WORKSHEET UNLOCKED. Both instructional tracks heard. You may now complete your assignment!";
             }
-
             const utter = new SpeechSynthesisUtterance(stringData);
             utter.rate = 0.9;
             window.speechSynthesis.speak(utter);
         }
 
+        function pickCrayonColor(el, hex) { activeCrayonColor = hex; document.querySelectorAll('.crayon-option').forEach(c => c.style.borderColor='transparent'); el.style.borderColor='#1E293B'; }
+        function colorWorksheetSegment(node) { if (node.tagName !== 'svg') { node.setAttribute('fill', activeCrayonColor); } }
+
+        // Execute Initial System Boot Sequence
         adaptPortalStyleBrackets();
     </script>
 </body>
