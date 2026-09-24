@@ -3,87 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Production Dual-Track Classroom Portal</title>
+    <title>Visual Immersion Dual-Track Portal</title>
     <style>
         body { margin: 0; padding: 0; transition: background-color 0.4s ease; font-family: system-ui, -apple-system, sans-serif; }
         .main-container { min-height: 100vh; padding-bottom: 50px; }
         header { padding: 20px; display: flex; justify-content: space-between; align-items: center; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: background 0.4s ease; }
         .control-select { padding: 10px 20px; font-size: 15px; border-radius: 30px; font-weight: bold; border: 2px solid white; cursor: pointer; }
         
-        /* 🖍️ CLASSROOM THEME GRADES K-5 */
-        .elem-card { background: white; border: 5px solid #ff7675; border-radius: 35px; padding: 35px; text-align: center; box-shadow: 0 12px 24px rgba(0,0,0,0.06); max-width: 750px; margin: 0 auto 25px auto; }
-        .elem-btn { background: linear-gradient(to bottom, #74b9ff, #0984e3); color: white; border: 3px solid white; font-size: 20px; font-weight: bold; padding: 15px 40px; border-radius: 50px; cursor: pointer; box-shadow: 0 6px 0 #06528e; transition: all 0.1s ease; }
-        .elem-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #06528e; }
-        .elem-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #06528e; }
+        /* 🖍️ DYNAMIC THEME ANIMATIONS & CLASSROOM CONTAINER OVERRIDES */
+        .immersive-viewport-wrapper { max-width: 950px; margin: 0 auto; width: 100%; transition: all 0.4s ease; }
+        
+        /* Playful Kinder Interactive Items */
+        .kinder-dot { width: 50px; height: 50px; background: #2d3436; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px; cursor: pointer; transition: transform 0.2s, background 0.2s; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+        .kinder-dot.active { background: #e84393; transform: scale(1.15); box-shadow: 0 6px 12px rgba(232, 67, 147, 0.4); }
+        
+        .number-line-block { background: #ffeaa7; border: 3px solid #fdcb6e; border-radius: 15px; padding: 20px; display: inline-block; font-size: 24px; font-weight: bold; color: #d63031; cursor: pointer; transition: all 0.2s; min-width: 60px; text-align: center; box-shadow: 0 6px 0 #xbf963f; }
+        .number-line-block:active { transform: translateY(4px); box-shadow: 0 2px 0 #xbf963f; }
 
-        /* 📘 CLASSROOM THEME GRADES 6-8 */
-        .mid-grid { display: grid; grid-template-columns: 280px 1fr; gap: 25px; max-width: 1100px; margin: 0 auto; }
-        .mid-sidebar { background: white; border-radius: 16px; border: 2px solid #a4b0be; padding: 20px; height: fit-content; }
-        .mid-panel { background: white; border-radius: 16px; border-top: 8px solid #2980b9; padding: 35px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .mid-btn { background: #2980b9; color: white; border: none; font-size: 16px; font-weight: bold; padding: 14px 32px; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
-        .mid-btn:hover { background: #3498db; }
+        .sorting-badge { background: #ffffff; border: 2px solid #b2bec3; padding: 12px 20px; border-radius: 30px; font-weight: bold; font-size: 16px; cursor: grab; display: inline-block; margin: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .sorting-badge:hover { transform: scale(1.05); }
 
-        /* 🎓 CLASSROOM THEME GRADES 9-12 */
-        .high-workspace { background: #ffffff; border: 1px solid #ced6e0; border-radius: 12px; max-width: 950px; margin: 0 auto; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.04); }
-        .high-banner { background: #2f3542; color: #f5f6fa; padding: 18px 25px; font-size: 14px; font-weight: bold; letter-spacing: 1px; display: flex; justify-content: space-between; }
-        .high-paper { padding: 45px; background: #fdfefe; }
-        .high-btn { background: #2f3542; color: white; font-size: 13px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; padding: 14px 28px; border: none; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
-        .high-btn:hover { background: #57606f; }
+        /* Universal Layout Card Mixins */
+        .lesson-sheet-paper { background: #ffffff; border-radius: 30px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #e5e7eb; }
+        .audio-trigger-btn { background: linear-gradient(to bottom, #6c5ce7, #4f3bb1); color: white; border: none; padding: 16px 35px; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 6px 0 #3b2b8c; transition: all 0.1s ease; display: block; margin: 0 auto 25px auto; }
+        .audio-trigger-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #3b2b8c; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-<div id="learning-platform-container" class="main-container">
+<div id="learning-platform-container" class="main-container" style="background: #f0f8ff;">
     
+    <!-- Unified Student Dashboard Controls -->
     <header id="dynamic-header-bar" style="background: linear-gradient(135deg, #ff7675, #6c5ce7);">
         <div style="font-size: 22px; font-weight: bold; letter-spacing: 1px;">🏫 LIVE PRODUCTION WORKSTATION</div>
         <div style="display: flex; gap: 15px; align-items: center;">
             
             <select id="grade-selector" class="control-select" style="background: #ffeaa7;" onchange="executeDynamicPortalUpdate()">
-                <optgroup label="🖍️ Elementary Tracks">
+                <optgroup label="🖍️ Kindergarten Tracks">
                     <option value="gk">Kindergarten Base</option>
+                </optgroup>
+                <optgroup label="📘 Academy Division">
                     <option value="g1">Grade 1 Core</option>
-                    <option value="g2">Grade 2 Core</option>
-                    <option value="g3">Grade 3 Intermediate</option>
-                    <option value="g4">Grade 4 Intermediate</option>
-                    <option value="g5">Grade 5 Advanced</option>
-                </optgroup>
-                <optgroup label="📘 Middle Academy">
-                    <option value="g6">Grade 6 Core</option>
-                    <option value="g7">Grade 7 Core</option>
-                    <option value="g8">Grade 8 Core</option>
-                </optgroup>
-                <optgroup label="🎓 High Seminars">
-                    <option value="g9">Grade 9 Core</option>
-                    <option value="g10">Grade 10 Core</option>
-                    <option value="g11">Grade 11 Core</option>
-                    <option value="g12">Grade 12 Advanced</option>
+                    <option value="g7">Grade 7 Lecture</option>
                 </optgroup>
             </select>
             
             <select id="subject-selector" class="control-select" style="background: #fab1a0;" onchange="executeDynamicPortalUpdate()">
                 <option value="mathematics">🔢 Mathematics Track</option>
                 <option value="science">🔬 Scientific Investigations</option>
-                <option value="language_arts">🔤 English & Reading</option>
-                <option value="historical_studies">🌍 History & Geography</option>
-                <option value="biblical">📖 Biblical Studies</option>
             </select>
             
             <select id="day-selector" class="control-select" style="background: #55efc4; color: #2d3436;" onchange="executeDynamicPortalUpdate()">
-                <!-- Populated automatically from 1 to 180 by execution engine script -->
+                <option value="1">📆 Day 1 Track</option>
+                <option value="2">📆 Day 2 Track</option>
             </select>
             
         </div>
     </header>
 
-    <main id="adaptive-portal-viewport" style="max-width: 1200px; margin: 40px auto; padding: 0 20px; box-sizing: border-box;">
-        <!-- Clean AI curriculum blocks inject directly here without raw code bleed -->
+    <!-- Visual Interactive Immersion Arena -->
+    <main style="padding: 40px 20px;">
+        <div id="adaptive-portal-viewport" class="immersive-viewport-wrapper">
+            <!-- Customized themed learning sandboxes load dynamically here -->
+        </div>
     </main>
 </div>
 <script>
-const THEME_CONFIGS = {
-    "elementary": { bg: "#f0f8ff", header: "linear-gradient(135deg, #ff7675, #6c5ce7)", font: "system-ui, sans-serif" },
-    "middle": { bg: "#eef2f7", header: "linear-gradient(135deg, #2c3e50, #2980b9)", font: "system-ui, sans-serif" },
-    "high": { bg: "#ffffff", header: "linear-gradient(135deg, #1e272e, #485460)", font: "system-ui, sans-serif" }
+// Configuration matrix to adapt container themes automatically
+const DISPATCH_THEMES = {
+    "math_day1": { bg: "#fff5f5", cardBorder: "#ff7675" },
+    "math_day2": { bg: "#fffdf0", cardBorder: "#fbc531" },
+    "science_day1": { bg: "#ebfbee", cardBorder: "#2ecc71" },
+    "science_day2": { bg: "#f3f0ff", cardBorder: "#9c88ff" }
 };
 
 function executeDynamicPortalUpdate() {
@@ -91,174 +83,196 @@ function executeDynamicPortalUpdate() {
     const subject = document.getElementById('subject-selector').value;
     const day = document.getElementById('day-selector').value;
     
-    let division = "elementary";
-    if (["g6", "g7", "g8"].includes(grade)) division = "middle";
-    if (["g9", "g10", "g11", "g12"].includes(grade)) division = "high";
+    // Set standard asset path mapping to your local 46,800 file catalog vault
+    const unitFolder = subject === "mathematics" ? "unit_1_foundations" : "unit_1_foundations";
+    const targetFileUrl = `/pure_curriculum_vault/k5/${grade}/${subject}/${unitFolder}/day_${day}.json`;
     
-    const theme = THEME_CONFIGS[division];
-    document.getElementById('learning-platform-container').style.backgroundColor = theme.bg;
-    document.getElementById('learning-platform-container').style.fontFamily = theme.font;
-    document.getElementById('dynamic-header-bar').style.background = theme.header;
-    
-    // Auto-detect unit subfolders matching your production engine data mapping parameters
-    let unitFolder = "unit_1_foundations";
-    if (day > 45) unitFolder = "unit_2_shapes_spaces";
-    if (day > 90) unitFolder = "unit_3_weather_seasons";
-    if (day > 135) unitFolder = "unit_4_counting_base";
-    
-    // Mirroring your exact 46,800 path specifications: /pure_curriculum_vault/[group]/[grade]/[subject]/[unit]/day_[?].json
-    let folderBucket = division === "elementary" ? "k5" : (division === "middle" ? "68" : "912");
-    const targetFileUrl = `/pure_curriculum_vault/${folderBucket}/${grade}/${subject}/${unitFolder}/day_${day}.json`;
-    
-    console.log("Ingesting file payload from node: " + targetFileUrl);
+    console.log("Fetching visual data module from: " + targetFileUrl);
 
     fetch(targetFileUrl)
         .then(response => {
-            if (!response.ok) { throw new Error("Awaiting textbook data ingestion segment."); }
+            if (!response.ok) { throw new Error("Awaiting database content payload."); }
             return response.json();
         })
         .then(data => {
-            renderActiveWorkspaceUI(division, grade, data);
+            compileThemeDrivenClassroom(grade, subject, parseInt(day), data);
         })
         .catch(error => {
-            // Display empty database setup state if file isn't hit yet
             document.getElementById('adaptive-portal-viewport').innerHTML = `
-                <div style="text-align: center; color: #a4b0be; padding: 50px;">
+                <div style="text-align: center; color: #a4b0be; padding: 6px 0;">
                     <h2>📖 Awaiting AI Curriculum Generation</h2>
-                    <p>Launch your local curricullm_engine.py script to populate the day tracker logs inside: <strong>${targetFileUrl}</strong></p>
+                    <p>Launch your local <code>curricullm_engine.py</code> script to build files inside: <code>${targetFileUrl}</code></p>
                 </div>`;
         });
 }
 </script>
 <script>
-function renderActiveWorkspaceUI(division, grade, data) {
+function compileThemeDrivenClassroom(grade, subject, day, data) {
     const viewport = document.getElementById('adaptive-portal-viewport');
+    const container = document.getElementById('learning-platform-container');
     
-    if (division === "elementary") {
-        viewport.innerHTML = `
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 25px; animation: fadeIn 0.2s ease;">
-                <button class="elem-btn" style="background: linear-gradient(to bottom, #6c5ce7, #4f3bb1); box-shadow: 0 6px 0 #3b2b8c;" onclick="window.speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance('${data.lesson_body.replace(/'/g, "\\'")}'); u.rate=0.95; window.speechSynthesis.speak(u);">
-                    🔊 Click to Hear Lesson Read Aloud
-                </button>
-                
-                <div class="elem-card" style="width:100%; box-sizing:border-box;">
-                    <div style="font-size: 60px; margin-bottom: 10px;">🌟🏫</div>
-                    <h2 style="font-size: 26px; color: #2d3436; margin: 10px 0 20px 0;">${data.lesson_title}</h2>
-                    <p style="font-size: 19px; color: #2d3436; text-align: left; background: #fffdf0; padding: 30px; border-radius: 20px; line-height: 1.6; border: 3px dashed #ffeaa7;">
-                        ${data.lesson_body}
-                    </p>
-                </div>
-                
-                <div class="elem-card" style="border-color: #74b9ff; background: #f1f7ff; width:100%; box-sizing:border-box;">
-                    <h3 style="color: #0984e3; margin-top: 0; font-size: 22px;">🎨 Today's Interactive Assignment</h3>
-                    <p style="font-size: 16.5px; text-align: left; background: white; padding: 20px; border-radius: 12px; border: 1px solid #ced6e0; color:#2d3436;">
-                        ${data.interactive_assignment}
-                    </p>
-                    <div style="background: white; border: 3px dashed #74b9ff; border-radius: 20px; padding: 50px 0; color: #b2bec3; font-weight: bold; cursor: crosshair;" onclick="this.style.background='#e3fafc'; alert('Sketch pad active.')">
-                        🎨 [Click to Draw Worksheet Answers Box]
+    // ------------------------------------------------------------------
+    // VISUAL SANDBOX CONFIGURATION: MATHEMATICS
+    // ------------------------------------------------------------------
+    if (subject === "mathematics" && grade === "gk") {
+        if (day === 1) {
+            // Theme 1: Ten Black Dots & Circle Canvas Room
+            container.style.backgroundColor = DISPATCH_THEMES.math_day1.bg;
+            viewport.innerHTML = `
+                <div style="animation: fadeIn 0.3s ease;">
+                    <button class="audio-trigger-btn" onclick="triggerVoiceReader('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Read Lesson Aloud</button>
+                    
+                    <div class="lesson-sheet-paper" style="border-top: 10px solid ${DISPATCH_THEMES.math_day1.cardBorder}; text-align:center; margin-bottom: 30px;">
+                        <h1 style="color: #2d3436; margin-top:0;">🔴 ${data.lesson_title}</h1>
+                        <p style="text-align: left; font-size: 18px; line-height: 1.6; color: #2d3436; background: #fffdf8; padding: 25px; border-radius: 16px; border: 1px solid #ffeaa7;">${data.lesson_body}</p>
+                        
+                        <!-- INTERACTIVE DOT BOARD WIDGET: Directly matches the Book Text -->
+                        <h3 style="color: #e84393; margin-top: 30px;">🔢 Tap the Interactive Counting Dots!</h3>
+                        <p style="color: #636e72; font-size: 15px;">Tap each dot below one-by-one to practice counting out loud from 1 to 10.</p>
+                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; padding: 20px 0;">
+                            ${Array.from({length: 10}, (_, i) => `<div class="kinder-dot" onclick="this.classList.toggle('active'); playClickAudio(\({i+1});">\){i+1}</div>`).join('')}
+                        </div>
                     </div>
-                    <button class="elem-btn" style="background: linear-gradient(to bottom, #20bf6b, #1b8a4c); box-shadow: 0 6px 0 #126636; margin-top: 25px;" onclick="alert('Worksheet files submitted!')">Submit Assignment 🌟</button>
-                </div>
 
-                <div class="elem-card" style="border-color: #a55eea; background: #faf5ff; width:100%; box-sizing:border-box;">
-                    <h3 style="color: #6f00ff; margin-top: 0; font-size: 22px;">❓ Daily Knowledge Check Assessment</h3>
-                    <p style="font-size: 17px; text-align: left; color:#2d3436;">${data.daily_assessment}</p>
-                    <input type="text" style="width:100%; padding: 15px; border-radius: 10px; border: 2px solid #a55eea; font-size:16px;" placeholder="Type your checkpoint answer statement here...">
-                </div>
-            </div>`;
-    } else if (division === "middle") {
-        paintMiddleSchoolWorkspace(viewport, data);
+                    <!-- Immersive Hands-on Project Slate -->
+                    <div class="lesson-sheet-paper" style="border-top: 10px solid #74b9ff; background: #f1f7ff;">
+                        <h3 style="color: #0984e3; margin-top:0;">🎨 Creative Assignment Workspace</h3>
+                        <p style="color: #2d3436; font-size: 16px; line-height: 1.5;">${data.interactive_assignment}</p>
+                        <div style="background: white; border: 3px dashed #74b9ff; border-radius: 20px; height: 160px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #b2bec3; cursor: crosshair;" onclick="alert('Drawing tool activated!')">
+                            🔴 [Click here to unlock the Dot Art Response Canvas]
+                        </div>
+                    </div>
+                </div>`;
+        } else if (day === 2) {
+            // Theme 2: Interactive Tactile Number Line & Blocks Room
+            container.style.backgroundColor = DISPATCH_THEMES.math_day2.bg;
+            viewport.innerHTML = `
+                <div style="animation: fadeIn 0.3s ease;">
+                    <button class="audio-trigger-btn" onclick="triggerVoiceReader('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Read Lesson Aloud</button>
+                    
+                    <div class="lesson-sheet-paper" style="border-top: 10px solid ${DISPATCH_THEMES.math_day2.cardBorder}; text-align:center; margin-bottom: 30px;">
+                        <h1 style="color: #2d3436; margin-top:0;">🪵 ${data.lesson_title}</h1>
+                        <p style="text-align: left; font-size: 18px; line-height: 1.6; color: #2d3436; background: #faf9f0; padding: 25px; border-radius: 16px; border: 1px solid #fdcb6e;">${data.lesson_body}</p>
+                        
+                        <!-- INTERACTIVE WOODEN NUMBER LINE WIDGET -->
+                        <h3 style="color: #d63031; margin-top: 30px;">🧗 Step Along the Wooden Number Line!</h3>
+                        <p style="color: #636e72; font-size: 15px;">Tap the blocks in order from 1 to 5 to show how numbers grow larger.</p>
+                        <div style="display: flex; gap: 20px; justify-content: center; padding: 25px 0;">
+                            ${Array.from({length: 5}, (_, i) => `<div class="number-line-block" onclick="alert('Step matched on block number ' + \({(i+1)} + '!')">\){i+1}</div>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="lesson-sheet-paper" style="border-top: 10px solid #fdcb6e; background: #fffdf0;">
+                        <h3 style="color: #e67e22; margin-top:0;">✂️ Interactive Collage Assignment</h3>
+                        <p style="color: #2d3436; font-size: 16px; line-height: 1.5;">${data.interactive_assignment}</p>
+                        <div style="background: white; border: 3px dashed #fdcb6e; border-radius: 20px; height: 150px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #d1ccc0;" onclick="alert('Collage tool loaded.')">
+                            🔢 [Click to Drag Number Cards Into the Collage Box]
+                        </div>
+                    </div>
+                </div>`;
+        }
     } else {
-        paintHighSchoolWorkspace(viewport, data, grade);
+        compileScienceThemedClassroom(grade, subject, day, data, viewport, container);
     }
 }
 </script>
 <script>
-function paintMiddleSchoolWorkspace(viewport, data) {
-    viewport.innerHTML = `
-        <div class="mid-grid" style="animation: fadeIn 0.2s ease;">
-            <aside class="mid-sidebar">
-                <h3 style="color: #2c3e50; margin-top: 0; font-size: 18px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">📋 Progress</h3>
-                <div style="padding: 12px; background: #e8f5e9; border-left: 5px solid #2ecc71; border-radius: 4px; font-size: 14px; font-weight: bold; margin-bottom: 10px;">✓ Complete</div>
-                <div style="padding: 12px; background: #ebf7ff; border-left: 5px solid #2980b9; border-radius: 4px; font-size: 14px; font-weight: bold;">→ Active Objective</div>
-            </aside>
-            <main class="mid-panel">
-                <span style="background: #e3fafc; color: #0b7285; padding: 5px 12px; font-weight: bold; border-radius: 4px; font-size: 12px; text-transform: uppercase;">Academy Division</span>
-                <h2 style="color: #2c3e50; margin: 15px 0 20px 0; font-size: 24px;">${data.lesson_title}</h2>
-                <p style="color: #374151; line-height: 1.7; font-size: 16.5px; margin-bottom: 35px; text-align: justify;">${data.lesson_body}</p>
-                
-                <div style="background: #f8f9fa; border: 1px solid #ced6e0; padding: 25px; border-radius: 12px; margin-bottom: 20px;">
-                    <h4 style="margin: 0 0 10px 0; color: #2c3e50;">📝 Interactive Project Assignment</h4>
-                    <p style="color: #4b5563; font-size: 15px; line-height: 1.5;">${data.interactive_assignment}</p>
-                    <textarea style="width: 100%; height: 90px; border-radius: 6px; border: 1px solid #bdc3c7; padding: 12px; font-family: sans-serif;" placeholder="Type your text analysis observation metrics here..."></textarea>
-                </div>
-
-                <div style="background: #fff5f5; border: 1px solid #ffa8a8; padding: 25px; border-radius: 12px; margin-bottom: 20px;">
-                    <h4 style="margin: 0 0 10px 0; color: #c92a2a;">❓ Standard Assessment Question</h4>
-                    <p style="color: #c92a2a; font-size: 15px; font-weight:500;">${data.daily_assessment}</p>
-                    <input type="text" style="width: 100%; padding:12px; border-radius:6px; border:1px solid #ffa8a8;" placeholder="Provide your analytical response values...">
-                </div>
-                <button class="mid-btn" onclick="alert('Data sync submitted.')">Submit Tasks Verification</button>
-            </main>
-        </div>`;
-}
-
-function paintHighSchoolWorkspace(viewport, data, exactGrade) {
-    viewport.innerHTML = `
-        <div class="high-workspace" style="animation: fadeIn 0.2s ease;">
-            <div class="high-banner">
-                <div>📚 ACADEMIC ADVANCED AP COURSES TERMINAL</div>
-                <div>SECURE SYLLABUS GATEWAY</div>
-            </div>
-            <div class="high-paper">
-                <h1 style="margin-top: 0; font-size: 26px; font-weight: 600; color: #1e272e; border-bottom: 2px solid #f1f2f6; padding-bottom: 12px; margin-bottom: 20px;">${data.lesson_title}</h1>
-                <article style="line-height: 1.8; color: #2f3542; font-size: 16.5px; margin-bottom: 40px; text-align: justify;">
-                    ${data.lesson_body}
-                </article>
-                
-                <div style="border-top: 2px solid #f1f2f6; padding-top: 25px; margin-bottom:30px;">
-                    <h4 style="margin: 0 0 12px 0; color: #2f3542; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px;">🎓 Assignment Analysis Requirement</h4>
-                    <p style="line-height: 1.6; color: #57606f; font-size: 15px; background: #f8f9fa; padding: 15px; border-left: 4px solid #2f3542;">${data.interactive_assignment}</p>
-                    <div style="border: 2px dashed #b2bec3; padding: 35px; text-align: center; background: #ffffff; border-radius: 6px;">
-                        <span style="color: #747d8c; font-size: 14px; display: block; margin-bottom: 15px;">Drag and drop response papers here (.pdf, .docx)</span>
-                        <button class="high-btn">Select Document Asset</button>
+function compileScienceThemedClassroom(grade, subject, day, data, viewport, container) {
+    // ------------------------------------------------------------------
+    // VISUAL SANDBOX CONFIGURATION: SCIENCE
+    // ------------------------------------------------------------------
+    if (subject === "science" && grade === "gk") {
+        if (day === 1) {
+            // Theme 3: Matter States Interactive Room
+            container.style.backgroundColor = DISPATCH_THEMES.science_day1.bg;
+            viewport.innerHTML = `
+                <div style="animation: fadeIn 0.3s ease;">
+                    <button class="audio-trigger-btn" onclick="triggerVoiceReader('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Read Lesson Aloud</button>
+                    
+                    <div class="lesson-sheet-paper" style="border-top: 10px solid ${DISPATCH_THEMES.science_day1.cardBorder}; text-align:center; margin-bottom: 30px;">
+                        <h1 style="color: #2d3436; margin-top:0;">🧱 ${data.lesson_title}</h1>
+                        <p style="text-align: left; font-size: 18px; line-height: 1.6; color: #2d3436; background: #f4fff7; padding: 25px; border-radius: 16px; border: 1px solid #a8e6cf;">${data.lesson_body}</p>
+                        
+                        <!-- INTERACTIVE MATTER STATE CHANGER WIDGET -->
+                        <h3 style="color: #27ae60; margin-top: 30px;">🧪 Tap the Matter Test Jars!</h3>
+                        <div style="display: flex; gap: 25px; justify-content: center; padding: 20px 0;">
+                            <div style="background: #dfe6e9; border: 3px solid #b2bec3; padding: 20px; border-radius: 12px; cursor: pointer; font-weight:bold;" onclick="alert('Solid Test: Hard like a toy brick!')">🧱 Solid Jar</div>
+                            <div style="background: #74b9ff; border: 3px solid #0984e3; padding: 20px; border-radius: 12px; cursor: pointer; font-weight:bold; color:white;" onclick="alert('Liquid Test: Flows like water drops!')">💧 Liquid Jar</div>
+                            <div style="background: #e17055; border: 3px solid #d63031; padding: 20px; border-radius: 12px; cursor: pointer; font-weight:bold; color:white;" onclick="alert('Gas Test: Fills the jar like a balloon!')">🎈 Gas Jar</div>
+                        </div>
                     </div>
-                </div>
 
-                <div style="border-top: 2px solid #f1f2f6; padding-top: 25px;">
-                    <h4 style="margin: 0 0 12px 0; color: #2f3542; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px;">📋 Formal Assessment Checkpoint</h4>
-                    <p style="line-height: 1.6; color: #2f3542; font-size: 15px;">${data.daily_assessment}</p>
-                    <textarea style="width:100%; height:80px; padding:12px; border-radius:4px; border:1px solid #ced6e0;" placeholder="Provide your rigorous thesis arguments calculations..."></textarea>
-                </div>
-            </div>
-        </div>`;
+                    <div class="lesson-sheet-paper" style="border-top: 10px solid #2ecc71; background: #ebfbeee;">
+                        <h3 style="color: #27ae60; margin-top:0;">🔍 Matter Detective Lab</h3>
+                        <p style="color: #2d3436; font-size: 16px;">${data.interactive_assignment}</p>
+                        <button class="audio-trigger-btn" style="background:#2ecc71; box-shadow:0 6px 0 #1e7e43;" onclick="alert('Camera system initialized to take photos of items!')">📸 Capture Item Properties</button>
+                    </div>
+                </div>`;
+        } else if (day === 2) {
+            // Theme 4: Living vs Non-Living Sorting Board Room
+            container.style.backgroundColor = DISPATCH_THEMES.science_day2.bg;
+            viewport.innerHTML = `
+                <div style="animation: fadeIn 0.3s ease;">
+                    <button class="audio-trigger-btn" onclick="triggerVoiceReader('${data.lesson_body.replace(/'/g, "\\'")}')">🔊 Read Lesson Aloud</button>
+                    
+                    <div class="lesson-sheet-paper" style="border-top: 10px solid ${DISPATCH_THEMES.science_day2.cardBorder}; text-align:center; margin-bottom: 30px;">
+                        <h1 style="color: #2d3436; margin-top:0;">🐜 ${data.lesson_title}</h1>
+                        <p style="text-align: left; font-size: 18px; line-height: 1.6; color: #2d3436; background: #fdfcff; padding: 25px; border-radius: 16px; border: 1px solid #dcd6f7;">${data.lesson_body}</p>
+                        
+                        <!-- INTERACTIVE LIVING COHORT CLASSIFICATION DRAG DOCK -->
+                        <h3 style="color: #8c7ae6; margin-top: 30px;">🗂️ Tactile Nature Classification Board</h3>
+                        <p style="color: #718093; font-size: 15px;">Tap an item token below to classify its lifecyle status instantly.</p>
+                        
+                        <div style="background: #f8f9fa; border: 2px dashed #b2bec3; padding: 15px; border-radius: 15px; margin-bottom: 25px;">
+                            <div class="sorting-badge" onclick="alert('Classification Correct! Ants grow, breathe, and move.')">🐜 Busy Ant</div>
+                            <div class="sorting-badge" onclick="alert('Classification Correct! Trees use sunlight to grow big.')">🌳 Green Tree</div>
+                            <div class="sorting-badge" onclick="alert('Classification Correct! Cars are built out of metal, they are non-living.')">🚗 Toy Car</div>
+                            <div class="sorting-badge" onclick="alert('Classification Correct! Clouds are made of water vapor in the sky.')">☁️ Sky Cloud</div>
+                        </div>
+                    </div>
+
+                    <div class="lesson-sheet-paper" style="border-top: 10px solid #9c88ff; background: #f5f4ff;">
+                        <h3 style="color: #6c5ce7; margin-top:0;">🎒 Nature Scavenger Hunt Console</h3>
+                        <p style="color: #2d3436; font-size: 16px; line-height: 1.5;">${data.interactive_assignment}</p>
+                        <div style="display:flex; gap:20px; justify-content:center;">
+                            <button class="audio-trigger-btn" style="background:#6c5ce7; box-shadow:0 6px 0 #4a3b9c; margin:0;" onclick="alert('Living log checklist recorded.')">📝 Log Living Thing</button>
+                            <button class="audio-trigger-btn" style="background:#718093; box-shadow:0 6px 0 #4b5463; margin:0;" onclick="alert('Non-living log checklist recorded.')">📝 Log Non-Living Thing</button>
+                        </div>
+                    </div>
+                </div>`;
+        }
+    }
 }
 </script>
 <script>
-function initializeTrackDayDropdown() {
-    const dayDropdown = document.getElementById('day-selector');
-    if (!dayDropdown) return;
-    
-    dayDropdown.innerHTML = "";
-    for (let currentDayIndex = 1; currentDayIndex <= 180; currentDayIndex++) {
-        const optionNode = document.createElement('option');
-        optionNode.value = currentDayIndex;
-        optionNode.innerText = "📆 Day " + currentDayIndex + " Track";
-        dayDropdown.appendChild(optionNode);
+function playClickAudio(number) {
+    // Play structural sound triggers matching early childhood sensory requirements
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(number.toString());
+        utterance.rate = 1.1;
+        window.speechSynthesis.speak(utterance);
     }
 }
 
+function triggerVoiceReader(textToRead) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(textToRead);
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+// Master bootstrap routine to lock in navigation tracking triggers on page mount
 window.addEventListener('DOMContentLoaded', () => {
-    initializeTrackDayDropdown();
-    
     document.getElementById('grade-selector').addEventListener('change', executeDynamicPortalUpdate);
     document.getElementById('subject-selector').addEventListener('change', executeDynamicPortalUpdate);
     document.getElementById('day-selector').addEventListener('change', executeDynamicPortalUpdate);
     
-    // Fire dynamic updates to pull your text files right away on page load
+    // Auto clear space and paint configurations instantly on load
     executeDynamicPortalUpdate();
 });
 </script>
-
 </body>
 </html>
