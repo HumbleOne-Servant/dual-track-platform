@@ -2,7 +2,8 @@
 import os
 import json
 import time
-import requests
+import urllib.request
+import urllib.error
 
 # Root database path confirmation mapping
 DATABASE_ROOT = r"C:\DualTrackLearning_Online\pure_curriculum_vault"
@@ -19,18 +20,22 @@ GROUPS_MAPPING = {
 
 SUBJECTS = ["mathematics", "science", "language_arts", "historical_studies", "biblical"]
 UNITS = ["unit_1_foundations", "unit_2_shapes_spaces", "unit_3_weather_seasons", "unit_4_counting_base"]
-# Box 2: Stream-Isolated OpenAI Request Engine
+# Box 2: Robust OpenAI Network Request Engine (Payload Format Fixed)
 def call_generation_model(prompt_text):
     """
-    Communicates with gpt-4o-mini using the hardened requests framework.
-    Guarantees the text download finishes 100% before any data conversion happens.
+    Communicates with gpt-4o-mini via raw network requests to avoid version bugs.
+    Features verified header arrays and payload schemas matching OpenAI requirements.
     """
-    url = "https://openai.com"
+    url = "https://api.openai.com/v1/chat/completions"
+    
     headers = {
         "Authorization": f"Bearer {API_KEY}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
-    payload = {
+    
+    # Standard OpenAI Chat Ingestion Payload Data Model
+    data = {
         "model": "gpt-4o-mini",
         "messages": [
             {"role": "system", "content": "You are an expert curriculum developer. You strictly align lesson complexity to national grade-level standards."},
@@ -39,26 +44,43 @@ def call_generation_model(prompt_text):
         "temperature": 0.5
     }
     
-    retry_delay = 5
-    for attempt in range(3):
+    retry_delay = 4
+    max_retries = 5
+    
+    for attempt in range(max_retries):
         try:
-            # Send the request and wait explicitly for the full complete package block
-            response = requests.post(url, json=payload, headers=headers, timeout=45)
-            
-            if response.status_code == 200:
-                # The .json() function here handles conversion safely once data is downloaded
-                res_body = response.json()
-                return res_body['choices']['message']['content'].strip()
-            elif response.status_code == 429 or response.status_code >= 500:
-                print(f"   [API Alert] Server busy (Code {response.status_code}). Retrying in {retry_delay}s...")
+            req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers=headers)
+            with urllib.request.urlopen(req, timeout=30) as response:
+                raw_bytes = response.read()
+                raw_data = raw_bytes.decode('utf-8', errors='ignore').strip()
+                
+                if not raw_data:
+                    print("   [Network Alert] Received empty response from OpenAI. Retrying...")
+                    time.sleep(5)
+                    continue
+                
+                res_body = json.loads(raw_data)
+                return res_body['choices'][0]['message']['content'].strip()
+                    
+        except urllib.error.HTTPError as e:
+            # Handle rate limits (429) or temporary server errors (500-504) safely
+            if e.code == 429 or (e.code >= 500 and e.code <= 504):
+                print(f"   [API Alert] Code {e.code} hit. Pausing for {retry_delay} seconds...")
                 time.sleep(retry_delay)
                 retry_delay *= 2
             else:
-                print(f"   [API Error] Connection rejected with code: {response.status_code}")
+                print(f"   [HTTP Error] Connection rejected by server with code: {e.code}")
+                try:
+                    print(f"   [Server Message] {e.read().decode('utf-8')[:200]}")
+                except:
+                    pass
                 return None
-                
-        except requests.exceptions.RequestException as e:
-            print(f"   [Connection Error] Data stream interrupted. Pacing and retrying... {str(e)}")
+        except json.JSONDecodeError:
+            print("   [Data Error] Truncated data stream encountered. Pacing connection and retrying...")
+            time.sleep(5)
+            continue
+        except Exception as e:
+            print(f"   [Connection Error] {str(e)}")
             time.sleep(5)
             
     return None
@@ -114,8 +136,8 @@ def generate_and_save_day_node(file_path, group, grade_code, subject, unit, day_
     print(f"Processing Target: Day {day_num} for {grade_code} ({group.upper()}) - {subject}")
     
     prompt = build_standards_based_prompt(grade_code, subject, unit, day_num)
-    raw_response = call_generation_model(prompt)
     
+    raw_response = call_generation_model(prompt)
     if not raw_response:
         print(f"❌ Failed to generate content for Day {day_num}. Skipping step.")
         return
