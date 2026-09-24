@@ -25,8 +25,8 @@ def verify_vault_directory_path(group, grade, subject, unit):
     return path
 def ask_curricullm_to_generate_lesson(grade, subject, unit, day):
     """
-    Sends a precise prompt to OpenAI to receive a completely unique,
-    highly detailed school curriculum dataset with zero placeholders.
+    Sends a precise prompt to OpenAI and prints out the exact network error 
+    on the screen if the server rejects the request.
     """
     prompt = f"""
     You are an expert K-12 curriculum designer building a comprehensive school system where learning is the #1 priority.
@@ -53,32 +53,36 @@ def ask_curricullm_to_generate_lesson(grade, subject, unit, day):
             messages=[{"role": "user", "content": prompt}],
             timeout=20
         )
-        return json.loads(response.choices[0].message.content)
+        return json.loads(response.choices.message.content)
     except Exception as e:
-        print(f"   [API Bottleneck] Fallback triggered for day {day}: {str(e)}")
+        # CRITICAL UPDATE: Stop hiding errors and print the exact reason to the screen
+        print(f"\n❌ SERVER CONNECTION ERROR ON DAY {day}: {str(e)}\n")
         return {
-            "lesson_body": f"Welcome to Day {day} of your {subject.title()} studies. Today we are conducting a deep thematic reading analysis regarding our active core module.",
-            "interactive_assignment": f"Complete the interactive review chart mapping for today's text.",
-            "daily_assessment": "Question: Define the primary variable discussed in today's textbook reading block."
+            "lesson_body": "CRITICAL CAPTURE ERROR: The AI server rejected the connection request. Check the error log printed above in your terminal.",
+            "interactive_assignment": "Verify API key status and trial credit balance.",
+            "daily_assessment": "Error code logged inside command prompt window."
         }
 def run_curricullm_distribution_engine():
     print("Initializing live OpenAI CurricuLLM ingestion pipeline...")
     file_counter = 0
     
-    # Target a test run batch first (Grade 1 Mathematics) to ensure you love the output
-    active_grades = ["g1"] 
+    # Target a test run batch first (Grade K Mathematics) to check the error output instantly
+    active_grades = ["gk"] 
     active_subjects = ["mathematics"]
     active_units = ["unit_4_counting_base"]
     
+    # Make sure old bad files are wiped from the test space first
     for grade in active_grades:
         group = LAYOUT_GROUPS[grade]
         for subject in active_subjects:
             for unit in active_units:
-                
                 target_dir = verify_vault_directory_path(group, grade, subject, unit)
+                for f in os.listdir(target_dir):
+                    try: os.remove(os.path.join(target_dir, f))
+                    except: pass
                 
-                # Loop through your targeted days sequentially (Testing first 5 days live)
-                for day in range(1, 6): 
+                # Loop through your targeted days sequentially (Testing first 3 days live)
+                for day in range(1, 4): 
                     print(f" -> Contacting OpenAI to generate custom textbook assets for {grade.upper()} | {subject.title()} | Day {day}...")
                     
                     llm_data = ask_curricullm_to_generate_lesson(grade, subject, unit, day)
@@ -100,13 +104,12 @@ def run_curricullm_distribution_engine():
                         json.dump(final_json_payload, f, indent=2, ensure_ascii=False)
                         
                     file_counter += 1
-                    time.sleep(0.5) # Safe spacing delay to avoid network request limits
+                    time.sleep(0.5)
                     
     print("\n========================================================================")
-    print("             CURRICULLM LIVE GENERATION COMPLETION REPORT               ")
+    print("             CURRICULLM LIVE DIAGNOSTIC COMPLETE                        ")
     print("========================================================================")
-    print(f" Successfully Ingested & Saved: {file_counter} genuine textbook data files via OpenAI.")
-    print(f" Target Vault Storage Location:  {AUDIT_VAULT_ROOT}")
+    print(f" Staged Test Operation Complete. Review any red text error flags above.")
     print("========================================================================")
 
 if __name__ == "__main__":
