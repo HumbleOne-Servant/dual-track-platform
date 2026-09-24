@@ -20,11 +20,11 @@ GROUPS_MAPPING = {
 
 SUBJECTS = ["mathematics", "science", "language_arts", "historical_studies", "biblical"]
 UNITS = ["unit_1_foundations", "unit_2_shapes_spaces", "unit_3_weather_seasons", "unit_4_counting_base"]
-# Box 2: Robust OpenAI Network Request Engine with Hardened Syntax Filters
+# Box 2: Robust OpenAI Network Request Engine (Syntax Error Fixed Completely)
 def call_generation_model(prompt_text):
     """
     Communicates with gpt-4o-mini via raw network requests to avoid version bugs.
-    Includes explicit User-Agent strings and an explicit buffered stream reader.
+    Includes explicit User-Agent strings and explicit direct number status filters.
     """
     url = "https://openai.com"
     headers = {
@@ -60,8 +60,8 @@ def call_generation_model(prompt_text):
                 return res_body['choices']['message']['content'].strip()
                 
         except urllib.error.HTTPError as e:
-            # FIXED: Explicitly set the numeric network codes list to prevent loop fall-throughs
-            if e.code in:
+            # FIXED: Direct explicit matching checks to prevent syntax drops entirely
+            if e.code == 429 or (e.code >= 500 and e.code <= 504):
                 print(f"   [API Alert] Code {e.code} hit. Pausing for {retry_delay} seconds...")
                 time.sleep(retry_delay)
                 retry_delay *= 2
