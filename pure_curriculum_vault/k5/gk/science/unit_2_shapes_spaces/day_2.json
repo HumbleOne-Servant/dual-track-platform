@@ -1,0 +1,20 @@
+{
+  "grade_prefix": "gk",
+  "layout_group": "K5",
+  "subject_track": "science",
+  "unit_folder": "unit_2_shapes_spaces",
+  "day": 2,
+  "lesson_title": "Grade K Science - Day 2",
+  "lesson_body": "Welcome to Day 2 of our exciting unit on Shapes and Spaces! Today, we will dive deeper into the world of shapes, focusing on their properties and how they fit in different spaces around us.\n\nLet's think about what shapes we discovered yesterday! We learned about circles, squares, triangles, and rectangles. These shapes are all around us. For instance, a circle can be seen in the sun, a square is often found in windows, a triangle can be spotted in rooftops, and rectangles are everywhere, like in books and doors! \n\nNext, let's explore the properties of these shapes. What makes a square different from a rectangle, or a triangle different from a circle? A square has four equal sides, while a rectangle has two longer sides and two shorter ones. Triangles can come in many forms, with three sides and three corners, but they can be tall, short, wide, or thin. Circles, on the other hand, are unique because they have no corners or edges! \n\nUnderstanding these shapes and their properties helps us build and organize our world. What happens when we stack different shapes together? Can a square fit on top of a circle? What about a triangle resting on a rectangle? Today, we will experiment with these questions as we play with our shape manipulatives. This will help us see how these shapes can fit together in various spaces.\n\nTo conclude our lesson, we will gather in a circle to share what we learned. Each of you will have a chance to tell the group your favorite shape and where you found it today. Remember, shapes are everywhere in our world, and observing them helps us learn more about the environment around us!",
+  "interactive_assignment": "For today's hands-on activity, we will create a Shape Scavenger Hunt! You will receive a checklist with various shapes: a circle, square, triangle, and rectangle. Your mission is to find real-life objects in our classroom or outside that match these shapes. You can take pictures or draw them on your sheet. Once you've completed the scavenger hunt, we will come together to share what we found and where we spotted each shape. This activity will help you connect shapes with their real-world applications and encourage teamwork as you work with your classmates!",
+  "daily_assessment": {
+    "prompt": "Which shape has three sides?",
+    "choices": [
+      "A. Circle",
+      "B. Triangle",
+      "C. Square",
+      "D. Rectangle"
+    ],
+    "correct_answer": "B. Triangle"
+  }
+}

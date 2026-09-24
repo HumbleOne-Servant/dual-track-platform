@@ -1,0 +1,20 @@
+{
+  "grade_prefix": "gk",
+  "layout_group": "K5",
+  "subject_track": "mathematics",
+  "unit_folder": "unit_3_weather_seasons",
+  "day": 2,
+  "lesson_title": "Grade K Mathematics - Day 2",
+  "lesson_body": "Today we continue our exciting journey into the world of weather seasons! In our last lesson, we learned about the four seasons: winter, spring, summer, and fall. Each season has its own unique weather patterns, and today we will discover how to use numbers to describe the weather changes in each season. \n\nWe will start by talking about temperature. Can anyone tell me what temperature means? That's right! Temperature tells us how hot or cold something is. In winter, it's usually very cold outside - so we wear warm coats and mittens. In summer, it's often hot - perfect for ice cream! Let's think about what temperature it might be during spring and fall. In spring, the weather is getting warmer after the cold winter. We might see temperatures around 50 to 70 degrees. During fall, as the days start to get cooler again, temperatures can dip back to about 40 to 60 degrees. \n\nNow, let’s explore some fun activities to understand this better. First, we will create a weather chart for each season that indicates what clothes we wear and what the temperature is like. We will use numbers to represent the average temperatures in each season - winter will get a number like 30 degrees, while summer can be as high as 85 degrees. We will color our charts with blue for cold winter, pink for spring, bright yellow for summer, and orange for fall. By the end of our lesson, you will have a colorful representation of how temperatures change throughout the year! \n\nDon’t forget to think about the weather in your own neighborhood! When you go home, I want you to observe the weather for the day and write down the temperature. What season do you think it represents? You can make your own weather journal at home with this information! Learning about weather and seasons helps us better understand the world around us and how to prepare for each season’s unique characteristics.",
+  "interactive_assignment": "For our interactive assignment today, we are going to create a 'Weather Seasons Collage'. You will receive magazines and colored paper to cut out pictures that represent each of the four seasons. Look for images that show what people wear, activities they do, and types of weather. For example, you might find a picture of a snowman for winter, flowers for spring, a beach scene for summer, and falling leaves for fall. Each collage will have four sections, one for each season. Label each section with the season's name and the average temperature we discussed. Once completed, each student will present their collage to the class, explaining what they found and learned about each season. This will help us share our understanding of weather and seasons together!",
+  "daily_assessment": {
+    "question": "Which season do you wear warm coats and hats? Choose the correct answer.",
+    "choices": [
+      "A) Spring",
+      "B) Summer",
+      "C) Winter",
+      "D) Fall"
+    ],
+    "correct_answer": "C) Winter"
+  }
+}

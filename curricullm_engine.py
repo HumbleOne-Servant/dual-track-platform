@@ -3,7 +3,7 @@ import json
 import time
 from openai import OpenAI
 
-# Target vault root folder path matching your project drive configurations
+# Target directory path matching your project specifications
 AUDIT_VAULT_ROOT = r"C:\DualTrackLearning_Online\pure_curriculum_vault"
 
 LAYOUT_GROUPS = {
@@ -49,7 +49,7 @@ def ask_curricullm_to_generate_lesson(grade, subject, unit, day):
             messages=[{"role": "user", "content": prompt}],
             timeout=25
         )
-        # CRITICAL FIX: Added [0] index accessor to safely parse the choices array
+        # Accessing the first item in the choices array correctly
         raw_json_string = response.choices[0].message.content
         return json.loads(raw_json_string)
     except Exception as e:
@@ -61,7 +61,7 @@ def ask_curricullm_to_generate_lesson(grade, subject, unit, day):
         }
 def run_curricullm_production_pipeline():
     print("========================================================================")
-    print("             LAUNCHING PROTECTED PRODUCTION CURRICULLM GENERATION       ")
+    print("             LAUNCHING FRESH OPENAI CURRICULLM LIVE VERIFICATION        ")
     print("========================================================================")
     file_counter = 0
     
@@ -84,15 +84,11 @@ def run_curricullm_production_pipeline():
                 target_dir = verify_vault_directory_path(group, grade, subject, unit)
                 print(f"\n[Ingestion Engine] Active Folder Branch: {group}/{grade}/{subject}/{unit}")
                 
-                # Production Loop: Process the consecutive days cleanly
-                for day in range(1, 4): # Verifying the first 3 days live
+                # Test run loop: Generate the first 3 days completely fresh to verify formatting
+                for day in range(1, 4): 
                     file_name = f"day_{day}.json"
                     file_dest = os.path.join(target_dir, file_name)
                     
-                    # Prevent duplicating content if file is already populated
-                    if os.path.exists(file_dest):
-                        continue
-                        
                     llm_data = ask_curricullm_to_generate_lesson(grade, subject, unit, day)
                     
                     final_json_payload = {
@@ -111,12 +107,13 @@ def run_curricullm_production_pipeline():
                         json.dump(final_json_payload, f, indent=2, ensure_ascii=False)
                         
                     file_counter += 1
+                    print(f" -> Generated and saved day_{day}.json successfully.")
                     time.sleep(0.2)
                     
     print("\n========================================================================")
     print("             PRODUCTION CURRICULLM DIAGNOSTIC COMPLETE                  ")
     print("========================================================================")
-    print(f" Layout staging batch generated successfully: {file_counter} files.")
+    print(f" Fresh layout staging batch generated successfully: {file_counter} files.")
     print("========================================================================")
 
 if __name__ == "__main__":

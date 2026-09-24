@@ -1,0 +1,20 @@
+{
+  "grade_prefix": "gk",
+  "layout_group": "K5",
+  "subject_track": "mathematics",
+  "unit_folder": "unit_1_foundations",
+  "day": 3,
+  "lesson_title": "Grade K Mathematics - Day 3",
+  "lesson_body": "Welcome to Day 3 of our mathematical adventure in Unit 1 Foundations! Today, we're diving deeper into the wonderful world of numbers. Our focus will be on recognizing and counting numbers from 1 to 10. Let's start by reviewing what we learned yesterday about the numbers 1 through 5. Can anyone tell me how many fingers we have on one hand? That's right, we have 5! Now, let’s count our way up to 10 together. \"One, two, three, four, five, six, seven, eight, nine, ten!\" Great job!\n\nNext, we will explore the concept of matching quantities with numbers. For example, if I show you a group of 3 apples, how can we write that using numbers? Yes! We write it as '3'. Now, let's involve some fun. I have colorful counting blocks that represent numbers. Each block has a number on one side and a corresponding number of dots on the other. \n\nIn our next activity, we will match the numbered blocks to the correct set of dots. This will help us visualize how numbers correspond to actual quantities. Remember, the number '4' means we can see 4 dots! Pay close attention as we do this together. \n\nFor our final activity, let's play a number hunt! I will hide numbered cards around the classroom. Your task will be to find the cards and bring them back to our circle. Then, we'll practice counting out loud together as you show me each card. This will be a fun way to reinforce your counting skills while keeping our learning lively and interactive. Let’s finish the day with our counting song to wrap up what we've learned about numbers 1 through 10. Singing helps our memory, and it'll be a fun way to celebrate our learning! \n\nYou've all done amazing work today, and remember, every number is a stepping stone to becoming a future math whiz!",
+  "interactive_assignment": "For our hands-on activity today, we will create 'Number Collages'. Each student will receive a blank sheet of paper and a variety of materials, including colored magazines, stickers, and colored markers. Your task is to create a collage for a specific number (1-10). For instance, if your number is '4', you should gather four pictures from magazines or four stickers and glue them onto your paper. Then, write the number '4' prominently on your collage. Once you've completed your collage, we will have a sharing circle where each of you can present your number collage to the class. This activity will reinforce your understanding of numbers while being creative!",
+  "daily_assessment": {
+    "question": "How many total stars do you see in this picture? ⭐⭐⭐⭐⭐⭐⭐⭐⭐ (Count the stars and choose the correct number.)",
+    "choices": {
+      "A": "5",
+      "B": "7",
+      "C": "10",
+      "D": "9"
+    },
+    "correct_answer": "B"
+  }
+}

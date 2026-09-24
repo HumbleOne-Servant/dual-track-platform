@@ -1,0 +1,20 @@
+{
+  "grade_prefix": "gk",
+  "layout_group": "K5",
+  "subject_track": "science",
+  "unit_folder": "unit_1_foundations",
+  "day": 1,
+  "lesson_title": "Grade K Science - Day 1",
+  "lesson_body": "Welcome to the exciting world of science, little explorers! Today marks the first day of our journey in Unit 1, Foundations, where we will learn about the basics that help us understand the world around us. Science is all about asking questions, making discoveries, and learning how things work. Let's start by exploring some foundational concepts.\n\nOne important idea we will focus on today is that everything in the world is made of matter. Matter is anything that has mass and takes up space, like the air we breathe, the water we drink, and the trees we see outside. To help us visualize this concept, let’s think of some common examples of matter. Can you feel the chair you’re sitting on? That’s matter! What about the crayons you use for coloring or the snacks you eat during recess? Yes, those are all forms of matter too.\n\nNext, we will look at the different states of matter. There are three main states: solid, liquid, and gas. Solids hold their shape, like a rock or a toy. Liquids can flow and take the shape of the container they are in, like water or juice. Gases, on the other hand, are all around us but we can’t always see them, like the air that fills our balloons. Let’s think about it: when you blow air into a balloon, what happens? That’s right! The balloon inflates because the gas inside takes up space!\n\nNow, let’s become scientists together! I want you to use your five senses to discover the world. You can look around the classroom or outside to find examples of solids, liquids, and gases. Remember to think about how they feel, look, and even smell! Science is everywhere, and we are just starting to scratch the surface.\n\nAs we wrap up our lesson for today, I encourage you to keep asking questions about what you see and feel in your surroundings. Why do you think the sky is blue? What happens when ice melts? Each question you ask takes you on a new adventure in science. Tomorrow, we will dive deeper into these ideas and start our first hands-on experiments. Let the fun begin!",
+  "interactive_assignment": "For your interactive assignment, I want you to become a 'Matter Detective'! Your task is to gather items from home or your classroom that fall under the categories of solid, liquid, and gas. Make a poster or a scrapbook page for each category, where you will draw pictures of the items you collected and write one sentence about each item explaining why it belongs in that category. Have fun with your creations and bring them to class to share with your friends! We will have a special show-and-tell to present our findings!",
+  "daily_assessment": {
+    "question": "Which of the following is NOT a state of matter?",
+    "choices": [
+      "A) Solid",
+      "B) Liquid",
+      "C) Vapor",
+      "D) Color"
+    ],
+    "correct_answer": "D) Color"
+  }
+}

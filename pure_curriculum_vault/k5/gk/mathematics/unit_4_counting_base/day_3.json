@@ -1,0 +1,20 @@
+{
+  "grade_prefix": "gk",
+  "layout_group": "K5",
+  "subject_track": "mathematics",
+  "unit_folder": "unit_4_counting_base",
+  "day": 3,
+  "lesson_title": "Grade K Mathematics - Day 3",
+  "lesson_body": "Welcome to our exciting day of learning in Mathematics! Today, we're going to explore the concept of counting through fun activities and engaging storytelling. In this unit, we are focusing on the different ways we can count objects, and understanding that counting helps us in everyday life.\n\nWe will begin our day with a story featuring a friendly character named Benny the Bunny. Benny loves to collect colorful eggs in the forest. As we follow Benny on his adventure, we will count the eggs he finds along the way. For example, when Benny sees a blue egg, we will all shout 'One!' and hold up one finger. As he collects more eggs, we will count together, ensuring that we understand how counting works sequentially: one, two, three, and so on.\n\nAfter the story, we will move to our counting circle. Each child will receive a set of small counting objects, like blocks or counters. I will call out a number, and everyone will count out that many objects from their set. For example, if I say 'four,' everyone will gather four blocks! This exercise will help reinforce the idea that counting sets of objects is fun and practical.\n\nNow, it’s time to get creative! We will work on a counting art project where each student will create a colorful collage. They will need to gather a specific number of colored pieces of paper or stickers. For instance, I may say, 'Please choose exactly six stars.' This will help children practice their counting skills in a tactile and visual way. They'll have the opportunity to share their collages with the class, explaining how many pieces they used and what they represent.\n\nTo wrap up our day, we will gather once again in our counting circle and talk about what we've learned. We will emphasize how counting helps us not just in math, but in real-life situations like counting our toys, animals, or snacks. Remember, counting is everywhere around us! Our sense of accomplishment will be celebrated as we count out loud one last time together, solidifying our new learning with joy and excitement.",
+  "interactive_assignment": "For your interactive assignment today, you will create your own 'Counting Book.' Take several pages of paper and turn them into a mini-book. On each page, draw a different number of objects based on what we discussed in class. For example, on one page, you could draw three trees, and on another, five stars. Remember to write the number on each page in big, clear letters. Once you have finished your book, share it with a friend or family member, and read it out loud to them! This will help you practice your counting and narrate the story of your creations.",
+  "daily_assessment": {
+    "question": "How many eggs did Benny the Bunny collect if he found two blue eggs and one red egg?",
+    "choices": {
+      "A": 1,
+      "B": 2,
+      "C": 3,
+      "D": 5
+    },
+    "correct_answer": "C"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "grade_prefix": "gk",
+  "layout_group": "K5",
+  "subject_track": "science",
+  "unit_folder": "unit_2_shapes_spaces",
+  "day": 1,
+  "lesson_title": "Grade K Science - Day 1",
+  "lesson_body": "Welcome to the exciting world of shapes and spaces! Today, we’re going to begin our exploration of how shapes are all around us in our everyday lives. We’ll start by identifying basic shapes like circles, squares, triangles, and rectangles. You’ll learn not just what these shapes look like but where you can see them. For instance, did you know that a pizza is a circle, and a window can be a rectangle? \n\nLet’s begin by gathering everyone in a circle. I will show you flashcards with different shapes on them. As I hold each card up, I want you to shout out the name of the shape you see. Great job! Now, let’s move around the classroom and see if we can find objects that match these shapes. Look around for something round, something square, triangular, or rectangular. This will help you understand that shapes are not just for art—they’re everywhere!\n\nOnce we’ve identified shapes around us, let’s talk about how these different shapes can be combined to create new objects! For example, a house can be made up of a big rectangle for the main building and a triangle for the roof. We will use building blocks to create our own houses using various shapes. Each of you will get to showcase how you combined the shapes to form your house. Remember, every creation is unique and special, just like you!\n\nThroughout our lesson, continuing to recognize how shapes make up our environment is vital. Today we’ll use drawing and building activities to not only learn but also have a lot of fun with shapes. Get ready to see shapes in a whole new light!",
+  "interactive_assignment": "For today’s hands-on activity, you will create your own ‘Shape Collage’! Gather materials like construction paper, scissors, and glue. Start by choosing at least three different shapes that we discussed today: circle, square, triangle, and rectangle. Cut out these shapes from the colored construction paper. Next, arrange them on a larger piece of paper to form a picture. You can create anything you like—animals, houses, or even abstract art! Once you’ve glued the shapes down, label each shape with its name. You can present your collage to the class and explain your creation, highlighting what shapes you’ve used. This activity will help reinforce your understanding of different shapes and allow you to express your creativity!",
+  "daily_assessment": {
+    "question": "Which of the following objects is shaped like a circle?",
+    "choices": [
+      {
+        "option": "A. A door",
+        "isCorrect": false
+      },
+      {
+        "option": "B. A pizza",
+        "isCorrect": true
+      },
+      {
+        "option": "C. A book",
+        "isCorrect": false
+      },
+      {
+        "option": "D. A house",
+        "isCorrect": false
+      }
+    ],
+    "correct_answer": "B. A pizza"
+  }
+}

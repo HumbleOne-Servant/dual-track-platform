@@ -1,0 +1,20 @@
+{
+  "grade_prefix": "gk",
+  "layout_group": "K5",
+  "subject_track": "mathematics",
+  "unit_folder": "unit_3_weather_seasons",
+  "day": 3,
+  "lesson_title": "Grade K Mathematics - Day 3",
+  "lesson_body": "Welcome to Day 3 of our Weather Seasons unit in Math! Today, we will combine our understanding of seasons with some early math skills that help us explore the world around us. As we know, we have four seasons: spring, summer, autumn, and winter. Each season brings different weather patterns, and today, we will focus on identifying seasons through numbers and counting.\n\nLet's start by reviewing what we learned yesterday. Can anyone tell me what season we are currently in? Great! Now, let’s count the different weather types we experience in that season. For instance, in winter, we might see snow, rain, and clouds. We can make a list of these together. How many different types of weather can we think of for each season?\n\nNow, it’s time to incorporate some math! We will use our fingers to count the weather types we listed. As you count, I want you to also think about how many days are in each week during each season. Typically, every week has 7 days. Let's visualize this. If we have 4 weeks in a month, how many days do we have in that month? That’s right, 28 days! We will draw a calendar together to mark the days in each season and learn how to count these days better.\n\nNext, we will use colored paper to make season cards. Each card will show a picture representing one of the seasons and we will place the number of weather types we listed on the back of each card. This will help us learn not just about seasons, but also about counting up to a total number of weather types, making math fun and colorful! Our goal is to connect nature's beauty with the fun of counting.\n\nFinally, let’s have a short storytime where I will read a weather-themed story, encouraging children to listen closely for any mention of seasons and weather. After the story, we can discuss how the characters experienced different seasons, connecting that back to our earlier math activity. Let’s remember: math is everywhere, even in the seasons and weather! This will be a day full of fun learning, connecting math to our everyday experiences in the world around us.",
+  "interactive_assignment": "For today’s interactive assignment, each student will create a Seasonal Weather Wheel! You will need a piece of sturdy paper, scissors, and crayons or markers. First, fold the paper in half and cut it into a circle shape. Once the wheel is cut out, divide the circle into four sections, each labeled with one of the seasons: spring, summer, autumn, and winter. In each section, you can draw or paste pictures that represent the weather types typical of that season (e.g., raindrops for spring, sun for summer, falling leaves for autumn, and snowflakes for winter). You can also write down the number of days in that season on the edge of your wheel. Once completed, you can share your wheel with a partner, explaining what you drew and the weather you expect in each season. This activity will help solidify the connection between seasons and counting while being creative too!",
+  "daily_assessment": {
+    "question": "What type of weather do we typically see in winter? Choose the best answer.",
+    "choices": [
+      "A) Sun and flowers",
+      "B) Rain and leaves",
+      "C) Snow and cold temperatures",
+      "D) Hot and sunny"
+    ],
+    "correct_answer": "C) Snow and cold temperatures"
+  }
+}
