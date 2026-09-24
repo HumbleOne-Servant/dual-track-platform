@@ -1,4 +1,4 @@
-# Box 1: Core System Modules and Database Node Rules
+# Box 1: Core System Modules and Structural Definition Blueprints
 import os
 import json
 import time
@@ -11,19 +11,26 @@ DATABASE_ROOT = r"C:\DualTrackLearning_Online\pure_curriculum_vault"
 # Secure Key Retrieval from terminal environment memory
 API_KEY = os.environ.get("OPENAI_API_KEY")
 
-# Layout Framework Structure Rules
-GROUPS = ["k5", "68", "912"]
+# Complete structural mapping for the entire 13-year curriculum
+GROUPS_MAPPING = {
+    "k5": ["gk", "g1", "g2", "g3", "g4", "g5"],
+    "68": ["g6", "g7", "g8"],
+    "912": ["g9", "g10", "g11", "g12"]
+}
+
 SUBJECTS = ["mathematics", "science", "language_arts", "historical_studies", "biblical"]
-# Box 2: Robust OpenAI Network Request Engine (Direct Error Check)
+UNITS = ["unit_1_foundations", "unit_2_shapes_spaces", "unit_3_weather_seasons", "unit_4_counting_base"]
+# Box 2: Robust OpenAI Network Request Engine with Hardened Crash Proofing
 def call_generation_model(prompt_text):
     """
     Communicates with gpt-4o-mini via raw network requests to avoid version bugs.
-    Includes built-in retry logic and automatic backoff delays if limits are hit.
+    Includes explicit User-Agent strings and a crash-proof JSON data parser.
     """
     url = "https://openai.com"
     headers = {
         "Authorization": f"Bearer {API_KEY}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
     data = {
         "model": "gpt-4o-mini",
@@ -41,18 +48,34 @@ def call_generation_model(prompt_text):
         try:
             req = urllib.request.Request(url, data=json.dumps(data).encode('utf-8'), headers=headers)
             with urllib.request.urlopen(req) as response:
-                res_body = json.loads(response.read().decode('utf-8'))
+                raw_data = response.read().decode('utf-8')
+                
+                # Crash Proof Check: Ensure network content isn't empty before trying to read it
+                if not raw_data.strip():
+                    print("   [Network Alert] Received empty response from OpenAI. Retrying...")
+                    time.sleep(5)
+                    continue
+                    
+                res_body = json.loads(raw_data)
                 return res_body['choices']['message']['content'].strip()
                 
         except urllib.error.HTTPError as e:
-            # Direct status checks to avoid syntax drops: 429 is rate limit, 500-504 are server drops
+            # Direct status checks: 429 is rate limit, 500-504 are server drops
             if e.code == 429 or (e.code >= 500 and e.code <= 504):
                 print(f"   [API Alert] Code {e.code} hit. Pausing for {retry_delay} seconds...")
                 time.sleep(retry_delay)
                 retry_delay *= 2
             else:
                 print(f"   [HTTP Error] Permanent code received: {e.code}")
+                try:
+                    # Print out any hidden API alerts or credit warnings from OpenAI
+                    print(f"   [Server Message] {e.read().decode('utf-8')}")
+                except:
+                    pass
                 return None
+        except json.JSONDecodeError:
+            print("   [Data Error] Could not parse raw response. Retrying setup connection...")
+            time.sleep(5)
         except Exception as e:
             print(f"   [Connection Error] {str(e)}")
             time.sleep(5)
@@ -135,55 +158,49 @@ def generate_and_save_day_node(file_path, group, grade_code, subject, unit, day_
         print(f"✅ Successfully written: Day {day_num}")
     except Exception as e:
         print(f"❌ Disk write failure at {file_path}: {str(e)}")
-# Box 5: Directory Level Tree Scanning
+# Box 5: Self-Building Directory Framework Generator
 def run_curriculum_batch_engine():
     """
-    Loops recursively through the database structure blueprints, setting 
-    safe baseline pacing delays between files to prevent limit spikes.
+    Loops through the structural blueprint definitions, automatically builds
+    any missing folder layers on disk, and processes missing day modules.
     """
     if not API_KEY:
         print("CRITICAL ERROR: The environment variable 'OPENAI_API_KEY' is empty or missing.")
         return
         
-    print("🚀 Initializing Dual-Track Learning Hub Batch Ingestion Loop...")
+    print("🚀 Initializing Dual-Track Learning Hub Self-Building Loop...")
     pacing_delay = 1.5
     
-    # Loop Down Level 1: Group Folders
-    for group in GROUPS:
-        group_path = os.path.join(DATABASE_ROOT, group)
-        if not os.path.exists(group_path):
-            continue
+    # Loop Down Level 1: Group Folders defined in mapping blueprint
+    for group, grades_list in GROUPS_MAPPING.items():
+        
+        # Loop Down Level 2: Grade Level Prefixes
+        for grade in grades_list:
             
-        # Loop Down Level 2: Grade Prefixes
-        for grade in os.listdir(group_path):
-            grade_path = os.path.join(group_path, grade)
-            if not os.path.isdir(grade_path):
-                continue
-# Box 6: Timeline Index Execution Block
-                # Loop Down Level 3: Subject Tracks
-                for subject in SUBJECTS:
-                    subject_path = os.path.join(grade_path, subject)
-                    if not os.path.exists(subject_path):
-                        continue
+            # Loop Down Level 3: Course Subject Tracks
+            for subject in SUBJECTS:
+                
+                # Loop Down Level 4: Chronological Chapter Units
+                for unit in UNITS:
+                    # Construct target path location
+                    unit_path = os.path.join(DATABASE_ROOT, group, grade, subject, unit)
+                    
+                    # SELF-BUILDING UPGRADE: Automatically create directories if they are missing
+                    if not os.path.exists(unit_path):
+                        os.makedirs(unit_path, exist_ok=True)
+# Box 6: Timeline Index Loop Execution Block
+                    # Loop Down Level 5: Every Course Timeline Day (1 through 180)
+                    for day_num in range(1, 181):
+                        filename = f"day_{day_num}.json"
+                        target_file_path = os.path.join(unit_path, filename)
                         
-                    # Loop Down Level 4: Chronological Unit Folders
-                    for unit in os.listdir(subject_path):
-                        unit_path = os.path.join(subject_path, unit)
-                        if not os.path.isdir(unit_path):
+                        # Idempotency Check: Skip completed files instantly to protect tokens
+                        if os.path.exists(target_file_path):
                             continue
                             
-                        # Loop Down Level 5: Every Course Timeline Day (1 through 180)
-                        for day_num in range(1, 181):
-                            filename = f"day_{day_num}.json"
-                            target_file_path = os.path.join(unit_path, filename)
-                            
-                            # Idempotency Check: Skip completed files instantly to protect tokens
-                            if os.path.exists(target_file_path):
-                                continue
-                                
-                            # Execute targeted script generation
-                            generate_and_save_day_node(target_file_path, group, grade, subject, unit, day_num)
-                            time.sleep(pacing_delay)
+                        # Execute targeted generation and file creation
+                        generate_and_save_day_node(target_file_path, group, grade, subject, unit, day_num)
+                        time.sleep(pacing_delay)
 
 if __name__ == "__main__":
     run_curriculum_batch_engine()
