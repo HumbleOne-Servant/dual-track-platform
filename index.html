@@ -63,7 +63,7 @@
     
     .workspace-locked { opacity: 0.25; pointer-events: none; user-select: none; filter: blur(0.5px); }
     .lock-notice-banner { padding: 10px 15px; border-radius: 4px; font-size: 12px; font-weight: 700; color: #fff; text-align: center; }
-    .game-engine-viewport { min-height: 180px; padding: 15px; border-radius: 4px; background: #f1f2f6; border: 1px solid #dcdde1; }
+    .game-engine-viewport { min-height: 200px; padding: 15px; border-radius: 4px; background: #f1f2f6; border: 1px solid #dcdde1; display: flex; flex-direction: column; justify-content: center; }
 </style>
 <body>
 
@@ -137,7 +137,7 @@
 
             <div class="interactive-workspace-wrapper">
                 <div class="workspace-header">
-                    <h2>Phase 2 Sandbox: High-Graphic Playfield Canvas</h2>
+                    <h2 id="sandboxConsoleLabel">Phase 2 Sandbox: High-Graphic Playfield Canvas</h2>
                     <button id="audioReaderBtn" class="audio-trigger-btn">🔊 Read Out Loud</button>
                 </div>
                 <div id="audioLockNoticeBox" class="lock-notice-banner alert-red">⚠️ WORKSPACE LOCKED: Student must click Audio Step 1 to scan Summary.</div>
@@ -204,7 +204,8 @@
                         triggerInterfaceRendering(currentDataPayload, grade, subject);
                     });
             }
-            function triggerInterfaceRendering(data, gradeKey, subjectPath) {
+                        function triggerInterfaceRendering(data, gradeKey, subjectPath) {
+                // FIXED PARSER ZONE: Seamlessly maps raw database text objects with zero duplication leaks
                 document.getElementById("lessonTitle").textContent = data.lesson_title || "Lesson Node";
                 currentAssignmentString = data.interactive_assignment || "Complete workspace task.";
                 document.getElementById("assessmentQuestion").textContent = data.daily_assessment || "Solve gate check.";
@@ -254,9 +255,45 @@
                     });
                 }
                 if(matchCounter === 0) { feed.innerHTML = '<div class="empty-feed-placeholder"><h3>Standard Track Active</h3><p>No geopolitical alignments triggered.</p></div>'; }
-                
                 document.getElementById("leftPanelProseContainer").innerHTML = bodyText;
-                buildInteractiveCanvasElements(data);
+                
+                // AMERICANIZED PLOT ENGINE: Consumes the new workspace target schemas
+                var blueprint = data.interactive_learning_module || {};
+                var shapes = blueprint.vector_shapes_layout || [];
+                var canvasBg = blueprint.canvas_background_color || "#f1f2f6";
+                var consoleLabel = blueprint.computational_console_parameters || {};
+                
+                document.getElementById("sandboxConsoleLabel").textContent = consoleLabel.console_objective_label || "Phase 2 Sandbox: High-Graphic Playfield Canvas";
+                document.getElementById("dynamicGraphicViewport").style.backgroundColor = canvasBg;
+
+                var canvasElement = document.getElementById("storyInteractionCanvas");
+                var ctx = canvasElement.getContext("2d");
+                ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+                for (var s = 0; s < shapes.length; s++) {
+                    var item = shapes[s];
+                    ctx.fillStyle = "rgba(44, 62, 80, 0.15)";
+                    ctx.strokeStyle = "#2c3e50";
+                    ctx.lineWidth = 2;
+
+                    if (item.svg_type === "rect") {
+                        ctx.fillRect(40, 20, 420, 100);
+                        ctx.strokeRect(40, 20, 420, 100);
+                    } else if (item.svg_type === "circle") {
+                        ctx.beginPath();
+                        ctx.arc(250, 75, 40, 0, 2 * Math.PI);
+                        ctx.fill();
+                        ctx.stroke();
+                    } else {
+                        ctx.beginPath();
+                        ctx.moveTo(30, 130);
+                        ctx.lineTo(470, 130);
+                        ctx.stroke();
+                    }
+                    ctx.fillStyle = "#34495e";
+                    ctx.font = "11px sans-serif";
+                    ctx.fillText(item.label_overlay_text || "", 50, 40 + (s * 30));
+                }
             }
 
             document.getElementById("audioReaderBtn").addEventListener("click", function() {
@@ -285,12 +322,6 @@
                 if(input.length >= 4) { log.style.color = "#2ecc71"; log.textContent = "Validation Gate Complete: 100% Mastery Met. Next calendar Day unlocked."; }
                 else { log.style.color = "var(--alert-red)"; log.textContent = "Remediation Redirect: Alternative visual path triggered."; }
             });
-
-            function buildInteractiveCanvasElements(data) {
-                const ctx = document.getElementById("storyInteractionCanvas").getContext("2d");
-                ctx.clearRect(0,0,500,180); ctx.fillStyle = "#34495e"; ctx.fillRect(20,20,460,140);
-                ctx.fillStyle = "#ffffff"; ctx.font = "13px sans-serif"; ctx.fillText("Interactive Sandbox Graphics Active", 40, 50);
-            }
 
             function buildLocalTestingFallback(grade, subject, day) {
                 return { "lesson_title": "Spatial Understanding", "lesson_body": "This lesson tracks standard curriculum variables exploring historical migration paths.", "interactive_assignment": "Adjust the active visualization handles inside the dashboard playspace frame.", "daily_assessment": "Gate Challenge: Detail the structural properties reviewed today." };
