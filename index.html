@@ -517,26 +517,40 @@
             }
         }
 
-        function triggerVoiceReader() {
-            if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); } else { return; }
-            let stringData = (audioClickCount === 0) ? document.getElementById('lessonGuideContent').innerText : document.getElementById('assignmentDirectionsLabel').innerText;
-            const shield = document.getElementById("lockShieldWrapper");
-            const notice = document.getElementById("audioLockNoticeBox");
+        // Hardened Speech Engine: Filters layout tags and icons out of the student audio loop
+function triggerVoiceReader() {
+    if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); } else { return; }
+    
+    let stringData = (audioClickCount === 0) 
+        ? document.getElementById('lessonGuideContent').innerText 
+        : document.getElementById('assignmentDirectionsLabel').innerText;
+        
+    const shield = document.getElementById("lockShieldWrapper");
+    const notice = document.getElementById("audioLockNoticeBox");
 
-            if (audioClickCount === 0) {
-                audioClickCount = 1;
-                notice.style.backgroundColor = "#FEF3C7"; notice.style.borderColor = "#FCD34D"; notice.style.color = "#D97706";
-                notice.innerHTML = "⚡ STEP 1 COMPLETE. Now click 'Read Out Loud' one more time to hear your assignment instructions and unlock your worksheet!";
-            } else {
-                audioClickCount = 2;
-                if (shield) shield.classList.remove("workspace-locked");
-                notice.style.backgroundColor = "#D1FAE5"; notice.style.borderColor = "#A7F3D0"; notice.style.color = "#059669";
-                notice.innerHTML = "✅ WORKSHEET UNLOCKED. Both instructional tracks heard. You may now complete your assignment!";
-            }
-            const utter = new SpeechSynthesisUtterance(stringData);
-            utter.rate = 0.9;
-            window.speechSynthesis.speak(utter);
-        }
+    // PROACTIVE CLEANING FILTER: Strip text labels and stray symbols out of spoken speech data
+    stringData = stringData.replace(/📄/g, "")
+                           .replace(/Brief Lesson Description Summary:/gi, "")
+                           .replace(/Workbook Instructions:/gi, "")
+                           .replace(/🎯/g, "")
+                           .replace(/⚡/g, "")
+                           .trim();
+
+    if (audioClickCount === 0) {
+        audioClickCount = 1;
+        notice.style.backgroundColor = "#FEF3C7"; notice.style.borderColor = "#FCD34D"; notice.style.color = "#D97706";
+        notice.innerHTML = "⚡ STEP 1 COMPLETE. Now click 'Read Out Loud' one more time to hear your assignment instructions and unlock your worksheet!";
+    } else {
+        audioClickCount = 2;
+        if (shield) shield.classList.remove("workspace-locked");
+        notice.style.backgroundColor = "#D1FAE5"; notice.style.borderColor = "#A7F3D0"; notice.style.color = "#059669";
+        notice.innerHTML = "✅ WORKSHEET UNLOCKED. Both instructional tracks heard. You may now complete your assignment!";
+    }
+
+    const utter = new SpeechSynthesisUtterance(stringData);
+    utter.rate = 0.95; // Steady, kid-friendly processing speed
+    window.speechSynthesis.speak(utter);
+}
 
         function pickCrayonColor(el, hex) { activeCrayonColor = hex; document.querySelectorAll('.crayon-option').forEach(c => c.style.borderColor='transparent'); el.style.borderColor='#1E293B'; }
         // Upgraded CPA Handshake: Updates the dark computational console when elements are colored
