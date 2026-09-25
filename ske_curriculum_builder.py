@@ -27,6 +27,7 @@ STANDARDS_VAULT = {
     }
 }
 
+# Upgraded SDK Data Parser: Native v1.0 Array Element Extraction
 def call_openai_ske_model(prompt_text):
     client = OpenAI(api_key=API_KEY)
     try:
@@ -45,15 +46,32 @@ def call_openai_ske_model(prompt_text):
             response_format={"type": "json_object"},
             temperature=0.4
         )
-        return response.choices.message.content.strip()
+        # FIXED: Added array bracket [0] to match modern Python SDK specifications
+        return response.choices[0].message.content.strip()
     except Exception as e:
         print(f"   [API Handshake Postponed] Delaying thread: {str(e)}")
         return None
 
 def build_prompt_blueprint(group, grade, subject, unit, day):
-    # Extract standard milestone guidelines dynamically
     standards_focus = STANDARDS_VAULT.get(subject, {}).get(grade, "Age-appropriate national curriculum guidelines and logical ordering proofs.")
     
+    # DYNAMIC BRAIN ROUTER: Changes prompt rules based on the active age bracket
+    if group == "k5":
+        activity_instruction_rule = (
+            "Write direct instructions for a Kindergarten/Elementary child. Tell them exactly what numbered crayon node (1, 2, or 3) "
+            "to select from their palette box and which graphic chart canvas zone (Zone 1, Zone 2, or Zone 3) to fill to verify the count."
+        )
+    elif group == "68":
+        activity_instruction_rule = (
+            "Write clear instructions for a Middle School student. Command them to analyze the textbook equation or science data tracking line, "
+            "formulate the balanced sum step-by-step, and input the precise solution integer directly into the 'Isolate Unknown Token Variable (X)' console input box."
+        )
+    else:
+        activity_instruction_rule = (
+            "Write advanced academic instructions for a High School student. Command them to analyze the thesis layout statements "
+            "and input a multi-paragraph analytical summary evidence proof directly into the Estonian Matrix Optimizer text arena."
+        )
+
     return f"""
     Generate an unbendable, production-ready S-K-E data node for Grade {grade.upper()}, Subject Track: {subject}, Day {day}.
     Target Academic Standard Milestone Focus: {standards_focus}
@@ -66,8 +84,8 @@ def build_prompt_blueprint(group, grade, subject, unit, day):
         "unit_folder": "{unit}",
         "day": {day},
         "lesson_title": "Grade {grade.upper()} {subject.replace('_', ' ').title()} - Day {day} (SKE Edition)",
-        "lesson_body": "Write a 3-sentence lesson text introducing the concept. For K-5, explicitly describe the visual shape zones (Zone 1, Zone 2, Zone 3) on their screen and how they connect to the math standard.",
-        "interactive_assignment": "Write direct instructions for the student's task. For K-5 Math, tell them exactly what numbered crayon to select and which canvas zone (1, 2, or 3) to fill.",
+        "lesson_body": "Write direct textbook prose introducing the concept. Tailor it exactly to Grade {grade.upper()}.",
+        "interactive_assignment": "{activity_instruction_rule}",
         "daily_assessment": "State the short evaluation question or check-out problem that verifies complete ownership of this day's concept.",
         "worldview_track_matrices": {{
             "comparative_insight": "Provide a 1-sentence analytical perspective showing absolute structural design or logical order constants over chaotic randomness.",
@@ -75,7 +93,6 @@ def build_prompt_blueprint(group, grade, subject, unit, day):
         }}
     }}
     """
-
 def run_mass_vault_generation(start_day=2, end_day=5):
     if not API_KEY:
         print("❌ ERROR: The environment variable 'OPENAI_API_KEY' is missing on this machine.")
