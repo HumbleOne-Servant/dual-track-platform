@@ -539,7 +539,22 @@
         }
 
         function pickCrayonColor(el, hex) { activeCrayonColor = hex; document.querySelectorAll('.crayon-option').forEach(c => c.style.borderColor='transparent'); el.style.borderColor='#1E293B'; }
-        function colorWorksheetSegment(node) { if (node.tagName !== 'svg') { node.setAttribute('fill', activeCrayonColor); } }
+        // Upgraded CPA Handshake: Updates the dark computational console when elements are colored
+function colorWorksheetSegment(node) {
+    if (node.tagName !== 'svg') {
+        node.setAttribute('fill', activeCrayonColor);
+        
+        // Target the dark computational logic console status row
+        const consoleStatusText = document.querySelector("#leftCoreWorkspace div[style*='background: rgb(15, 23, 26)'] div[style*='font-size: 0.8rem']") 
+                               || document.querySelector("#leftCoreWorkspace div[style*='background: #0F172A'] div[style*='font-size: 0.8rem']");
+        
+        if (consoleStatusText) {
+            consoleStatusText.style.color = "#38BDF8"; // Flash neon blue
+            consoleStatusText.style.fontWeight = "bold";
+            consoleStatusText.innerHTML = "⚡ CIRCUIT STATUS: ONE-TO-ONE CORRESPONDENCE VERIFIED [SET DATA = 1 NODE ACTIVE]";
+        }
+    }
+}
 
         function initializeGlobal180DayTimeline() {
             const daySelectorElement = document.getElementById("daySelect");
