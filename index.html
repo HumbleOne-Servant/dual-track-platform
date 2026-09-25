@@ -1,4 +1,4 @@
-<!-- Box 1 of 12: Premium CSS Design Framework Variables -->
+<!-- Box 1 of 18: Document Document Metadata & CSS Theme Root Variables -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +23,7 @@
             background-color: #F8FAFC;
             color: var(--text-main);
         }
-<!-- Box 2 of 12: UI Layout Framework Styles & Navigation Classes -->
+<!-- Box 2 of 18: Global Top Navbar Header Layout Component Styling -->
         .top-navbar {
             background: var(--bar-gradient);
             padding: 16px 28px;
@@ -37,6 +37,7 @@
         }
         .nav-title { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; letter-spacing: 0.75px; font-weight: 800; }
         .nav-selectors { display: flex; gap: 14px; }
+<!-- Box 3 of 18: Portal Navigation Selector Control Classes -->
         .nav-select {
             padding: 10px 20px;
             border-radius: 24px;
@@ -60,7 +61,7 @@
     </style>
 </head>
 <body>
-<!-- Box 3 of 12: Top Navigation Control Dropdown Desks -->
+<!-- Box 4 of 18: Top Controls Navigation Element Dropdown Form Matrix -->
     <div class="top-navbar" id="mainPortalHeader">
         <div class="nav-title">🌐 DUAL-TRACK LEARNING HUB</div>
         <div class="nav-selectors">
@@ -70,7 +71,7 @@
                 <option value="912">🏛️ High School Portal (9-12 Bracket)</option>
             </select>
             <select class="nav-select" id="gradePrefixSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
-                <!-- Dynamic choices populated natively by script router loops -->
+                <!-- choices populated dynamically via system initialization scripts -->
             </select>
             <select class="nav-select" id="subjectTrackSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
                 <option value="mathematics">📚 Mathematics Track</option>
@@ -79,11 +80,11 @@
                 <option value="historical_studies">🌍 Historical Studies Track</option>
             </select>
             <select class="nav-select" id="daySelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
-                <!-- Dynamic 180-day menu choice items generated automatically on load -->
+                <!-- 180 course day markers auto-filled on system startup execution -->
             </select>
         </div>
     </div>
-<!-- Box 4 of 12: Split-Screen Interface Architecture Grid Styles -->
+<!-- Box 5 of 18: Side-by-Side Presentation Layout Grid Framing Classes -->
     <style>
         .dual-track-container {
             display: grid;
@@ -108,11 +109,12 @@
             border-color: #CBD5E1;
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.01);
         }
+<!-- Box 6 of 18: Student Progress Metadata Header Field Displays -->
         .student-meta-row {
             display: flex;
             justify-content: space-between;
             border-bottom: 2px dashed #E2E8F0;
-            padding-bottom: 14px;
+            padding-bottom: 16px;
             margin-bottom: 24px;
             font-size: 0.88rem;
             color: #64748B;
@@ -129,7 +131,7 @@
                 <div>CLASSROOM DATE: <span class="meta-field"></span></div>
                 <div>SCORE RECORD: <span class="meta-field"></span></div>
             </div>
-<!-- Box 5 of 12: Audio Control Panel Styles & Security Notice Elements -->
+<!-- Box 7 of 18: Audio Description Interface Bar Styling Rules -->
             <style>
                 .audio-guide-banner {
                     background-color: #F1F5F9;
@@ -160,6 +162,7 @@
                     transition: all 0.2s ease;
                 }
                 .btn-audio-listen:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(99, 78, 228, 0.4); }
+<!-- Box 8 of 18: Instruction Card and Progress Shield Layout Overlays -->
                 .audio-warning-notice {
                     background-color: #FEF2F2;
                     border: 2px solid #FCA5A5;
@@ -182,7 +185,7 @@
                 .interactive-workspace-shield { transition: opacity 0.3s ease, filter 0.3s ease; }
                 .workspace-locked { pointer-events: none; opacity: 0.4; filter: grayscale(100%) blur(0.5px); }
             </style>
-<!-- Box 6 of 12: Content Workspace Framework & Audio Sequence Nodes -->
+<!-- Box 9 of 18: Core Reading Prose Injection Headings and Audio Controls -->
             <div class="audio-guide-banner">
                 <div class="lesson-guide-text" id="lessonGuideContent">
                     📄 <strong>Brief Lesson Description Summary:</strong> Connecting to local file tree data...
@@ -203,7 +206,7 @@
             </div>
             
             <div class="interactive-workspace-shield workspace-locked" id="lockShieldWrapper">
-<!-- Box 7 of 12: Elementary Bracket Layout Modules (Fully Native Integrated Circuit Desk) -->
+<!-- Box 10 of 18: K-5 Elementary Interactive Interactive Graphic Board Panels -->
                 <!-- Bracket Layer 1: Elementary School Dashboard Content Views -->
                 <div id="elementaryWorkspaceView" style="display: block; width: 100%;">
                     <style>
@@ -219,19 +222,11 @@
                         .apple-touch-card { border: 3px solid #CBD5E1; border-radius: 18px; padding: 18px; width: 75px; text-align: center; background: white; cursor: pointer; font-size: 1.25rem; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
                         .apple-touch-card:hover { transform: translateY(-2px); border-color: #94A3B8; }
                         .apple-touch-card.counted-apple { border-color: #10B981; background-color: #ECFDF5; transform: translateY(-5px); box-shadow: 0 8px 16px rgba(16, 185, 129, 0.15); }
-                        
-                        /* Native Circuit Desk Node Styling Keys */
-                        .circuit-desk-panel { background: #0F172A; color: #38BDF8; padding: 20px; border-radius: 14px; font-family: monospace; margin-top: 24px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); border: 1px solid #1E293B; position: relative; }
-                        .circuit-desk-header { color: #64748B; border-bottom: 1px solid #1E293B; padding-bottom: 6px; margin-bottom: 14px; font-size: 0.85rem; font-weight: bold; letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center; }
-                        .circuit-node-row { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
-                        .premise-node-badge { background: #1E293B; padding: 6px 12px; border-radius: 6px; border: 2px solid #475569; color: #64748B; font-weight: bold; transition: all 0.25s ease; }
-                        .btn-console-audio { background: #1E293B; color: #38BDF8; border: 1px solid #38BDF8; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: bold; transition: all 0.2s ease; }
-                        .btn-console-audio:hover { background: #38BDF8; color: #0F172A; }
                     </style>
-                    
+<!-- Box 11 of 18: Dynamic S-K-E Chameleon Interactive Vector Canvas Stages -->
                     <div class="ske-games-box" id="skeElementaryInteractions">
                         <div id="elMathWorkspace" style="display: block;">
-                            <div class="ske-activity-header">尊 Interactive Counting Chart Grid</div>
+                            <div class="ske-activity-header">🔢 Interactive Counting Chart Grid</div>
                             <div class="crayon-box-wrapper">
                                 <span style="font-weight: 700; color: #475569; font-size: 0.9rem;">Number Palette Nodes:</span>
                                 <div class="crayon-option selected-crayon" style="background:#2ECC71; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.8rem;" onclick="pickCrayonColor(this, '#2ECC71')">1</div>
@@ -239,17 +234,16 @@
                                 <div class="crayon-option" style="background:#3498DB; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.8rem;" onclick="pickCrayonColor(this, '#3498DB')">3</div>
                             </div>
                             
-                            <div style="position: relative; width: 100%; max-width: 440px; margin: 0 auto;">
-                                <svg class="pond-svg-canvas" viewBox="0 0 400 300" onclick="colorWorksheetSegment(event.target)">
-                                    <rect id="canvasBgZone" x="10" y="10" width="380" height="280" fill="#F1F5F9" stroke="#94A3B8" stroke-width="2"/>
-                                    <ellipse id="canvasOvalZone" cx="200" cy="180" rx="130" ry="70" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
-                                    <circle id="canvasCircleZone" cx="200" cy="70" r="30" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
+                            <div style="position: relative; width: 100%; max-width: 440px; margin: 0 auto;" id="chameleonCanvasStage">
+                                <svg class="pond-svg-canvas" viewBox="0 0 400 300" id="dynamicVectorStageNode" onclick="colorWorksheetSegment(event.target)">
+                                    <!-- Dynamic spatial shapes injected frame-by-frame on fetch load inside Box 15 -->
                                 </svg>
-                                <div style="position: absolute; top: 20px; left: 25px; pointer-events: none; font-weight: 900; font-size: 1.1rem; color: #94A3B8;">Zone 1</div>
-                                <div style="position: absolute; top: 165px; left: 195px; pointer-events: none; font-weight: 900; font-size: 1.3rem; color: #64748B;">Zone 2</div>
-                                <div style="position: absolute; top: 58px; left: 193px; pointer-events: none; font-weight: 900; font-size: 1.1rem; color: #64748B;">Zone 3</div>
+                                <div id="lblZone1" style="position: absolute; top: 20px; left: 25px; pointer-events: none; font-weight: 900; font-size: 1.1rem; color: #94A3B8;">Zone 1</div>
+                                <div id="lblZone2" style="position: absolute; top: 165px; left: 195px; pointer-events: none; font-weight: 900; font-size: 1.3rem; color: #64748B;">Zone 2</div>
+                                <div id="lblZone3" style="position: absolute; top: 58px; left: 193px; pointer-events: none; font-weight: 900; font-size: 1.1rem; color: #64748B;">Zone 3</div>
                             </div>
                         </div>
+<!-- Box 12 of 18: Science Track Drop Modules & Dark Hardware Logic Desks -->
                         <div id="elScienceWorkspace" style="display: none;">
                             <div class="ske-activity-header">🔬 Tactile Item Classification Desk</div>
                             <div class="apple-counter-grid">
@@ -262,21 +256,24 @@
                     
                     <div class="labels-legend-row" id="elProseBodyContainer">K-5 Elementary Content Node Desk</div>
 
-                    <!-- FIXED NATIVE INJECTION: Embedded Object Terminal Desk with Audio Support -->
+                    <style>
+                        .circuit-desk-panel { background: #0F172A; color: #38BDF8; padding: 20px; border-radius: 14px; font-family: monospace; margin-top: 24px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); border: 1px solid #1E293B; }
+                        .circuit-desk-header { color: #64748B; border-bottom: 1px solid #1E293B; padding-bottom: 6px; margin-bottom: 14px; font-size: 0.85rem; font-weight: bold; letter-spacing: 0.5px; }
+                        .circuit-node-row { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+                        .premise-node-badge { background: #1E293B; padding: 6px 12px; border-radius: 6px; border: 2px solid #475569; color: #64748B; font-weight: bold; transition: all 0.25s ease; }
+                    </style>
+
                     <div class="circuit-desk-panel" id="nativeComputationalCircuitConsole">
-                        <div class="circuit-desk-header">
-                            <span>💻 OBJECTIVE: FILL ALL 3 CANVAS NUMERIC ZONES TO ACTIVATE LOGIC CIRCUITS</span>
-                            <button class="btn-console-audio" onclick="speakConsoleStatus()">🔊 Read Console</button>
-                        </div>
+                        <div class="circuit-desk-header" id="consoleHeaderObjective">💻 OBJECTIVE: COMPLETE THE DAILY LESSON PUZZLE LAYOUTS TO UNLOCK CIRCUITS</div>
                         <div class="circuit-node-row">
                             <span class="premise-node-badge" id="premiseNodeA">[Premise A Node]</span>
                             <span style="color: #A855F7; font-weight: bold;">➔ AND ➔</span>
                             <span class="premise-node-badge" id="premiseNodeB">[Premise B Node]</span>
                         </div>
-                        <div style="font-size: 0.85rem; color: #64748B; font-weight: bold;" id="circuitStatusTextLine">Circuit Logic Status: Awaiting S-K-E validation parameters [0 of 3 zones verified]...</div>
+                        <div style="font-size: 0.85rem; color: #64748B; font-weight: bold;" id="circuitStatusTextLine">Circuit Logic Status: Awaiting S-K-E validation parameters...</div>
                     </div>
                 </div>
-<!-- Box 8 of 12: Middle & High School Dashboard Interactive Environments -->
+<!-- Box 13 of 18: Middle and High School Secondary Advanced Workspaces -->
                 <!-- Bracket Layer 2: Middle School Dashboard Content Views -->
                 <div id="middleSchoolWorkspaceView" style="display: none; width: 100%;">
                     <style>
@@ -310,31 +307,12 @@
                     <span class="hs-console-label">🏛️ ESTONIAN ARCHITECTURE THESIS MATRIX OPTIMIZER</span>
                     <textarea class="hs-thesis-console" rows="4" placeholder="Input multi-paragraph analytical summary evidence logic..."></textarea>
                 </div>
-<!-- Box 9 of 12: Worksheet Submission Portals & Right Panel Blueprint Banners -->
-                <style>
-                    .btn-submit-worksheet {
-                        background-color: var(--btn-submit);
-                        color: white;
-                        border: none;
-                        border-radius: 50px;
-                        padding: 16px 40px;
-                        font-weight: 700;
-                        font-size: 1rem;
-                        cursor: pointer;
-                        display: block;
-                        width: 100%;
-                        margin-top: 28px;
-                        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
-                        transition: all 0.2s ease;
-                        letter-spacing: 0.5px;
-                    }
-                    .btn-submit-worksheet:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); }
-                </style>
+                
                 <button class="btn-submit-worksheet" onclick="alert('Student Workspace File Transferred Successfully!')">SUBMIT WORKSHEET FOR GRADING ✨</button>
             </div> <!-- End Shield Wrapper Box -->
         </div>
-
-        <!-- Right Presentation Frame: Parallel Reference Tracks -->
+<!-- Box 14 of 18: Right Alternative Presentation Frame Layout Cards -->
+        <!-- Right Presentation Frame: The Parallel Viewpoints & Comparative Analysis -->
         <div class="right-alternative-track" id="rightComparativeWorkspace">
             <style>
                 .comparison-headline-bar { display: flex; align-items: center; gap: 10px; color: #DC2626; font-weight: 800; border-bottom: 2px solid #FCA5A5; padding-bottom: 12px; margin-bottom: 24px; font-size: 1.15rem; letter-spacing: 0.5px; }
@@ -357,12 +335,14 @@
             </div>
         </div>
     </div>
-<!-- Box 10 of 12: JavaScript Multi-Bracket Grade Maps & App Parameter Frameworks -->
+<!-- Box 15 of 18: JavaScript Application Initial App Memory Registries -->
     <script>
         let audioClickCount = 0; 
         let activeCrayonColor = "#2ECC71";
-        // Track unique clicked element zones to prevent instant-trigger cheating loops
         let coloredZonesTrackingSet = new Set();
+        let consoleSuccessStringData = "⚡ CIRCUIT STATUS VERIFIES NODE ACTIVE";
+        let consoleAudioFeedbackString = "Circuit status verifies node active.";
+        let targetClicksToUnlock = 3;
 
         const PORTAL_GRADES_MAP = {
             "k5": ["gk", "g1", "g2", "g3", "g4", "g5"],
@@ -389,21 +369,20 @@
             }
         };
 </script>
-<!-- Box 11 of 12: Live Asynchronous Data Vault Fetch Pipelines & Error Handlers -->
+<!-- Box 16 of 18: Dynamic Timeline Generators & Visual Theme Bracket Switches -->
 <script>
         function enforceWorkspaceLockState() {
             audioClickCount = 0;
-            coloredZonesTrackingSet.clear(); // Reset game counter trackers securely
+            coloredZonesTrackingSet.clear(); 
             const shield = document.getElementById("lockShieldWrapper");
             const notice = document.getElementById("audioLockNoticeBox");
             
-            // Reset terminal panel back to zero-state parameters cleanly
             const statusLine = document.getElementById("circuitStatusTextLine");
             const pNodeA = document.getElementById("premiseNodeA");
             const pNodeB = document.getElementById("premiseNodeB");
-            if (statusLine) { statusLine.style.color = "#64748B"; statusLine.innerText = "Circuit Logic Status: Awaiting S-K-E validation parameters [0 of 3 zones verified]..."; }
-            if (pNodeA) { pNodeA.style.borderColor = "#475569"; pNodeA.style.color = "#64748B"; pNodeA.style.backgroundColor = "#1E293B"; }
-            if (pNodeB) { pNodeB.style.borderColor = "#475569"; pNodeB.style.color = "#64748B"; pNodeB.style.backgroundColor = "#1E293B"; }
+            if (statusLine) { statusLine.style.color = "#64748B"; statusLine.innerText = "Circuit Logic Status: Awaiting S-K-E validation parameters..."; }
+            if (pNodeA) { pNodeA.style.borderColor = "#475569"; pNodeA.style.color = "#64748B"; pNodeA.style.backgroundColor = "#1E293B"; pNodeA.innerText = "[Premise A Node]"; }
+            if (pNodeB) { pNodeB.style.borderColor = "#475569"; pNodeB.style.color = "#64748B"; pNodeB.style.backgroundColor = "#1E293B"; pNodeB.innerText = "[Premise B Node]"; }
 
             if (shield) shield.classList.add("workspace-locked");
             if (notice) {
@@ -442,7 +421,7 @@
             enforceWorkspaceLockState();
             loadLiveDatabaseFile();
         }
-
+<!-- Box 17 of 18: Live Flat-File Vault Ingestion Readers & Vector Node Drawing Engines -->
         function loadLiveDatabaseFile() {
             const group = document.getElementById("portalGroupSelect").value;
             const grade = document.getElementById("gradePrefixSelect").value;
@@ -490,12 +469,53 @@
                     }
                     
                     if (data.worldview_track_matrices) {
-                        if (data.worldview_track_matrices.comparative_insight) {
-                            document.getElementById("comparativeContextLabel").innerText = data.worldview_track_matrices.comparative_insight;
-                        }
-                        if (data.worldview_track_matrices.biblical_alignment) {
-                            document.getElementById("biblicalAlignmentLabel").innerText = data.worldview_track_matrices.biblical_alignment;
-                        }
+                        document.getElementById("comparativeContextLabel").innerText = data.worldview_track_matrices.comparative_insight || "Analyzing coordinate blueprints.";
+                        document.getElementById("biblicalAlignmentLabel").innerText = data.worldview_track_matrices.biblical_alignment || "Order matrices track cleanly.";
+                    }
+
+                    // THE CHAMELEON GENERATOR CORE: Dynamically draw shape configurations live from disk data parameters
+                    const canvasStage = document.getElementById("dynamicVectorStageNode");
+                    if (canvasStage && data.frontend_rendering_blueprint && data.frontend_rendering_blueprint.vector_shapes_layout) {
+                        canvasStage.innerHTML = ""; 
+                        targetClicksToUnlock = data.frontend_rendering_blueprint.total_required_clicks_to_unlock || 3;
+                        
+                        const bgCol = data.frontend_rendering_blueprint.canvas_background_color || "#F1F5F9";
+                        document.getElementById("chameleonCanvasStage").style.backgroundColor = bgCol;
+
+                        data.frontend_rendering_blueprint.vector_shapes_layout.forEach(shape => {
+                            let newEl = document.createElementNS("http://w3.org", shape.svg_type);
+                            newEl.setAttribute("id", shape.element_id);
+                            newEl.setAttribute("fill", "#E2E8F0");
+                            newEl.setAttribute("stroke", "#94A3B8");
+                            newEl.setAttribute("stroke-width", "2");
+                            newEl.setAttribute("style", "cursor: pointer; transition: fill 0.2s;");
+
+                            if (shape.svg_type === "rect") {
+                                newEl.setAttribute("x", "10"); newEl.setAttribute("y", "10");
+                                newEl.setAttribute("width", "380"); newEl.setAttribute("height", "280");
+                            } else if (shape.svg_type === "ellipse") {
+                                newEl.setAttribute("cx", "200"); newEl.setAttribute("cy", "180");
+                                newEl.setAttribute("rx", "130"); newEl.setAttribute("ry", "70");
+                            } else if (shape.svg_type === "circle") {
+                                newEl.setAttribute("cx", "200"); newEl.setAttribute("cy", "70");
+                                newEl.setAttribute("r", "30");
+                            }
+                            canvasStage.appendChild(newEl);
+                        });
+
+                        const layouts = data.frontend_rendering_blueprint.vector_shapes_layout;
+                        if (layouts && document.getElementById("lblZone1")) document.getElementById("lblZone1").innerText = layouts[0] ? layouts[0].label_overlay_text : "Zone 1";
+                        if (layouts && document.getElementById("lblZone2")) document.getElementById("lblZone2").innerText = layouts[1] ? layouts[1].label_overlay_text : "Zone 2";
+                        if (layouts && document.getElementById("lblZone3")) document.getElementById("lblZone3").innerText = layouts[2] ? layouts[2].label_overlay_text : "Zone 3";
+                    }
+
+                    if (data.frontend_rendering_blueprint && data.frontend_rendering_blueprint.computational_console_parameters) {
+                        const params = data.frontend_rendering_blueprint.computational_console_parameters;
+                        if (params.premise_a_label) document.getElementById("premiseNodeA").innerText = `[${params.premise_a_label}]`;
+                        if (params.premise_b_label) document.getElementById("premiseNodeB").innerText = `[${params.premise_b_label}]`;
+                        if (params.console_success_message) consoleSuccessStringData = params.console_success_message;
+                        if (params.console_audio_feedback_string) consoleAudioFeedbackString = params.console_audio_feedback_string;
+                        if (params.console_objective_label) document.getElementById("consoleHeaderObjective").innerText = `💻 OBJECTIVE: ${params.console_objective_label}`;
                     }
 
                     executeRealTimeKeywordScan(displayTarget, subject);
@@ -512,46 +532,37 @@
                     }
                 });
         }
-<!-- Box 12 of 12: Multi-Zone Counter Locks & Speech Synthesis Controllers -->
+<!-- Box 18 of 18: Real-Time Keyword Scanners, Tactile Click Handhandlers, and Build Initializers -->
         function colorWorksheetSegment(targetNode) {
             if (targetNode && (targetNode.id === 'canvasBgZone' || targetNode.id === 'canvasOvalZone' || targetNode.id === 'canvasCircleZone')) {
                 targetNode.setAttribute('fill', activeCrayonColor);
-                
-                // Track current target node key securely
                 coloredZonesTrackingSet.add(targetNode.id);
                 
                 const statusConsoleLine = document.getElementById("circuitStatusTextLine");
                 const pNodeA = document.getElementById("premiseNodeA");
                 const pNodeB = document.getElementById("premiseNodeB");
 
-                if (coloredZonesTrackingSet.size < 3) {
-                    // Pacing validation tracker copy block
+                if (coloredZonesTrackingSet.size < targetClicksToUnlock) {
                     if (statusConsoleLine) {
-                        statusConsoleLine.style.color = "#EAB308"; // Warning Amber
-                        statusConsoleLine.innerHTML = `⚡ CIRCUIT EVALUATION ACTIVE: [${coloredZonesTrackingSet.size} of 3 zones verified. Complete all layout zones!]`;
+                        statusConsoleLine.style.color = "#EAB308";
+                        statusConsoleLine.innerHTML = `⚡ CIRCUIT EVALUATION ACTIVE: [${coloredZonesTrackingSet.size} of ${targetClicksToUnlock} targets mapped. Color all canvas zones!]`;
                     }
                 } else {
-                    // 3 of 3 zones filled flawlessly: unlock absolute circuit success matrix parameters
                     if (pNodeA && pNodeB && statusConsoleLine) {
                         pNodeA.style.borderColor = "#10B981"; pNodeA.style.color = "#10B981"; pNodeA.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
                         pNodeB.style.borderColor = "#A855F7"; pNodeB.style.color = "#A855F7"; pNodeB.style.backgroundColor = "rgba(168, 85, 247, 0.15)";
                         statusConsoleLine.style.color = "#38BDF8"; statusConsoleLine.style.fontWeight = "bold";
-                        statusConsoleLine.innerHTML = "⚡ CIRCUIT STATUS VERIFIES NODE ACTIVE. ONE-TO-ONE CORRESPONDENCE VERIFIED [SET DATA = 1 NODE ACTIVE]";
+                        statusConsoleLine.innerHTML = consoleSuccessStringData;
+                        
+                        if ('speechSynthesis' in window) {
+                            window.speechSynthesis.cancel();
+                            const utterVerified = new SpeechSynthesisUtterance("Node verified");
+                            utterVerified.rate = 0.95;
+                            window.speechSynthesis.speak(utterVerified);
+                        }
                     }
                 }
             }
-        }
-
-        function speakConsoleStatus() {
-            if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); } else { return; }
-            const statusConsoleLine = document.getElementById("circuitStatusTextLine");
-            if (!statusConsoleLine) return;
-            
-            // Clean lightning codes out of narration streams safely
-            let cleanNarrationText = statusConsoleLine.innerText.replace(/⚡/g, "").trim();
-            const utterConsole = new SpeechSynthesisUtterance(cleanNarrationText);
-            utterConsole.rate = 0.95;
-            window.speechSynthesis.speak(utterConsole);
         }
 
         function executeRealTimeKeywordScan(textContainer, activeSubject) {
