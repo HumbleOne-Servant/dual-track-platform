@@ -1,0 +1,39 @@
+{
+    "grade_prefix": "gk",
+    "layout_group": "K5",
+    "subject_track": "mathematics",
+    "unit_folder": "unit_1_foundations",
+    "day": 1,
+    "national_standard_code": "CCSS.MATH.CONTENT.K-12.GK.1",
+    "lesson_title": "Mastery Module: Mathematics Core Studies",
+    "lesson_body": "This operational courseware text establishes systemic training sequences under standard CCSS.MATH.CONTENT.K-12.",
+    "interactive_assignment_sequence": [
+        {
+            "step": 1,
+            "screen_action": "initialize_vector_shape_playground_tokens",
+            "voice_synthesis_phrase": "Let us activate the workspace canvas environment to explore this concept.",
+            "student_action_required": "trigger_canvas_node",
+            "success_metric": "interaction_point_match"
+        }
+    ],
+    "guided_learning_coaching": {
+        "optimal_keywords": [
+            "explore",
+            "verify",
+            "solve"
+        ],
+        "american_title_objectives": {
+            "remediation_tree": "Helper Step-Ladder",
+            "misconception_catcher": "Oops Catcher",
+            "validation_gate": "Super Skill Lock"
+        },
+        "misconception_catcher": "[Oops Catcher]: Check operational tracks.",
+        "remediation_analogy": "[Helper Step-Ladder]: Review core components."
+    },
+    "historical_connections": {
+        "calendar_year": "Creation Foundations (Ancient Babylonian/Hebrew Constant)",
+        "geographic_coordinate_bounds": "Mesopotamia / Fertile Crescent (32.46\u00b0 N, 44.42\u00b0 E)",
+        "biblical_epoch_match": "Genesis Order / Design Constraints",
+        "primary_source_excerpt": "Order, absolute symmetry, and numerical harmony establish natural constants from the beginning of space-time metrics."
+    }
+}
