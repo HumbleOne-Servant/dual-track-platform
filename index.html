@@ -1,3 +1,4 @@
+<!-- Box 1 of 21: Document Core Schema and Global Base CSS Variable Root Directives -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,11 +17,52 @@
             --text-main: #1E293B;
             --bg-card: #FFFFFF;
         }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #F8FAFC;
+            color: var(--text-main);
+        }
+<!-- Box 2 of 21: Top Navbar Header Interface Classes -->
+        .top-navbar {
+            background: var(--bar-gradient);
+            padding: 16px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15);
+            transition: background 0.3s ease;
+        }
+        .nav-title { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; letter-spacing: 0.75px; font-weight: 800; }
+        .nav-selectors { display: flex; gap: 14px; }
+<!-- Box 3 of 21: Interactive Dropdown Controls Styling Framework -->
+        .nav-select {
+            padding: 10px 20px;
+            border-radius: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.12);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        .nav-select:hover { background-color: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.5); }
+        .nav-select option { color: var(--text-main); background-color: white; }
+<!-- Box 4 of 21: Real-Time Cross-Scanner Word Highlights CSS Rules -->
+        .keyword-highlight {
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(234, 179, 8, 0.3);
+            transition: transform 0.15s ease;
+            display: inline-block;
+        }
+        .keyword-highlight:hover { transform: scale(1.06); }
     </style>
-    <!-- LINK TO YOUR EXTERNAL CSS TO STOP ALL TRUNCATION ERRORS -->
-    <link rel="stylesheet" href="ske_styles.css">
 </head>
 <body>
+<!-- Box 5 of 21: Top Navbar Controls Layout dropdown form items -->
     <div class="top-navbar" id="mainPortalHeader">
         <div class="nav-title">🌐 DUAL-TRACK LEARNING HUB</div>
         <div class="nav-selectors">
@@ -29,7 +71,10 @@
                 <option value="68">📐 Middle School Portal (6-8 Bracket)</option>
                 <option value="912">🏛️ High School Portal (9-12 Bracket)</option>
             </select>
-            <select class="nav-select" id="gradePrefixSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();"></select>
+<!-- Box 6 of 21: Sub-Grade and Subject Track Selection Dropdowns -->
+            <select class="nav-select" id="gradePrefixSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
+                <!-- dynamically populated natively on startup routines -->
+            </select>
             <select class="nav-select" id="subjectTrackSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
                 <option value="mathematics">📚 Mathematics Track</option>
                 <option value="science">🔬 Science Track</option>
@@ -39,15 +84,94 @@
             <select class="nav-select" id="daySelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();"></select>
         </div>
     </div>
-
+<!-- Box 7 of 21: Split Workspace Layout Framing Component Classes -->
+    <style>
+        .dual-track-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            padding: 28px;
+            max-width: 1700px;
+            margin: 0 auto;
+        }
+        .left-core-track, .right-alternative-track {
+            background: var(--bg-card);
+            border: 2px solid var(--border-panel);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
+            min-height: 700px;
+            transition: all 0.3s ease;
+        }
+<!-- Box 8 of 21: Worldview Track laboratory and Progress Metadata Classes -->
+        .right-alternative-track {
+            background-color: #F8FAFC;
+            border-style: dashed;
+            border-color: #CBD5E1;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.01);
+        }
+        .student-meta-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px dashed #E2E8F0;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            font-size: 0.88rem;
+            color: #64748B;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .meta-field { border-bottom: 2px solid #CBD5E1; width: 140px; display: inline-block; margin-left: 6px; }
+    </style>
+<!-- Box 9 of 21: Student Header Metadata Field rows -->
     <div class="dual-track-container">
+        <!-- Left Presentation Frame: Core Standard Textbook Classroom Workdesk -->
         <div class="left-core-track" id="leftCoreWorkspace">
             <div class="student-meta-row">
                 <div>STUDENT: <span class="meta-field"></span></div>
                 <div>CLASSROOM DATE: <span class="meta-field"></span></div>
                 <div>SCORE RECORD: <span class="meta-field"></span></div>
             </div>
-
+<!-- Box 10 of 21: Audio Banner Interface Controls Styling Framework -->
+            <style>
+                .audio-guide-banner {
+                    background-color: #F1F5F9;
+                    border: 1px solid #E2E8F0;
+                    border-radius: 14px;
+                    padding: 18px 24px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 20px;
+                    margin-bottom: 16px;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+                }
+                .lesson-guide-text { font-size: 1rem; color: #334155; line-height: 1.5; }
+<!-- Box 11 of 21: Instruction Card and Lockdown Gate Overlay Rules -->
+                .btn-audio-listen {
+                    background-color: var(--btn-listen);
+                    color: white;
+                    border: none;
+                    border-radius: 50px;
+                    padding: 14px 32px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    box-shadow: 0 4px 14px rgba(99, 78, 228, 0.3);
+                    white-space: nowrap;
+                    transition: all 0.2s ease;
+                }
+                .btn-audio-listen:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(99, 78, 228, 0.4); }
+                .audio-warning-notice { background-color: #FEF2F2; border: 2px solid #FCA5A5; border-radius: 10px; color: var(--color-warning); padding: 12px 18px; font-size: 0.9rem; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; line-height: 1.5; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.05); transition: all 0.3s ease; }
+                .lesson-header-title { font-size: 1.75rem; color: #0F172A; margin: 24px 0 12px 0; font-weight: 800; letter-spacing: -0.5px; }
+                .directions-container { background-color: #FFFDF2; border-left: 5px solid #F59E0B; padding: 16px 20px; margin-bottom: 28px; border-radius: 0 10px 10px 0; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.03); }
+                .directions-text { font-size: 1rem; font-weight: 700; color: #B45309; line-height: 1.5; }
+                .interactive-workspace-shield { transition: opacity 0.3s ease, filter 0.3s ease; }
+                .workspace-locked { pointer-events: none; opacity: 0.4; filter: grayscale(100%) blur(0.5px); }
+            </style>
+<!-- Box 12 of 21: Textbook Headers and Progress lock Container Openers -->
             <div class="audio-guide-banner">
                 <div class="lesson-guide-text" id="lessonGuideContent">📄 <strong>Brief Lesson Description Summary:</strong> Connecting to local file tree data...</div>
                 <button class="btn-audio-listen" id="audioDeskButton" onclick="triggerVoiceReader()">🔊 Read Out Loud</button>
@@ -58,7 +182,19 @@
             <div class="directions-container"><div class="directions-text" id="assignmentDirectionsLabel">Workbook Instructions: Review the reading material below.</div></div>
             
             <div class="interactive-workspace-shield workspace-locked" id="lockShieldWrapper">
+<!-- Box 13 of 21: K-5 Elementary Interactive Interactive Graphic Board Panels -->
                 <div id="elementaryWorkspaceView" style="display: block; width: 100%;">
+                    <style>
+                        .crayon-box-wrapper { display: flex; gap: 16px; border: 2px solid #E2E8F0; padding: 12px 24px; border-radius: 30px; background: white; margin-bottom: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.01); }
+                        .crayon-option { width: 36px; height: 34px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: transform 0.15s ease; }
+                        .crayon-option:hover { transform: scale(1.1); }
+                        .crayon-option.selected-crayon { border-color: #0F172A; transform: scale(1.15); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+                        .ske-games-box { border: 2px solid #CBD5E1; border-radius: 16px; padding: 20px; background: #F8FAFC; min-height: 300px; margin-bottom: 20px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.01); }
+                        .ske-activity-header { font-size: 0.85rem; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px dashed #E2E8F0; display: flex; align-items: center; gap: 6px; }
+                        .pond-svg-canvas { width: 100%; max-width: 440px; background: white; border: 2px solid #CBD5E1; border-radius: 12px; display: block; margin: 0 auto; box-shadow: 0 6px 16px rgba(0,0,0,0.02); }
+                        .labels-legend-row { text-align: center; margin-top: 18px; font-size: 1.05rem; font-weight: 600; color: #334155; line-height: 1.6; background: #FFFFFF; padding: 16px; border-radius: 12px; border: 1px solid #E2E8F0; margin-bottom: 20px; }
+                    </style>
+<!-- Box 14 of 21: Dynamic S-K-E Chameleon Interactive Vector Canvas Stages -->
                     <div class="ske-games-box" id="skeElementaryInteractions">
                         <div id="elMathWorkspace" style="display: block;">
                             <div class="ske-activity-header">🔢 Interactive Counting Chart Grid</div>
@@ -75,6 +211,7 @@
                                 <div id="lblZone3" style="position: absolute; top: 58px; left: 193px; pointer-events: none; font-weight: 900; font-size: 1.1rem; color: #64748B;">Zone 3</div>
                             </div>
                         </div>
+<!-- Box 15 of 21: Science Track Drop Modules & Dark Hardware Logic Desks -->
                         <div id="elScienceWorkspace" style="display: none;">
                             <div class="ske-activity-header">🔬 Tactile Item Classification Desk</div>
                             <div class="apple-counter-grid">
@@ -85,6 +222,7 @@
                         </div>
                     </div>
                     <div class="labels-legend-row" id="elProseBodyContainer">K-5 Content Desk</div>
+<!-- Box 16 of 21: Upper Bracket Matrix Structural Configuration Blocks -->
                     <div class="circuit-desk-panel" id="nativeComputationalCircuitConsole">
                         <div class="circuit-desk-header" id="consoleHeaderObjective">💻 OBJECTIVE: COMPLETE LESSON GOALS</div>
                         <div class="circuit-node-row">
@@ -95,7 +233,7 @@
                         <div style="font-size: 0.85rem; color: #64748B; font-weight: bold;" id="circuitStatusTextLine">Circuit Logic Status: Awaiting parameters...</div>
                     </div>
                 </div>
-
+<!-- Box 17 of 21: Middle and High School Secondary Advanced Workspaces -->
                 <div id="middleSchoolWorkspaceView" style="display: none; width: 100%;">
                     <div class="ms-textbook-prose" id="msProseBodyContainer">Middle School Loading...</div>
                     <div class="ms-vocab-box">
@@ -115,7 +253,7 @@
                 <button class="btn-submit-worksheet" onclick="alert('Student Workspace Transferred!')">SUBMIT WORKSHEET FOR GRADING ✨</button>
             </div>
         </div>
-
+<!-- Box 18 of 21: Right Alternative Presentation Frame Layout Cards -->
         <div class="right-alternative-track" id="rightComparativeWorkspace">
             <div class="comparison-headline-bar">🧬 WORLDVIEW TRACK REFERENCE LAB</div>
             <div id="liveComparisonContainer">
@@ -130,8 +268,198 @@
             </div>
         </div>
     </div>
+<!-- Box 19 of 21: JavaScript Memory Registries & App State Variables -->
+    <script>
+        let audioClickCount = 0; 
+        let activeCrayonColor = "#2ECC71";
+        let coloredZonesTrackingSet = new Set();
+        let consoleSuccessStringData = "⚡ CIRCUIT STATUS VERIFIES NODE ACTIVE";
+        let consoleAudioFeedbackString = "Circuit status verifies node active.";
+        let targetClicksToUnlock = 3;
 
-    <!-- LINK DIRECTLY TO THE SECURE EXTERNAL SCRIPT -->
-    <script src="ske_core_engine.js"></script>
+        const PORTAL_GRADES_MAP = {
+            "k5": ["gk", "g1", "g2", "g3", "g4", "g5"],
+            "68": ["g6", "g7", "g8"],
+            "912": ["g9", "g10", "g11", "g12"]
+        };
+
+        const DUAL_TRACK_KEYWORD_VAULT = {
+            "mathematics": {
+                "equations": "Mathematical equations reveal absolute structural consistency. Natural laws balance perfectly because creation operates under unchanging mathematical constants.",
+                "vector": "Spatial vectors map direction and magnitude. This invisible geometric blueprint demonstrates purposeful design parameters built directly into space formulas."
+            },
+            "science": {
+                "water": "Job 36:27-28 outlines the evaporation and condensation cycle perfectly. Ancient scriptural records documented global water mechanics long before modern meteorology textbooks.",
+                "atoms": "Hebrews 11:3 notes that what is seen was not made out of things that are visible, perfectly matching the structural reality of microscopic atomic frameworks."
+            }
+        };
+</script>
+<!-- Box 20 of 21: Live Asynchronous Data Vault Fetch Pipelines & Vector Drawing Engines -->
+<script>
+        function enforceWorkspaceLockState() {
+            audioClickCount = 0; coloredZonesTrackingSet.clear(); 
+            const shield = document.getElementById("lockShieldWrapper");
+            const notice = document.getElementById("audioLockNoticeBox");
+            const statusLine = document.getElementById("circuitStatusTextLine");
+            const pNodeA = document.getElementById("premiseNodeA");
+            const pNodeB = document.getElementById("premiseNodeB");
+            if (document.getElementById("middleSchoolExpressionBox")) document.getElementById("middleSchoolExpressionBox").value = "";
+            if (statusLine) { statusLine.style.color = "#64748B"; statusLine.innerText = "Circuit Logic Status: Awaiting S-K-E validation parameters..."; }
+            if (pNodeA) { pNodeA.style.borderColor = "#475569"; pNodeA.style.color = "#64748B"; pNodeA.style.backgroundColor = "#1E293B"; pNodeA.innerText = "[Premise A Node]"; }
+            if (pNodeB) { pNodeB.style.borderColor = "#475569"; pNodeB.style.color = "#64748B"; pNodeB.style.backgroundColor = "#1E293B"; pNodeB.innerText = "[Premise B Node]"; }
+            if (shield) shield.classList.add("workspace-locked");
+            if (notice) { notice.style.backgroundColor = "#FEF2F2"; notice.style.borderColor = "#FCA5A5"; notice.style.color = "#EF4444"; notice.innerHTML = "⚠️ ATTENTION: You must click the 'Read Out Loud' button TWICE before this worksheet unlocks."; }
+        }
+
+        function adaptPortalStyleBrackets() {
+            const group = document.getElementById("portalGroupSelect").value;
+            const subGradeSelector = document.getElementById("gradePrefixSelect");
+            if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); }
+            subGradeSelector.innerHTML = "";
+            PORTAL_GRADES_MAP[group].forEach((g, idx) => {
+                subGradeSelector.innerHTML += `<option value="${g}" ${idx === 0 ? "selected" : ""}>Grade ${g.toUpperCase()}</option>`;
+            });
+            const elView = document.getElementById("elementaryWorkspaceView");
+            const msView = document.getElementById("middleSchoolWorkspaceView");
+            const hsView = document.getElementById("highSchoolWorkspaceView");
+            if (group === "k5") {
+                document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(135deg, #E96B8B, #F9A86C)');
+                elView.style.display = "block"; msView.style.display = "none"; hsView.style.display = "none";
+            } else if (group === "68") {
+                document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(135deg, #2563EB, #1D4ED8)');
+                elView.style.display = "none"; msView.style.display = "block"; hsView.style.display = "none";
+            } else {
+                document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(135deg, #0F172A, #1E293B)');
+                elView.style.display = "none"; msView.style.display = "none"; hsView.style.display = "block";
+            }
+            enforceWorkspaceLockState(); loadLiveDatabaseFile();
+        }
+
+        function loadLiveDatabaseFile() {
+            const group = document.getElementById("portalGroupSelect").value;
+            const grade = document.getElementById("gradePrefixSelect").value;
+            const subject = document.getElementById("subjectTrackSelect").value;
+            const day = parseInt(document.getElementById("daySelect").value) || 1;
+            let unit = "unit_1_foundations";
+            if (day > 45 && day <= 90) unit = "unit_2_shapes_spaces";
+            else if (day > 90 && day <= 135) unit = "unit_3_weather_seasons";
+            else if (day > 135) unit = "unit_4_counting_base";
+
+            fetch(`pure_curriculum_vault/${group}/${grade}/${subject}/${unit}/day_${day}.json`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("lessonTitleLabel").innerText = data.lesson_title || `Day ${day} Lesson`;
+                    let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
+                    if (displayTarget) displayTarget.innerHTML = (data.lesson_body || "").replace(/###/g, "").replace(/\*\*/g, "");
+                    document.getElementById("assignmentDirectionsLabel").innerHTML = `🎯 <strong>Instructions:</strong> ${data.interactive_assignment || 'Complete goals.'}`;
+                    document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Summary:</strong> ${data.daily_assessment || 'Verify check.'}`;
+                    if (data.worldview_track_matrices) {
+                        document.getElementById("comparativeContextLabel").innerText = data.worldview_track_matrices.comparative_insight || "";
+                        document.getElementById("biblicalAlignmentLabel").innerText = data.worldview_track_matrices.biblical_alignment || "";
+                    }
+                    const canvasStage = document.getElementById("dynamicVectorStageNode");
+                    if (canvasStage && data.frontend_rendering_blueprint && data.frontend_rendering_blueprint.vector_shapes_layout) {
+                        canvasStage.innerHTML = ""; targetClicksToUnlock = data.frontend_rendering_blueprint.total_required_clicks_to_unlock || 3;
+                        document.getElementById("chameleonCanvasStage").style.backgroundColor = data.frontend_rendering_blueprint.canvas_background_color || "#F1F5F9";
+                        data.frontend_rendering_blueprint.vector_shapes_layout.forEach(shape => {
+                            let newEl = document.createElementNS("http://w3.org", shape.svg_type || "path");
+                            newEl.setAttribute("id", shape.element_id); newEl.setAttribute("fill", "#E2E8F0"); newEl.setAttribute("stroke", "#94A3B8"); newEl.setAttribute("stroke-width", "2"); newEl.setAttribute("style", "cursor: pointer; transition: fill 0.2s;");
+                            if (shape.svg_path_data) newEl.setAttribute("d", shape.svg_path_data);
+                            canvasStage.appendChild(newEl);
+                        });
+                        const layouts = data.frontend_rendering_blueprint.vector_shapes_layout;
+                        if (layouts && layouts[0] && document.getElementById("lblZone1")) document.getElementById("lblZone1").innerText = layouts[0].label_overlay_text;
+                        if (layouts && layouts[1] && document.getElementById("lblZone2")) document.getElementById("lblZone2").innerText = layouts[1].label_overlay_text;
+                        if (layouts && layouts[2] && document.getElementById("lblZone3")) document.getElementById("lblZone3").innerText = layouts[2].label_overlay_text;
+                    }
+                    if (data.frontend_rendering_blueprint && data.frontend_rendering_blueprint.computational_console_parameters) {
+                        const params = data.frontend_rendering_blueprint.computational_console_parameters;
+                        if (params.premise_a_label) document.getElementById("premiseNodeA").innerText = `[${params.premise_a_label}]`;
+                        if (params.premise_b_label) document.getElementById("premiseNodeB").innerText = `[${params.premise_b_label}]`;
+                        consoleSuccessStringData = params.console_success_message || "⚡ NODE ACTIVE";
+                        consoleAudioFeedbackString = params.console_audio_feedback_string || "Verified";
+                        if (params.console_objective_label) document.getElementById("consoleHeaderObjective").innerText = `💻 OBJECTIVE: ${params.console_objective_label}`;
+                    }
+                    executeRealTimeKeywordScan(displayTarget, subject);
+                }).catch(err => { document.getElementById("lessonTitleLabel").innerText = `Day ${day} Lesson Node`; });
+        }
+</script>
+<!-- Box 21 of 21: Interaction Gate Closures, Evaluation Hooks and Timeline Build Initializers -->
+<script>
+        function colorWorksheetSegment(targetNode) {
+            if (targetNode && (targetNode.id === 'canvasBgZone' || targetNode.id === 'canvasOvalZone' || targetNode.id === 'canvasCircleZone')) {
+                targetNode.setAttribute('fill', activeCrayonColor);
+                coloredZonesTrackingSet.add(targetNode.id);
+                const statusLine = document.getElementById("circuitStatusTextLine");
+                if (coloredZonesTrackingSet.size < targetClicksToUnlock) {
+                    if (statusLine) statusLine.innerHTML = `⚡ EVALUATION ACTIVE: [${coloredZonesTrackingSet.size} of ${targetClicksToUnlock} mapped]`;
+                } else {
+                    triggerTerminalSuccessGate();
+                }
+            }
+        }
+
+        function evaluateMiddleSchoolAnswer(val) { if (val.trim().length > 0) triggerTerminalSuccessGate(); }
+        function evaluateHighSchoolAnswer(val) { if (val.trim().length > 5) triggerTerminalSuccessGate(); }
+
+        function triggerTerminalSuccessGate() {
+            const statusLine = document.getElementById("circuitStatusTextLine");
+            const pNodeA = document.getElementById("premiseNodeA");
+            const pNodeB = document.getElementById("premiseNodeB");
+            if (pNodeA && pNodeB && statusLine) {
+                pNodeA.style.borderColor = "#10B981"; pNodeA.style.color = "#10B981"; pNodeA.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
+                pNodeB.style.borderColor = "#A855F7"; pNodeB.style.color = "#A855F7"; pNodeB.style.backgroundColor = "rgba(168, 85, 247, 0.15)";
+                statusLine.style.color = "#38BDF8"; statusLine.style.fontWeight = "bold"; statusLine.innerHTML = consoleSuccessStringData;
+                if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); const utter = new SpeechSynthesisUtterance("Node verified"); utter.rate = 0.95; window.speechSynthesis.speak(utter); }
+            }
+        }
+
+        function executeRealTimeKeywordScan(textContainer, activeSubject) {
+            if (!textContainer) return;
+            let currentContent = textContainer.innerHTML;
+            const lookupGroup = DUAL_TRACK_KEYWORD_VAULT[activeSubject];
+            if (!lookupGroup) return;
+            for (const key in lookupGroup) {
+                const checkExp = new RegExp(`\\b(${key})\\b`, 'gi');
+                if (checkExp.test(currentContent)) {
+                    currentContent = currentContent.replace(checkExp, `<mark class="keyword-highlight" style="background-color: #FEF08A; padding: 0 4px; border-radius: 4px; font-weight: bold; color: #1E293B;">$1</mark>`);
+                    textContainer.innerHTML = currentContent;
+                    document.getElementById("comparativeContextLabel").innerText = lookupGroup[key];
+                    document.getElementById("biblicalAlignmentLabel").innerText = `Worldview connection unblocked for key focus concept: ${key.toUpperCase()}`;
+                    break;
+                }
+            }
+        }
+
+        function triggerVoiceReader() {
+            if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); } else { return; }
+            let stringData = (audioClickCount === 0) ? document.getElementById('lessonGuideContent').innerText : document.getElementById('assignmentDirectionsLabel').innerText;
+            const shield = document.getElementById("lockShieldWrapper");
+            const notice = document.getElementById("audioLockNoticeBox");
+            stringData = stringData.replace(/📄/g, "").replace(/Summary:/gi, "").replace(/Instructions:/gi, "").replace(/🎯/g, "").replace(/⚡/g, "").trim();
+            if (audioClickCount === 0) {
+                audioClickCount = 1;
+                if (notice) { notice.style.backgroundColor = "#FEF3C7"; notice.style.borderColor = "#FCD34D"; notice.style.color = "#D97706"; notice.innerHTML = "⚡ STEP 1 COMPLETE. Click once more to unlock!"; }
+            } else {
+                audioClickCount = 2;
+                if (shield) shield.classList.remove("workspace-locked");
+                if (notice) { notice.style.backgroundColor = "#D1FAE5"; notice.style.borderColor = "#A7F3D0"; notice.style.color = "#059669"; notice.innerHTML = "✅ WORKSHEET UNLOCKED."; }
+            }
+            const utter = new SpeechSynthesisUtterance(stringData);
+            utter.rate = 0.95; window.speechSynthesis.speak(utter);
+        }
+
+        function pickCrayonColor(el, hex) { activeCrayonColor = hex; document.querySelectorAll('.crayon-option').forEach(c => c.style.borderColor='transparent'); el.style.borderColor='#1E293B'; }
+
+        function initializeGlobal180DayTimeline() {
+            const daySelect = document.getElementById("daySelect");
+            if (!daySelect) return;
+            daySelect.innerHTML = "";
+            for (let d = 1; d <= 180; d++) { daySelect.innerHTML += `<option value="${d}">🗓️ Course Day ${d}</option>`; }
+            adaptPortalStyleBrackets();
+        }
+
+        initializeGlobal180DayTimeline();
+    </script>
 </body>
 </html>
