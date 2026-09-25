@@ -1,4 +1,4 @@
-<!-- Box 1 of 21: Document Core Schema and Global Base CSS Variable Root Directives -->
+<!-- Box 1 of 21: Document Core Metadata & Dynamic Palette Styling Variables -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,74 +7,75 @@
     <title>Dual-Track Learning Hub - Student Portal Desk</title>
     <style>
         :root {
-            --bg-canvas: #FFFDF9;
-            --bar-gradient: linear-gradient(135deg, #0F172A, #1E293B, #334155);
-            --btn-listen: #634EE4;
-            --btn-submit: #10B981;
-            --border-panel: #E2E8F0;
-            --theme-primary: #E96B8B;
-            --color-warning: #EF4444;
-            --text-main: #1E293B;
+            --bg-canvas: #FAFAFA;
+            --bar-gradient: linear-gradient(135deg, #1E293B, #0F172A);
+            --btn-listen: #4F46E5;
+            --btn-submit: #059669;
+            --border-panel: transparent;
+            --theme-primary: #3B82F6;
+            --color-warning: #DC2626;
+            --text-main: #334155;
             --bg-card: #FFFFFF;
         }
         body {
             margin: 0;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background-color: #F8FAFC;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-canvas);
             color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
         }
-<!-- Box 2 of 21: Top Navbar Header Interface Classes -->
+<!-- Box 2 of 21: Premium Top Header Layout Navigation Styles -->
         .top-navbar {
             background: var(--bar-gradient);
-            padding: 16px 28px;
+            padding: 18px 36px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: white;
-            font-weight: 700;
-            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15);
-            transition: background 0.3s ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
         }
-        .nav-title { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; letter-spacing: 0.75px; font-weight: 800; }
-        .nav-selectors { display: flex; gap: 14px; }
-<!-- Box 3 of 21: Interactive Dropdown Controls Styling Framework -->
+        .nav-title { font-size: 1.15rem; letter-spacing: 1px; font-weight: 800; font-family: monospace; }
+        .nav-selectors { display: flex; gap: 16px; }
+<!-- Box 3 of 21: Borderless Dropdown Control Menu Component Frameworks -->
         .nav-select {
-            padding: 10px 20px;
-            border-radius: 24px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background-color: rgba(255, 255, 255, 0.12);
+            padding: 10px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.08);
             color: white;
             font-weight: 700;
+            font-size: 0.9rem;
             cursor: pointer;
             outline: none;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .nav-select:hover { background-color: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.5); }
-        .nav-select option { color: var(--text-main); background-color: white; }
-<!-- Box 4 of 21: Real-Time Cross-Scanner Word Highlights CSS Rules -->
+        .nav-select:hover { background-color: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.3); }
+        .nav-select option { color: #1E293B; background-color: white; }
+<!-- Box 4 of 21: Cross-Scanner Highlighter CSS Classes -->
         .keyword-highlight {
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(234, 179, 8, 0.3);
-            transition: transform 0.15s ease;
-            display: inline-block;
+            background-color: #FEF08A;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            color: #1E293B;
+            transition: transform 0.1s ease;
         }
-        .keyword-highlight:hover { transform: scale(1.06); }
+        .keyword-highlight:hover { transform: scale(1.04); }
     </style>
 </head>
 <body>
-<!-- Box 5 of 21: Top Navbar Controls Layout dropdown form items -->
+<!-- Box 5 of 21: Top Global Menu Forms Navigation Desk Bar -->
     <div class="top-navbar" id="mainPortalHeader">
-        <div class="nav-title">🌐 DUAL-TRACK LEARNING HUB</div>
+        <div class="nav-title">⚡ S-K-E LEARNING ECOSYSTEM</div>
         <div class="nav-selectors">
             <select class="nav-select" id="portalGroupSelect" onchange="adaptPortalStyleBrackets()">
-                <option value="k5">🎒 Elementary Portal (K-5 Bracket)</option>
-                <option value="68">📐 Middle School Portal (6-8 Bracket)</option>
-                <option value="912">🏛️ High School Portal (9-12 Bracket)</option>
+                <option value="k5">🎒 Elementary Portal (K-5)</option>
+                <option value="68">📐 Middle School Portal (6-8)</option>
+                <option value="912">🏛️ High School Portal (9-12)</option>
             </select>
-<!-- Box 6 of 21: Sub-Grade and Subject Track Selection Dropdowns -->
-            <select class="nav-select" id="gradePrefixSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
-                <!-- dynamically populated natively on startup routines -->
-            </select>
+<!-- Box 6 of 21: Main Subject Selector and Timeline Navigation Tracks -->
+            <select class="nav-select" id="gradePrefixSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();"></select>
             <select class="nav-select" id="subjectTrackSelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();">
                 <option value="mathematics">📚 Mathematics Track</option>
                 <option value="science">🔬 Science Track</option>
@@ -84,194 +85,190 @@
             <select class="nav-select" id="daySelect" onchange="enforceWorkspaceLockState(); loadLiveDatabaseFile();"></select>
         </div>
     </div>
-<!-- Box 7 of 21: Split Workspace Layout Framing Component Classes -->
+<!-- Box 7 of 21: Open Playboard Fluid Layout Split Grid Parameters -->
     <style>
         .dual-track-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 28px;
-            padding: 28px;
-            max-width: 1700px;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 32px;
+            padding: 32px;
+            max-width: 1750px;
             margin: 0 auto;
         }
         .left-core-track, .right-alternative-track {
             background: var(--bg-card);
-            border: 2px solid var(--border-panel);
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
-            min-height: 700px;
-            transition: all 0.3s ease;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.01);
+            min-height: 750px;
         }
-<!-- Box 8 of 21: Worldview Track laboratory and Progress Metadata Classes -->
+<!-- Box 8 of 21: Borderless Modern Information Layout Framework Styles -->
         .right-alternative-track {
             background-color: #F8FAFC;
-            border-style: dashed;
-            border-color: #CBD5E1;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.01);
+            border: 2px dashed #E2E8F0;
         }
         .student-meta-row {
             display: flex;
             justify-content: space-between;
-            border-bottom: 2px dashed #E2E8F0;
-            padding-bottom: 16px;
-            margin-bottom: 24px;
-            font-size: 0.88rem;
-            color: #64748B;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            padding-bottom: 20px;
+            margin-bottom: 32px;
+            font-size: 0.8rem;
+            color: #94A3B8;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #F1F5F9;
         }
-        .meta-field { border-bottom: 2px solid #CBD5E1; width: 140px; display: inline-block; margin-left: 6px; }
+        .meta-field { border-bottom: 2px solid #E2E8F0; width: 120px; display: inline-block; margin-left: 6px; }
     </style>
-<!-- Box 9 of 21: Student Header Metadata Field rows -->
+<!-- Box 9 of 21: Primary Left Frame Container Framework Openers -->
     <div class="dual-track-container">
         <!-- Left Presentation Frame: Core Standard Textbook Classroom Workdesk -->
         <div class="left-core-track" id="leftCoreWorkspace">
             <div class="student-meta-row">
-                <div>STUDENT: <span class="meta-field"></span></div>
-                <div>CLASSROOM DATE: <span class="meta-field"></span></div>
-                <div>SCORE RECORD: <span class="meta-field"></span></div>
+                <div>STUDENT <span class="meta-field"></span></div>
+                <div>TIMELINE DATE <span class="meta-field"></span></div>
+                <div>PROGRESS MASTER <span class="meta-field"></span></div>
             </div>
-<!-- Box 10 of 21: Audio Banner Interface Controls Styling Framework -->
+<!-- Box 10 of 21: Audio Guidance Desk Controls Layout Framework Styles -->
             <style>
                 .audio-guide-banner {
-                    background-color: #F1F5F9;
-                    border: 1px solid #E2E8F0;
-                    border-radius: 14px;
-                    padding: 18px 24px;
+                    background-color: #F8FAFC;
+                    border-radius: 16px;
+                    padding: 20px 28px;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    gap: 20px;
-                    margin-bottom: 16px;
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+                    gap: 24px;
+                    margin-bottom: 24px;
                 }
-                .lesson-guide-text { font-size: 1rem; color: #334155; line-height: 1.5; }
-<!-- Box 11 of 21: Instruction Card and Lockdown Gate Overlay Rules -->
+                .lesson-guide-text { font-size: 0.95rem; color: #475569; font-weight: 500; line-height: 1.6; }
+<!-- Box 11 of 21: Playboard Control Action Button Layout Styles -->
                 .btn-audio-listen {
                     background-color: var(--btn-listen);
                     color: white;
                     border: none;
-                    border-radius: 50px;
-                    padding: 14px 32px;
+                    border-radius: 30px;
+                    padding: 12px 28px;
                     font-weight: 700;
+                    font-size: 0.88rem;
                     cursor: pointer;
                     display: flex;
                     align-items: center;
-                    gap: 10px;
-                    box-shadow: 0 4px 14px rgba(99, 78, 228, 0.3);
+                    gap: 8px;
+                    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
                     white-space: nowrap;
                     transition: all 0.2s ease;
                 }
-                .btn-audio-listen:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(99, 78, 228, 0.4); }
-                .audio-warning-notice { background-color: #FEF2F2; border: 2px solid #FCA5A5; border-radius: 10px; color: var(--color-warning); padding: 12px 18px; font-size: 0.9rem; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; line-height: 1.5; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.05); transition: all 0.3s ease; }
-                .lesson-header-title { font-size: 1.75rem; color: #0F172A; margin: 24px 0 12px 0; font-weight: 800; letter-spacing: -0.5px; }
-                .directions-container { background-color: #FFFDF2; border-left: 5px solid #F59E0B; padding: 16px 20px; margin-bottom: 28px; border-radius: 0 10px 10px 0; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.03); }
-                .directions-text { font-size: 1rem; font-weight: 700; color: #B45309; line-height: 1.5; }
+                .btn-audio-listen:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(79, 70, 229, 0.25); }
+                .audio-warning-notice { background-color: #FFF1F2; border-radius: 12px; color: var(--color-warning); padding: 14px 24px; font-size: 0.88rem; font-weight: 700; margin-bottom: 32px; line-height: 1.5; display: flex; align-items: center; gap: 8px; }
+                .lesson-header-title { font-size: 2.2rem; color: #1E293B; margin: 32px 0 16px 0; font-weight: 800; letter-spacing: -0.75px; }
+                .directions-container { background-color: #FDFEFA; border-left: 4px solid #84CC16; padding: 20px; margin-bottom: 36px; border-radius: 0 16px 24px 0; }
+                .directions-text { font-size: 1.05rem; font-weight: 600; color: #4D7C0F; line-height: 1.6; }
                 .interactive-workspace-shield { transition: opacity 0.3s ease, filter 0.3s ease; }
-                .workspace-locked { pointer-events: none; opacity: 0.4; filter: grayscale(100%) blur(0.5px); }
+                .workspace-locked { pointer-events: none; opacity: 0.35; filter: grayscale(100%) blur(0.5px); }
             </style>
-<!-- Box 12 of 21: Textbook Headers and Progress lock Container Openers -->
+<!-- Box 12 of 21: Textbook Main Row Headers and Lock Guard Layout Tags -->
             <div class="audio-guide-banner">
-                <div class="lesson-guide-text" id="lessonGuideContent">📄 <strong>Brief Lesson Description Summary:</strong> Connecting to local file tree data...</div>
+                <div class="lesson-guide-text" id="lessonGuideContent">📄 Summary mapping log loading...</div>
                 <button class="btn-audio-listen" id="audioDeskButton" onclick="triggerVoiceReader()">🔊 Read Out Loud</button>
             </div>
             
-            <div class="audio-warning-notice" id="audioLockNoticeBox">⚠️ ATTENTION: You must click the 'Read Out Loud' button TWICE before this worksheet unlocks.</div>
-            <h2 class="lesson-header-title" id="lessonTitleLabel">Portal Framework Core</h2>
-            <div class="directions-container"><div class="directions-text" id="assignmentDirectionsLabel">Workbook Instructions: Review the reading material below.</div></div>
+            <div class="audio-warning-notice" id="audioLockNoticeBox">⚠️ LOCK SHIELD ACTIVE: Listen to instruction guides twice to unlock.</div>
+            <h1 class="lesson-header-title" id="lessonTitleLabel">Lesson Portal Loading...</h1>
+            <div class="directions-container"><div class="directions-text" id="assignmentDirectionsLabel">Worksheet criteria loading...</div></div>
             
             <div class="interactive-workspace-shield workspace-locked" id="lockShieldWrapper">
-<!-- Box 13 of 21: K-5 Elementary Interactive Interactive Graphic Board Panels -->
+<!-- Box 13 of 21: Chameleon Canvas Playboard Presentation Screen Frameworks -->
                 <div id="elementaryWorkspaceView" style="display: block; width: 100%;">
                     <style>
-                        .crayon-box-wrapper { display: flex; gap: 16px; border: 2px solid #E2E8F0; padding: 12px 24px; border-radius: 30px; background: white; margin-bottom: 20px; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.01); }
-                        .crayon-option { width: 36px; height: 34px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: transform 0.15s ease; }
-                        .crayon-option:hover { transform: scale(1.1); }
-                        .crayon-option.selected-crayon { border-color: #0F172A; transform: scale(1.15); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
-                        .ske-games-box { border: 2px solid #CBD5E1; border-radius: 16px; padding: 20px; background: #F8FAFC; min-height: 300px; margin-bottom: 20px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.01); }
-                        .ske-activity-header { font-size: 0.85rem; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px dashed #E2E8F0; display: flex; align-items: center; gap: 6px; }
-                        .pond-svg-canvas { width: 100%; max-width: 440px; background: white; border: 2px solid #CBD5E1; border-radius: 12px; display: block; margin: 0 auto; box-shadow: 0 6px 16px rgba(0,0,0,0.02); }
-                        .labels-legend-row { text-align: center; margin-top: 18px; font-size: 1.05rem; font-weight: 600; color: #334155; line-height: 1.6; background: #FFFFFF; padding: 16px; border-radius: 12px; border: 1px solid #E2E8F0; margin-bottom: 20px; }
+                        .palette-row-desk { display: flex; gap: 14px; padding: 10px 0; margin-bottom: 24px; align-items: center; justify-content: flex-start; }
+                        .crayon-option { width: 44px; height: 42px; border-radius: 12px; cursor: pointer; border: 2px solid transparent; transition: all 0.15s ease; font-weight: 800; color: white; display: flex; align-items: center; justify-content: center; font-size: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+                        .crayon-option:hover { transform: translateY(-2px); }
+                        .crayon-option.selected-crayon { border-color: #1E293B; transform: translateY(-3px) scale(1.08); box-shadow: 0 6px 14px rgba(0,0,0,0.15); }
+                        
+                        /* THE DYNAMIC CHAMELEON INTERACTIVE CANVAS BOX */
+                        .chameleon-playboard-stage { width: 100%; min-height: 380px; border-radius: 24px; position: relative; margin-bottom: 32px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+                        .fluid-vector-renderer { width: 100%; height: 100%; min-height: 380px; display: block; }
+                        .playboard-prose-container { font-size: 1.12rem; line-height: 1.75; color: #475569; margin-bottom: 32px; padding: 0 4px; }
                     </style>
-<!-- Box 14 of 21: Dynamic S-K-E Chameleon Interactive Vector Canvas Stages -->
-                    <div class="ske-games-box" id="skeElementaryInteractions">
-                        <div id="elMathWorkspace" style="display: block;">
-                            <div class="ske-activity-header">🔢 Interactive Counting Chart Grid</div>
-                            <div class="crayon-box-wrapper">
-                                <span style="font-weight: 700; color: #475569; font-size: 0.9rem;">Number Palette Nodes:</span>
-                                <div class="crayon-option selected-crayon" style="background:#2ECC71; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.8rem;" onclick="pickCrayonColor(this, '#2ECC71')">1</div>
-                                <div class="crayon-option" style="background:#F1C40F; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.8rem;" onclick="pickCrayonColor(this, '#F1C40F')">2</div>
-                                <div class="crayon-option" style="background:#3498DB; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.8rem;" onclick="pickCrayonColor(this, '#3498DB')">3</div>
-                            </div>
-                            <div style="position: relative; width: 100%; max-width: 440px; margin: 0 auto;" id="chameleonCanvasStage">
-                                <svg class="pond-svg-canvas" viewBox="0 0 400 300" id="dynamicVectorStageNode" onclick="colorWorksheetSegment(event.target)"></svg>
-                                <div id="lblZone1" style="position: absolute; top: 20px; left: 25px; pointer-events: none; font-weight: 900; font-size: 1.1rem; color: #94A3B8;">Zone 1</div>
-                                <div id="lblZone2" style="position: absolute; top: 165px; left: 195px; pointer-events: none; font-weight: 900; font-size: 1.3rem; color: #64748B;">Zone 2</div>
-                                <div id="lblZone3" style="position: absolute; top: 58px; left: 193px; pointer-events: none; font-weight: 900; font-size: 1.1rem; color: #64748B;">Zone 3</div>
-                            </div>
+<!-- Box 14 of 21: Empty Vector Stage Screen Canvas Containers -->
+                    <div id="elMathWorkspace" style="display: block;">
+                        <div class="palette-row-desk">
+                            <span style="font-weight: 800; color: #64748B; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 8px;">Palette Nodes</span>
+                            <div class="crayon-option selected-crayon" style="background:#10B981;" onclick="pickCrayonColor(this, '#10B981')">1</div>
+                            <div class="crayon-option" style="background:#F59E0B;" onclick="pickCrayonColor(this, '#F59E0B')">2</div>
+                            <div class="crayon-option" style="background:#3B82F6;" onclick="pickCrayonColor(this, '#3B82F6')">3</div>
                         </div>
-<!-- Box 15 of 21: Science Track Drop Modules & Dark Hardware Logic Desks -->
-                        <div id="elScienceWorkspace" style="display: none;">
-                            <div class="ske-activity-header">🔬 Tactile Item Classification Desk</div>
-                            <div class="apple-counter-grid">
-                                <div class="apple-touch-card" onclick="this.classList.toggle('counted-apple')">🔬<br><b style="font-size:0.85rem; color:#475569;">Node A</b></div>
-                                <div class="apple-touch-card" onclick="this.classList.toggle('counted-apple')">🔬<br><b style="font-size:0.85rem; color:#475569;">Node B</b></div>
-                                <div class="apple-touch-card" onclick="this.classList.toggle('counted-apple')">🔬<br><b style="font-size:0.85rem; color:#475569;">Node C</b></div>
-                            </div>
+                        
+                        <!-- REMOVED OLD STERILE BOX: Replaced with Borderless Immersive Canvas Stage -->
+                        <div class="chameleon-playboard-stage" id="chameleonCanvasStage">
+                            <svg class="fluid-vector-renderer" viewBox="0 0 400 300" id="dynamicVectorStageNode" onclick="colorWorksheetSegment(event.target)">
+                                <!-- Dynamic shape path assets painted on the fly natively from database entries -->
+                            </svg>
                         </div>
                     </div>
-                    <div class="labels-legend-row" id="elProseBodyContainer">K-5 Content Desk</div>
-<!-- Box 16 of 21: Upper Bracket Matrix Structural Configuration Blocks -->
+<!-- Box 15 of 21: Science Track Drop Zones & Dark Hardware Console Desks -->
+                    <div id="elScienceWorkspace" style="display: none;">
+                        <div style="display: flex; gap: 16px; margin: 32px 0;">
+                            <div class="apple-touch-card" style="border: 2px dashed #CBD5E1; border-radius: 16px; padding: 24px; text-align: center; background: white; cursor: pointer; flex: 1;" onclick="this.classList.toggle('counted-apple')">🔬 <b style="color:#475569;">Analysis Node A</b></div>
+                            <div class="apple-touch-card" style="border: 2px dashed #CBD5E1; border-radius: 16px; padding: 24px; text-align: center; background: white; cursor: pointer; flex: 1;" onclick="this.classList.toggle('counted-apple')">🔬 <b style="color:#475569;">Analysis Node B</b></div>
+                        </div>
+                    </div>
+                    
+                    <div class="playboard-prose-container" id="elProseBodyContainer">Academic lesson text outlines loading...</div>
+<!-- Box 16 of 21: Hardware Terminal Desk Interface Classes -->
                     <div class="circuit-desk-panel" id="nativeComputationalCircuitConsole">
-                        <div class="circuit-desk-header" id="consoleHeaderObjective">💻 OBJECTIVE: COMPLETE LESSON GOALS</div>
+                        <div class="circuit-desk-header" id="consoleHeaderObjective">💻 OBJECTIVE REGISTER: WAITING FOR INGESTION PARAMETERS</div>
                         <div class="circuit-node-row">
                             <span class="premise-node-badge" id="premiseNodeA">[Premise A Node]</span>
-                            <span style="color: #A855F7; font-weight: bold;">➔ AND ➔</span>
+                            <span style="color: #8B5CF6; font-weight: 800; font-size: 0.9rem;">➔ LOGIC AND ➔</span>
                             <span class="premise-node-badge" id="premiseNodeB">[Premise B Node]</span>
                         </div>
-                        <div style="font-size: 0.85rem; color: #64748B; font-weight: bold;" id="circuitStatusTextLine">Circuit Logic Status: Awaiting parameters...</div>
+                        <div style="font-size: 0.88rem; color: #64748B; font-weight: 700; letter-spacing: 0.5px; margin-top: 8px;" id="circuitStatusTextLine">System Matrix: Awaiting validation triggers...</div>
                     </div>
                 </div>
-<!-- Box 17 of 21: Middle and High School Secondary Advanced Workspaces -->
+<!-- Box 17 of 21: Upper Grade Analytical Balance Workspace Components -->
                 <div id="middleSchoolWorkspaceView" style="display: none; width: 100%;">
-                    <div class="ms-textbook-prose" id="msProseBodyContainer">Middle School Loading...</div>
+                    <div class="ms-textbook-prose" id="msProseBodyContainer">Middle School Outlines Loading...</div>
                     <div class="ms-vocab-box">
-                        <div class="ms-vocab-title">📐 ALGEBRAIC BALANCER COMINATOR</div>
+                        <div class="ms-vocab-title">📐 SOUTH KOREAN COEFFICIENT BALANCER MATRIX</div>
                         <div class="concept-matching-row">
                             <span class="concept-term">Isolate Unknown Token Variable (X):</span>
-                            <input type="text" class="concept-input" id="middleSchoolExpressionBox" placeholder="Execute..." oninput="evaluateMiddleSchoolAnswer(this.value)">
+                            <input type="text" class="concept-input" id="middleSchoolExpressionBox" placeholder="Enter solution..." oninput="evaluateMiddleSchoolAnswer(this.value)">
                         </div>
                     </div>
                 </div>
 
                 <div id="highSchoolWorkspaceView" style="display: none; width: 100%;">
-                    <div class="hs-academic-viewport" id="hsProseBodyContainer">High School Advanced Academic Prose Loading...</div>
-                    <span class="hs-console-label">🏛️ ESTONIAN ARCHITECTURE THESIS MATRIX OPTIMIZER</span>
-                    <textarea class="hs-thesis-console" rows="4" placeholder="Input analytical summary evidence..." oninput="evaluateHighSchoolAnswer(this.value)"></textarea>
+                    <div class="hs-academic-viewport" id="hsProseBodyContainer">High School Advanced Case Material Loading...</div>
+                    <span class="hs-console-label">🏛️ ESTONIAN RHETORICAL CRITERIA OPTIMIZER</span>
+                    <textarea class="hs-thesis-console" rows="4" placeholder="Construct evidence summaries..." oninput="evaluateHighSchoolAnswer(this.value)"></textarea>
                 </div>
-                <button class="btn-submit-worksheet" onclick="alert('Student Workspace Transferred!')">SUBMIT WORKSHEET FOR GRADING ✨</button>
-            </div>
+                
+                <button class="btn-submit-worksheet" onclick="alert('Student Workspace File Transferred Successfully!')">SUBMIT MODULE CORE ✨</button>
+            </div> <!-- End Shield Wrapper -->
         </div>
-<!-- Box 18 of 21: Right Alternative Presentation Frame Layout Cards -->
+<!-- Box 18 of 21: Right Panel Reference laboratory Cards Framework -->
+        <!-- Right Presentation Frame: Parallel Reference Tracks -->
         <div class="right-alternative-track" id="rightComparativeWorkspace">
             <div class="comparison-headline-bar">🧬 WORLDVIEW TRACK REFERENCE LAB</div>
             <div id="liveComparisonContainer">
                 <div class="live-comparison-card">
-                    <div class="comparison-card-title">🔍 COMPARATIVE INSIGHT CONTEXT</div>
-                    <div class="comparison-card-text" id="comparativeContextLabel">Alternative frameworks display side-by-side.</div>
+                    <div class="comparison-card-title">🔍 COMPARATIVE INSIGHT MATRIX</div>
+                    <div class="comparison-card-text" id="comparativeContextLabel">Structural observations update natively side-by-side.</div>
                 </div>
                 <div class="live-comparison-card">
-                    <div class="comparison-card-title">📖 BIBLICAL TRUTH ALIGNMENT CORE</div>
-                    <div class="comparison-card-text" id="biblicalAlignmentLabel">Designed order models align logs.</div>
+                    <div class="comparison-card-title">📖 BIBLICAL TRUTH ALIGNMENT SYSTEM</div>
+                    <div class="comparison-card-text" id="biblicalAlignmentLabel">Designed order constants align cleanly across term parameters.</div>
                 </div>
             </div>
         </div>
     </div>
-<!-- Box 19 of 21: JavaScript Memory Registries & App State Variables -->
+<!-- Box 19 of 21: JavaScript Memory States & Grade Map Parameters -->
     <script>
         let audioClickCount = 0; 
-        let activeCrayonColor = "#2ECC71";
+        let activeCrayonColor = "#10B981";
         let coloredZonesTrackingSet = new Set();
         let consoleSuccessStringData = "⚡ CIRCUIT STATUS VERIFIES NODE ACTIVE";
         let consoleAudioFeedbackString = "Circuit status verifies node active.";
@@ -294,7 +291,7 @@
             }
         };
 </script>
-<!-- Box 20 of 21: Live Asynchronous Data Vault Fetch Pipelines & Vector Drawing Engines -->
+<!-- Box 20 of 21: Asynchronous Fetch Core & Dynamic Shape Canvas Generators -->
 <script>
         function enforceWorkspaceLockState() {
             audioClickCount = 0; coloredZonesTrackingSet.clear(); 
@@ -304,11 +301,12 @@
             const pNodeA = document.getElementById("premiseNodeA");
             const pNodeB = document.getElementById("premiseNodeB");
             if (document.getElementById("middleSchoolExpressionBox")) document.getElementById("middleSchoolExpressionBox").value = "";
+
             if (statusLine) { statusLine.style.color = "#64748B"; statusLine.innerText = "Circuit Logic Status: Awaiting S-K-E validation parameters..."; }
             if (pNodeA) { pNodeA.style.borderColor = "#475569"; pNodeA.style.color = "#64748B"; pNodeA.style.backgroundColor = "#1E293B"; pNodeA.innerText = "[Premise A Node]"; }
             if (pNodeB) { pNodeB.style.borderColor = "#475569"; pNodeB.style.color = "#64748B"; pNodeB.style.backgroundColor = "#1E293B"; pNodeB.innerText = "[Premise B Node]"; }
             if (shield) shield.classList.add("workspace-locked");
-            if (notice) { notice.style.backgroundColor = "#FEF2F2"; notice.style.borderColor = "#FCA5A5"; notice.style.color = "#EF4444"; notice.innerHTML = "⚠️ ATTENTION: You must click the 'Read Out Loud' button TWICE before this worksheet unlocks."; }
+            if (notice) { notice.style.backgroundColor = "#FFF1F2"; notice.style.color = "#DC2626"; notice.innerHTML = "⚠️ LOCK SHIELD ACTIVE: Listen to instruction guides twice to unlock."; }
         }
 
         function adaptPortalStyleBrackets() {
@@ -323,7 +321,7 @@
             const msView = document.getElementById("middleSchoolWorkspaceView");
             const hsView = document.getElementById("highSchoolWorkspaceView");
             if (group === "k5") {
-                document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(135deg, #E96B8B, #F9A86C)');
+                document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(135deg, #1E293B, #0F172A)');
                 elView.style.display = "block"; msView.style.display = "none"; hsView.style.display = "none";
             } else if (group === "68") {
                 document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(135deg, #2563EB, #1D4ED8)');
@@ -353,24 +351,23 @@
                     if (displayTarget) displayTarget.innerHTML = (data.lesson_body || "").replace(/###/g, "").replace(/\*\*/g, "");
                     document.getElementById("assignmentDirectionsLabel").innerHTML = `🎯 <strong>Instructions:</strong> ${data.interactive_assignment || 'Complete goals.'}`;
                     document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Summary:</strong> ${data.daily_assessment || 'Verify check.'}`;
+                    
                     if (data.worldview_track_matrices) {
                         document.getElementById("comparativeContextLabel").innerText = data.worldview_track_matrices.comparative_insight || "";
                         document.getElementById("biblicalAlignmentLabel").innerText = data.worldview_track_matrices.biblical_alignment || "";
                     }
+                    
+                    // CHAMELEON STAGE INJECTION CORE: Sweeps old elements away completely and renders dynamic custom paths
                     const canvasStage = document.getElementById("dynamicVectorStageNode");
                     if (canvasStage && data.frontend_rendering_blueprint && data.frontend_rendering_blueprint.vector_shapes_layout) {
                         canvasStage.innerHTML = ""; targetClicksToUnlock = data.frontend_rendering_blueprint.total_required_clicks_to_unlock || 3;
                         document.getElementById("chameleonCanvasStage").style.backgroundColor = data.frontend_rendering_blueprint.canvas_background_color || "#F1F5F9";
                         data.frontend_rendering_blueprint.vector_shapes_layout.forEach(shape => {
-                            let newEl = document.createElementNS("http://w3.org", shape.svg_type || "path");
+                            let newEl = document.createElementNS("http://w3.org", "path");
                             newEl.setAttribute("id", shape.element_id); newEl.setAttribute("fill", "#E2E8F0"); newEl.setAttribute("stroke", "#94A3B8"); newEl.setAttribute("stroke-width", "2"); newEl.setAttribute("style", "cursor: pointer; transition: fill 0.2s;");
                             if (shape.svg_path_data) newEl.setAttribute("d", shape.svg_path_data);
                             canvasStage.appendChild(newEl);
                         });
-                        const layouts = data.frontend_rendering_blueprint.vector_shapes_layout;
-                        if (layouts && layouts[0] && document.getElementById("lblZone1")) document.getElementById("lblZone1").innerText = layouts[0].label_overlay_text;
-                        if (layouts && layouts[1] && document.getElementById("lblZone2")) document.getElementById("lblZone2").innerText = layouts[1].label_overlay_text;
-                        if (layouts && layouts[2] && document.getElementById("lblZone3")) document.getElementById("lblZone3").innerText = layouts[2].label_overlay_text;
                     }
                     if (data.frontend_rendering_blueprint && data.frontend_rendering_blueprint.computational_console_parameters) {
                         const params = data.frontend_rendering_blueprint.computational_console_parameters;
@@ -384,7 +381,7 @@
                 }).catch(err => { document.getElementById("lessonTitleLabel").innerText = `Day ${day} Lesson Node`; });
         }
 </script>
-<!-- Box 21 of 21: Interaction Gate Closures, Evaluation Hooks and Timeline Build Initializers -->
+<!-- Box 21 of 21: Playboard Interaction Closure Loops and Master Initializers -->
 <script>
         function colorWorksheetSegment(targetNode) {
             if (targetNode && (targetNode.id === 'canvasBgZone' || targetNode.id === 'canvasOvalZone' || targetNode.id === 'canvasCircleZone')) {
@@ -422,7 +419,7 @@
             for (const key in lookupGroup) {
                 const checkExp = new RegExp(`\\b(${key})\\b`, 'gi');
                 if (checkExp.test(currentContent)) {
-                    currentContent = currentContent.replace(checkExp, `<mark class="keyword-highlight" style="background-color: #FEF08A; padding: 0 4px; border-radius: 4px; font-weight: bold; color: #1E293B;">$1</mark>`);
+                    currentContent = currentContent.replace(checkExp, `<mark class="keyword-highlight">$1</mark>`);
                     textContainer.innerHTML = currentContent;
                     document.getElementById("comparativeContextLabel").innerText = lookupGroup[key];
                     document.getElementById("biblicalAlignmentLabel").innerText = `Worldview connection unblocked for key focus concept: ${key.toUpperCase()}`;
@@ -439,11 +436,11 @@
             stringData = stringData.replace(/📄/g, "").replace(/Summary:/gi, "").replace(/Instructions:/gi, "").replace(/🎯/g, "").replace(/⚡/g, "").trim();
             if (audioClickCount === 0) {
                 audioClickCount = 1;
-                if (notice) { notice.style.backgroundColor = "#FEF3C7"; notice.style.borderColor = "#FCD34D"; notice.style.color = "#D97706"; notice.innerHTML = "⚡ STEP 1 COMPLETE. Click once more to unlock!"; }
+                if (notice) { notice.style.backgroundColor = "#FEF3C7"; notice.style.color = "#D97706"; notice.innerHTML = "⚡ STEP 1 COMPLETE. Click once more to unlock!"; }
             } else {
                 audioClickCount = 2;
                 if (shield) shield.classList.remove("workspace-locked");
-                if (notice) { notice.style.backgroundColor = "#D1FAE5"; notice.style.borderColor = "#A7F3D0"; notice.style.color = "#059669"; notice.innerHTML = "✅ WORKSHEET UNLOCKED."; }
+                if (notice) { notice.style.backgroundColor = "#D1FAE5"; notice.style.color = "#059669"; notice.innerHTML = "✅ WORKSHEET UNLOCKED."; }
             }
             const utter = new SpeechSynthesisUtterance(stringData);
             utter.rate = 0.95; window.speechSynthesis.speak(utter);

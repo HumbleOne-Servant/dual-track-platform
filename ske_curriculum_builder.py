@@ -27,7 +27,7 @@ STANDARDS_VAULT = {
         "g4": "Fraction Equivalence, Multi-Digit Arithmetic Circuits, Angle Rotation Measures.",
         "g5": "Fractions Multi-Tier Operations, Coordinate Grid Cartesian Planes, Volume Constants.",
         "g6": "Ratios and Rates, Division of Fractions, Rational Numbers, Algebraic Expressions.",
-        "g7": "Proportional Relationships, Rational Operations, Multi-Step Linear Equations.",
+        "g7": "Proportional Relationships, Ratios, Rational Number Operations, Expressions and Equations.",
         "g8": "Radicals and Integer Exponents, Linear Functions, Pythagorean Theorem, Volume Profiles.",
         "g9": "Quadratic Functions, Linear Systems, Structural Modeling Functions, Matrix Transformations.",
         "g10": "Coordinate Geometry Proofs, Trigonometric Ratio Constants, Circle Theorem Layouts.",
@@ -50,62 +50,57 @@ STANDARDS_VAULT = {
         "g12": "Nuclear decay milestones, Quantum electron states, Organic molecular configurations."
     }
 }
-# Hardened SDK Data Parser: Native v1.0 Array Element Choice Extraction
+ART_BLUEPRINT_VAULT = {
+    1: {
+        "theme": "magical_forest",
+        "bg_color": "#ECFDF5",
+        "bg_path": "M 0 0 L 400 0 L 400 300 L 0 300 Z",
+        "container_path": "M 50,220 C 100,180 300,180 350,220 C 320,260 80,260 50,220 Z",
+        "target_path": "M 200,60 C 180,40 150,60 170,90 C 190,110 210,110 230,90 C 250,60 220,40 200,60 Z",
+        "bg_label": "Zone 1: The Magical Forest Field",
+        "container_label": "Zone 2: The Forest Stream Pond",
+        "target_label": "Zone 3: The Targeted Hidden Counting Leaf"
+    },
+    2: {
+        "theme": "butterfly_garden",
+        "bg_color": "#FFFDF2",
+        "bg_path": "M 10 10 L 390 10 L 390 290 L 10 290 Z",
+        "container_path": "M 200,130 Q 110,150 110,230 Q 200,270 290,230 Q 290,150 200,130 Z",
+        "target_path": "M 180,50 C 160,30 160,80 180,70 C 200,80 200,30 180,50 Z",
+        "bg_label": "Zone 1: The Sunny Garden Field",
+        "container_label": "Zone 2: The Butterfly Flower Patch",
+        "target_label": "Zone 3: The Flapping Counting Butterfly"
+    }
+}
 def call_openai_ske_model(prompt_text):
     client = OpenAI(api_key=API_KEY)
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
-                {
-                    "role": "system", 
-                    "content": (
-                        "You are an elite educational game designer and curriculum developer. You output data strictly inside a single, raw, valid JSON object matching the requested schema. "
-                        "Never write introductory remarks, markdown code ticks (like ```json), or conversational footnotes. Keep parameters structurally perfect."
-                    )
-                },
+                {"role": "system", "content": "You are an expert curriculum writer. You output content strictly inside valid JSON objects matching the user blueprint."},
                 {"role": "user", "content": prompt_text}
             ],
             response_format={"type": "json_object"},
             temperature=0.4
         )
-        # FIXED PERMANENTLY: Enforced explicit choices[0] array index mapping configuration
         return response.choices[0].message.content.strip()
     except Exception as e:
         print(f"   [API Handshake Postponed] Delaying thread: {str(e)}")
         return None
 def build_prompt_blueprint(group, grade, subject, unit, day):
-    standards_focus = STANDARDS_VAULT.get(subject, {}).get(grade, f"Advanced Grade {grade.upper()} standard curriculum milestones and logical ordering proofs.")
+    standards_focus = STANDARDS_VAULT.get(subject, {}).get(grade, f"Advanced Grade {grade.upper()} milestones.")
+    art_meta = ART_BLUEPRINT_VAULT.get(day, ART_BLUEPRINT_VAULT[1])
     
     if group == "k5":
         interaction_key = "tactile_svg_matrix"
-        assignment_prompt = (
-            "Write direct workbook instructions for an elementary child. Invent a completely unique real-world visual story scene "
-            "(such as a colorful garden with butterflies, a coral reef with fish, or a space galaxy with rockets). Tell the child exactly what numbered palette crayon node to select "
-            "and which specific story object zone (Zone 1, Zone 2, or Zone 3) to fill on their canvas chart to complete the visual count."
-        )
-        # CRITICAL HARDENING: Gives the AI rigid structural examples so it outputs real storytelling nouns, not code instructions
+        assignment_prompt = f"Imagine you are exploring an interactive lesson centered around {art_meta['theme'].replace('_', ' ')}. Write clear, child-friendly instructions telling the student exactly what action palette crayon number node to pick to select their element tool, and command them to color {art_meta['bg_label']}, {art_meta['container_label']}, and {art_meta['target_label']} to verify the final concept count value."
         blueprint_prompt = f"""
-        "canvas_background_color": "#E0F2FE",
+        "canvas_background_color": "{art_meta['bg_color']}",
         "vector_shapes_layout": [
-            {{
-                "element_id": "canvasBgZone", 
-                "svg_type": "rect", 
-                "label_overlay_text": "Zone 1: [Invent a direct story setting noun here, do NOT use generic words like Name or Story. Example: 'The Colorful Garden Field']",
-                "svg_path_data": "M 10 10 L 390 10 L 380 290 L 10 290 Z"
-            }},
-            {{
-                "element_id": "canvasOvalZone", 
-                "svg_type": "ellipse", 
-                "label_overlay_text": "Zone 2: [Invent a direct container object noun here. Example: 'The Red Rose Petals']",
-                "svg_path_data": "M 70 180 A 130 70 0 1 0 330 180 A 130 70 0 1 0 70 180 Z"
-            }},
-            {{
-                "element_id": "canvasCircleZone", 
-                "svg_type": "circle", 
-                "label_overlay_text": "Zone 3: [Invent a direct countable target item noun here. Example: 'The Flapping Butterflies']",
-                "svg_path_data": "M 170 70 A 30 30 0 1 0 230 70 A 30 30 0 1 0 170 70 Z"
-            }}
+            {{"element_id": "canvasBgZone", "svg_type": "path", "label_overlay_text": "{art_meta['bg_label']}", "svg_path_data": "{art_meta['bg_path']}"}},
+            {{"element_id": "canvasOvalZone", "svg_type": "path", "label_overlay_text": "{art_meta['container_label']}", "svg_path_data": "{art_meta['container_path']}"}},
+            {{"element_id": "canvasCircleZone", "svg_type": "path", "label_overlay_text": "{art_meta['target_label']}", "svg_path_data": "{art_meta['target_path']}"}}
         ],
         "computational_console_parameters": {{
             "console_objective_label": "GENERATE SET MATRIX: VERIFY YOUR DAILY STORY VARIABLES",
@@ -117,11 +112,7 @@ def build_prompt_blueprint(group, grade, subject, unit, day):
         """
     elif group == "68":
         interaction_key = "algebraic_balancer_grid"
-        assignment_prompt = (
-            f"Write rigorous analytical instructions for a Middle School student tackling {standards_focus}. Command them to evaluate "
-            "the mathematical equation or data tracking chart, isolate the balanced sum constants step-by-step, and input the precise solution integer "
-            "directly into the 'Isolate Unknown Token Variable (X)' console input text box to unblock the logic loops."
-        )
+        assignment_prompt = f"Write clear instructions directing a Middle School student to calculate the balanced system constant for this specific Day {day} equation, and type their isolated variable directly into the variable box."
         blueprint_prompt = f"""
         "canvas_background_color": "#FAFBFD",
         "vector_shapes_layout": [],
@@ -135,23 +126,18 @@ def build_prompt_blueprint(group, grade, subject, unit, day):
         """
     else:
         interaction_key = "thesis_optimizer_console"
-        assignment_prompt = (
-            f"Write advanced academic instructions for a High School student executing {standards_focus}. Command them to analyze "
-            "the structural proof or thesis statement layout, formulate a multi-paragraph analytical summary evidence case study, and input "
-            "their logical assertion validation strings directly into the Estonian Matrix Optimizer text arena."
-        )
+        assignment_prompt = f"Write advanced instructions commanding a High School student to review the layout statements and input an evidentiary proof summary into the matrix analyzer text arena."
         blueprint_prompt = f"""
         "canvas_background_color": "#0F172A",
         "vector_shapes_layout": [],
         "computational_console_parameters": {{
-            "console_objective_label": "RHETORICAL MATRIX OPTIMIZER: CONSTRUCT AND VALIDATE STRUCTURAL EVIDENCE CASE STUDY",
+            "console_objective_label": "RHETORICAL MATRIX OPTIMIZER: CONSTRUCT EVIDENCE CASE STUDY",
             "premise_a_label": "Validate Assertion Case",
             "premise_b_label": "Lock Logic Constants",
             "console_success_message": "⚡ CIRCUIT STATUS VERIFIES ARCHITECTURE SECURED: THESIS PROOF Day {day} OPERATIONAL",
             "console_audio_feedback_string": "Node verified"
         }}
         """
-
     return f"""
     Generate an unbendable, production-ready S-K-E data node for Grade {grade.upper()}, Subject Track: {subject}, Day {day}.
     Active Academic Standard Focus Milestone: {standards_focus}
@@ -187,18 +173,15 @@ def build_prompt_blueprint(group, grade, subject, unit, day):
     """
 def run_mass_vault_generation(start_day=1, end_day=2):
     if not API_KEY:
-        print("❌ ERROR: The environment variable 'OPENAI_API_KEY' is missing on this machine.")
+        print("❌ ERROR: OpenAI API key missing.")
         return
-        
     print("========================================================================")
-    print("🤖 LAUNCHING UNIVERSAL ALL-GRADE GENERATIVE S-K-E INGESTION ENGINE")
-    print(f"Generating exactly {end_day - start_day + 1} days per subject for ALL 13 Grade tracks...")
+    print("🤖 LAUNCHING PATH VECTOR GENERATIVE INGESTION ENGINE")
     print("========================================================================")
     for group, grades in GROUPS_MAPPING.items():
         for grade in grades:
             for subject in SUBJECTS:
                 for day_num in range(start_day, end_day + 1):
-                    
                     unit = "unit_1_foundations"
                     if day_num > 45 and day_num <= 90: unit = "unit_2_shapes_spaces"
                     elif day_num > 90 and day_num <= 135: unit = "unit_3_weather_seasons"
@@ -206,22 +189,19 @@ def run_mass_vault_generation(start_day=1, end_day=2):
                     
                     folder_path = os.path.join(DATABASE_ROOT, group, grade, subject, unit)
                     os.makedirs(folder_path, exist_ok=True)
-                    
                     target_file = os.path.join(folder_path, f"day_{day_num}.json")
                     
-                    print(f"⚙️ Formatting Age-Appropriate Node: [{grade.upper()}] -> [{subject.upper()}] -> Day {day_num}")
+                    print(f"🎨 Injecting Graphic Vector Artwork: [{grade.upper()}] -> [{subject.upper()}] -> Day {day_num}")
                     prompt = build_prompt_blueprint(group, grade, subject, unit, day_num)
                     raw_json = call_openai_ske_model(prompt)
-                    
                     if raw_json:
                         try:
                             parsed_data = json.loads(raw_json)
                             with open(target_file, 'w', encoding='utf-8') as f:
                                 json.dump(parsed_data, f, indent=4, ensure_ascii=False)
-                            print(f"   ✨ Grade {grade.upper()} Day {day_num} Secured.")
+                            print(f"   ✅ Upgraded Node Written Successfully.")
                         except Exception as parse_error:
                             print(f"   ❌ Formatting anomaly, skipping node: {str(parse_error)}")
-                            
                     time.sleep(1.2)
 
 if __name__ == "__main__":
