@@ -112,7 +112,7 @@
             display: flex;
             justify-content: space-between;
             border-bottom: 2px dashed #E2E8F0;
-            padding-bottom: 16px;
+            padding-bottom: 14px;
             margin-bottom: 24px;
             font-size: 0.88rem;
             color: #64748B;
@@ -203,7 +203,7 @@
             </div>
             
             <div class="interactive-workspace-shield workspace-locked" id="lockShieldWrapper">
-<!-- Box 7 of 12: Elementary Bracket Layout Modules (Tactile CPA Math Workdesks) -->
+<!-- Box 7 of 12: Elementary Bracket Layout Modules (Fully Native Integrated Circuit Desk) -->
                 <!-- Bracket Layer 1: Elementary School Dashboard Content Views -->
                 <div id="elementaryWorkspaceView" style="display: block; width: 100%;">
                     <style>
@@ -214,11 +214,17 @@
                         .ske-games-box { border: 2px solid #CBD5E1; border-radius: 16px; padding: 20px; background: #F8FAFC; min-height: 300px; margin-bottom: 20px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.01); }
                         .ske-activity-header { font-size: 0.85rem; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px dashed #E2E8F0; display: flex; align-items: center; gap: 6px; }
                         .pond-svg-canvas { width: 100%; max-width: 440px; background: white; border: 2px solid #CBD5E1; border-radius: 12px; display: block; margin: 0 auto; box-shadow: 0 6px 16px rgba(0,0,0,0.02); }
-                        .labels-legend-row { text-align: center; margin-top: 18px; font-size: 1.05rem; font-weight: 600; color: #334155; line-height: 1.6; background: #FFFFFF; padding: 16px; border-radius: 12px; border: 1px solid #E2E8F0; }
+                        .labels-legend-row { text-align: center; margin-top: 18px; font-size: 1.05rem; font-weight: 600; color: #334155; line-height: 1.6; background: #FFFFFF; padding: 16px; border-radius: 12px; border: 1px solid #E2E8F0; margin-bottom: 20px; }
                         .apple-counter-grid { display: flex; gap: 14px; justify-content: center; margin: 24px 0; }
                         .apple-touch-card { border: 3px solid #CBD5E1; border-radius: 18px; padding: 18px; width: 75px; text-align: center; background: white; cursor: pointer; font-size: 1.25rem; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
                         .apple-touch-card:hover { transform: translateY(-2px); border-color: #94A3B8; }
                         .apple-touch-card.counted-apple { border-color: #10B981; background-color: #ECFDF5; transform: translateY(-5px); box-shadow: 0 8px 16px rgba(16, 185, 129, 0.15); }
+                        
+                        /* Native Circuit Desk Node Styling Keys */
+                        .circuit-desk-panel { background: #0F172A; color: #38BDF8; padding: 20px; border-radius: 14px; font-family: monospace; margin-top: 24px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); border: 1px solid #1E293B; }
+                        .circuit-desk-header { color: #64748B; border-bottom: 1px solid #1E293B; padding-bottom: 6px; margin-bottom: 14px; font-size: 0.85rem; font-weight: bold; letter-spacing: 0.5px; }
+                        .circuit-node-row { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+                        .premise-node-badge { background: #1E293B; padding: 6px 12px; border-radius: 6px; border: 2px solid #475569; color: #64748B; font-weight: bold; transition: all 0.25s ease; }
                     </style>
                     
                     <div class="ske-games-box" id="skeElementaryInteractions">
@@ -251,7 +257,19 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="labels-legend-row" id="elProseBodyContainer">K-5 Elementary Content Node Desk</div>
+
+                    <!-- FIXED NATIVE INJECTION: The dark console is now a structural, trackable HTML module -->
+                    <div class="circuit-desk-panel" id="nativeComputationalCircuitConsole">
+                        <div class="circuit-desk-header">💻 COMPUTATIONAL LOGIC NODE CIRCUIT DESK</div>
+                        <div class="circuit-node-row">
+                            <span class="premise-node-badge" id="premiseNodeA">[Premise A Node]</span>
+                            <span style="color: #A855F7; font-weight: bold;">➔ AND ➔</span>
+                            <span class="premise-node-badge" id="premiseNodeB">[Premise B Node]</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #475569; id='circuitStatusTextLine'">Circuit Logic Status: Awaiting S-K-E validation parameters...</div>
+                    </div>
                 </div>
 <!-- Box 8 of 12: Middle & High School Dashboard Interactive Environments -->
                 <!-- Bracket Layer 2: Middle School Dashboard Content Views -->
@@ -394,12 +412,15 @@
             if (group === "k5") {
                 document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(135deg, #E96B8B, #F9A86C)');
                 elView.style.display = "block"; msView.style.display = "none"; hsView.style.display = "none";
+                document.getElementById("nativeComputationalCircuitConsole").style.display = "block";
             } else if (group === "68") {
                 document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(135deg, #2563EB, #1D4ED8)');
                 elView.style.display = "none"; msView.style.display = "block"; hsView.style.display = "none";
+                document.getElementById("nativeComputationalCircuitConsole").style.display = "none";
             } else {
                 document.documentElement.style.setProperty('--bar-gradient', 'linear-gradient(135deg, #0F172A, #1E293B)');
                 elView.style.display = "none"; msView.style.display = "none"; hsView.style.display = "block";
+                document.getElementById("nativeComputationalCircuitConsole").style.display = "none";
             }
             enforceWorkspaceLockState();
             loadLiveDatabaseFile();
@@ -447,10 +468,6 @@
                         fullBodyText = fullBodyText.replace(/###/g, "").replace(/\*\*/g, "").replace(/\*/g, "");
 
                         displayTarget.innerHTML = fullBodyText;
-                        if (typeof drawComputationalLogicSandbox === "function") {
-                            drawComputationalLogicSandbox(displayTarget.id);
-                        }
-
                         document.getElementById("assignmentDirectionsLabel").innerHTML = `🎯 <strong>Workbook Instructions:</strong> ${data.interactive_assignment || 'Match the colors to the numbers.'}`;
                         document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> ${rawAssessmentText || 'Complete your verification check.'}`;
                     }
@@ -475,24 +492,35 @@
                     let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
                     if (displayTarget) {
                         displayTarget.innerHTML = `Let's practice counting sets with accuracy. Today we look at how numbers represent real items. Match your colors to the numbers inside the shape layouts to complete your assignment goals!`;
-                        if (typeof drawComputationalLogicSandbox === "function") {
-                            drawComputationalLogicSandbox(displayTarget.id);
-                        }
                     }
                 });
         }
 <!-- Box 12 of 12: Speech Synthesis Engines & Global App Build Initializers -->
         function colorWorksheetSegment(node) {
-            if (node && (node.tagName === 'rect' || node.tagName === 'ellipse' || node.tagName === 'circle' || node.tagName === 'path')) {
+            // FIXED EXTRACTION: Target actual explicit ID elements built natively inside Box 7 html layers
+            if (node && (node.id === 'canvasBgZone' || node.id === 'canvasOvalZone' || node.id === 'canvasCircleZone')) {
                 node.setAttribute('fill', activeCrayonColor);
                 
-                const consoleStatusText = document.querySelector("#leftCoreWorkspace div[style*='background: #0F172A'] div[style*='font-size: 0.8rem']")
-                                       || document.querySelector(".left-core-track div[style*='background: #0F172A'] div[style*='font-size: 0.8rem']");
-                
-                if (consoleStatusText) {
-                    consoleStatusText.style.color = "#38BDF8";
-                    consoleStatusText.style.fontWeight = "bold";
-                    consoleStatusText.innerHTML = "⚡ CIRCUIT STATUS: ONE-TO-ONE CORRESPONDENCE VERIFIED [SET DATA = 1 NODE ACTIVE]";
+                // Natively access explicit structural node ID tokens directly 
+                const pNodeA = document.getElementById("premiseNodeA");
+                const pNodeB = document.getElementById("premiseNodeB");
+                const statusConsoleLine = document.getElementById("nativeComputationalCircuitConsole").querySelector("div:last-child");
+
+                if (pNodeA && pNodeB && statusConsoleLine) {
+                    // Turn Premise A Glowing Green
+                    pNodeA.style.borderColor = "#10B981";
+                    pNodeA.style.color = "#10B981";
+                    pNodeA.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
+
+                    // Turn Premise B Glowing Purple
+                    pNodeB.style.borderColor = "#A855F7";
+                    pNodeB.style.color = "#A855F7";
+                    pNodeB.style.backgroundColor = "rgba(168, 85, 247, 0.15)";
+
+                    // Update terminal string message
+                    statusConsoleLine.style.color = "#38BDF8";
+                    statusConsoleLine.style.fontWeight = "bold";
+                    statusConsoleLine.innerHTML = "⚡ CIRCUIT STATUS: ONE-TO-ONE CORRESPONDENCE VERIFIED [SET DATA = 1 NODE ACTIVE]";
                 }
             }
         }
@@ -565,6 +593,5 @@
 
         initializeGlobal180DayTimeline();
     </script>
-    <script src="global_standards.js"></script>
 </body>
 </html>
