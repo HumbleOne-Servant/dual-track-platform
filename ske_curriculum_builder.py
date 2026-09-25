@@ -44,7 +44,8 @@ def call_openai_ske_model(prompt_text):
             response_format={"type": "json_object"},
             temperature=0.5
         )
-        return response.choices.message.content.strip()
+        # FIXED PROACTIVELY: Absolute explicit array index mapping to conform with modern SDKs
+        return response.choices[0].message.content.strip()
     except Exception as e:
         print(f"   [API Handshake Postponed] Delaying thread: {str(e)}")
         return None
@@ -52,6 +53,25 @@ def call_openai_ske_model(prompt_text):
 def build_prompt_blueprint(group, grade, subject, unit, day):
     standards_focus = STANDARDS_VAULT.get(subject, {}).get(grade, "Age-appropriate national curriculum guidelines and logical ordering proofs.")
     
+    if group == "k5":
+        activity_instruction_rule = (
+            "Write direct instructions for an elementary child. Tell them exactly what numbered crayon node (1, 2, or 3) "
+            "to select from their palette box and which specific story object zone (Zone 1, Zone 2, or Zone 3) to fill to complete the visual count."
+        )
+        interaction_key = "tactile_svg_matrix"
+    elif group == "68":
+        activity_instruction_rule = (
+            "Write clear instructions for a Middle School student. Command them to analyze the textbook equation or science data tracking line, "
+            "formulate the balanced sum step-by-step, and input the precise solution integer directly into the 'Isolate Unknown Token Variable (X)' console input box."
+        )
+        interaction_key = "algebraic_balancer_grid"
+    else:
+        activity_instruction_rule = (
+            "Write advanced academic instructions for a High School student. Command them to analyze the thesis layout statements "
+            "and input a multi-paragraph analytical summary evidence proof directly into the Estonian Matrix Optimizer text arena."
+        )
+        interaction_key = "thesis_optimizer_console"
+
     return f"""
     Generate an unbendable, production-ready S-K-E data node for Grade {grade.upper()}, Subject Track: {subject}, Day {day}.
     Target Academic Standard Focus Milestone: {standards_focus}
@@ -68,11 +88,11 @@ def build_prompt_blueprint(group, grade, subject, unit, day):
         "lesson_title": "Grade {grade.upper()} {subject.replace('_', ' ').title()} - Day {day} (SKE Edition)",
         
         "lesson_body": "Write a 3-sentence textbook story introducing today's concept. You MUST explicitly name and weave your newly invented real-world objects and the three screen zones into the narrative.",
-        "interactive_assignment": "Provide direct instructions telling the child exactly what numbered palette crayon node to select and which specific story object zone (Zone 1, Zone 2, or Zone 3) to fill to complete the visual count.",
+        "interactive_assignment": "Provide direct instructions telling the child exactly what action parameters or story object zones (Zone 1, Zone 2, or Zone 3) to choose or target to complete the milestone task.",
         "daily_assessment": "State a direct, short check-out problem question that tests ownership of this day's milestone.",
         
         "frontend_rendering_blueprint": {{
-            "active_interaction_type": "tactile_svg_matrix",
+            "active_interaction_type": "{interaction_key}",
             "total_required_clicks_to_unlock": 3,
             "canvas_background_color": "Provide a unique, theme-appropriate custom pastel hex color code matching your story environment background mood",
             "vector_shapes_layout": [
@@ -113,23 +133,19 @@ def build_prompt_blueprint(group, grade, subject, unit, day):
     }}
     """
 
-def run_mass_vault_generation(start_day=2, end_day=4):
+def run_mass_vault_generation(start_day=2, end_day=3):
     if not API_KEY:
         print("❌ ERROR: The environment variable 'OPENAI_API_KEY' is missing on this machine.")
         return
         
     print("========================================================================")
-    print("🤖 LAUNCHING GENERATIVE VISUAL STORY INGESTION ENGINE")
-    print(f"Generating Days: {start_day} to {end_day} across Grade Tracks...")
+    print("🤖 LAUNCHING MULTI-GRADE GENERATIVE VISUAL STORY INGESTION ENGINE")
+    print(f"Generating exactly {end_day - start_day + 1} days per subject across all grade brackets...")
     print("========================================================================")
     
     for group, grades in GROUPS_MAPPING.items():
-        # Focus on Kindergarten/K5 to lock down our test pass first
-        if group != "k5": continue 
         for grade in grades:
-            if grade != "gk": continue
             for subject in SUBJECTS:
-                if subject != "mathematics": continue
                 for day_num in range(start_day, end_day + 1):
                     
                     unit = "unit_1_foundations"
@@ -138,7 +154,7 @@ def run_mass_vault_generation(start_day=2, end_day=4):
                     
                     target_file = os.path.join(folder_path, f"day_{day_num}.json")
                     
-                    print(f"🎨 Illustrating SKE Story Node: Day {day_num}")
+                    print(f"🎨 Illustrating SKE Story Node: [{grade.upper()}] -> [{subject.upper()}] -> Day {day_num}")
                     prompt = build_prompt_blueprint(group, grade, subject, unit, day_num)
                     raw_json = call_openai_ske_model(prompt)
                     
@@ -147,11 +163,12 @@ def run_mass_vault_generation(start_day=2, end_day=4):
                             parsed_data = json.loads(raw_json)
                             with open(target_file, 'w', encoding='utf-8') as f:
                                 json.dump(parsed_data, f, indent=4, ensure_ascii=False)
-                            print(f"   ✨ Day {day_num} Story Environment Generated Successfully.")
+                            print(f"   ✨ Day {day_num} Story Node Written Successfully.")
                         except Exception as parse_error:
                             print(f"   ❌ Formatting anomaly, skipping node: {str(parse_error)}")
                             
-                    time.sleep(1.0)
+                    time.sleep(1.2) # Steady pipeline cadence control
 
 if __name__ == "__main__":
-    run_mass_vault_generation(start_day=2, end_day=4)
+    # CONSTRAINT LOCKED: Loops exactly 2 unique files (Day 2 and Day 3) for all grade brackets and subjects
+    run_mass_vault_generation(start_day=2, end_day=3)
