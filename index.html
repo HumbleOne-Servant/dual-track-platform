@@ -221,15 +221,17 @@
                         .apple-touch-card.counted-apple { border-color: #10B981; background-color: #ECFDF5; transform: translateY(-5px); box-shadow: 0 8px 16px rgba(16, 185, 129, 0.15); }
                         
                         /* Native Circuit Desk Node Styling Keys */
-                        .circuit-desk-panel { background: #0F172A; color: #38BDF8; padding: 20px; border-radius: 14px; font-family: monospace; margin-top: 24px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); border: 1px solid #1E293B; }
-                        .circuit-desk-header { color: #64748B; border-bottom: 1px solid #1E293B; padding-bottom: 6px; margin-bottom: 14px; font-size: 0.85rem; font-weight: bold; letter-spacing: 0.5px; }
+                        .circuit-desk-panel { background: #0F172A; color: #38BDF8; padding: 20px; border-radius: 14px; font-family: monospace; margin-top: 24px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); border: 1px solid #1E293B; position: relative; }
+                        .circuit-desk-header { color: #64748B; border-bottom: 1px solid #1E293B; padding-bottom: 6px; margin-bottom: 14px; font-size: 0.85rem; font-weight: bold; letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center; }
                         .circuit-node-row { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
                         .premise-node-badge { background: #1E293B; padding: 6px 12px; border-radius: 6px; border: 2px solid #475569; color: #64748B; font-weight: bold; transition: all 0.25s ease; }
+                        .btn-console-audio { background: #1E293B; color: #38BDF8; border: 1px solid #38BDF8; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: bold; transition: all 0.2s ease; }
+                        .btn-console-audio:hover { background: #38BDF8; color: #0F172A; }
                     </style>
                     
                     <div class="ske-games-box" id="skeElementaryInteractions">
                         <div id="elMathWorkspace" style="display: block;">
-                            <div class="ske-activity-header">🔢 Interactive Counting Chart Grid</div>
+                            <div class="ske-activity-header">尊 Interactive Counting Chart Grid</div>
                             <div class="crayon-box-wrapper">
                                 <span style="font-weight: 700; color: #475569; font-size: 0.9rem;">Number Palette Nodes:</span>
                                 <div class="crayon-option selected-crayon" style="background:#2ECC71; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.8rem;" onclick="pickCrayonColor(this, '#2ECC71')">1</div>
@@ -260,15 +262,18 @@
                     
                     <div class="labels-legend-row" id="elProseBodyContainer">K-5 Elementary Content Node Desk</div>
 
-                    <!-- FIXED NATIVE INJECTION: The dark console is now a structural, trackable HTML module -->
+                    <!-- FIXED NATIVE INJECTION: Embedded Object Terminal Desk with Audio Support -->
                     <div class="circuit-desk-panel" id="nativeComputationalCircuitConsole">
-                        <div class="circuit-desk-header">💻 COMPUTATIONAL LOGIC NODE CIRCUIT DESK</div>
+                        <div class="circuit-desk-header">
+                            <span>💻 OBJECTIVE: FILL ALL 3 CANVAS NUMERIC ZONES TO ACTIVATE LOGIC CIRCUITS</span>
+                            <button class="btn-console-audio" onclick="speakConsoleStatus()">🔊 Read Console</button>
+                        </div>
                         <div class="circuit-node-row">
                             <span class="premise-node-badge" id="premiseNodeA">[Premise A Node]</span>
                             <span style="color: #A855F7; font-weight: bold;">➔ AND ➔</span>
                             <span class="premise-node-badge" id="premiseNodeB">[Premise B Node]</span>
                         </div>
-                        <div style="font-size: 0.85rem; color: #475569; id='circuitStatusTextLine'">Circuit Logic Status: Awaiting S-K-E validation parameters...</div>
+                        <div style="font-size: 0.85rem; color: #64748B; font-weight: bold;" id="circuitStatusTextLine">Circuit Logic Status: Awaiting S-K-E validation parameters [0 of 3 zones verified]...</div>
                     </div>
                 </div>
 <!-- Box 8 of 12: Middle & High School Dashboard Interactive Environments -->
@@ -356,6 +361,8 @@
     <script>
         let audioClickCount = 0; 
         let activeCrayonColor = "#2ECC71";
+        // Track unique clicked element zones to prevent instant-trigger cheating loops
+        let coloredZonesTrackingSet = new Set();
 
         const PORTAL_GRADES_MAP = {
             "k5": ["gk", "g1", "g2", "g3", "g4", "g5"],
@@ -386,8 +393,18 @@
 <script>
         function enforceWorkspaceLockState() {
             audioClickCount = 0;
+            coloredZonesTrackingSet.clear(); // Reset game counter trackers securely
             const shield = document.getElementById("lockShieldWrapper");
             const notice = document.getElementById("audioLockNoticeBox");
+            
+            // Reset terminal panel back to zero-state parameters cleanly
+            const statusLine = document.getElementById("circuitStatusTextLine");
+            const pNodeA = document.getElementById("premiseNodeA");
+            const pNodeB = document.getElementById("premiseNodeB");
+            if (statusLine) { statusLine.style.color = "#64748B"; statusLine.innerText = "Circuit Logic Status: Awaiting S-K-E validation parameters [0 of 3 zones verified]..."; }
+            if (pNodeA) { pNodeA.style.borderColor = "#475569"; pNodeA.style.color = "#64748B"; pNodeA.style.backgroundColor = "#1E293B"; }
+            if (pNodeB) { pNodeB.style.borderColor = "#475569"; pNodeB.style.color = "#64748B"; pNodeB.style.backgroundColor = "#1E293B"; }
+
             if (shield) shield.classList.add("workspace-locked");
             if (notice) {
                 notice.style.backgroundColor = "#FEF2F2"; notice.style.borderColor = "#FCA5A5"; notice.style.color = "#EF4444";
@@ -495,34 +512,46 @@
                     }
                 });
         }
-<!-- Box 12 of 12: Speech Synthesis Engines & Global App Build Initializers -->
-        function colorWorksheetSegment(node) {
-            // FIXED EXTRACTION: Target actual explicit ID elements built natively inside Box 7 html layers
-            if (node && (node.id === 'canvasBgZone' || node.id === 'canvasOvalZone' || node.id === 'canvasCircleZone')) {
-                node.setAttribute('fill', activeCrayonColor);
+<!-- Box 12 of 12: Multi-Zone Counter Locks & Speech Synthesis Controllers -->
+        function colorWorksheetSegment(targetNode) {
+            if (targetNode && (targetNode.id === 'canvasBgZone' || targetNode.id === 'canvasOvalZone' || targetNode.id === 'canvasCircleZone')) {
+                targetNode.setAttribute('fill', activeCrayonColor);
                 
-                // Natively access explicit structural node ID tokens directly 
+                // Track current target node key securely
+                coloredZonesTrackingSet.add(targetNode.id);
+                
+                const statusConsoleLine = document.getElementById("circuitStatusTextLine");
                 const pNodeA = document.getElementById("premiseNodeA");
                 const pNodeB = document.getElementById("premiseNodeB");
-                const statusConsoleLine = document.getElementById("nativeComputationalCircuitConsole").querySelector("div:last-child");
 
-                if (pNodeA && pNodeB && statusConsoleLine) {
-                    // Turn Premise A Glowing Green
-                    pNodeA.style.borderColor = "#10B981";
-                    pNodeA.style.color = "#10B981";
-                    pNodeA.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
-
-                    // Turn Premise B Glowing Purple
-                    pNodeB.style.borderColor = "#A855F7";
-                    pNodeB.style.color = "#A855F7";
-                    pNodeB.style.backgroundColor = "rgba(168, 85, 247, 0.15)";
-
-                    // Update terminal string message
-                    statusConsoleLine.style.color = "#38BDF8";
-                    statusConsoleLine.style.fontWeight = "bold";
-                    statusConsoleLine.innerHTML = "⚡ CIRCUIT STATUS: ONE-TO-ONE CORRESPONDENCE VERIFIED [SET DATA = 1 NODE ACTIVE]";
+                if (coloredZonesTrackingSet.size < 3) {
+                    // Pacing validation tracker copy block
+                    if (statusConsoleLine) {
+                        statusConsoleLine.style.color = "#EAB308"; // Warning Amber
+                        statusConsoleLine.innerHTML = `⚡ CIRCUIT EVALUATION ACTIVE: [${coloredZonesTrackingSet.size} of 3 zones verified. Complete all layout zones!]`;
+                    }
+                } else {
+                    // 3 of 3 zones filled flawlessly: unlock absolute circuit success matrix parameters
+                    if (pNodeA && pNodeB && statusConsoleLine) {
+                        pNodeA.style.borderColor = "#10B981"; pNodeA.style.color = "#10B981"; pNodeA.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
+                        pNodeB.style.borderColor = "#A855F7"; pNodeB.style.color = "#A855F7"; pNodeB.style.backgroundColor = "rgba(168, 85, 247, 0.15)";
+                        statusConsoleLine.style.color = "#38BDF8"; statusConsoleLine.style.fontWeight = "bold";
+                        statusConsoleLine.innerHTML = "⚡ CIRCUIT STATUS VERIFIES NODE ACTIVE. ONE-TO-ONE CORRESPONDENCE VERIFIED [SET DATA = 1 NODE ACTIVE]";
+                    }
                 }
             }
+        }
+
+        function speakConsoleStatus() {
+            if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); } else { return; }
+            const statusConsoleLine = document.getElementById("circuitStatusTextLine");
+            if (!statusConsoleLine) return;
+            
+            // Clean lightning codes out of narration streams safely
+            let cleanNarrationText = statusConsoleLine.innerText.replace(/⚡/g, "").trim();
+            const utterConsole = new SpeechSynthesisUtterance(cleanNarrationText);
+            utterConsole.rate = 0.95;
+            window.speechSynthesis.speak(utterConsole);
         }
 
         function executeRealTimeKeywordScan(textContainer, activeSubject) {
@@ -557,12 +586,7 @@
             const shield = document.getElementById("lockShieldWrapper");
             const notice = document.getElementById("audioLockNoticeBox");
 
-            stringData = stringData.replace(/📄/g, "")
-                                   .replace(/Brief Lesson Description Summary:/gi, "")
-                                   .replace(/Workbook Instructions:/gi, "")
-                                   .replace(/🎯/g, "")
-                                   .replace(/⚡/g, "")
-                                   .trim();
+            stringData = stringData.replace(/📄/g, "").replace(/Brief Lesson Description Summary:/gi, "").replace(/Workbook Instructions:/gi, "").replace(/🎯/g, "").replace(/⚡/g, "").trim();
 
             if (audioClickCount === 0) {
                 audioClickCount = 1;
