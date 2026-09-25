@@ -503,12 +503,13 @@
                             canvasStage.appendChild(newEl);
                         });
 
-                        const layouts = data.frontend_rendering_blueprint.vector_shapes_layout;
-                        if (layouts && document.getElementById("lblZone1")) document.getElementById("lblZone1").innerText = layouts[0] ? layouts[0].label_overlay_text : "Zone 1";
-                        if (layouts && document.getElementById("lblZone2")) document.getElementById("lblZone2").innerText = layouts[1] ? layouts[1].label_overlay_text : "Zone 2";
-                        if (layouts && document.getElementById("lblZone3")) document.getElementById("lblZone3").innerText = layouts[2] ? layouts[2].label_overlay_text : "Zone 3";
-                    }
-
+                        // Paste inside loadLiveDatabaseFile() success pass loop to map labels correctly
+const layouts = data.frontend_rendering_blueprint.vector_shapes_layout;
+if (layouts && layouts.length >= 3) {
+    if (document.getElementById("lblZone1")) document.getElementById("lblZone1").innerText = layouts[0].label_overlay_text;
+    if (document.getElementById("lblZone2")) document.getElementById("lblZone2").innerText = layouts[1].label_overlay_text;
+    if (document.getElementById("lblZone3")) document.getElementById("lblZone3").innerText = layouts[2].label_overlay_text;
+}
                     if (data.frontend_rendering_blueprint && data.frontend_rendering_blueprint.computational_console_parameters) {
                         const params = data.frontend_rendering_blueprint.computational_console_parameters;
                         if (params.premise_a_label) document.getElementById("premiseNodeA").innerText = `[${params.premise_a_label}]`;

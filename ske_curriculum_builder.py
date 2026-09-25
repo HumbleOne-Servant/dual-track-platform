@@ -81,15 +81,31 @@ def build_prompt_blueprint(group, grade, subject, unit, day):
         interaction_key = "tactile_svg_matrix"
         assignment_prompt = (
             "Write direct workbook instructions for an elementary child. Invent a completely unique real-world visual story scene "
-            "(e.g., apples on a tree, stars in a constellation, or fish in a reef). Tell the child exactly what numbered palette crayon node to select "
+            "(such as a colorful garden with butterflies, a coral reef with fish, or a space galaxy with rockets). Tell the child exactly what numbered palette crayon node to select "
             "and which specific story object zone (Zone 1, Zone 2, or Zone 3) to fill on their canvas chart to complete the visual count."
         )
+        # CRITICAL HARDENING: Gives the AI rigid structural examples so it outputs real storytelling nouns, not code instructions
         blueprint_prompt = f"""
-        "canvas_background_color": "Provide a premium, soft pastel color hex matching your story environment background mood",
+        "canvas_background_color": "#E0F2FE",
         "vector_shapes_layout": [
-            {{"element_id": "canvasBgZone", "svg_type": "path", "label_overlay_text": "Zone 1: Name the large scene setting backdrop based on your story", "svg_path_data": "Clean SVG path string 'M...' outlining a simple setting backdrop background"}},
-            {{"element_id": "canvasOvalZone", "svg_type": "path", "label_overlay_text": "Zone 2: Name the primary container item based on your story", "svg_path_data": "Clean SVG path string 'M...' tracing a container target space"}},
-            {{"element_id": "canvasCircleZone", "svg_type": "path", "label_overlay_text": "Zone 3: Name the countable item unit value based on your story", "svg_path_data": "Clean SVG path string 'M...' drawing a standalone tracking counter shape"}}
+            {{
+                "element_id": "canvasBgZone", 
+                "svg_type": "rect", 
+                "label_overlay_text": "Zone 1: [Invent a direct story setting noun here, do NOT use generic words like Name or Story. Example: 'The Colorful Garden Field']",
+                "svg_path_data": "M 10 10 L 390 10 L 380 290 L 10 290 Z"
+            }},
+            {{
+                "element_id": "canvasOvalZone", 
+                "svg_type": "ellipse", 
+                "label_overlay_text": "Zone 2: [Invent a direct container object noun here. Example: 'The Red Rose Petals']",
+                "svg_path_data": "M 70 180 A 130 70 0 1 0 330 180 A 130 70 0 1 0 70 180 Z"
+            }},
+            {{
+                "element_id": "canvasCircleZone", 
+                "svg_type": "circle", 
+                "label_overlay_text": "Zone 3: [Invent a direct countable target item noun here. Example: 'The Flapping Butterflies']",
+                "svg_path_data": "M 170 70 A 30 30 0 1 0 230 70 A 30 30 0 1 0 170 70 Z"
+            }}
         ],
         "computational_console_parameters": {{
             "console_objective_label": "GENERATE SET MATRIX: VERIFY YOUR DAILY STORY VARIABLES",
@@ -135,6 +151,7 @@ def build_prompt_blueprint(group, grade, subject, unit, day):
             "console_audio_feedback_string": "Node verified"
         }}
         """
+
     return f"""
     Generate an unbendable, production-ready S-K-E data node for Grade {grade.upper()}, Subject Track: {subject}, Day {day}.
     Active Academic Standard Focus Milestone: {standards_focus}
