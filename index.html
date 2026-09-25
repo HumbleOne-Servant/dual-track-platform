@@ -1,7 +1,3 @@
-<!-- ========================================================================
-     FILE: index.html (Box 1 of 6)
-     DESCRIPTION: Document Main Layout Shell, Header Controls & Core CSS Styles
-     ======================================================================== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,10 +30,6 @@
         .action-btn:hover { background: #34495e; }
     </style>
 </head>
-<!-- ========================================================================
-     FILE: index.html (Box 2 of 6)
-     DESCRIPTION: Split Panel Layout CSS Framework & Dynamic Left Track Dashboard Desks
-     ======================================================================== -->
 <style>
     .dual-track-container { display: flex; flex: 1; overflow: hidden; }
     .panel { flex: 1; display: flex; flex-direction: column; overflow-y: auto; padding: 25px; }
@@ -73,17 +65,13 @@
     .lock-notice-banner { padding: 10px 15px; border-radius: 4px; font-size: 12px; font-weight: 700; color: #fff; text-align: center; }
     .game-engine-viewport { min-height: 180px; padding: 15px; border-radius: 4px; background: #f1f2f6; border: 1px solid #dcdde1; }
 </style>
-<!-- ========================================================================
-     FILE: index.html (Box 3 of 6)
-     DESCRIPTION: Top Header Navigation Layout Row & Standard Pre-Injected Tags
-     ======================================================================== -->
 <body>
 
     <header class="control-desk-header">
         <div class="logo-area">Dual-Track Learning Hub</div>
         <div class="selector-grid">
             <div class="control-group">
-                <label>Age Bracket / Grade</label>
+                <label for="gradeSelect">Age Bracket / Grade</label>
                 <select id="gradeSelect">
                     <option value="k5/gk">K-1: Early Elementary (GK)</option>
                     <option value="k5/g1">K-1: Early Elementary (G1)</option>
@@ -92,7 +80,7 @@
                 </select>
             </div>
             <div class="control-group">
-                <label>Course Subject Track</label>
+                <label for="subjectSelect">Course Subject Track</label>
                 <select id="subjectSelect">
                     <option value="science">Science Track</option>
                     <option value="historical_studies" selected>Historical Studies</option>
@@ -102,7 +90,7 @@
                 </select>
             </div>
             <div class="control-group">
-                <label>Calendar Day Timeline</label>
+                <label for="daySelect">Calendar Day Timeline</label>
                 <select id="daySelect">
                     <option value="1">Day 1</option>
                     <option value="46" selected>Day 46</option>
@@ -112,16 +100,12 @@
             <button id="loadLessonBtn" class="action-btn">Open Lesson Node</button>
         </div>
     </header>
-<!-- ========================================================================
-     FILE: index.html (Box 4 of 6)
-     DESCRIPTION: Presentation Track Interface Panels, Dynamic Content Shell Containers
-     ======================================================================== -->
     <main class="dual-track-container">
         <section class="panel left-academic-track" id="leftPanel">
             <div class="bracket-banner" id="bracketBanner">Tracking System Offline</div>
             <div class="content-wrapper">
                 <h1 id="lessonTitle">Open a curriculum node parameters track to begin.</h1>
-                <div class="lesson-prose-body" id="lessonBody">Academic prose textbook entries load cleanly here.</div>
+                <div class="lesson-prose-body" id="leftPanelProseContainer">Academic prose textbook entries load cleanly here.</div>
             </div>
 
             <div class="left-dashboard-desk-wrapper" id="deskAssignmentWrapper">
@@ -135,6 +119,7 @@
                 <h3>Phase 3: Automated Validation Gate Checkout</h3>
                 <p id="assessmentQuestion" style="font-size: 13.5px; margin-bottom: 10px;">Final milestone verification query challenge will print here.</p>
                 <div style="display:flex; gap:10px;">
+                    <label for="studentAnswer" style="display:none;">Your Answer Check</label>
                     <input type="text" id="studentAnswer" placeholder="Type your text mastery check here..." style="flex:1; padding:8px; border:1px solid #ccc; border-radius:4px; font-size:13px; color:#2f3640; background:#fff;">
                     <button id="submitGateBtn" class="action-btn" style="background:#2ecc71;">Verify Mastery</button>
                 </div>
@@ -168,10 +153,6 @@
     </main>
 
     <script src="global_standards.js"></script>
-<!-- ========================================================================
-     FILE: index.html (Box 5 of 6)
-     DESCRIPTION: Calendar Timeline Selector Initializer Loop & API Fetch Logic
-     ======================================================================== -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const daySelector = document.getElementById("daySelect");
@@ -193,60 +174,40 @@
             document.getElementById("loadLessonBtn").addEventListener("click", executeAsynchronousFetch);
 
             function executeAsynchronousFetch() {
-                const [group, grade] = document.getElementById("gradeSelect").value.split("/");
-                const subject = document.getElementById("subjectSelect").value;
-                const day = daySelector.value;
+                var gradeCompositeValue = document.getElementById("gradeSelect").value;
+                var slashIndexPosition = gradeCompositeValue.indexOf("/");
                 
-                let unit = "unit_1_foundations";
-                if (day >= 46 && day <= 90) unit = "unit_2_shapes_spaces";
-                else if (day >= 91 && day <= 135) unit = "unit_3_weather_seasons";
-                else if (day >= 136 && day <= 180) unit = "unit_4_counting_base";
+                var group = gradeCompositeValue.substring(0, slashIndexPosition);
+                var grade = gradeCompositeValue.substring(slashIndexPosition + 1);
+                
+                var subject = document.getElementById("subjectSelect").value;
+                var day = daySelector.value;
+                
+                var unit = "unit_1_foundations";
+                if (day >= 46 && day <= 90) { unit = "unit_2_shapes_spaces"; }
+                else if (day >= 91 && day <= 135) { unit = "unit_3_weather_seasons"; }
+                else if (day >= 136 && day <= 180) { unit = "unit_4_counting_base"; }
 
-                const fileUrl = "pure_curriculum_vault/" + group + "/" + grade + "/" + subject + "/" + unit + "/day_" + day + ".json";
+                var fileUrl = "pure_curriculum_vault/" + group + "/" + grade + "/" + subject + "/" + unit + "/day_" + day + ".json";
 
                 fetch(fileUrl)
-                    .then(res => {
-                        if (!res.ok) throw new Error("Path offline");
+                    .then(function(res) {
+                        if (!res.ok) { throw new Error("Offline"); }
                         return res.json();
                     })
-                    .then(data => { 
+                    .then(function(data) { 
                         currentDataPayload = data; 
                         triggerInterfaceRendering(data, grade, subject); 
                     })
-                    .catch(() => {
+                    .catch(function() {
                         currentDataPayload = buildLocalTestingFallback(grade, subject, day);
                         triggerInterfaceRendering(currentDataPayload, grade, subject);
                     });
             }
-<!-- ========================================================================
-     FILE: index.html (Box 6 of 6)
-     DESCRIPTION: ABSOLUTE FIXED BOUNDS STRING PARSER, Real-Time Highlights, and Audio Gates
-     ======================================================================== -->
             function triggerInterfaceRendering(data, gradeKey, subjectPath) {
-                let rawTitle = data.lesson_title || "";
-                let rawBody = data.lesson_body || "";
-                let rawWorkspace = data.interactive_assignment || "";
-                let rawCheckout = data.daily_assessment || "";
-
-                const cleanTagRegex = /(TITLE:|BODY:|WORKSPACE:|CHECKOUT:)/gi;
-                rawTitle = rawTitle.replace(cleanTagRegex, "").trim();
-                rawBody = rawBody.replace(cleanTagRegex, "").trim();
-                rawWorkspace = rawWorkspace.replace(cleanTagRegex, "").trim();
-                rawCheckout = rawCheckout.replace(cleanTagRegex, "").trim();
-
-                // ABSOLUTE ARRAYS FILTER FIX: Targets the first string array item using [0] to protect the engine threads
-                if (rawBody.match(/WORKSPACE:/i)) {
-                    let parts = rawBody.split(/WORKSPACE:/i);
-                    rawBody = parts[0].trim(); 
-                }
-                if (rawBody.match(/BODY:/i)) {
-                    let parts = rawBody.split(/BODY:/i);
-                    rawBody = parts[parts.length - 1].trim();
-                }
-
-                document.getElementById("lessonTitle").textContent = rawTitle;
-                currentAssignmentString = rawWorkspace;
-                document.getElementById("assessmentQuestion").textContent = rawCheckout;
+                document.getElementById("lessonTitle").textContent = data.lesson_title || "Lesson Node";
+                currentAssignmentString = data.interactive_assignment || "Complete workspace task.";
+                document.getElementById("assessmentQuestion").textContent = data.daily_assessment || "Solve gate check.";
                 
                 document.getElementById("studentAnswer").value = ""; 
                 document.getElementById("gateFeedback").textContent = "";
@@ -276,24 +237,25 @@
                     banner.textContent = "Advanced Secondary Track Active"; banner.style.background = "#747d8c";
                 }
 
+                let bodyText = data.lesson_body || "";
                 const feed = document.getElementById("worldviewFeed");
                 feed.innerHTML = ""; let matchCounter = 0;
 
                 if(typeof GLOBAL_WORLDVIEW_MATRIX !== 'undefined') {
-                    Object.keys(GLOBAL_WORLDVIEW_MATRIX).forEach(keyword => {
+                    Object.keys(GLOBAL_WORLDVIEW_MATRIX).forEach(function(keyword) {
                         let pattern = new RegExp("\\b(" + keyword + ")\\b", "gi");
-                        if(pattern.test(rawBody)) {
+                        if(pattern.test(bodyText)) {
                             matchCounter++;
-                            rawBody = rawBody.replace(pattern, '<mark class="keyword-highlight">$1</mark>');
+                            bodyText = bodyText.replace(pattern, '<mark class="keyword-highlight">$1</mark>');
                             let card = document.createElement("div"); card.className = "worldview-feed-card";
                             card.innerHTML = "<h4>✨ Alignment: " + GLOBAL_WORLDVIEW_MATRIX[keyword].title + "</h4><p>" + GLOBAL_WORLDVIEW_MATRIX[keyword].insight + "</p>";
                             feed.appendChild(card);
                         }
                     });
                 }
-                if(matchCounter === 0) feed.innerHTML = '<div class="empty-feed-placeholder"><h3>Standard Track Active</h3><p>No geopolitical alignments triggered.</p></div>';
+                if(matchCounter === 0) { feed.innerHTML = '<div class="empty-feed-placeholder"><h3>Standard Track Active</h3><p>No geopolitical alignments triggered.</p></div>'; }
                 
-                document.getElementById("lessonBody").innerHTML = rawBody;
+                document.getElementById("leftPanelProseContainer").innerHTML = bodyText;
                 buildInteractiveCanvasElements(data);
             }
 
