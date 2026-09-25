@@ -402,94 +402,77 @@
         }
 
         function loadLiveDatabaseFile() {
-            const group = document.getElementById("portalGroupSelect").value;
-            const grade = document.getElementById("gradePrefixSelect").value;
-            const subject = document.getElementById("subjectTrackSelect").value;
-            const day = parseInt(document.getElementById("daySelect").value) || 1;
+    const group = document.getElementById("portalGroupSelect").value;
+    const grade = document.getElementById("gradePrefixSelect").value;
+    const subject = document.getElementById("subjectTrackSelect").value;
+    const day = parseInt(document.getElementById("daySelect").value) || 1;
 
-            let unitFolder = "unit_1_foundations";
-            if (day > 45 && day <= 90) unitFolder = "unit_2_shapes_spaces";
-            else if (day > 90 && day <= 135) unitFolder = "unit_3_weather_seasons";
-            else if (day > 135) unitFolder = "unit_4_counting_base";
+    let unitFolder = "unit_1_foundations";
+    if (day > 45 && day <= 90) unitFolder = "unit_2_shapes_spaces";
+    else if (day > 90 && day <= 135) unitFolder = "unit_3_weather_seasons";
+    else if (day > 135) unitFolder = "unit_4_counting_base";
 
-            if (group === "k5") {
-                document.getElementById("elMathWorkspace").style.display = (subject === "mathematics") ? "block" : "none";
-                document.getElementById("elScienceWorkspace").style.display = (subject === "science") ? "block" : "none";
+    if (group === "k5") {
+        document.getElementById("elMathWorkspace").style.display = (subject === "mathematics") ? "block" : "none";
+        document.getElementById("elScienceWorkspace").style.display = (subject === "science") ? "block" : "none";
+    }
+
+    const targetJsonUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/${unitFolder}/day_${day}.json`;
+
+    fetch(targetJsonUrl)
+        .then(response => {
+            if (!response.ok) throw new Error("Target File Missing inside Vault Folder Structure.");
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById("lessonTitleLabel").innerText = data.lesson_title || `Day ${day} Lesson`;
+            
+            let rawAssessmentText = "";
+            if (data.daily_assessment) {
+                if (typeof data.daily_assessment === 'object' && data.daily_assessment.prompt) {
+                    rawAssessmentText = data.daily_assessment.prompt;
+                } else if (typeof data.daily_assessment === 'string') {
+                    rawAssessmentText = data.daily_assessment;
+                }
             }
 
-            const targetJsonUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/${unitFolder}/day_${day}.json`;
+            let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
+            
+            if (displayTarget) {
+                let fullBodyText = data.lesson_body || "";
+                fullBodyText = fullBodyText.replace(/###/g, "").replace(/\*\*/g, "").replace(/\*/g, "");
 
-            fetch(targetJsonUrl)
-                .then(response => {
-                    if (!response.ok) throw new Error("Target File Missing inside Vault Folder Structure.");
-                    return response.json();
-                })
-                .then(data => {
-                    document.getElementById("lessonTitleLabel").innerText = data.lesson_title || `Day ${day} Lesson`;
-                    
-                    let rawAssessmentText = "";
-                    if (data.daily_assessment) {
-                        if (typeof data.daily_assessment === 'object' && data.daily_assessment.prompt) {
-                            rawAssessmentText = data.daily_assessment.prompt;
-                        } else if (typeof data.daily_assessment === 'string') {
-                            rawAssessmentText = data.daily_assessment;
-                        }
-                    }
+                // FIXED: Direct precise mapping to display actual assignment goals from JSON file
+                displayTarget.innerHTML = fullBodyText;
+                document.getElementById("assignmentDirectionsLabel").innerHTML = `🎯 <strong>Workbook Instructions:</strong> ${data.interactive_assignment || 'Complete active puzzle goals.'}`;
+                document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> ${rawAssessmentText || 'Formulate verification steps.'}`;
+            }
+            
+            if (data.worldview_track_matrices) {
+                if (data.worldview_track_matrices.comparative_insight) {
+                    document.getElementById("comparativeContextLabel").innerText = data.worldview_track_matrices.comparative_insight;
+                }
+                if (data.worldview_track_matrices.biblical_alignment) {
+                    document.getElementById("biblicalAlignmentLabel").innerText = data.worldview_track_matrices.biblical_alignment;
+                }
+            }
 
-                    let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
-                    
-                    if (displayTarget) {
-                        let fullBodyText = data.lesson_body || "";
-                        fullBodyText = fullBodyText.replace(/###/g, "").replace(/\*\*/g, "").replace(/\*/g, "");
-
-                        let phase1Injection = fullBodyText;
-                        let phase2Assignment = data.interactive_assignment || "Complete active workbook fields.";
-                        let phase3Assessment = rawAssessmentText || "Formulate your validation gate solutions.";
-
-                        const purgeRegex = /Lesson Plan:|Introduction|Direct Instruction|\(\d+\s*minutos\)?|\(\d+\s*minutes\)?|\d+\s*minutes/gi;
-                        phase1Injection = phase1Injection.replace(purgeRegex, "").replace(/\s+/g, " ").trim();
-                        
-                        if (typeof phase2Assignment === 'string') {
-                            phase2Assignment = phase2Assignment.replace(purgeRegex, "").replace(/Interactive Assignment:/i, "").replace(/\s+/g, " ").trim();
-                        }
-                        if (typeof phase3Assessment === 'string') {
-                            phase3Assessment = phase3Assessment.replace(purgeRegex, "").replace(/Check-Out Question:/i, "").replace(/\s+/g, " ").trim();
-                        }
-
-                        displayTarget.innerHTML = phase1Injection;
-                        if (typeof drawComputationalLogicSandbox === "function") {
-                            drawComputationalLogicSandbox(displayTarget.id);
-                        }
-
-                        document.getElementById("assignmentDirectionsLabel").innerText = typeof phase2Assignment === 'object' ? JSON.stringify(phase2Assignment) : phase2Assignment;
-                        document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> ${phase3Assessment}`;
-                    }
-                    
-                    // FIXED: Dynamic data-binding links to map file metrics directly onto right panel view cards
-                    if (data.worldview_track_matrices) {
-                        if (data.worldview_track_matrices.comparative_insight) {
-                            document.getElementById("comparativeContextLabel").innerText = data.worldview_track_matrices.comparative_insight;
-                        }
-                        if (data.worldview_track_matrices.biblical_alignment) {
-                            document.getElementById("biblicalAlignmentLabel").innerText = data.worldview_track_matrices.biblical_alignment;
-                        }
-                    }
-
-                    executeRealTimeKeywordScan(displayTarget, subject);
-                })
-                .catch(error => {
-                    console.log("[Vault Sync Alert]", error.message);
-                    document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
-                    document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> Dynamic milestone checkout description active for Day ${day}.`;
-                    let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
-                    if (displayTarget) {
-                        displayTarget.innerHTML = `Active S-K-E course parameters focus on standard ${subject.replace('_', ' ')} core tracks. Complete your assignment goals!`;
-                        if (typeof drawComputationalLogicSandbox === "function") {
-                            drawComputationalLogicSandbox(displayTarget.id);
-                        }
-                    }
-                });
-        }
+            executeRealTimeKeywordScan(displayTarget, subject);
+        })
+        .catch(error => {
+            console.log("[Vault Sync Alert]", error.message);
+            document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
+            document.getElementById("assignmentDirectionsLabel").innerHTML = `🎯 <strong>Workbook Instructions:</strong> S-K-E Core Ingestion Router: Singapore CPA Interactive Grid. Connect color nodes to synchronize set data configurations.`;
+            document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> Dynamic milestone checkout description active for Day ${day}.`;
+            let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
+            if (displayTarget) {
+                displayTarget.innerHTML = `Active S-K-E course parameters focus on standard ${subject.replace('_', ' ')} core tracks. Match your crayon color palette selections to the target geometry variables to unblock the logic console circuits.`;
+                if (typeof drawComputationalLogicSandbox === "function") {
+                    drawComputationalLogicSandbox(displayTarget.id);
+                }
+            }
+        });
+}
 <!-- Box 12 of 12: Speech Synthesis Engines & Global App Build Initializers -->
         function executeRealTimeKeywordScan(textContainer, activeSubject) {
             if (!textContainer) return;
