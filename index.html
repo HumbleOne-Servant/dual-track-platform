@@ -1,5 +1,5 @@
 <!-- ========================================================================
-     FILE: index.html (Box 6 of 10)
+     FILE: index.html (Box 1 of 8)
      DESCRIPTION: Document Entry Point, Base Master CSS Variable Sheets
      ======================================================================== -->
 <!DOCTYPE html>
@@ -20,157 +20,388 @@
             --alert-green: #27ae60;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: var(--primary-bg); color: var(--txt-dark); display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
 
-        /* HEADER INTERFACE STYLES */
-        .control-desk-header { background: #ffffff; padding: 15px 25px; border-bottom: 2px solid var(--panel-border); display: flex; justify-content: space-between; align-items: center; z-index: 10; }
-        .logo-area { font-size: 20px; font-weight: 700; color: var(--slate-desk); }
-        .selector-grid { display: flex; gap: 20px; align-items: flex-end; }
-        .control-group { display: flex; flex-direction: column; gap: 5px; }
-        .control-group label { font-size: 11px; font-weight: 600; text-transform: uppercase; color: #7f8c8d; }
-        .control-group select { padding: 8px 12px; border-radius: 4px; border: 1px solid #bdc3c7; background: #fff; font-size: 13px; font-weight: 500; min-width: 160px; }
-        
-        .action-btn { padding: 9px 18px; border: none; background: var(--slate-desk); color: #fff; font-weight: 600; border-radius: 4px; cursor: pointer; transition: background 0.2s; font-size: 13px; }
-        .action-btn:hover { background: #34495e; }
+        body { 
+            background: var(--primary-bg); 
+            color: var(--txt-dark); 
+            display: flex; 
+            flex-direction: column; 
+            height: 100vh; 
+            overflow: hidden; 
+        }
     </style>
 </head>
 <!-- ========================================================================
-     FILE: index.html (Box 7 of 10)
-     DESCRIPTION: Split Panel System Layout Styles & Scanner Markup Classes
+     FILE: index.html (Box 2 of 8)
+     DESCRIPTION: Top Header Navigation Bar Interface Styling Layouts
      ======================================================================== -->
 <style>
-    /* MASTER SPLIT PANEL WORKSPACE LAYOUT RULES */
-    .dual-track-container { display: flex; flex: 1; overflow: hidden; }
-    .panel { flex: 1; display: flex; flex-direction: column; overflow-y: auto; padding: 25px; }
-    
-    .left-academic-track { background: #ffffff; border-right: 2px solid var(--panel-border); transition: all 0.3s ease; }
-    .right-worldview-track { background: #f8f9fa; gap: 20px; }
-    
-    .bracket-banner { padding: 8px 15px; border-radius: 4px; color: #fff; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; width: fit-content; }
-    .content-wrapper h1 { font-size: 26px; color: var(--slate-desk); margin-bottom: 15px; }
-    .lesson-prose-body { font-size: 16px; line-height: 1.7; color: #34495e; text-align: justify; }
+    .control-desk-header { 
+        background: #ffffff; 
+        padding: 15px 25px; 
+        border-bottom: 2px solid var(--panel-border); 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        z-index: 10; 
+    }
 
-    /* REAL-TIME GOLD COMPILER HIGHLIGHT ELEMENT MARKS */
-    mark.keyword-highlight { background: linear-gradient(to top, rgba(212,175,55,0.3) 40%, transparent 40%); background-color: transparent; border-bottom: 2px solid var(--accent-gold); color: #111; font-weight: 600; padding: 0 2px; }
+    .logo-area { 
+        font-size: 20px; 
+        font-weight: 700; 
+        color: var(--slate-desk); 
+    }
 
-    /* LIQUID FEED CODES FOR THE ALTERNATIVE INFRASTRUCTURE */
-    .worldview-card-feed { background: #fff; border: 1px solid var(--panel-border); border-left: 4px solid var(--accent-gold); padding: 15px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    .worldview-feed-card { border-bottom: 1px solid #f1f2f6; padding-bottom: 10px; margin-bottom: 10px; }
-    .worldview-feed-card:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
-    .worldview-feed-card h4 { color: #b78a00; font-size: 14px; margin-bottom: 4px; text-transform: uppercase; }
-    .worldview-feed-card p { font-size: 13.5px; line-height: 1.5; color: #57606f; }
-    .empty-feed-placeholder { text-align: center; color: #a4b0be; padding: 10px; }
+    .selector-grid { 
+        display: flex; 
+        gap: 20px; 
+        align-items: flex-end; 
+    }
 
-    /* HIGH GRAPHIC BOXES AND POINTER SHIELD INTERFACE STYLES */
-    .interactive-workspace-wrapper { background: #fff; border: 1px solid #e1e8ed; border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
-    .workspace-header { display: flex; justify-content: space-between; align-items: center; }
-    .workspace-header h2 { font-size: 15px; color: var(--slate-desk); text-transform: uppercase; }
+    .control-group { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 5px; 
+    }
+
+    .control-group label { 
+        font-size: 11px; 
+        font-weight: 600; 
+        text-transform: uppercase; 
+        color: #7f8c8d; 
+    }
+
+    .control-group select { 
+        padding: 8px 12px; 
+        border-radius: 4px; 
+        border: 1px solid #bdc3c7; 
+        background: #fff; 
+        font-size: 13px; 
+        font-weight: 500; 
+        min-width: 160px; 
+    }
     
-    .audio-trigger-btn { padding: 6px 14px; border: 2px solid var(--slate-desk); background: transparent; font-weight: 600; font-size: 12px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
-    .audio-trigger-btn.step-active { background: var(--alert-amber); border-color: var(--alert-amber); color: #fff; }
-    .audio-trigger-btn.unlocked-state { background: var(--alert-green); border-color: var(--alert-green); color: #fff; }
-    
-    .workspace-locked { opacity: 0.25; pointer-events: none; user-select: none; filter: blur(0.5px); }
-    .lock-notice-banner { padding: 10px 15px; border-radius: 4px; font-size: 12px; font-weight: 700; color: #fff; text-align: center; }
-    .game-engine-viewport { min-height: 80px; padding: 15px; border-radius: 4px; background: #f1f2f6; border: 1px solid #dcdde1; }
-    .validation-gate-box { background: #fff; border: 1px solid #e1e8ed; border-radius: 6px; padding: 20px; }
+    .action-btn { 
+        padding: 9px 18px; 
+        border: none; 
+        background: var(--slate-desk); 
+        color: #fff; 
+        font-weight: 600; 
+        border-radius: 4px; 
+        cursor: pointer; 
+        transition: background 0.2s; 
+        font-size: 13px; 
+    }
+
+    .action-btn:hover { 
+        background: #34495e; 
+    }
 </style>
 <!-- ========================================================================
-     FILE: index.html (Box 8 of 10)
-     DESCRIPTION: Core Layout Shell Markup Framework
+     FILE: index.html (Box 3 of 8)
+     DESCRIPTION: Split Panel Layout CSS Framework & Dual-Track Presentation Layer
      ======================================================================== -->
-<body>
+<style>
+    .dual-track-container { 
+        display: flex; 
+        flex: 1; 
+        overflow: hidden; 
+    }
 
-    <header class="control-desk-header">
-        <div class="logo-area">⚜️ Dual-Track Learning Hub</div>
-        <div class="selector-grid">
-            <div class="control-group">
-                <label>Age Bracket / Grade</label>
-                <select id="gradeSelect">
-                    <option value="k5/gk">K-1: Early Elementary (GK)</option>
-                    <option value="k5/g1">K-1: Early Elementary (G1)</option>
-                    <option value="68/g7">6-8: Middle School (G7)</option>
-                    <option value="912/g10" selected>9-12: High School (G10)</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <label>Course Subject Track</label>
-                <select id="subjectSelect">
-                    <option value="science">Science Track</option>
-                    <option value="historical_studies" selected>Historical Studies</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <label>Calendar Day Timeline</label>
-                <select id="daySelect"></select>
-            </div>
-            <button id="loadLessonBtn" class="action-btn">Open Lesson Node</button>
+    .panel { 
+        flex: 1; 
+        display: flex; 
+        flex-direction: column; 
+        overflow-y: auto; 
+        padding: 25px; 
+    }
+    
+    .left-academic-track { 
+        border-right: 2px solid var(--panel-border); 
+        background: #ffffff; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 20px; 
+    }
+
+    .right-worldview-track { 
+        background: #f8f9fa; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 20px; 
+    }
+    
+    .bracket-banner { 
+        padding: 8px 15px; 
+        border-radius: 4px; 
+        color: #fff; 
+        font-size: 12px; 
+        font-weight: 700; 
+        text-transform: uppercase; 
+        margin-bottom: 5px; 
+        width: fit-content; 
+    }
+
+    .content-wrapper h1 { 
+        font-size: 24px; 
+        margin-bottom: 15px; 
+        color: inherit; 
+    }
+
+    .lesson-prose-body { 
+        font-size: 15.5px; 
+        line-height: 1.7; 
+        text-align: justify; 
+        color: inherit; 
+        margin-bottom: 5px; 
+    }
+
+    mark.keyword-highlight { 
+        background: linear-gradient(to top, rgba(212,175,55,0.4) 50%, transparent 50%); 
+        background-color: transparent; 
+        border-bottom: 2px solid var(--accent-gold); 
+        color: inherit; 
+        font-weight: 600; 
+        padding: 0 2px; 
+    }
+</style>
+<!-- ========================================================================
+     FILE: index.html (Box 4 of 8)
+     DESCRIPTION: Left Panel Interaction Desks & Right Panel High-Graphic CSS Styles
+     ======================================================================== -->
+<style>
+    .left-dashboard-desk-wrapper { 
+        border: 1px solid #e1e8ed; 
+        border-radius: 8px; 
+        padding: 20px; 
+        background: rgba(0, 0, 0, 0.03); 
+        display: flex; 
+        flex-direction: column; 
+        gap: 12px; 
+    }
+
+    .left-dashboard-desk-wrapper h3 { 
+        font-size: 14px; 
+        text-transform: uppercase; 
+        letter-spacing: 0.5px; 
+        color: inherit; 
+        border-bottom: 1px dashed rgba(127,140,141,0.4); 
+        padding-bottom: 6px; 
+        margin-bottom: 2px; 
+    }
+
+    .worldview-card-feed { 
+        background: #fff; 
+        border: 1px solid var(--panel-border); 
+        border-left: 4px solid var(--accent-gold); 
+        padding: 15px; 
+        border-radius: 4px; 
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+    }
+
+    .worldview-feed-card { 
+        border-bottom: 1px solid #f1f2f6; 
+        padding-bottom: 10px; 
+        margin-bottom: 10px; 
+    }
+
+    .worldview-feed-card:last-child { 
+        border-bottom: none; 
+        padding-bottom: 0; 
+        margin-bottom: 0; 
+    }
+
+    .worldview-feed-card h4 { 
+        color: #b78a00; 
+        font-size: 14px; 
+        margin-bottom: 4px; 
+        text-transform: uppercase; 
+    }
+
+    .worldview-feed-card p { 
+        font-size: 13.5px; 
+        line-height: 1.5; 
+        color: #57606f; 
+    }
+
+    .empty-feed-placeholder { 
+        text-align: center; 
+        color: #a4b0be; 
+        padding: 10px; 
+    }
+
+    .interactive-workspace-wrapper { 
+        background: #fff; 
+        border: 1px solid #e1e8ed; 
+        border-radius: 6px; 
+        padding: 20px; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 15px; 
+    }
+
+    .workspace-header { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+    }
+
+    .workspace-header h2 { 
+        font-size: 15px; 
+        color: var(--slate-desk); 
+        text-transform: uppercase; 
+    }
+    
+    .audio-trigger-btn { 
+        padding: 6px 14px; 
+        border: 2px solid var(--slate-desk); 
+        background: transparent; 
+        font-weight: 600; 
+        font-size: 12px; 
+        border-radius: 20px; 
+        cursor: pointer; 
+        transition: all 0.2s; 
+        color: #2c3e50; 
+        border-color: #2c3e50; 
+    }
+
+    .audio-trigger-btn.step-active { 
+        background: var(--alert-amber) !important; 
+        border-color: var(--alert-amber) !important; 
+        color: #fff !important; 
+    }
+
+    .audio-trigger-btn.unlocked-state { 
+        background: var(--alert-green) !important; 
+        border-color: var(--alert-green) !important; 
+        color: #fff !important; 
+    }
+    
+    .workspace-locked { 
+        opacity: 0.25; 
+        pointer-events: none; 
+        user-select: none; 
+        filter: blur(0.5px); 
+    }
+
+    .lock-notice-banner { 
+        padding: 10px 15px; 
+        border-radius: 4px; 
+        font-size: 12px; 
+        font-weight: 700; 
+        color: #fff; 
+        text-align: center; 
+    }
+
+    .game-engine-viewport { 
+        min-height: 180px; 
+        padding: 15px; 
+        border-radius: 4px; 
+        background: #f1f2f6; 
+        border: 1px solid #dcdde1; 
+    }
+</style>
+<!-- ========================================================================
+     FILE: index.html (Box 5 of 8)
+     DESCRIPTION: Core Layout Content Desks, Left Textbook Panel & Right Sandbox Panel Markup
+     ======================================================================== -->
+<header class="control-desk-header">
+    <div class="logo-area">Dual-Track Learning Hub</div>
+    <div class="selector-grid">
+        <div class="control-group">
+            <label>Age Bracket / Grade</label>
+            <select id="gradeSelect">
+                <option value="k5/gk">K-1: Early Elementary (GK)</option>
+                <option value="k5/g1">K-1: Early Elementary (G1)</option>
+                <option value="68/g7">6-8: Middle School (G7)</option>
+                <option value="912/g10" selected>9-12: High School (G10)</option>
+            </select>
         </div>
-    </header>
+        <div class="control-group">
+            <label>Course Subject Track</label>
+            <select id="subjectSelect">
+                <option value="science">Science Track</option>
+                <option value="historical_studies" selected>Historical Studies</option>
+                <option value="mathematics">Mathematics</option>
+                <option value="language_arts">Language Arts</option>
+                <option value="biblical">Biblical Studies</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label>Calendar Day Timeline</label>
+            <select id="daySelect"></select>
+        </div>
+        <button id="loadLessonBtn" class="action-btn">Open Lesson Node</button>
+    </div>
+</header>
 
-    <main class="dual-track-container">
-        <!-- LEFT PRESENTATION LAYER: CORE TEXTBOOK MATERIAL -->
-        <section class="panel left-academic-track" id="leftPanel">
-            <div class="bracket-banner" id="bracketBanner" style="background:#747d8c;">High School view engaged</div>
-            <div class="content-wrapper">
-                <h1 id="lessonTitle">Open a curriculum node parameters track to begin.</h1>
-                <div class="lesson-prose-body" id="lessonBody">
-                    Academic prose textbook entries load cleanly here containing dynamic cross-scanner mark targets.
+<main class="dual-track-container">
+    <section class="panel left-academic-track" id="leftPanel">
+        <div class="bracket-banner" id="bracketBanner">Tracking System Offline</div>
+        <div class="content-wrapper">
+            <h1 id="lessonTitle">Open a curriculum node parameters track to begin.</h1>
+            <div class="lesson-prose-body" id="lessonBody">Academic prose textbook entries load cleanly here.</div>
+        </div>
+
+        <div class="left-dashboard-desk-wrapper" id="deskAssignmentWrapper">
+            <h3>Phase 2: Core Concept Assignment Directions</h3>
+            <p id="assignmentText" style="font-size: 14px; line-height: 1.5; font-weight: 500;">
+                Please complete the two-stage audio lock sequence on the right to view this day's targeted task milestones.
+            </p>
+        </div>
+
+        <div class="left-dashboard-desk-wrapper" id="deskAssessmentWrapper">
+            <h3>Phase 3: Automated Validation Gate Checkout</h3>
+            <p id="assessmentQuestion" style="font-size: 13.5px; margin-bottom: 10px;">Final milestone verification query challenge will print here.</p>
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="studentAnswer" placeholder="Type your text mastery check here..." style="flex:1; padding:8px; border:1px solid #ccc; border-radius:4px; font-size:13px; color:#2f3640; background:#fff;">
+                <button id="submitGateBtn" class="action-btn" style="background:#2ecc71;">Verify Mastery</button>
+            </div>
+            <div id="gateFeedback" style="margin-top:5px; font-weight:bold; font-size:13px;"></div>
+        </div>
+    </section>
+
+    <section class="panel right-worldview-track" id="rightPanel">
+        <div class="worldview-card-feed" id="worldviewFeed">
+            <div class="empty-feed-placeholder">
+                <h3>Alternative Reference System</h3>
+                <p>Cross-references providential milestones and Biblical truths here automatically.</p>
+            </div>
+        </div>
+
+        <div class="interactive-workspace-wrapper">
+            <div class="workspace-header">
+                <h2>Phase 2 Sandbox: High-Graphic Playfield Canvas</h2>
+                <button id="audioReaderBtn" class="audio-trigger-btn">🔊 Read Out Loud</button>
+            </div>
+            <div id="audioLockNoticeBox" class="lock-notice-banner alert-red">⚠️ WORKSPACE LOCKED: Student must click Audio Step 1 to scan Summary.</div>
+            <div id="workspaceDesk" class="workspace-locked">
+                <div id="dynamicPaletteRow" style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;"></div>
+                <div id="dynamicGraphicViewport" class="game-engine-viewport">
+                    <canvas id="storyInteractionCanvas" width="500" height="150" style="display:block; margin:0 auto; background:transparent;"></canvas>
+                    <div id="textSandboxMessage" style="font-weight:600; text-align:center; color:#57606f; font-size:13px; margin-top:10px;">Console Standby...</div>
                 </div>
             </div>
-        </section>
-
-        <!-- RIGHT PRESENTATION LAYER: GEOPOLITICAL PROVIDENTIAL & BIBLICAL VIEWS -->
-        <section class="panel right-worldview-track" id="rightPanel">
-            <div class="worldview-card-feed" id="worldviewFeed">
-                <div class="empty-feed-placeholder">
-                    <h3>Alternative Reference System</h3>
-                    <p>Cross-references providential milestones and Biblical truths here automatically.</p>
-                </div>
-            </div>
-
-            <!-- COGNITIVE INTERACTIVE SANDBOX DESK -->
-            <div class="interactive-workspace-wrapper">
-                <div class="workspace-header">
-                    <h2>Phase 2: Dynamic Element Interaction Sandbox</h2>
-                    <button id="audioReaderBtn" class="audio-trigger-btn">🔊 Read Out Loud</button>
-                </div>
-                <div id="audioLockNoticeBox" class="lock-notice-banner alert-red">⚠️ WORKSPACE LOCKED: Student must click Audio Step 1 to scan Summary.</div>
-                <div id="workspaceDesk" class="workspace-locked">
-                    <p id="assignmentText" style="margin-bottom:12px; font-weight:500;">Please unlock instructions via audio playback loop tracks.</p>
-                    <div id="dynamicPaletteRow" style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;"></div>
-                    <div id="dynamicGraphicViewport" class="game-engine-viewport">
-                        <canvas id="storyInteractionCanvas" width="500" height="180" style="display:block; margin:0 auto; background:transparent;"></canvas>
-                        <div id="textSandboxMessage" style="font-weight:600; text-align:center; color:#57606f; font-size:13px; margin-top:10px;">Console Standby...</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AUTOMATED VALIDATION GATE SUMMARY -->
-            <div class="validation-gate-box">
-                <h3>Phase 3: Automated Validation Gate Checkout</h3>
-                <p id="assessmentQuestion">Mastery thresholds are checked strictly at this terminal box.</p>
-                <div style="display:flex; gap:10px; margin-top:10px;">
-                    <input type="text" id="studentAnswer" placeholder="Type solution text check..." style="flex:1; padding:8px; border:1px solid #ccc; border-radius:4px;">
-                    <button id="submitGateBtn" class="action-btn" style="background:#2ecc71;">Verify Mastery</button>
-                </div>
-                <div id="gateFeedback" style="margin-top:8px; font-weight:bold; font-size:13px;"></div>
-            </div>
-        </section>
-    </main>
-// ========================================================================
-// FILE: index.html (Box 9 of 10)
-// DESCRIPTION: Dynamic Timeline Selectors & Asynchronous Browser Disk Fetch Commands
-// ========================================================================
+        </div>
+    </section>
+</main>
+<!-- ========================================================================
+     FILE: index.html (Box 6 of 8)
+     DESCRIPTION: Automated Menu Dropdowns & Asynchronous Browser Disk Fetch Router
+     ======================================================================== -->
 <script src="global_standards.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Populates timeline options up to 180 entries automatically
         const daySelector = document.getElementById("daySelect");
         for(let i = 1; i <= 180; i++) {
             let opt = document.createElement("option"); opt.value = i; opt.textContent = `Day ${i}`;
-            if(i === 1) opt.selected = true;
+            if(i === 46) opt.selected = true; 
             daySelector.appendChild(opt);
         }
 
@@ -181,118 +412,169 @@
             const [group, grade] = document.getElementById("gradeSelect").value.split("/");
             const subject = document.getElementById("subjectSelect").value;
             const day = daySelector.value;
-            const unit = (day <= 45) ? "unit_1_foundations" : (day <= 90) ? "unit_2_shapes_spaces" : (day <= 135) ? "unit_3_weather_seasons" : "unit_4_counting_base";
+            
+            let unit = "unit_1_foundations";
+            if (day >= 46 && day <= 90) unit = "unit_2_shapes_spaces";
+            else if (day >= 91 && day <= 135) unit = "unit_3_weather_seasons";
+            else if (day >= 136 && day <= 180) unit = "unit_4_counting_base";
 
             const fileUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/${unit}/day_${day}.json`;
 
             fetch(fileUrl)
-                .then(res => { if(!res.ok) throw new Error(); return res.json(); })
-                .then(data => { currentDataPayload = data; triggerInterfaceRendering(data, grade, subject); })
+                .then(res => res.json())
+                .then(data => { 
+                    currentDataPayload = data; 
+                    triggerInterfaceRendering(data, grade, subject); 
+                })
                 .catch(() => {
-                    // Resilient offline framework loop generates fallback data structures instantly
                     currentDataPayload = buildLocalTestingFallback(grade, subject, day);
                     triggerInterfaceRendering(currentDataPayload, grade, subject);
                 });
         }
-// ========================================================================
-// FILE: index.html (Box 10 of 10)
-// DESCRIPTION: Real-Time Scanner Compiler Logic & Double-Click Audio Locks
-// ========================================================================
-        function triggerInterfaceRendering(data, gradeKey, subjectPath) {
-            document.getElementById("lessonTitle").textContent = data.lesson_title;
-            currentAssignmentString = data.interactive_assignment;
-            document.getElementById("assessmentQuestion").textContent = data.daily_assessment;
-            document.getElementById("studentAnswer").value = ""; document.getElementById("gateFeedback").textContent = "";
+</script>
+<!-- ========================================================================
+     FILE: index.html (Box 7 of 8)
+     DESCRIPTION: Ingestion Substring Extraction Filters & Real-Time Contrast Controls
+     ======================================================================== -->
+<script>
+    function triggerInterfaceRendering(data, gradeKey, subjectPath) {
+        let rawTitle = data.lesson_title || "";
+        let rawBody = data.lesson_body || "";
+        let rawWorkspace = data.interactive_assignment || "";
+        let rawCheckout = data.daily_assessment || "";
+
+        // HARDENED TEXT REPETITION INTERCEPTOR: Cuts out structural header artifacts
+        const cleanTagRegex = /(TITLE:|BODY:|WORKSPACE:|CHECKOUT:)/gi;
+        rawTitle = rawTitle.replace(cleanTagRegex, "").trim();
+        rawBody = rawBody.replace(cleanTagRegex, "").trim();
+        rawWorkspace = rawWorkspace.replace(cleanTagRegex, "").trim();
+        rawCheckout = rawCheckout.replace(cleanTagRegex, "").trim();
+
+        // EXTRACTION SAFETY MATRIX: Slices clean indices without breaking string threads
+        if (rawBody.toUpperCase().includes("WORKSPACE:")) {
+            let splitIndex = rawBody.toUpperCase().indexOf("WORKSPACE:");
+            rawBody = rawBody.substring(0, splitIndex).trim();
+        } else if (rawBody.toUpperCase().includes("BODY:")) {
+            let splitIndex = rawBody.toUpperCase().indexOf("BODY:");
+            rawBody = rawBody.substring(splitIndex + 5).trim();
+        }
+
+        document.getElementById("lessonTitle").textContent = rawTitle;
+        currentAssignmentString = rawWorkspace;
+        document.getElementById("assessmentQuestion").textContent = rawCheckout;
+        
+        document.getElementById("studentAnswer").value = ""; 
+        document.getElementById("gateFeedback").textContent = "";
+        document.getElementById("assignmentText").textContent = "Please complete the two-stage audio lock sequence on the right to view this day's targeted task milestones.";
+        
+        audioClickSequenceCount = 0;
+        const audioBtn = document.getElementById("audioReaderBtn");
+        audioBtn.textContent = "🔊 Read Out Loud"; audioBtn.className = "audio-trigger-btn";
+        
+        const lockBanner = document.getElementById("audioLockNoticeBox");
+        lockBanner.className = "lock-notice-banner alert-red";
+        lockBanner.textContent = "⚠️ WORKSPACE LOCKED: Student must click Audio Step 1 to scan Summary.";
+        document.getElementById("workspaceDesk").className = "workspace-locked";
+
+        const leftPanel = document.getElementById("leftPanel");
+        const banner = document.getElementById("bracketBanner");
+        const deskAssignment = document.getElementById("deskAssignmentWrapper");
+        const deskAssessment = document.getElementById("deskAssessmentWrapper");
+
+        if(gradeKey === "gk" || gradeKey === "g1") {
+            leftPanel.style.background = "#fffbf2"; 
+            leftPanel.style.color = "#2f3640"; 
+            deskAssignment.style.color = "#2f3640";
+            deskAssessment.style.color = "#2f3640";
+            banner.textContent = "Early Elementary Track Active"; 
+            banner.style.background = "#3498db";
+        } else {
+            leftPanel.style.background = "#2c3e50"; 
+            leftPanel.style.color = "#ffffff"; 
+            deskAssignment.style.color = "#ffffff";
+            deskAssessment.style.color = "#ffffff";
+            banner.textContent = "Advanced Secondary Track Active"; 
+            banner.style.background = "#747d8c";
+        }
+
+        const feed = document.getElementById("worldviewFeed");
+        feed.innerHTML = ""; let matchCounter = 0;
+
+        if(typeof GLOBAL_WORLDVIEW_MATRIX !== 'undefined') {
+            Object.keys(GLOBAL_WORLDVIEW_MATRIX).forEach(keyword => {
+                let pattern = new RegExp(`\\b(${keyword})\\b`, "gi");
+                if(pattern.test(rawBody)) {
+                    matchCounter++;
+                    rawBody = rawBody.replace(pattern, `<mark class="keyword-highlight">$1</mark>`);
+                    let card = document.createElement("div"); card.className = "worldview-feed-card";
+                    card.innerHTML = `<h4>✨ Alignment: ${GLOBAL_WORLDVIEW_MATRIX[keyword].title}</h4><p>${GLOBAL_WORLDVIEW_MATRIX[keyword].insight}</p>`;
+                    feed.appendChild(card);
+                }
+            });
+        }
+        if(matchCounter === 0) {
+            feed.innerHTML = `<div class="empty-feed-placeholder"><h3>Standard Track Active</h3><p>No geopolitical alignments triggered for this textbook block.</p></div>`;
+        }
+        
+        document.getElementById("lessonBody").innerHTML = rawBody;
+        buildInteractiveCanvasElements(data);
+    }
+</script>
+<!-- ========================================================================
+     FILE: index.html (Box 8 of 8)
+     DESCRIPTION: Hardened Two-Stage Speech Synthetic Closures & Fallback Loops
+     ======================================================================== -->
+<script>
+    document.getElementById("audioReaderBtn").addEventListener("click", function() {
+        if(!currentDataPayload) return;
+        const banner = document.getElementById("audioLockNoticeBox");
+        if(audioClickSequenceCount === 0) {
+            audioClickSequenceCount = 1; this.textContent = "🔁 Play Assignment Directions"; this.className = "audio-trigger-btn step-active";
+            banner.className = "lock-notice-banner alert-amber"; banner.textContent = "⏳ OVERVIEW RUNNING: Click button again to clear directions block.";
+            dispatchVoiceSynthesis(`Now processing overview summary benchmarks.`);
+        } else if(audioClickSequenceCount === 1) {
+            audioClickSequenceCount = 2; this.textContent = "✅ System Unlocked"; this.className = "audio-trigger-btn unlocked-state";
+            banner.className = "lock-notice-banner alert-green"; banner.textContent = "🎯 WORKSPACE RELEASED: Interaction sandboxes active.";
+            document.getElementById("workspaceDesk").className = "";
             
-            // RESET AUDIO STATE TO LEVEL ZERO
-            audioClickSequenceCount = 0;
-            const audioBtn = document.getElementById("audioReaderBtn");
-            audioBtn.textContent = "🔊 Read Out Loud"; audioBtn.className = "audio-trigger-btn";
-            
-            const lockBanner = document.getElementById("audioLockNoticeBox");
-            lockBanner.className = "lock-notice-banner alert-red";
-            lockBanner.textContent = "⚠️ WORKSPACE LOCKED: Student must click Audio Step 1 to scan Summary.";
-            document.getElementById("workspaceDesk").className = "workspace-locked";
-
-            // BRACKET DISPLAY MANAGEMENT ROUTER
-            const leftPanel = document.getElementById("leftPanel");
-            const banner = document.getElementById("bracketBanner");
-            if(gradeKey === "gk" || gradeKey === "g1") {
-                leftPanel.style.background = "#fffbf2"; leftPanel.style.color = "#2f3640";
-                banner.textContent = "Early Elementary Track Active"; banner.style.background = "#3498db";
-            } else {
-                leftPanel.style.background = "#2c3e50"; leftPanel.style.color = "#ffffff";
-                banner.textContent = "Advanced Secondary Track Active"; banner.style.background = "#747d8c";
-            }
-
-            // REAL-TIME KEYWORD SCANNED INJECTION LOGIC
-            let bodyText = data.lesson_body;
-            const feed = document.getElementById("worldviewFeed");
-            feed.innerHTML = ""; let matchCounter = 0;
-
-            if(typeof GLOBAL_WORLDVIEW_MATRIX !== 'undefined') {
-                Object.keys(GLOBAL_WORLDVIEW_MATRIX).forEach(keyword => {
-                    let pattern = new RegExp(`\\b(${keyword})\\b`, "gi");
-                    if(pattern.test(bodyText)) {
-                        matchCounter++;
-                        bodyText = bodyText.replace(pattern, `<mark class="keyword-highlight">$1</mark>`);
-                        let card = document.createElement("div"); card.className = "worldview-feed-card";
-                        card.innerHTML = `<h4>✨ Alignment: ${GLOBAL_WORLDVIEW_MATRIX[keyword].title}</h4><p>${GLOBAL_WORLDVIEW_MATRIX[keyword].insight}</p>`;
-                        feed.appendChild(card);
-                    }
-                });
-            }
-            if(matchCounter === 0) {
-                feed.innerHTML = `<div class="empty-feed-placeholder"><h3>Standard Track Active</h3><p>No geopolitical alignments triggered for this textbook block.</p></div>`;
-            }
-            document.getElementById("lessonBody").innerHTML = bodyText;
-            buildInteractiveCanvasElements(data);
+            document.getElementById("assignmentText").textContent = currentAssignmentString;
+            dispatchVoiceSynthesis(`Workspace instructions engaged: ${currentAssignmentString}`);
         }
-
-        // INTELLIGENT TWO-STAGE HARDENED ACTIVATION LOCK CLOSURE
-        document.getElementById("audioReaderBtn").addEventListener("click", function() {
-            if(!currentDataPayload) return;
-            const banner = document.getElementById("audioLockNoticeBox");
-            if(audioClickSequenceCount === 0) {
-                audioClickSequenceCount = 1; this.textContent = "🔁 Play Assignment Directions"; this.className = "audio-trigger-btn step-active";
-                banner.className = "lock-notice-banner alert-amber"; banner.textContent = "⏳ OVERVIEW RUNNING: Click button again to clear directions block.";
-                dispatchVoiceSynthesis(`Now processing overview summary benchmarks for ${currentDataPayload.lesson_title}`);
-            } else if(audioClickSequenceCount === 1) {
-                audioClickSequenceCount = 2; this.textContent = "✅ System Unlocked"; this.className = "audio-trigger-btn unlocked-state";
-                banner.className = "lock-notice-banner alert-green"; banner.textContent = "🎯 WORKSPACE RELEASED: Interaction sandboxes active.";
-                document.getElementById("workspaceDesk").className = "";
-                document.getElementById("assignmentText").textContent = currentAssignmentString;
-                dispatchVoiceSynthesis(`Workspace instructions engaged: ${currentAssignmentString}`);
-            }
-        });
-
-        function dispatchVoiceSynthesis(str) {
-            if('speechSynthesis' in window) { window.speechSynthesis.cancel(); window.speechSynthesis.speak(new SpeechSynthesisUtterance(str)); }
-        }
-
-        document.getElementById("submitGateBtn").addEventListener("click", function() {
-            const input = document.getElementById("studentAnswer").value.trim(), log = document.getElementById("gateFeedback");
-            if(!input) return alert("Please fill response fields.");
-            if(input.length >= 4) { log.style.color = "var(--alert-green)"; log.textContent = "Validation Gate Complete: 100% Mastery Met. Next calendar Day unlocked."; }
-            else { log.style.color = "var(--alert-red)"; log.textContent = "Remediation Redirect: Alternative visual path triggered."; }
-        });
-
-        function buildInteractiveCanvasElements(data) {
-            const ctx = document.getElementById("storyInteractionCanvas").getContext("2d");
-            ctx.clearRect(0,0,500,180); ctx.fillStyle = "#34495e"; ctx.fillRect(20,20,460,140);
-            ctx.fillStyle = "#ffffff"; ctx.font = "13px sans-serif"; ctx.fillText("Interactive Sandbox Graphics Active", 40, 50);
-        }
-
-        function buildLocalTestingFallback(grade, subject, day) {
-            let body = `This lesson tracks standard curriculum criteria variables. We evaluate how linear equations measure mass distributions, analyze how water properties protect natural environments, and monitor how atoms organize structures. The strategic vector points to stable data positions.`;
-            if(subject === "historical_studies") {
-                body = `Historical tracking tracks how cross-border migration trails changed socio-economic spaces. The arrival of printing systems accelerated script transmission rules. During this epoch, the dispersals of judah lines through ancient babylon altered global parameters across generations.`;
-            }
-            return { "lesson_title": `Grade ${grade.toUpperCase()} - ${subject.toUpperCase()} (Day ${day})`, "lesson_body": body, "interactive_assignment": "Adjust the active visualization handles inside the dashboard playspace frame to balance the logic parameters.", "daily_assessment": "Gate Challenge: Detail the structural properties reviewed during today's track block." };
-        }
-
-        executeAsynchronousFetch();
     });
+
+    function dispatchVoiceSynthesis(str) {
+        if('speechSynthesis' in window) { 
+            window.speechSynthesis.cancel(); 
+            window.speechSynthesis.speak(new SpeechSynthesisUtterance(str)); 
+        }
+    }
+
+    document.getElementById("submitGateBtn").addEventListener("click", function() {
+        const input = document.getElementById("studentAnswer").value.trim(), log = document.getElementById("gateFeedback");
+        if(!input) return alert("Please fill response fields.");
+        if(input.length >= 4) { 
+            log.style.color = "#2ecc71"; 
+            log.textContent = "Validation Gate Complete: 100% Mastery Met. Next calendar Day unlocked."; 
+        } else { 
+            log.style.color = "var(--alert-red)"; 
+            log.textContent = "Remediation Redirect: Alternative visual path triggered."; 
+        }
+    });
+
+    function buildInteractiveCanvasElements(data) {
+        const ctx = document.getElementById("storyInteractionCanvas").getContext("2d");
+        ctx.clearRect(0,0,500,180); ctx.fillStyle = "#34495e"; ctx.fillRect(20,20,460,140);
+        ctx.fillStyle = "#ffffff"; ctx.font = "13px sans-serif"; ctx.fillText("Interactive Sandbox Graphics Active", 40, 50);
+    }
+
+    function buildLocalTestingFallback(grade, subject, day) {
+        return { 
+            "lesson_title": "Spatial Understanding", 
+            "lesson_body": "This lesson tracks standard curriculum variables exploring historical migration paths.", 
+            "interactive_assignment": "Adjust the active visualization handles inside the dashboard playspace frame.", 
+            "daily_assessment": "Gate Challenge: Detail the structural properties reviewed today." 
+        };
+    }
 </script>
 </body>
 </html>

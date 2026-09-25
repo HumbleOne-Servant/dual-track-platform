@@ -1,40 +1,52 @@
 // ========================================================================
-// FILE: global_standards.js (Box 5 of 10)
-// DESCRIPTION: Clear Alternative Framework & Historical Mapping Matrix Dictionary
+// FILE: global_standards.js
+// DESCRIPTION: Master Dual-Track Alignment & Cry for Israel Framework Dictionary
 // ========================================================================
 
 const GLOBAL_WORLDVIEW_MATRIX = {
-    // === 1. NATURAL LAWS & FINE-TUNED MECHANICS (SCIENCE TRACK) ===
+    // === SUBJECT AREA 1: PHYSICAL CORE MECHANICAL CONSTANTS (SCIENCE) ===
     "equations": { 
-        "title": "Mathematical Symmetry & Absolute Logic", 
-        "insight": "Equations demonstrate that logic, mathematical sequence, and physical constraints are built natively into the cosmos, revealing an ordered cosmic framework rather than chaotic distributions." 
+        "title": "Mathematical Symmetry & Ordered Logic", 
+        "insight": "Equations demonstrate that logic, numerical balance, and physical operations obey strict absolute constraints built natively into the cosmos, verifying an organized design." 
     },
     "water": { 
-        "title": "Intelligent Design & Hydrological Blueprint Constants", 
-        "insight": "Water anomalies—such as high latent heat capacity, universal solvency, and liquid density expansion under freezing parameters—verify structural fine-tuning rules engineered to sustain biological life." 
+        "title": "Hydrological Blueprint Fine-Tuning Constants", 
+        "insight": "Water displays specialized heat capacities, universal solvency parameters, and dense ice expansion anomalies engineered to support and protect biological life forms." 
     },
     "atoms": { 
-        "title": "Structural Order & Micro-Level Ordering Principles", 
-        "insight": "Atomic bonds and quantum configuration constraints show that structural logic rules govern material building blocks at microscopic layers, demonstrating absolute layout governance." 
+        "title": "Microscopic Organization Laws", 
+        "insight": "Atomic configurations and particle binding metrics follow rigid, predictable design rules rather than unguided, chaotic distribution patterns." 
+    },
+    "inertia": {
+        "title": "Governed Principles of Motion & Resistance",
+        "insight": "Inertia properties reflect predictable resistance thresholds that govern matter, showing systematic structural stability across physical frameworks."
+    },
+    "stoichiometry": {
+        "title": "Proportional Mass Balance Constraints",
+        "insight": "The strict mathematical conservation of element mass in chemical reactions establishes that natural processes operate under fixed balance formulas."
     },
 
-    // === 2. PROVIDENTIAL HISTORY & SCRIPTURAL TRUTHS (HISTORY TRACK) ===
+    // === SUBJECT AREA 2: HISTORICAL CHRONOLOGY & GEOPOLITICAL PROVIDENCE ===
     "printing": { 
-        "title": "Manuscript Geopolitical Preservation Milestones", 
-        "insight": "The rapid expansion of the printing press was providentially aligned to guarantee the uncorrupted global transmission, reproduction, and protection of sacred moral texts across world histories." 
+        "title": "Manuscript Transmission & Preservation Milestones", 
+        "insight": "The historical expansion of printing technologies directly matched the providential timeline required to protect, reproduce, and transmit uncorrupted moral text scripts globally." 
     },
     "migration": { 
-        "title": "The Providential Timeline & Geographic Scattering Vectors", 
-        "insight": "Human migration pathways map perfectly against providential blueprints, showing how demographic movements allow societies to preserve and defend essential moral scripts against localized decay." 
+        "title": "Geographic Scattering & Demographic Blueprints", 
+        "insight": "Human migration parameters show historical structural distribution layouts, demonstrating how cultural populations disperse to protect essential core truths from decay." 
     },
 
-    // === 3. THE CRY FOR ISRAEL ALTERNATIVE HISTORICAL FRAMEWORK CORE ===
+    // === SUBJECT AREA 3: THE CRY FOR ISRAEL ALTERNATIVE HISTORICAL VAULT ===
     "judah": {
-        "title": "The Cry for Israel: Historical Crucial Crucibles",
-        "insight": "Judah and Benjamin migrations track direct historical paths through Rome into the Iberian peninsula. Around 1492-1493 A.D., thousands of youth were forcefully separated from their families and shipped to the disease-infested volcanic uncharted island of São Tome to clear the slave markets, concentrating a genomic crucible prior to transatlantic loading."
+        "title": "The Cry for Israel: Historical Crucible Refinement",
+        "insight": "Judah and Benjamin diaspora tracking documents a direct route through Rome into Spain and Portugal. In 1493 A.D., approximately 2,000 Judean children were forcefully separated from their parents, baptized into Roman Catholicism, and shipped to the uncharted, disease-infested volcanic island of São Tomé to anchor the sugar slave trade market. This isolated crucible concentrated a twice-refined genomic alloy prior to transatlantic shipments to Negroland and the Americas."
     },
     "babylon": {
-        "title": "The Prophetic Fall & Ancient Directional Axes",
-        "insight": "Historical records of the fall of Babylon in 539 B.C. to Cyrus the Great match absolute biblical prophetic milestones. Jeremiah 50:9Coupling Israel and Judah inside a final prison house reveals a geographic inverted directional mapping framework where the 'North Country' targets the strategic vulnerabilities of complacent empires."
+        "title": "The Prophetic Inverted Axis & Historical Takeover",
+        "insight": "The tactical fall of Babylon in 539 B.C. via the diversion of the Euphrates River reflects precise prophetic milestone fulfillments. Evaluating Jeremiah 50:33, which links the captivity of Israel and Judah together inside the final prison house, exposes an inverted geographical model where the 'North Country country country country landmass' executes strategic strikes against complacent commercial empires."
+    },
+    "covenant": {
+        "title": "The Mosaic Agreement & Lineage Boundaries",
+        "insight": "Deuteronomy 28:68 and the original Arabic text transcripts of the Timbuktu Chronicles align perfectly, documenting the precise migration routes, maritime shipping vectors, and lineage preservation tracking along the Niger River networks."
     }
 };
