@@ -23,7 +23,7 @@
             background-color: #F8FAFC;
             color: var(--text-main);
         }
-<!-- Box 2 of 12: High-Performance Global Selector CSS Layouts -->
+<!-- Box 2 of 12: UI Layout Framework Styles & Navigation Classes -->
         .top-navbar {
             background: var(--bar-gradient);
             padding: 16px 28px;
@@ -182,7 +182,7 @@
                 .interactive-workspace-shield { transition: opacity 0.3s ease, filter 0.3s ease; }
                 .workspace-locked { pointer-events: none; opacity: 0.4; filter: grayscale(100%) blur(0.5px); }
             </style>
-<!-- Box 6 of 12: Primary Content Workspace Wrapper Structs -->
+<!-- Box 6 of 12: Content Workspace Framework & Audio Sequence Nodes -->
             <div class="audio-guide-banner">
                 <div class="lesson-guide-text" id="lessonGuideContent">
                     📄 <strong>Brief Lesson Description Summary:</strong> Connecting to local file tree data...
@@ -203,7 +203,7 @@
             </div>
             
             <div class="interactive-workspace-shield workspace-locked" id="lockShieldWrapper">
-<!-- Box 7 of 12: Elementary Presentation Viewports (Natively Polished Activity Displays) -->
+<!-- Box 7 of 12: Elementary Bracket Layout Modules (Tactile CPA Math Workdesks) -->
                 <!-- Bracket Layer 1: Elementary School Dashboard Content Views -->
                 <div id="elementaryWorkspaceView" style="display: block; width: 100%;">
                     <style>
@@ -223,23 +223,27 @@
                     
                     <div class="ske-games-box" id="skeElementaryInteractions">
                         <div id="elMathWorkspace" style="display: block;">
-                            <!-- FIXED: Formally printed instruction banners right on the activity pane -->
-                            <div class="ske-activity-header">🎯 S-K-E Core Ingestion Router: Singapore CPA Interactive Grid</div>
+                            <div class="ske-activity-header">🔢 Interactive Counting Chart Grid</div>
                             <div class="crayon-box-wrapper">
-                                <span style="font-weight: 700; color: #475569; font-size: 0.9rem;">CPA Palette:</span>
-                                <div class="crayon-option selected-crayon" style="background:#2ECC71;" onclick="pickCrayonColor(this, '#2ECC71')"></div>
-                                <div class="crayon-option" style="background:#F1C40F;" onclick="pickCrayonColor(this, '#F1C40F')"></div>
-                                <div class="crayon-option" style="background:#3498DB;" onclick="pickCrayonColor(this, '#3498DB')"></div>
+                                <span style="font-weight: 700; color: #475569; font-size: 0.9rem;">Number Palette Nodes:</span>
+                                <div class="crayon-option selected-crayon" style="background:#2ECC71; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.8rem;" onclick="pickCrayonColor(this, '#2ECC71')">1</div>
+                                <div class="crayon-option" style="background:#F1C40F; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.8rem;" onclick="pickCrayonColor(this, '#F1C40F')">2</div>
+                                <div class="crayon-option" style="background:#3498DB; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.8rem;" onclick="pickCrayonColor(this, '#3498DB')">3</div>
                             </div>
-                            <svg class="pond-svg-canvas" viewBox="0 0 400 300" onclick="colorWorksheetSegment(event.target)">
-                                <rect x="10" y="10" width="380" height="280" fill="#F1F5F9" stroke="#94A3B8" stroke-width="2"/>
-                                <ellipse cx="200" cy="180" rx="130" ry="70" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
-                                <circle cx="200" cy="80" r="30" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
-                            </svg>
+                            
+                            <div style="position: relative; width: 100%; max-width: 440px; margin: 0 auto;">
+                                <svg class="pond-svg-canvas" viewBox="0 0 400 300" onclick="colorWorksheetSegment(event.target)">
+                                    <rect id="canvasBgZone" x="10" y="10" width="380" height="280" fill="#F1F5F9" stroke="#94A3B8" stroke-width="2"/>
+                                    <ellipse id="canvasOvalZone" cx="200" cy="180" rx="130" ry="70" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
+                                    <circle id="canvasCircleZone" cx="200" cy="70" r="30" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
+                                </svg>
+                                <div style="position: absolute; top: 20px; left: 25px; pointer-events: none; font-weight: 900; font-size: 1.1rem; color: #94A3B8;">Zone 1</div>
+                                <div style="position: absolute; top: 165px; left: 195px; pointer-events: none; font-weight: 900; font-size: 1.3rem; color: #64748B;">Zone 2</div>
+                                <div style="position: absolute; top: 58px; left: 193px; pointer-events: none; font-weight: 900; font-size: 1.1rem; color: #64748B;">Zone 3</div>
+                            </div>
                         </div>
                         <div id="elScienceWorkspace" style="display: none;">
-                            <!-- FIXED: Formally printed instruction banners right on the activity pane -->
-                            <div class="ske-activity-header">🎯 S-K-E Core Ingestion Router: South Korean Stamina Counting Desk</div>
+                            <div class="ske-activity-header">🔬 Tactile Item Classification Desk</div>
                             <div class="apple-counter-grid">
                                 <div class="apple-touch-card" onclick="this.classList.toggle('counted-apple')">🔬<br><b style="font-size:0.85rem; color:#475569;">Node A</b></div>
                                 <div class="apple-touch-card" onclick="this.classList.toggle('counted-apple')">🔬<br><b style="font-size:0.85rem; color:#475569;">Node B</b></div>
@@ -253,10 +257,10 @@
                 <!-- Bracket Layer 2: Middle School Dashboard Content Views -->
                 <div id="middleSchoolWorkspaceView" style="display: none; width: 100%;">
                     <style>
-                        .ms-textbook-prose { font-size: 1.1rem; line-height: 1.6EA; color: #334155; margin-bottom: 24px; padding: 0 4px; }
+                        .ms-textbook-prose { font-size: 1.1rem; line-height: 1.6; color: #334155; margin-bottom: 24px; padding: 0 4px; }
                         .ms-vocab-box { background-color: #F8FAFC; border: 2px solid #E2E8F0; border-radius: 14px; padding: 24px; margin-top: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.01); }
                         .ms-vocab-title { font-weight: 800; font-size: 0.95rem; color: #475569; border-bottom: 2px dashed #E2E8F0; padding-bottom: 10px; margin-bottom: 16px; letter-spacing: 0.5px; }
-                        .concept-matching-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; background: white; padding: 12px 18px; border-radius: 8px; border: 1px solid #E2E8F0; }
+                        .concept-matching-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; background: white; padding: 12px 18px; border-radius: 8px; border: 1px solid #E2E8F0; }
                         .concept-term { font-weight: 700; color: #0F172A; }
                         .concept-input { padding: 8px 14px; width: 160px; border: 2px solid #CBD5E1; border-radius: 6px; outline: none; transition: border-color 0.2s ease; }
                         .concept-input:focus { border-color: var(--btn-listen); }
@@ -402,78 +406,97 @@
         }
 
         function loadLiveDatabaseFile() {
-    const group = document.getElementById("portalGroupSelect").value;
-    const grade = document.getElementById("gradePrefixSelect").value;
-    const subject = document.getElementById("subjectTrackSelect").value;
-    const day = parseInt(document.getElementById("daySelect").value) || 1;
+            const group = document.getElementById("portalGroupSelect").value;
+            const grade = document.getElementById("gradePrefixSelect").value;
+            const subject = document.getElementById("subjectTrackSelect").value;
+            const day = parseInt(document.getElementById("daySelect").value) || 1;
 
-    let unitFolder = "unit_1_foundations";
-    if (day > 45 && day <= 90) unitFolder = "unit_2_shapes_spaces";
-    else if (day > 90 && day <= 135) unitFolder = "unit_3_weather_seasons";
-    else if (day > 135) unitFolder = "unit_4_counting_base";
+            let unitFolder = "unit_1_foundations";
+            if (day > 45 && day <= 90) unitFolder = "unit_2_shapes_spaces";
+            else if (day > 90 && day <= 135) unitFolder = "unit_3_weather_seasons";
+            else if (day > 135) unitFolder = "unit_4_counting_base";
 
-    if (group === "k5") {
-        document.getElementById("elMathWorkspace").style.display = (subject === "mathematics") ? "block" : "none";
-        document.getElementById("elScienceWorkspace").style.display = (subject === "science") ? "block" : "none";
-    }
-
-    const targetJsonUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/${unitFolder}/day_${day}.json`;
-
-    fetch(targetJsonUrl)
-        .then(response => {
-            if (!response.ok) throw new Error("Target File Missing inside Vault Folder Structure.");
-            return response.json();
-        })
-        .then(data => {
-            document.getElementById("lessonTitleLabel").innerText = data.lesson_title || `Day ${day} Lesson`;
-            
-            let rawAssessmentText = "";
-            if (data.daily_assessment) {
-                if (typeof data.daily_assessment === 'object' && data.daily_assessment.prompt) {
-                    rawAssessmentText = data.daily_assessment.prompt;
-                } else if (typeof data.daily_assessment === 'string') {
-                    rawAssessmentText = data.daily_assessment;
-                }
+            if (group === "k5") {
+                document.getElementById("elMathWorkspace").style.display = (subject === "mathematics") ? "block" : "none";
+                document.getElementById("elScienceWorkspace").style.display = (subject === "science") ? "block" : "none";
             }
 
-            let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
-            
-            if (displayTarget) {
-                let fullBodyText = data.lesson_body || "";
-                fullBodyText = fullBodyText.replace(/###/g, "").replace(/\*\*/g, "").replace(/\*/g, "");
+            const targetJsonUrl = `pure_curriculum_vault/${group}/${grade}/${subject}/${unitFolder}/day_${day}.json`;
 
-                // FIXED: Direct precise mapping to display actual assignment goals from JSON file
-                displayTarget.innerHTML = fullBodyText;
-                document.getElementById("assignmentDirectionsLabel").innerHTML = `🎯 <strong>Workbook Instructions:</strong> ${data.interactive_assignment || 'Complete active puzzle goals.'}`;
-                document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> ${rawAssessmentText || 'Formulate verification steps.'}`;
-            }
-            
-            if (data.worldview_track_matrices) {
-                if (data.worldview_track_matrices.comparative_insight) {
-                    document.getElementById("comparativeContextLabel").innerText = data.worldview_track_matrices.comparative_insight;
-                }
-                if (data.worldview_track_matrices.biblical_alignment) {
-                    document.getElementById("biblicalAlignmentLabel").innerText = data.worldview_track_matrices.biblical_alignment;
-                }
-            }
+            fetch(targetJsonUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error("Target File Missing inside Vault Folder Structure.");
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById("lessonTitleLabel").innerText = data.lesson_title || `Day ${day} Lesson`;
+                    
+                    let rawAssessmentText = "";
+                    if (data.daily_assessment) {
+                        if (typeof data.daily_assessment === 'object' && data.daily_assessment.prompt) {
+                            rawAssessmentText = data.daily_assessment.prompt;
+                        } else if (typeof data.daily_assessment === 'string') {
+                            rawAssessmentText = data.daily_assessment;
+                        }
+                    }
 
-            executeRealTimeKeywordScan(displayTarget, subject);
-        })
-        .catch(error => {
-            console.log("[Vault Sync Alert]", error.message);
-            document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
-            document.getElementById("assignmentDirectionsLabel").innerHTML = `🎯 <strong>Workbook Instructions:</strong> S-K-E Core Ingestion Router: Singapore CPA Interactive Grid. Connect color nodes to synchronize set data configurations.`;
-            document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> Dynamic milestone checkout description active for Day ${day}.`;
-            let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
-            if (displayTarget) {
-                displayTarget.innerHTML = `Active S-K-E course parameters focus on standard ${subject.replace('_', ' ')} core tracks. Match your crayon color palette selections to the target geometry variables to unblock the logic console circuits.`;
-                if (typeof drawComputationalLogicSandbox === "function") {
-                    drawComputationalLogicSandbox(displayTarget.id);
-                }
-            }
-        });
-}
+                    let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
+                    
+                    if (displayTarget) {
+                        let fullBodyText = data.lesson_body || "";
+                        fullBodyText = fullBodyText.replace(/###/g, "").replace(/\*\*/g, "").replace(/\*/g, "");
+
+                        displayTarget.innerHTML = fullBodyText;
+                        if (typeof drawComputationalLogicSandbox === "function") {
+                            drawComputationalLogicSandbox(displayTarget.id);
+                        }
+
+                        document.getElementById("assignmentDirectionsLabel").innerHTML = `🎯 <strong>Workbook Instructions:</strong> ${data.interactive_assignment || 'Match the colors to the numbers.'}`;
+                        document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> ${rawAssessmentText || 'Complete your verification check.'}`;
+                    }
+                    
+                    if (data.worldview_track_matrices) {
+                        if (data.worldview_track_matrices.comparative_insight) {
+                            document.getElementById("comparativeContextLabel").innerText = data.worldview_track_matrices.comparative_insight;
+                        }
+                        if (data.worldview_track_matrices.biblical_alignment) {
+                            document.getElementById("biblicalAlignmentLabel").innerText = data.worldview_track_matrices.biblical_alignment;
+                        }
+                    }
+
+                    executeRealTimeKeywordScan(displayTarget, subject);
+                })
+                .catch(error => {
+                    console.log("[Vault Sync Alert]", error.message);
+                    document.getElementById("lessonTitleLabel").innerText = `${subject.replace('_', ' ').toUpperCase()} WORKSPACE - DAY ${day}`;
+                    document.getElementById("assignmentDirectionsLabel").innerHTML = `🎯 <strong>Workbook Instructions:</strong> Match the colors of your number palette to the corresponding number zones on the canvas chart to unblock the circuits below.`;
+                    document.getElementById("lessonGuideContent").innerHTML = `📄 <strong>Brief Lesson Description Summary:</strong> How many units do you count in your main workspace container oval?`;
+                    
+                    let displayTarget = (group === "k5") ? document.getElementById("elProseBodyContainer") : (group === "68") ? document.getElementById("msProseBodyContainer") : document.getElementById("hsProseBodyContainer");
+                    if (displayTarget) {
+                        displayTarget.innerHTML = `Let's practice counting sets with accuracy. Today we look at how numbers represent real items. Match your colors to the numbers inside the shape layouts to complete your assignment goals!`;
+                        if (typeof drawComputationalLogicSandbox === "function") {
+                            drawComputationalLogicSandbox(displayTarget.id);
+                        }
+                    }
+                });
+        }
 <!-- Box 12 of 12: Speech Synthesis Engines & Global App Build Initializers -->
+        function colorWorksheetSegment(node) {
+            if (node && (node.tagName === 'rect' || node.tagName === 'ellipse' || node.tagName === 'circle' || node.tagName === 'path')) {
+                node.setAttribute('fill', activeCrayonColor);
+                
+                const consoleStatusText = document.querySelector("#leftCoreWorkspace div[style*='background: #0F172A'] div[style*='font-size: 0.8rem']")
+                                       || document.querySelector(".left-core-track div[style*='background: #0F172A'] div[style*='font-size: 0.8rem']");
+                
+                if (consoleStatusText) {
+                    consoleStatusText.style.color = "#38BDF8";
+                    consoleStatusText.style.fontWeight = "bold";
+                    consoleStatusText.innerHTML = "⚡ CIRCUIT STATUS: ONE-TO-ONE CORRESPONDENCE VERIFIED [SET DATA = 1 NODE ACTIVE]";
+                }
+            }
+        }
+
         function executeRealTimeKeywordScan(textContainer, activeSubject) {
             if (!textContainer) return;
             let currentContent = textContainer.innerHTML;
@@ -500,58 +523,35 @@
             }
         }
 
-        // Hardened Speech Engine: Filters layout tags and icons out of the student audio loop
-function triggerVoiceReader() {
-    if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); } else { return; }
-    
-    let stringData = (audioClickCount === 0) 
-        ? document.getElementById('lessonGuideContent').innerText 
-        : document.getElementById('assignmentDirectionsLabel').innerText;
-        
-    const shield = document.getElementById("lockShieldWrapper");
-    const notice = document.getElementById("audioLockNoticeBox");
+        function triggerVoiceReader() {
+            if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); } else { return; }
+            let stringData = (audioClickCount === 0) ? document.getElementById('lessonGuideContent').innerText : document.getElementById('assignmentDirectionsLabel').innerText;
+            const shield = document.getElementById("lockShieldWrapper");
+            const notice = document.getElementById("audioLockNoticeBox");
 
-    // PROACTIVE CLEANING FILTER: Strip text labels and stray symbols out of spoken speech data
-    stringData = stringData.replace(/📄/g, "")
-                           .replace(/Brief Lesson Description Summary:/gi, "")
-                           .replace(/Workbook Instructions:/gi, "")
-                           .replace(/🎯/g, "")
-                           .replace(/⚡/g, "")
-                           .trim();
+            stringData = stringData.replace(/📄/g, "")
+                                   .replace(/Brief Lesson Description Summary:/gi, "")
+                                   .replace(/Workbook Instructions:/gi, "")
+                                   .replace(/🎯/g, "")
+                                   .replace(/⚡/g, "")
+                                   .trim();
 
-    if (audioClickCount === 0) {
-        audioClickCount = 1;
-        notice.style.backgroundColor = "#FEF3C7"; notice.style.borderColor = "#FCD34D"; notice.style.color = "#D97706";
-        notice.innerHTML = "⚡ STEP 1 COMPLETE. Now click 'Read Out Loud' one more time to hear your assignment instructions and unlock your worksheet!";
-    } else {
-        audioClickCount = 2;
-        if (shield) shield.classList.remove("workspace-locked");
-        notice.style.backgroundColor = "#D1FAE5"; notice.style.borderColor = "#A7F3D0"; notice.style.color = "#059669";
-        notice.innerHTML = "✅ WORKSHEET UNLOCKED. Both instructional tracks heard. You may now complete your assignment!";
-    }
-
-    const utter = new SpeechSynthesisUtterance(stringData);
-    utter.rate = 0.95; // Steady, kid-friendly processing speed
-    window.speechSynthesis.speak(utter);
-}
+            if (audioClickCount === 0) {
+                audioClickCount = 1;
+                notice.style.backgroundColor = "#FEF3C7"; notice.style.borderColor = "#FCD34D"; notice.style.color = "#D97706";
+                notice.innerHTML = "⚡ STEP 1 COMPLETE. Now click 'Read Out Loud' one more time to hear your assignment instructions and unlock your worksheet!";
+            } else {
+                audioClickCount = 2;
+                if (shield) shield.classList.remove("workspace-locked");
+                notice.style.backgroundColor = "#D1FAE5"; notice.style.borderColor = "#A7F3D0"; notice.style.color = "#059669";
+                notice.innerHTML = "✅ WORKSHEET UNLOCKED. Both instructional tracks heard. You may now complete your assignment!";
+            }
+            const utter = new SpeechSynthesisUtterance(stringData);
+            utter.rate = 0.95;
+            window.speechSynthesis.speak(utter);
+        }
 
         function pickCrayonColor(el, hex) { activeCrayonColor = hex; document.querySelectorAll('.crayon-option').forEach(c => c.style.borderColor='transparent'); el.style.borderColor='#1E293B'; }
-        // Upgraded CPA Handshake: Updates the dark computational console when elements are colored
-function colorWorksheetSegment(node) {
-    if (node.tagName !== 'svg') {
-        node.setAttribute('fill', activeCrayonColor);
-        
-        // Target the dark computational logic console status row
-        const consoleStatusText = document.querySelector("#leftCoreWorkspace div[style*='background: rgb(15, 23, 26)'] div[style*='font-size: 0.8rem']") 
-                               || document.querySelector("#leftCoreWorkspace div[style*='background: #0F172A'] div[style*='font-size: 0.8rem']");
-        
-        if (consoleStatusText) {
-            consoleStatusText.style.color = "#38BDF8"; // Flash neon blue
-            consoleStatusText.style.fontWeight = "bold";
-            consoleStatusText.innerHTML = "⚡ CIRCUIT STATUS: ONE-TO-ONE CORRESPONDENCE VERIFIED [SET DATA = 1 NODE ACTIVE]";
-        }
-    }
-}
 
         function initializeGlobal180DayTimeline() {
             const daySelectorElement = document.getElementById("daySelect");
