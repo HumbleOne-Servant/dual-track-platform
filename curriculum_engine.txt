@@ -1,8 +1,9 @@
 # ========================================================================
-# FILE: curriculum_engine.py (Part 1: Global Taxonomy Registries)
+# REPLACE ABSOLUTE TOP OF FILE: curriculum_engine.py
 # ========================================================================
 import os
 import json
+import time
 import re
 from typing import Dict, Any, List
 

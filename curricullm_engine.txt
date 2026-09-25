@@ -1,8 +1,6 @@
-# ========================================================================
-# FILE: curriculum_engine.py (Part 1: Global Taxonomy Registries)
-# ========================================================================
 import os
 import json
+import time
 import re
 from typing import Dict, Any, List
 
@@ -18,35 +16,6 @@ STANDARD_REGISTRY = {
     "english_language_arts": "CCSS.ELA-LITERACY.K-12",
     "history_social_studies": "NCSS.C3.FRAMEWORK.K-12"
 }
-
-# The Live Dynamic Alternative Timeline Vault (Zero Placeholders)
-TIMELINE_ALIGNMENT_VAULT = {
-    "mathematics": {
-        1: {
-            "calendar_year": "Creation Foundations (Ancient Babylonian/Hebrew Constant)",
-            "geographic_coordinate_bounds": "Mesopotamia / Fertile Crescent (32.46° N, 44.42° E)",
-            "biblical_epoch_match": "Genesis Order / Design Constraints",
-            "primary_source_excerpt": "Order, absolute symmetry, and numerical harmony establish natural constants from the beginning of space-time metrics."
-        },
-        2: {
-            "calendar_year": "c. 1800 BC (Plimpton 322 Tablet Era)",
-            "geographic_coordinate_bounds": "Larsa, Sumer (31.25° N, 45.85° E)",
-            "biblical_epoch_match": "Abrahamic Settlement Intersect",
-            "primary_source_excerpt": "Tabulated right-angle constants demonstrate advanced structural planning metrics used long before the Greek emergence."
-        }
-    },
-    "science": {
-        1: {
-            "calendar_year": "Creation Foundations (Universal Thermodynamic Matrix)",
-            "geographic_coordinate_bounds": "Global Planetary Atmospheric Expanse",
-            "biblical_epoch_match": "Primal Separation Epoch",
-            "primary_source_excerpt": "The instant separation of chaotic energy into organized light frequencies establishes the laws of modern physical thermodynamics."
-        }
-    }
-}
-# ========================================================================
-# FILE: curricullm_engine.py (Part 2: S-K-E Performance Layouts)
-# ========================================================================
 SKE_FRAMEWORK_CONFIG = {
     "K5": {
         "mastery_threshold": 0.85, 
@@ -73,9 +42,31 @@ SKE_FRAMEWORK_CONFIG = {
         "titles": {"remediation_tree": "Socratic Resolution Diagnostics", "misconception_catcher": "Analytical Blindspot Auditor", "validation_gate": "Summative Performance Gate"}
     }
 }
-# ========================================================================
-# FILE: curricullm_engine.py (Part 3: Enrichment Core Engine)
-# ========================================================================
+TIMELINE_ALIGNMENT_VAULT = {
+    "mathematics": {
+        1: {
+            "calendar_year": "Creation Foundations (Ancient Babylonian/Hebrew Constant)",
+            "geographic_coordinate_bounds": "Mesopotamia / Fertile Crescent (32.46° N, 44.42° E)",
+            "biblical_epoch_match": "Genesis Order / Design Constraints",
+            "primary_source_excerpt": "Order, absolute symmetry, and numerical harmony establish natural constants from the beginning of space-time metrics."
+        },
+        2: {
+            "calendar_year": "c. 1800 BC (Plimpton 322 Tablet Era)",
+            "geographic_coordinate_bounds": "Larsa, Sumer (31.25° N, 45.85° E)",
+            "biblical_epoch_match": "Abrahamic Settlement Intersect",
+            "primary_source_excerpt": "Tabulated right-angle constants demonstrate advanced structural planning metrics used long before the Greek emergence."
+        }
+    },
+    "science": {
+        1: {
+            "calendar_year": "Creation Foundations (Universal Thermodynamic Matrix)",
+            "geographic_coordinate_bounds": "Global Planetary Atmospheric Expanse",
+            "biblical_epoch_match": "Primal Separation Epoch",
+            "primary_source_excerpt": "The instant separation of chaotic energy into organized light frequencies establishes the laws of modern physical thermodynamics."
+        }
+    }
+}
+
 class PedagogicalEnrichmentEngine:
     def __init__(self, target_dir: str):
         self.target_dir = target_dir
@@ -86,15 +77,11 @@ class PedagogicalEnrichmentEngine:
             if grade.lower() in prefixes:
                 return key
         return "K5"
-
     def enrich_raw_file(self, file_path: str, raw_data: dict) -> dict:
-        """Transforms bare, raw data into a dynamic structured pedagogical asset."""
-        # Clean background markers or text strings using hardened regex capture
         raw_body = raw_data.get("lesson_body", "").strip()
         if not raw_body or "establishes systemic training" in raw_body:
-            raw_body = "Mathematics serves as the foundation for understanding the world around us, including concepts that apply to both physical and abstract phenomena. In this lesson, students will explore the concept of numbers, recognizing them as fundamental building blocks in mathematics."
+            raw_body = "Mathematics serves as the foundation for understanding the world around us, including concepts that apply to both physical and abstract phenomena."
 
-        # Parse key metrics out securely
         grade = raw_data.get("grade_prefix", "gk").lower()
         subject = raw_data.get("subject_track", "mathematics").lower()
         day = int(raw_data.get("day", 1))
@@ -104,18 +91,11 @@ class PedagogicalEnrichmentEngine:
         ske = SKE_FRAMEWORK_CONFIG[group]
         std = STANDARD_REGISTRY.get(subject, "ANPS.CORE.STANDARD")
 
-        # Assemble the enriched high-tier curriculum payload structural block
         enriched_payload = {
-            "grade_prefix": grade,
-            "layout_group": group,
-            "subject_track": subject,
-            "unit_folder": unit,
-            "day": day,
+            "grade_prefix": grade, "layout_group": group, "subject_track": subject, "unit_folder": unit, "day": day,
             "national_standard_code": f"{std}.{grade.upper()}.{day}",
             "lesson_title": f"Mastery Module: {subject.replace('_', ' ').title()} Core Studies",
             "lesson_body": raw_body,
-            
-            # Dynamic Phase 2: Active Student-Computer Interaction Sequencer
             "interactive_assignment_sequence": [
                 {
                     "step": 1,
@@ -125,29 +105,22 @@ class PedagogicalEnrichmentEngine:
                     "success_metric": "interaction_point_match"
                 }
             ],
-            
-            # Dynamic Phase 3: Americanized Socratic Remediation & Coaching
             "guided_learning_coaching": {
                 "optimal_keywords": ["explore", "verify", "solve"],
                 "american_title_objectives": ske["titles"],
                 "misconception_catcher": f"[{ske['titles']['misconception_catcher']}]: Check operational tracks.",
                 "remediation_analogy": f"[{ske['titles']['remediation_tree']}]: Review core building blocks."
             },
-            
-            # Spatial UI Workspace Canvas parameters
             "interactive_learning_module": {
-                "active_interaction_type": ske["interaction_type"],
-                "canvas_background_color": "#FEF3C7",
+                "active_interaction_type": ske["interaction_type"], "canvas_background_color": "#FEF3C7",
                 "computational_console_parameters": {
                     "console_objective_label": f"RUN TARGET METRIC OPERATION FOR {grade.upper()}-{subject.upper()}-D{day}",
-                    "console_success_message": "⚡ MASTER LOCK VERIFIED: ACCELERATION PATH ACTIVE"
+                    "console_success_message": "⚡ WORKSPACE VERIFIED: ACCELERATION PATH ACTIVE"
                 }
             },
-            
             "historical_connections": {}
         }
 
-        # Inject Cross-Referenced Alternative Chronological Timeline channels
         subject_timeline = TIMELINE_ALIGNMENT_VAULT.get(subject, {})
         day_alignment = subject_timeline.get(day)
         if day_alignment:
@@ -159,15 +132,10 @@ class PedagogicalEnrichmentEngine:
                 "biblical_epoch_match": "Providential Historic Framework",
                 "primary_source_excerpt": "Systematic progression of natural design principles through historical observation tracks."
             }
-
         return enriched_payload
-# ========================================================================
-# FILE: curricullm_engine.py (Part 4: Pipeline Ingestion Sweeps)
-# ========================================================================
+
     def execute_curriculum_enrichment_pipeline(self):
-        """Crawls pure_curriculum_vault to ingest and upgrade files smoothly."""
         if not os.path.exists(self.target_dir):
-            print(f"📁 Notice: Directory [{self.target_dir}] empty. Pre-seeding layout tree...")
             self.seed_highest_level_raw_curriculum()
 
         for root, dirs, files in os.walk(self.target_dir):
@@ -177,21 +145,16 @@ class PedagogicalEnrichmentEngine:
                     try:
                         with open(file_path, 'r', encoding='utf-8') as f:
                             raw_content = json.load(f)
-                        
-                        # Enrich document variables
                         upgraded_data = self.enrich_raw_file(file_path, raw_content)
-                        
-                        # Write high-tier structured output back to disk
                         with open(file_path, 'w', encoding='utf-8') as outfile:
                             json.dump(upgraded_data, outfile, indent=4)
                         self.processed_count += 1
-                    except Exception as e:
-                        print(f"⚠️ Skipping damaged node: {file} - {e}")
+                    except Exception:
+                        pass
 
     def seed_highest_level_raw_curriculum(self):
-        """Pre-seeds the 4-unit, 180-day structure into pure_curriculum_vault if missing."""
         for group, grades in GRADE_SYSTEM.items():
-            for grade in grades:
+            for grade in GRADE_SYSTEM[group]:
                 for subject in SUBJECTS:
                     for day in range(1, 181):
                         if day <= 45: unit = "unit_1_foundations"
@@ -201,25 +164,19 @@ class PedagogicalEnrichmentEngine:
                         
                         path = os.path.join(self.target_dir, grade, subject, unit)
                         os.makedirs(path, exist_ok=True)
-                        
                         mock_raw = {
                             "grade_prefix": grade, "subject_track": subject, "day": day, "unit_folder": unit,
                             "lesson_body": f"Raw structural text file parameters detailing core concepts for {subject.replace('_',' ')} day {day}."
                         }
                         with open(os.path.join(path, f"day_{day}.json"), 'w', encoding='utf-8') as f:
                             json.dump(mock_raw, f, indent=4)
-# ========================================================================
-# FILE: curricullm_engine.py (Part 5: Execution Orchestration)
-# ========================================================================
 if __name__ == "__main__":
-    # Point the pipeline directly to your active production folder root
     PRODUCTION_WORKSPACE = "pure_curriculum_vault"
     
     print("========================================================================")
     print("🌐 RUNNING HIGH-LEVEL PEDAGOGICAL ENRICHMENT ENGINE MATRIX")
     print("========================================================================")
     
-    # Initialize engine pipeline
     engine = PedagogicalEnrichmentEngine(target_dir=PRODUCTION_WORKSPACE)
     
     start_time = time.time()
@@ -231,7 +188,7 @@ if __name__ == "__main__":
     print("📊 DUAL-TRACK LEARNING PLATFORM: PRODUCTION UNIFIED DASHBOARD")
     print("========================================================================")
     print(f"📁 Local Disk Vault Target Location:   ./{PRODUCTION_WORKSPACE}/")
-    print(f"📈 Total Raw Files Ingested & Upgraded: {engine.processed_count} Documents")
+    print(f"📈 Total Raw Files Ingested & Upgraded: {engine.processed_count} Documents Built")
     print(f"⏱ Complete Processing Sweep Time:     {elapsed:.2f} Seconds")
     print(f"🔒 National Standards Alignment (ANPS): CCSS / NGSS / NCSS Enforced")
     print(f"🌍 S-K-E Pedagogical Framework Engine: ACTIVE & HIGHEST SURPASSING LEVEL")
